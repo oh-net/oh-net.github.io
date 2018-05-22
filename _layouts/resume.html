@@ -1,0 +1,45 @@
+---
+layout: default
+---
+
+<!-- Include Data Base  -->
+{% include liquid/data %}
+
+<div class="p-lg-4 layout_resume">
+
+    <div class="layout_resume__header">
+      <div class="container-fluid">
+
+        <div class="row">
+          <div class="p-0 col-8 col-lg-3 offset-lg-0 col-sm-6">
+            <h1 class="font-weight-bold layout_resume__title">{{ page.title }}</h1>
+          </div>
+          <div class="col-4 col-lg-3 offset-lg-6 col-sm-6 d-none d-lg-block">
+            <div class="row justify-content-end">
+              <button id="layout_resume__btnprint" type="button" name="button" class="btn btn-link btn-typing layout_resume__btnprint">{{ loadData.website.content.resume.button.text }}</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    {% if page.excerpt %}
+    <div class="layout_resume__excerpt">
+      <div class="container-fluid">
+        <div class="row d-block">
+          <div class="layout_resume__excerpt-text">{{ page.excerpt }}</div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="layout_resume__content">
+      <div class="container-fluid">
+        <div class="row d-block">
+          {{ content }}
+        </div>
+      </div>
+    </div>
+
+  </div>

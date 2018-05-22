@@ -1,0 +1,70 @@
+---
+layout: default
+---
+<!-- Include Data Base  -->
+{% include liquid/data %}
+
+{% if loadData.userdata.email %}
+
+  <div class="p-lg-4 layout_contact">
+
+    <div class="layout_contact__header">
+
+      <div class="container-fluid">
+        <div class="row">
+          <div class="p-0 col col-lg-7">
+            <h1 class="font-weight-bold layout_contact__title">{{ page.title }}</h1>
+          </div>
+          <div class="p-0 col col-lg-5 text-right">
+            <span class="text-right layout_contact__vendor">Service provided by:<a href="https://formspree.io/" target="_blank">Formspree</a></span>
+          </div>
+        </div>
+
+        <div class="row d-block">
+          <div class="layout_contact__description">{{ content }}</div>
+        </div>
+      </div>
+
+      <div class="container-fluid">
+        <div class="row d-block">
+          <form class="layout_contact__form" action="https://formspree.io/{{ loadData.userdata.email | encode_email }}" method="POST">
+
+            <div class="container-fluid">
+
+              <div class="row">
+                <input type="text" class="form-control layout_contact__input" name="Name" placeholder="{{ loadData.website.content.contact.placeholder.name }}" required autofocus>
+              </div>
+
+              <div class="row">
+                <input type="text" class="form-control layout_contact__input" name="_subject" placeholder="{{ loadData.website.content.contact.placeholder.subject }}" required autofocus>
+              </div>
+
+              <div class="row">
+                <input type="text" class="form-control layout_contact__input" name="Email" placeholder="{{ loadData.website.content.contact.placeholder.email }}" required autofocus>
+              </div>
+
+              <div class="row">
+                <textarea  class="form-control layout_contact__textarea" name="Message" rows="7" cols="50" placeholder="{{ loadData.website.content.contact.placeholder.message }}" required></textarea>
+              </div>
+
+              <div class="row">
+                <button class="m-0 btn btn-link btn-typing layout_contact__form-button" type="submit">{{ loadData.website.content.contact.send.button }}</button>
+              </div>
+
+              <input type="hidden" name="_next" value="{{ loadData.website.content.contact.send.permalink | prepend: site.baseurl | prepend: site.url }}">
+              <input type="hidden" name="_language" value="{{ loadData.website.content.contact.language }}" />
+              <input type="text" name="_gotcha" style="display:none" />
+
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+{% else %}
+<p style="color: yellow; background-color: black; padding: 5px;"> Warning! Email not informed "usedata => email" in file '_data/data.yml'.</p>
+{% endif %}

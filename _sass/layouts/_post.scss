@@ -1,0 +1,35 @@
+/* Stylesheets for layout Post
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.layout_post{
+  &__time{
+    font-size: 1rem;
+    @if $elements__bg-enable == true {
+      background-color: $bg__elements;
+      padding: 15px;
+    }
+  }
+  &__tags{
+    padding-bottom: 15px;
+    &-link{
+      font-size: 1.1rem;
+    }
+  }
+  &__dayquote, &__share, &__author{
+    margin: 8% 0%;
+  }
+  &__author{
+    &-title{
+      font-size: 1rem;
+    }
+  }
+  &__content{
+    padding-top: 15%;
+    font-size: $font-size__content;
+  }
+  &__disqus{
+    &-icon{
+      font-size: 1.7rem;
+    }
+  }
+}

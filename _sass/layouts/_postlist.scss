@@ -1,0 +1,38 @@
+/* Stylesheets for layout Postlist - Blog Home
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.layout_postlist{
+
+  background-color: $layout_postlist__bg;
+
+  &__header{}
+  &__description{
+    font-size: $font-size__content;
+  }
+  &__content{
+    @if $layout_postlist__bg-enable == true {
+      background-color: $bg__elements;
+      padding: 1.5rem !important;
+    }
+  }
+
+  &__link{
+    letter-spacing: 0.15rem;
+    text-decoration: $layout_postlist__title-decoration;
+    &:hover{
+      text-decoration: $layout_postlist__hover-title-decoration;
+      h1{
+        color: $layout_postlist__hover-title-color;
+      }
+    }
+    h1{
+      font-size: $font-size__layout_postlist-link;
+      font-weight: $font-weight__layout_postlist-link;
+    }
+  }
+
+  &__excerpted{
+    font-size: 1.1rem;
+  }
+
+}

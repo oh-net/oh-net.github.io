@@ -1,0 +1,20 @@
+/* Stylesheets for layout Default
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.layout_default{
+  font-family: $font-family__primary;
+
+  &__bg{
+    @if $layout_default__bg-enable == true {
+      background-color: $bg__full;
+    }
+  }
+
+  &__content{
+    background-color: $layout_postlist__bg;
+    p{
+      font-size: $font-size__content;
+    }
+  }
+
+}

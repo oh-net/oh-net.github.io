@@ -1,0 +1,55 @@
+/* Stylesheets for layout Search
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.layout-search{
+  &__form{
+    border: 1px solid $color__links;
+    border-radius: 0px;
+    &-group{
+      &:hover,&:focus,&:active,&:visited{
+        box-shadow: none !important;
+        border: none;
+        outline: none;
+      }
+    }
+  }
+  &__description{
+    font-size: 1.2rem;
+  }
+  &__input{
+    font-size: 1.8rem;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+    border-radius: 0px;
+    color: $color-text;
+    &:hover,&:focus,&:active,&:visited{
+      box-shadow: none !important;
+      border: none !important;
+      outline: none !important;
+      color: $color-text;
+    }
+  }
+
+  &__data{
+    list-style: none;
+    margin: 15px 0px;
+    font-size: 1.3rem;
+    li{
+      margin: 15px 0px;
+    }
+    &__entry-date{
+      font-size: 0.9rem;
+      padding: 5px;
+      background-color: $color__links;
+      color: #fff;
+      margin-left: 10px;
+      border-radius: 0px;
+    }
+    &__not-search{
+      padding: 15px 0;
+      color: red;
+      font-size: 1.7rem;
+    }
+  }
+}

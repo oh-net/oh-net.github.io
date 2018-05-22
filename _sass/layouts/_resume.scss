@@ -1,0 +1,16 @@
+/* Stylesheets for layout Resume
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.layout_resume{
+  &__excerpt{
+    margin: 5% 0% 15% 0%;
+    &-text{}
+  }
+  &__content{
+    font-size: 1.2rem;
+    h2{
+      border-bottom: 1px solid $color-text;
+      padding-bottom: 5px;
+    }
+  }
+}

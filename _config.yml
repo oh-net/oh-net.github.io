@@ -1,1 +1,179 @@
-theme: jekyll-theme-time-machine
+# Welcome to Jekyll! ... and Typing!
+#
+# This config file is meant for settings that affect your whole blog, values
+# which you are expected to set up once and rarely edit after that. If you find
+# yourself editing this file very often, consider using Jekyll's data files
+# feature for the data you need to update frequently.
+#
+# For technical reasons, this file is *NOT* reloaded automatically when you use
+# 'bundle exec jekyll serve'. If you change this file, please restart the server process.
+
+# Site settings
+# These are used to personalize your new site. If you look in the HTML files,
+# you will see them accessed via {{ data_string.website.title }}, {{  data_string.website.email }}, and so on.
+# You can create any custom variable you would like, and they will be accessible
+# in the templates via {{ site.myvariable }}.
+
+baseurl: "/typing-jekyll-template" # the subpath of your site, e.g. /blog
+url: "https://williamcanin.me" # the base hostname & protocol for your site, e.g. http://example.com
+
+
+### BEGIN - This property enables and disables template features. Use to taste.
+maintenance:
+  enable: false
+google:
+  analytics:
+    enable: true
+sidebar:
+  avatar:
+    enable: true
+  icons:
+    enable: true
+  socials:
+    enable: true
+content:
+  icons:
+    enable: true
+  postlist:
+    date:
+      enable: true
+    expected:
+      enable: true
+    tags:
+      enable: true
+    comments:
+      enable: true
+  tagpost:
+    date:
+      enable: true
+    expected:
+      enable: true
+    tags:
+      enable: true
+    comments:
+      enable: true
+  post:
+    author:
+      enable: true
+      avatar:
+        enable: true
+    share:
+      enable: true
+      facebook:
+        enable: true
+      linkedin:
+        enable: true
+      twitter:
+        enable: true
+      googleplus:
+        enable: true
+    day_quote:
+      enable: true
+    comments:
+      enable: true
+### END - This property enables and disables template features. Use to taste.
+
+
+
+
+
+
+
+
+### EXTRA BEGIN - These properties are extra features, such as built-in third-party plugins.
+jektify:
+  enable: true
+  open: true
+  toggle:
+    enable: true
+  spotify:
+    user: williamcanin
+    text: See me no Spotify
+  sass:
+    jekyll: true
+    other:
+      dir: "way/to/your/SASS"
+  title:
+    enable: true
+    text: "Jektify"
+  description:
+    enable: true
+    text: |
+      Jekyll plugin to generate html snippets for embedding Spotify Musics.
+      To listen to the full song, open your Spotify and start these musics.
+
+# Settings for the plugins in the _plugins folder.
+_plugins:
+  imager:
+    dir_posts: "assets/images/posts"
+  # To see language support, go to the plugin "_plugins/reading_time.rb"
+  reading_time:
+    locale: en_US
+  # To see language support, go to the plugin "_plugins/datelang.rb"
+  datelang:
+    locale: en_US
+    reload: false
+### EXTRA END - These properties are extra features, such as built-in third-party plugins.
+
+
+
+
+
+
+
+### BEGIN - [IRRELEVANT PROPERTIES] - These properties have no need to change unless you know what you are doing. WATCH OUT!
+
+# Settings Default
+include: ['_blog', '_contact', '_pages']
+markdown: kramdown
+highlighter: pygments
+permalink: /blog/:title/
+
+# Build local / Server
+destination: _site
+port: 4000
+host: localhost
+
+# Config SASS
+sass:
+  sass_dir: _sass
+  style: compressed
+
+# Config feed for atom
+feed:
+  path: atom.xml
+
+# Config for Compress HTML
+compress_html:
+  clippings: all
+  comments: all
+  endings: []
+  profile: false
+
+# Config plugin 'jekyll-tagging'
+tag_page_layout: tag
+tag_page_dir: blog/tags
+tag_permalink_style: pretty
+
+# Config for plugin 'jekyll-gist'
+gist:
+  noscript: false
+
+# Exclude files (or folders) in compilation.
+exclude:
+  - development
+  - temp
+  - src
+  - vendor
+  - Gemfile
+  - Gemfile.lock
+  - screenshot.png
+  - CHANGELOG
+  - LICENSE.txt
+  - COPYING
+  - "**/*.txt"
+  - README.md
+  - init.sh
+  - Rakefile
+  - deploy.conf
+### END - [IRRELEVANT PROPERTIES] - These properties have no need to change unless you know what you are doing. WATCH OUT!

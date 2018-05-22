@@ -1,0 +1,24 @@
+/* Stylesheets for include Footer
+––––––––––––––––––––––––––––––––––––––––––––––––––  */
+
+.footer{
+  font-family: $font-family__third;
+  background-color: $footer__bg;
+  font-size: 0.8rem;
+  color: $color-text;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  font-family: sans-serif;
+  border-top: $footer__bordertop;
+  font-weight: lighter;
+  &__scrrolltop{
+    position: absolute;
+    color: $color__links;
+    float: right;
+    right: 10px;
+    font-size: 3rem;
+    bottom: 0;
+  }
+}
