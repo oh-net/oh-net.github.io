@@ -3,18 +3,19 @@
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="utf-8">
   
-  <title>Hello,Stranger</title>
+  <title>hexo-deploy-without-username-and-password.md | Hello,Stranger</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="$$ Welcome 2 mine blog $$">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hello,Stranger">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Hexo免输入密码部署到Github本机生成SSH密钥，配置到github中  生成密钥 1ssh-keygen -f rsa -C &amp;quot;一些注释&amp;quot;  在github上添加ssh密钥注意 是公钥 id_rsa.pub  修改_config.yml中deploy的参数部署仓库以SSH的方式发布不需输入密码，反之如果以HTTPS的方式发布则需要密码。 示例：   1234deploy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hexo-deploy-without-username-and-password.md">
+<meta property="og:url" content="http://yoursite.com/2018/12/12/hexo-deploy-without-username-and-password-md/index.html">
 <meta property="og:site_name" content="Hello,Stranger">
-<meta property="og:description" content="$$ Welcome 2 mine blog $$">
+<meta property="og:description" content="Hexo免输入密码部署到Github本机生成SSH密钥，配置到github中  生成密钥 1ssh-keygen -f rsa -C &amp;quot;一些注释&amp;quot;  在github上添加ssh密钥注意 是公钥 id_rsa.pub  修改_config.yml中deploy的参数部署仓库以SSH的方式发布不需输入密码，反之如果以HTTPS的方式发布则需要密码。 示例：   1234deploy">
 <meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-12T06:41:40.466Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hello,Stranger">
-<meta name="twitter:description" content="$$ Welcome 2 mine blog $$">
+<meta name="twitter:title" content="hexo-deploy-without-username-and-password.md">
+<meta name="twitter:description" content="Hexo免输入密码部署到Github本机生成SSH密钥，配置到github中  生成密钥 1ssh-keygen -f rsa -C &amp;quot;一些注释&amp;quot;  在github上添加ssh密钥注意 是公钥 id_rsa.pub  修改_config.yml中deploy的参数部署仓库以SSH的方式发布不需输入密码，反之如果以HTTPS的方式发布则需要密码。 示例：   1234deploy">
   
     <link rel="alternate" href="/atom.xml" title="Hello,Stranger" type="application/atom+xml">
   
@@ -67,9 +68,7 @@
   </div>
 </header>
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-hexo-deploy-without-username-and-password-md" class="article article-type-post" itemscope="" itemprop="blogPost">
+        <section id="main"><article id="post-hexo-deploy-without-username-and-password-md" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/12/12/hexo-deploy-without-username-and-password-md/" class="article-date">
   <time datetime="2018-12-12T06:33:23.000Z" itemprop="datePublished">2018-12-12</time>
@@ -82,8 +81,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/12/hexo-deploy-without-username-and-password-md/">hexo-deploy-without-username-and-password.md</a>
+    <h1 class="article-title" itemprop="name">
+      hexo-deploy-without-username-and-password.md
     </h1>
   
 
@@ -113,56 +112,19 @@
     </footer>
   </div>
   
-</article>
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-move-files-using-mv" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/12/12/move-files-using-mv/" class="article-date">
-  <time datetime="2018-12-12T04:12:16.000Z" itemprop="datePublished">2018-12-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/12/move-files-using-mv/">move-files-using-mv</a>
-    </h1>
+    <a href="/2018/12/12/move-files-using-mv/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">move-files-using-mv</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="mv删除包含隐藏文件的所有文件"><a href="#mv删除包含隐藏文件的所有文件" class="headerlink" title="mv删除包含隐藏文件的所有文件"></a>mv删除包含隐藏文件的所有文件</h2><p>命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mv 原始文件 .[^.]* 目标地址</span><br></pre></td></tr></table></figure></p>
-<p>解释如下：</p>
-<ol start="3">
-<li>隐藏文件使用 <code>.[^.]*</code> 匹配</li>
-<li><strong>匹配隐藏文件</strong>用 <code>.[^.]*</code>。<br>之所以为什么不用 <code>.*</code>，是因为 <code>.*</code> 会匹配目录 <code>.</code> 和 <code>..</code></li>
-</ol>
-<p>更详细的命令可以参考下面的文章：<br><a href="https://unix.stackexchange.com/questions/6393/how-do-you-move-all-files-including-hidden-from-one-directory-to-another/6397#6397" target="_blank" rel="noopener">How do you move all files (including hidden) from one directory to another?</a></p>
-<p>–EOF–</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/12/move-files-using-mv/" data-id="cjpkt4oiy00017n81pev6ozwi" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mv-linux/">mv,linux</a></li></ul>
-
-    </footer>
-  </div>
   
 </article>
-
-
-  
 
 </section>
         
