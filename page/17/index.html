@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Hello,Stranger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="$$ Welcome 2 mine blog $$">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hello,Stranger">
+<meta property="og:url" content="http://yoursite.com/page/17/index.html">
+<meta property="og:site_name" content="Hello,Stranger">
+<meta property="og:description" content="$$ Welcome 2 mine blog $$">
+<meta property="og:locale" content="zh-cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hello,Stranger">
+<meta name="twitter:description" content="$$ Welcome 2 mine blog $$">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello,Stranger" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hello,Stranger</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Yet another note</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-netbeans-e4-b8-ad-e5-a6-82-e4-bd-95-e6-ad-a3-e5-b8-b8-e9-a1-af-e7-a4-ba-e4-b8-ad-e6-96-87" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/09/02/netbeans-e4-b8-ad-e5-a6-82-e4-bd-95-e6-ad-a3-e5-b8-b8-e9-a1-af-e7-a4-ba-e4-b8-ad-e6-96-87/" class="article-date">
+  <time datetime="2015-09-02T07:26:09.000Z" itemprop="datePublished">2015-09-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/02/netbeans-e4-b8-ad-e5-a6-82-e4-bd-95-e6-ad-a3-e5-b8-b8-e9-a1-af-e7-a4-ba-e4-b8-ad-e6-96-87/">NetBeans 中如何正常顯示中文</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>update:</p>
+<p>-----------------------------------------------------------</p>
+<p>字体启用平滑：</p>
+<p>-J-Dswing.aatext=true -J-Dawt.useSystemAAFontSettings=lcd</p>
+<p>字体大小：</p>
+<p>–fontsize 18</p>
+<p>-----------------------------------------------------------</p>
+<p><strong>路径： /usr/local/netbeans-7.3/etc/netbeans.conf</strong></p>
+<p><a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans IDE 7<strong>.</strong>0<strong>.</strong>1</a> 前一陣子出了，順手也一併升級。前幾天，把舊版7.0移除。沒想到，居然把NetBeans IDE 7<strong>.</strong>0.1的設定檔也給移除了。由6.x一直升級到7<strong>.</strong>0，我都是這樣做，都沒問題。這次怎會這樣？難道和這個農曆月份有關？ XD  </p>
+<p>於是，只好重新設定<strong>。</strong>順便解決<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 使用Consolas字型時，無法顯示中文的問題。  </p>
+<p>其實，<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 可以選擇程式碼顯示的字型<strong>。</strong>但是，只有選擇某些英文字型時才能正常顯示中文，例如dialoginput這個字型。但，選擇適合用於顯示程式碼的字型 - Consolas時，中文卻變成小方塊般的亂碼，無法正常顯示中文<strong>。</strong>  </p>
+<p>為何說微軟的Consolas這字型，適合用於顯示程式碼呢？有興趣的人可以參考下面網頁，就不難瞭解…  </p>
+<p>在同事的協助下，我們倆終於搞定了<strong>。</strong>讓<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 可以顯示Consolas字型。可以比較舒服的觀看code了～  </p>
+<p>完整設定步驟如下…<br>第一步<br>先察看<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 是使用的JAVA存放於那個目錄，請打開<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 的設定檔</p>
+<p><strong>Ubuntu下面的路径：/usr/local/netbeans-7.3.1/etc/netbeans.conf</strong></p>
+<p>C:Program FilesNetBeans 7<strong>.</strong>0.1etcNetBeans.conf</p>
+<p>註：目錄請換成您自己<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 所在目錄<strong>。</strong>因我安裝的是<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans IDE 7.0.1</a> ，所以是上述的目錄  </p>
+<p>找出如下的設定</p>
+<p># Default location of JDK, can be overridden by using –jdkhome <dir>:<br>NetBeans _jdkhome=”C:Program FilesJavajre6”</dir></p>
+<p>第二步<br>到<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 所使用的java目錄，開啟fontconfig.properties<strong>。</strong></p>
+<p>C:Program FilesJavajre6libfontconfig.properties</p>
+<p>註：如果目錄下沒有fontconfig.properties檔案，請複製該目錄下<br>fontconfig.properties.src，並改名為fontconfig.properties  </p>
+<p>第三步<br>在檔案fontconfig.properties的最後，增加下面設定，設定Consolas的實體字型檔</p>
+<p>filename.Consolas=CONSOLA.TTF<br>filename.Consolas_Bold=CONSOLAB.TTF<br>filename.Consolas_Italic=CONSOLAI.TTF<br>filename.Consolas_Bold_Italic=CONSOLAZ.TTF</p>
+<p>修改Search Sequences內的設定，將順序作如下的調整</p>
+<p>#sequence.monospaced<strong>.</strong>x-windows-950=chinese-ms950,alphabetic,dingbats,symbol,chinese-ms950-extb<br>sequence.monospaced<strong>.</strong>x-windows-950=alphabetic,chinese-ms950,dingbats,symbol,chinese-ms950-extb</p>
+<p>註：我是正體中文，其他中文語系，請改用您自己的中文語系  </p>
+<p>修改monospaced的相關設定</p>
+<p>#monospaced.plain.alphabetic=Courier New<br>monospaced.plain.alphabetic=Consolas<br>monospaced.plain.chinese-ms950=MingLiU<br>monospaced.plain.chinese-ms950-extb=MingLiU-ExtB<br>monospaced.plain.hebrew=David<br>monospaced.plain.japanese=MS Gothic<br>monospaced.plain.korean=GulimChe  </p>
+<p>#monospaced.bold.alphabetic=Courier New Bold<br>monospaced.bold.alphabetic=Consolas Bold<br>monospaced.bold.chinese-ms950=PMingLiU<br>monospaced.bold.chinese-ms950-extb=PMingLiU-ExtB<br>monospaced.bold.hebrew=David Bold<br>monospaced.bold.japanese=MS Gothic<br>monospaced.bold.korean=GulimChe  </p>
+<p>#monospaced.bolditalic.alphabetic=Courier New Italic<br>monospaced.italic.alphabetic=Consolas Italic<br>monospaced.italic.alphabetic=Consolas Italic<br>monospaced.italic.chinese-ms950=PMingLiU<br>monospaced.italic.chinese-ms950-extb=PMingLiU-ExtB<br>monospaced.italic.hebrew=David<br>monospaced.italic.japanese=MS Gothic<br>monospaced.italic.korean=GulimChe  </p>
+<p>#monospaced.bolditalic.alphabetic=Courier New Bold Italic<br>monospaced.bolditalic.alphabetic=Consolas Bold Italic<br>monospaced.bolditalic.chinese-ms950=PMingLiU<br>monospaced.bolditalic.chinese-ms950-extb=PMingLiU-ExtB<br>monospaced.bolditalic.hebrew=David Bold<br>monospaced.bolditalic.japanese=MS Gothic<br>monospaced.bolditalic.korean=GulimChe</p>
+<p>第四步<br>最後一步驟，可以說是最重要的…在<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 中的字型，<strong>請選擇monospaced**</strong>。**之前參考的文章，不是沒提到這點，不然就說選擇Consolas……… :(  </p>
+<p>設定完之後，也就瞭解…為何選擇dialoginput這個字型時，<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 可以正常顯示～</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/02/netbeans-e4-b8-ad-e5-a6-82-e4-bd-95-e6-ad-a3-e5-b8-b8-e9-a1-af-e7-a4-ba-e4-b8-ad-e6-96-87/" data-id="cjpkytqlt00016y8169mi1z5c" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/netbeans/">netbeans</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/中文/">中文</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-grep-e5-91-bd-e4-bb-a4-e8-af-a6-e8-a7-a3" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/13/linux-grep-e5-91-bd-e4-bb-a4-e8-af-a6-e8-a7-a3/" class="article-date">
+  <time datetime="2015-08-13T05:57:31.000Z" itemprop="datePublished">2015-08-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>►<a class="article-category-link" href="/categories/技术分类/操作系统/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/13/linux-grep-e5-91-bd-e4-bb-a4-e8-af-a6-e8-a7-a3/">linux grep命令详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>简介</strong> grep (global search regular expression(RE) and print out the line,全面搜索正则表达式并把行打印出来)是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹配的行打印出来。 Unix的grep家族包括grep、egrep和fgrep。egrep和fgrep的命令只跟grep有很小不同。egrep是grep的扩展，支持更多的re元字符， fgrep就是fixed grep或fast grep，它们把所有的字母都看作单词，也就是说，正则表达式中的元字符表示回其自身的字面意义，不再特殊。linux使用GNU版本的grep。它功能更强，可以通过-G、-E、-F命令行选项来使用egrep和fgrep的功能。</p>
+<h2 id="grep常用用法"><a href="#grep常用用法" class="headerlink" title="grep常用用法"></a><strong>grep常用用法</strong></h2><p>[root@www ~]# grep [-acinv] [–color=auto] ‘搜寻字符串’ filename<br>选项与参数： -a ：将 binary 文件以 text 文件的方式搜寻数据 -c ：计算找到 ‘搜寻字符串’ 的次数 -i ：忽略大小写的不同，所以大小写视为相同 -n ：顺便输出行号 -v ：反向选择，亦即显示出没有 ‘搜寻字符串’ 内容的那一行！ –color=auto ：可以将找到的关键词部分加上颜色的显示喔！</p>
+<p>将/etc/passwd，有出现 root 的行取出来</p>
+<p># grep root /etc/passwd root:x:0:0:root:/root:/bin/bash<br>operator:x:11:0:operator:/root:/sbin/nologin<br>或 # cat /etc/passwd | grep root<br>root:x:0:0:root:/root:/bin/bash<br>operator:x:11:0:operator:/root:/sbin/nologin</p>
+<p>  将/etc/passwd，有出现 root 的行取出来,同时显示这些行在/etc/passwd的行号</p>
+<p># grep -n root /etc/passwd<br>1:root:x:0:0:root:/root:/bin/bash 30:operator:x:11:0:operator:/root:/sbin/nologin</p>
+<p>在关键字的显示方面，grep 可以使用 –color=auto 来将关键字部分使用颜色显示。 这可是个很不错的功能啊！但是如果每次使用 grep 都得要自行加上 –color=auto 又显的很麻烦～ 此时那个好用的 alias 就得来处理一下啦！你可以在 ~/.bashrc 内加上这行：『alias grep=’grep –color=auto’』再以『 source ~/.bashrc 』来立即生效即可喔！ 这样每次运行 grep 他都会自动帮你加上颜色显示啦   将/etc/passwd，将没有出现 root 的行取出来</p>
+<p># grep -v root /etc/passwd root:x:0:0:root:/root:/bin/bash<br>operator:x:11:0:operator:/root:/sbin/nologin</p>
+<p>  将/etc/passwd，将没有出现 root 和nologin的行取出来</p>
+<p># grep -v root /etc/passwd | grep -v nologin<br>root:x:0:0:root:/root:/bin/bash<br>operator:x:11:0:operator:/root:/sbin/nologin</p>
+<p>  用 dmesg 列出核心信息，再以 grep 找出内含 eth 那行,要将捉到的关键字显色，且加上行号来表示：</p>
+<p>[root@www ~]# dmesg | grep -n –color=auto ‘eth’<br>247:eth0: RealTek RTL8139 at 0xee846000, 00:90:cc:a6:34:84, IRQ 10<br>248:eth0: Identified 8139 chip type ‘RTL-8139C’<br>294:eth0: link up, 100Mbps, full-duplex, lpa 0xC5E1<br>305:eth0: no IPv6 routers present<br># 你会发现除了 eth 会有特殊颜色来表示之外，最前面还有行号喔！</p>
+<p>在关键字的显示方面，grep 可以使用 –color=auto 来将关键字部分使用颜色显示。 这可是个很不错的功能啊！但是如果每次使用 grep 都得要自行加上 –color=auto 又显的很麻烦～ 此时那个好用的 alias 就得来处理一下啦！你可以在 ~/.bashrc 内加上这行：『alias grep=’grep –color=auto’』再以『 source ~/.bashrc 』来立即生效即可喔！ 这样每次运行 grep 他都会自动帮你加上颜色显示啦   用 dmesg 列出核心信息，再以 grep 找出内含 eth 那行,在关键字所在行的前两行与后三行也一起捉出来显示</p>
+<p>[root@www ~]# dmesg | grep -n -A3 -B2 –color=auto ‘eth’<br>245-PCI: setting IRQ 10 as level-triggered 246-ACPI: PCI Interrupt 0000:00:0e.0[A] -&gt; Link [LNKB] … 247:eth0: RealTek RTL8139 at 0xee846000, 00:90:cc:a6:34:84, IRQ 10<br>248:eth0: Identified 8139 chip type ‘RTL-8139C’<br>249-input: PC Speaker as /class/input/input2 250-ACPI: PCI Interrupt 0000:00:01.4[B] -&gt; Link [LNKB] … 251-hdb: ATAPI 48X DVD-ROM DVD-R-RAM CD-R/RW drive, 2048kB Cache, UDMA(66)<br># 如上所示，你会发现关键字 247 所在的前两行及 248 后三行也都被显示出来！<br># 这样可以让你将关键字前后数据捉出来进行分析啦！</p>
+<p>  根据文件内容递归查找目录</p>
+<p># grep ‘energywise’ *           #在当前目录搜索带’energywise’行的文件</p>
+<p># grep -r ‘energywise’ *        #在当前目录及其子目录下搜索’energywise’行的文件</p>
+<p># grep -l -r ‘energywise’ *     #在当前目录及其子目录下搜索’energywise’行的文件，但是不显示匹配的行，只显示匹配的文件</p>
+<p>这几个命令很使用，是查找文件的利器。  </p>
+<h2 id="grep与正规表达式"><a href="#grep与正规表达式" class="headerlink" title="grep与正规表达式"></a><strong>grep与正规表达式</strong></h2><p><strong> 字符类</strong> 字符类的搜索：如果我想要搜寻 test 或 taste 这两个单字时，可以发现到，其实她们有共通的 ‘t?st’ 存在～这个时候，我可以这样来搜寻：</p>
+<p>[root@www ~]# grep -n ‘t[ae]st’ regular_express.txt 8:I can’t finish the test.<br>9:Oh! The soup taste good.</p>
+<p>其实 [] 里面不论有几个字节，他都谨代表某『一个』字节， 所以，上面的例子说明了，我需要的字串是『tast』或『test』两个字串而已！   字符类的反向选择 [^] ：如果想要搜索到有 oo 的行，但不想要 oo 前面有 g，如下</p>
+<p>[root@www ~]# grep -n ‘[^g]oo’ regular_express.txt 2:apple is my favorite food. 3:Football game is not use feet only. 18:google is the best tools for search keyword. 19:goooooogle yes!</p>
+<p>第 2,3 行没有疑问，因为 foo 与 Foo 均可被接受！ 但是第 18 行明明有 google 的 goo 啊～别忘记了，因为该行后面出现了 tool 的 too 啊！所以该行也被列出来～ 也就是说， 18 行里面虽然出现了我们所不要的项目 (goo) 但是由於有需要的项目 (too) ， 因此，是符合字串搜寻的喔！ 至於第 19 行，同样的，因为 goooooogle 里面的 oo 前面可能是 o ，例如： go(ooo)oogle ，所以，这一行也是符合需求的！   字符类的连续：再来，假设我 oo 前面不想要有小写字节，所以，我可以这样写 [^abcd….z]oo ， 但是这样似乎不怎么方便，由於小写字节的 ASCII 上编码的顺序是连续的， 因此，我们可以将之简化为底下这样：</p>
+<p>[root@www ~]# grep -n ‘[^a-z]oo’ regular_express.txt 3:Football game is not use feet only.</p>
+<p>也就是说，当我们在一组集合字节中，如果该字节组是连续的，例如大写英文/小写英文/数字等等， 就可以使用[a-z],[A-Z],[0-9]等方式来书写，那么如果我们的要求字串是数字与英文呢？ 呵呵！就将他全部写在一起，变成：[a-zA-Z0-9]。 我们要取得有数字的那一行，就这样：</p>
+<p>[root@www ~]# grep -n ‘[0-9]‘ regular_express.txt 5:However, this dress is about $ 3183 dollars. 15:You are the best is mean you are the no. 1.</p>
+<p>  <strong>行首与行尾字节 ^ $</strong> 行首字符：如果我想要让 the 只在行首列出呢？ 这个时候就得要使用定位字节了！我们可以这样做：</p>
+<p>[root@www ~]# grep -n ‘^the’ regular_express.txt 12:the symbol ‘*’ is represented as start.</p>
+<p>  此时，就只剩下第 12 行，因为只有第 12 行的行首是 the 开头啊～此外， 如果我想要开头是小写字节的那一行就列出呢？可以这样：</p>
+<p>[root@www ~]# grep -n ‘^[a-z]‘ regular_express.txt 2:apple is my favorite food. 4:this dress doesn’t fit me.<br>10:motorcycle is cheap than car. 12:the symbol ‘*’ is represented as start. 18:google is the best tools for search keyword. 19:goooooogle yes!<br>20:go! go! Let’s go.</p>
+<p>  如果我不想要开头是英文字母，则可以是这样：</p>
+<p>[root@www ~]# grep -n ‘^[^a-zA-Z]‘ regular_express.txt 1:”Open Source” is a good mechanism to develop programs. 21:# I am VBird</p>
+<p>^ 符号，在字符类符号(括号[])之内与之外是不同的！ 在 [] 内代表『反向选择』，在 [] 之外则代表定位在行首的意义！   那如果我想要找出来，行尾结束为小数点 (.) 的那一行：</p>
+<p>[root@www ~]# grep -n ‘.$’ regular_express.txt 1:”Open Source” is a good mechanism to develop programs. 2:apple is my favorite food. 3:Football game is not use feet only. 4:this dress doesn’t fit me.<br>10:motorcycle is cheap than car. 11:This window is clear. 12:the symbol ‘*’ is represented as start. 15:You are the best is mean you are the no. 1. 16:The world <happy> is the same with “glad”. 17:I like dog. 18:google is the best tools for search keyword. 20:go! go! Let’s go.</happy></p>
+<p>特别注意到，因为小数点具有其他意义(底下会介绍)，所以必须要使用转义字符()来加以解除其特殊意义！   找出空白行：</p>
+<p>[root@www ~]# grep -n ‘^$’ regular_express.txt 22:</p>
+<p>因为只有行首跟行尾 (^$)，所以，这样就可以找出空白行啦！   <strong>任意一个字节 . 与重复字节 *</strong> 这两个符号在正则表达式的意义如下：</p>
+<p>. (小数点)：代表『一定有一个任意字节』的意思； * (星号)：代表『重复前一个字符， 0 到无穷多次』的意思，为组合形态</p>
+<p>假设我需要找出 g??d 的字串，亦即共有四个字节， 起头是 g 而结束是 d ，我可以这样做：</p>
+<p>[root@www ~]# grep -n ‘g..d’ regular_express.txt 1:”Open Source” is a good mechanism to develop programs. 9:Oh! The soup taste good. 16:The world <happy> is the same with “glad”.</happy></p>
+<p>因为强调 g 与 d 之间一定要存在两个字节，因此，第 13 行的 god 与第 14 行的 gd 就不会被列出来啦！   如果我想要列出有 oo, ooo, oooo 等等的数据， 也就是说，至少要有两个(含) o 以上，该如何是好？ 因为 <em> 代表的是『重复 0 个或多个前面的 RE 字符』的意义， 因此，『o</em>』代表的是：『拥有空字节或一个 o 以上的字节』，因此，『 grep -n ‘o<em>‘ regular_express.txt 』将会把所有的数据都列印出来终端上！ 当我们需要『至少两个 o 以上的字串』时，就需要 ooo</em> ，亦即是：</p>
+<p>[root@www ~]# grep -n ‘ooo*’ regular_express.txt 1:”Open Source” is a good mechanism to develop programs. 2:apple is my favorite food. 3:Football game is not use feet only. 9:Oh! The soup taste good. 18:google is the best tools for search keyword. 19:goooooogle yes!</p>
+<p>  如果我想要字串开头与结尾都是 g，但是两个 g 之间仅能存在至少一个 o ，亦即是 gog, goog, gooog…. 等等，那该如何？</p>
+<p>[root@www ~]# grep -n ‘goo*g’ regular_express.txt 18:google is the best tools for search keyword. 19:goooooogle yes!</p>
+<p>  如果我想要找出 g 开头与 g 结尾的行，当中的字符可有可无</p>
+<p>[root@www ~]# grep -n ‘g.*g’ regular_express.txt 1:”Open Source” is a good mechanism to develop programs. 14:The gd software is a library for drafting programs. 18:google is the best tools for search keyword. 19:goooooogle yes!<br>20:go! go! Let’s go.</p>
+<p>因为是代表 g 开头与 g 结尾，中间任意字节均可接受，所以，第 1, 14, 20 行是可接受的喔！ 这个 .* 的 RE 表示任意字符是很常见的.   如果我想要找出『任意数字』的行？因为仅有数字，所以就成为：</p>
+<p>[root@www ~]# grep -n ‘[0-9][0-9]*’ regular_express.txt 5:However, this dress is about $ 3183 dollars. 15:You are the best is mean you are the no. 1.</p>
+<pre><code>**限定连续 RE 字符范围 {}** 我们可以利用 . 与 RE 字符及 * 来配置 0 个到无限多个重复字节， 那如果我想要限制一个范围区间内的重复字节数呢？ 举例来说，我想要找出两个到五个 o 的连续字串，该如何作？这时候就得要使用到限定范围的字符 {} 了。 但因为 { 与 } 的符号在 shell 是有特殊意义的，因此， 我们必须要使用字符   来让他失去特殊意义才行。 至於 {} 的语法是这样的，假设我要找到两个 o 的字串，可以是：
+</code></pre><p>[root@www ~]# grep -n ‘o{2}’ regular_express.txt 1:”Open Source” is a good mechanism to develop programs. 2:apple is my favorite food. 3:Football game is not use feet only. 9:Oh! The soup taste good. 18:google is the best tools for search ke 19:goooooogle yes!</p>
+<p>  假设我们要找出 g 后面接 2 到 5 个 o ，然后再接一个 g 的字串，他会是这样：</p>
+<p>[root@www ~]# grep -n ‘go{2,5}g’ regular_express.txt 18:google is the best tools for search keyword.</p>
+<p>  如果我想要的是 2 个 o 以上的 goooo….g 呢？除了可以是 gooo*g ，也可以是：</p>
+<p>[root@www ~]# grep -n ‘go{2,}g’ regular_express.txt 18:google is the best tools for search keyword. 19:goooooogle yes!</p>
+<p>  <strong>扩展grep(grep -E 或者 egrep)：</strong> 使用扩展grep的主要好处是增加了额外的正则表达式元字符集。   打印所有包含NW或EA的行。如果不是使用egrep，而是grep，将不会有结果查出。</p>
+<pre><code># egrep &apos;NW|EA&apos; testfile
+northwest       NW      Charles Main 3.0     .98     3       34 eastern         EA      TB Savage 4.4     .84     5       20
+</code></pre><p>  对于标准grep，如果在扩展元字符前面加，grep会自动启用扩展选项-E。</p>
+<p>#grep ‘NW|EA’ testfile<br>northwest       NW      Charles Main 3.0     .98     3       34 eastern         EA      TB Savage 4.4     .84     5       20</p>
+<p>  搜索所有包含一个或多个3的行。</p>
+<p># egrep ‘3+’ testfile<br># grep -E ‘3+’ testfile<br># grep ‘3+’ testfile</p>
+<p>#这3条命令将会<br>northwest       NW      Charles Main 3.0     .98     3       34 western         WE      Sharon Gray 5.3     .97     5       23 northeast       NE      AM Main Jr. 5.1     .94     3       13 central         CT      Ann Stephens 5.7     .94     5       13</p>
+<p>  搜索所有包含0个或1个小数点字符的行。</p>
+<p># egrep ‘2.?[0-9]‘ testfile<br># grep -E ‘2.?[0-9]‘ testfile<br># grep ‘2.?[0-9]‘ testfile</p>
+<p>#首先含有2字符，其后紧跟着0个或1个点，后面再是0和9之间的数字。<br>western         WE       Sharon Gray 5.3     .97     5       23 southwest       SW      Lewis Dalsass 2.7     .8      2       18 eastern         EA       TB Savage 4.4     .84     5       20</p>
+<p>  搜索一个或者多个连续的no的行。</p>
+<p># egrep ‘(no)+’ testfile<br># grep -E ‘(no)+’ testfile<br># grep ‘(no)+’ testfile   #3个命令返回相同结果，<br>northwest       NW      Charles Main 3.0     .98     3       34 northeast       NE       AM Main Jr. 5.1     .94     3       13 north           NO      Margot Weber 4.5     .89     5       9</p>
+<p>  <strong>不使用正则表达式</strong> fgrep 查询速度比grep命令快，但是不够灵活：它只能找固定的文本，而不是规则表达式。 如果你想在一个文件或者输出中找到包含星号字符的行</p>
+<p>fgrep  ‘<em>‘ /etc/profile<br>for i in /etc/profile.d/</em>.sh ; do</p>
+<p>或<br>grep -F ‘<em>‘ /etc/profile<br>for i in /etc/profile.d/</em>.sh ; do</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/13/linux-grep-e5-91-bd-e4-bb-a4-e8-af-a6-e8-a7-a3/" data-id="cjpkyswqx000j6o81u0ehfnvb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/grep/">grep</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e4-bf-ae-e6-94-b9windows-e4-b8-8b-e7-9a-84vim-e5-ad-97-e4-bd-93" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/13/e4-bf-ae-e6-94-b9windows-e4-b8-8b-e7-9a-84vim-e5-ad-97-e4-bd-93/" class="article-date">
+  <time datetime="2015-08-13T05:38:29.000Z" itemprop="datePublished">2015-08-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>►<a class="article-category-link" href="/categories/技术分类/操作系统/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/13/e4-bf-ae-e6-94-b9windows-e4-b8-8b-e7-9a-84vim-e5-ad-97-e4-bd-93/">修改Windows下的vim字体</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>vim 在Windows和linux 下面配置字体的方式不太一样： <code>linux： set guifont=Monaco 14</code> windows: set guifont=Monaco:h14:cANSI</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/13/e4-bf-ae-e6-94-b9windows-e4-b8-8b-e7-9a-84vim-e5-ad-97-e4-bd-93/" data-id="cjpkyfum2003k1281ak0biveb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字体/">字体</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/配置/">配置</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-c-e6-97-b6-e9-97-b4-e6-88-b3-e8-bd-ac-e6-8d-a2-e4-b8-ba-e6-99-ae-e9-80-9a-e6-97-b6-e9-97-b4" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/06/c-e6-97-b6-e9-97-b4-e6-88-b3-e8-bd-ac-e6-8d-a2-e4-b8-ba-e6-99-ae-e9-80-9a-e6-97-b6-e9-97-b4/" class="article-date">
+  <time datetime="2015-08-06T06:02:10.000Z" itemprop="datePublished">2015-08-06</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/06/c-e6-97-b6-e9-97-b4-e6-88-b3-e8-bd-ac-e6-8d-a2-e4-b8-ba-e6-99-ae-e9-80-9a-e6-97-b6-e9-97-b4/">C# 时间戳转换为普通时间</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>时间戳转为C#格式时间</strong></p>
+<pre><code>// 时间戳转为C#格式时间
+private DateTime StampToDateTime(string timeStamp)
+{
+    DateTime dateTimeStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+    long lTime = long.Parse(timeStamp + &quot;0000000&quot;);
+    TimeSpan toNow = new TimeSpan(lTime);
+    return dateTimeStart.Add(toNow);
+}
+</code></pre><p><strong>DateTime时间格式转换为Unix时间戳格式</strong></p>
+<pre><code>// DateTime时间格式转换为Unix时间戳格式
+private int DateTimeToStamp(System.DateTime time)
+{
+    System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+    return (int)(time - startTime).TotalSeconds;
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/06/c-e6-97-b6-e9-97-b4-e6-88-b3-e8-bd-ac-e6-8d-a2-e4-b8-ba-e6-99-ae-e9-80-9a-e6-97-b6-e9-97-b4/" data-id="cjpkyfuko001e1281tmqlul7p" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/时间/">时间</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转换/">转换</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-ubuntu-e4-b8-8b-e6-80-8e-e4-b9-88-e4-bd-bf-e7-94-a8shadowsocks-ef-bc-9f" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/08/04/ubuntu-e4-b8-8b-e6-80-8e-e4-b9-88-e4-bd-bf-e7-94-a8shadowsocks-ef-bc-9f/" class="article-date">
+  <time datetime="2015-08-04T02:39:36.000Z" itemprop="datePublished">2015-08-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>►<a class="article-category-link" href="/categories/技术分类/操作系统/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/04/ubuntu-e4-b8-8b-e6-80-8e-e4-b9-88-e4-bd-bf-e7-94-a8shadowsocks-ef-bc-9f/">ubuntu下怎么使用shadowsocks？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Ubuntu下怎么使用Shadowsocks？"><a href="#Ubuntu下怎么使用Shadowsocks？" class="headerlink" title="Ubuntu下怎么使用Shadowsocks？"></a><a href="#ubuntu下怎么使用shadowsocks？"></a>Ubuntu下怎么使用Shadowsocks？</h1><p><strong>用pip安装就很简单。</strong></p>
+<ol>
+<li><h3 id="安装ss"><a href="#安装ss" class="headerlink" title="安装ss"></a><a href="#安装ss"></a>安装ss</h3><pre><code>apt-get install python-pip &amp; pip install shadowsocks
+</code></pre></li>
+</ol>
+<ol start="2">
+<li><h3 id="启动-ss客户端"><a href="#启动-ss客户端" class="headerlink" title="启动 ss客户端"></a><a href="#启动-ss客户端"></a>启动 ss客户端</h3><ol>
+<li><p>启动方法a，直接在终端用命令：</p>
+<pre><code>sslocal -s 123.123.213.213 -p 6666 -b 127.0.0.1 -l 1080 -k 23333 -t 600 -m aes-256-cfb
+</code></pre></li>
+</ol>
+</li>
+</ol>
+<pre><code>2.  启动方法b，用配置文件启动  
+    配置文件存为ss.conf，格式：
+
+        {
+         &quot;server&quot; : &quot;123.123.213.213&quot;,
+         &quot;server_port&quot; : 6666,
+         &quot;local_port&quot; : 1080,
+         &quot;password&quot; : &quot;23333&quot;,
+         &quot;timeout&quot; : 600,
+         &quot;method&quot; : &quot;aes-256-cfb&quot;
+         }
+
+
+    启动时使用命令：
+
+        sslocal -c /filepath/to/ss.conf
+
+
+    完成。
+
+**PS：**
+
+&gt; a. 记得在Network设置代理: 设置Socks Host指向 ss客户端的本地IP和端口, 即`127.0.0.1 1080`;  
+&gt; b. 有同学反应还是不能科学上网。说明一下，SS不同于VPN，它是走socks5协议的，一般搭配浏览器食用，对于 **terminal的get,wget等走http是没有帮助的**。虽然有socks转http的方法，但这里就不折腾了。
+</code></pre><ol start="3">
+<li><h3 id="开机启动ss-可选"><a href="#开机启动ss-可选" class="headerlink" title=")开机启动ss(可选)"></a><a href="#开机启动ss(可选"></a>)开机启动ss(可选)</h3><p>在<code>/etc/rc.local</code>中添加启动命令。<br>例如:</p>
+<pre><code>sudo vi /etc/rc.local
+</code></pre></li>
+</ol>
+<pre><code>在exit 0前添加(这里假设你已经在第2步写好shell脚本，并命名为`ss_start.sh`)
+
+     sudo sh /path/to/sslocal/ss_start.sh
+
+
+如果路径和权限都没问题，在下次开机时就会启动ss了。
+
+查看ss是否已经开启，用下面这个:
+
+     ps -ef | grep sslocal
+
+
+输出两条进程信息就说明成功开启了(其中一条是上面这条命令的)。
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/04/ubuntu-e4-b8-8b-e6-80-8e-e4-b9-88-e4-bd-bf-e7-94-a8shadowsocks-ef-bc-9f/" data-id="cjpkyx2pe00018q817e3bipsl" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ubuntu/">ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-vim-e4-b8-ad-ef-bc-8c-e5-a6-82-e4-bd-95-e4-bf-9d-e5-ad-98-e5-ae-8f" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/07/24/vim-e4-b8-ad-ef-bc-8c-e5-a6-82-e4-bd-95-e4-bf-9d-e5-ad-98-e5-ae-8f/" class="article-date">
+  <time datetime="2015-07-24T03:14:00.000Z" itemprop="datePublished">2015-07-24</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/24/vim-e4-b8-ad-ef-bc-8c-e5-a6-82-e4-bd-95-e4-bf-9d-e5-ad-98-e5-ae-8f/">vim中，如何保存宏</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>vim中的宏其实是把操作命令写到一个寄存器里了。 宏的确是可以保存下来，想要发给别人还需要一系列操作。 按下面操作。 1 先建立一个宏。按qa建立名字叫a的宏，其实是把你的操作存在寄存器a里。 2 在任意一个文件的任意位置normal状态下，命令”ap 即可以把宏的内容显示出来。比如说我的宏是：”LIBRARY ieee;^M USE ieee.std_logic_1164.all;^M USE ieee.std_logic_arith.all;^M USE ieee.std_logic_unsigned.ALL^M^[“ 3 如果你想发给别人可以保存下来这段内容。发给对方。 4 对方接到你的这段宏之后，可以使用命令：let @a=”LIBRARY ieee;^M USE ieee.std_logic_1164.all;^M USE ieee.std_logic_arith.all;^M USE ieee.std_logic_unsigned.ALL^M^[“ 5 这样他@a命令就可以使用你制作的宏了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/24/vim-e4-b8-ad-ef-bc-8c-e5-a6-82-e4-bd-95-e4-bf-9d-e5-ad-98-e5-ae-8f/" data-id="cjpkyx2rq00088q819cvta987" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vim/">vim</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/宏/">宏</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-windows-e4-b8-8b-e5-90-84-e5-b8-b8-e7-94-a8-e7-bc-96-e7-a8-8b-e5-ad-97-e4-bd-93-e5-af-b9-e6-af-94" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/29/windows-e4-b8-8b-e5-90-84-e5-b8-b8-e7-94-a8-e7-bc-96-e7-a8-8b-e5-ad-97-e4-bd-93-e5-af-b9-e6-af-94/" class="article-date">
+  <time datetime="2015-06-29T03:43:38.000Z" itemprop="datePublished">2015-06-29</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/大前端！/">大前端！</a>►<a class="article-category-link" href="/categories/大前端！/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/29/windows-e4-b8-8b-e5-90-84-e5-b8-b8-e7-94-a8-e7-bc-96-e7-a8-8b-e5-ad-97-e4-bd-93-e5-af-b9-e6-af-94/">windows下各常用编程字体对比</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>所有字体大小为10号 新宋体为默认字体，用多了感觉不到，一对比才知道有多烂。。。 Monaco 和 Lucida Console 不是系统自带的，要自己下载 个人还是觉得monaco  和 lucida console更好点。。 群众的眼睛是雪亮的~ <a href="http://happiz-wordpress.stor.sinaapp.com/uploads/2015/06/新宋体.png" target="_blank" rel="noopener"><img src="http://happiz-wordpress.stor.sinaapp.com/uploads/2015/06/新宋体.png" alt="" title="新宋体"></a> <a href="http://happiz-wordpress.stor.sinaapp.com/uploads/2015/06/monaco.png" target="_blank" rel="noopener"><img src="http://happiz-wordpress.stor.sinaapp.com/uploads/2015/06/monaco.png" alt="" title="monaco"></a> <a href="http://happiz-wordpress.stor.sinaapp.com/uploads/2015/06/Lucida-Console.png" target="_blank" rel="noopener"><img src="http://happiz-wordpress.stor.sinaapp.com/uploads/2015/06/Lucida-Console.png" alt="" title="Lucida Console"></a> <a href="http://happiz-wordpress.stor.sinaapp.com/uploads/2015/06/Curier_New.png" target="_blank" rel="noopener"><img src="http://happiz-wordpress.stor.sinaapp.com/uploads/2015/06/Curier_New.png" alt="" title="Curier_New"></a> <a href="http://happiz-wordpress.stor.sinaapp.com/uploads/2015/06/consolas.png" target="_blank" rel="noopener"><img src="http://happiz-wordpress.stor.sinaapp.com/uploads/2015/06/consolas.png" alt="" title="consolas"></a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/29/windows-e4-b8-8b-e5-90-84-e5-b8-b8-e7-94-a8-e7-bc-96-e7-a8-8b-e5-ad-97-e4-bd-93-e5-af-b9-e6-af-94/" data-id="cjpkyx2ti001y8q818t7rzaai" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字体/">字体</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程/">编程</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-gridview-e5-af-bc-e5-87-baexcel-ef-bc-88-e5-9f-ba-e6-9c-ac-e7-89-88-ef-bc-89" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/17/gridview-e5-af-bc-e5-87-baexcel-ef-bc-88-e5-9f-ba-e6-9c-ac-e7-89-88-ef-bc-89/" class="article-date">
+  <time datetime="2015-06-17T09:06:28.000Z" itemprop="datePublished">2015-06-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/17/gridview-e5-af-bc-e5-87-baexcel-ef-bc-88-e5-9f-ba-e6-9c-ac-e7-89-88-ef-bc-89/">Gridview导出Excel（基本版）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="关键方法"><a href="#关键方法" class="headerlink" title="关键方法"></a>关键方法</h3><p>/// /// 将网格数据导出到Excel<br>///<br>/// 网格名称(如GridView1)<br>/// 要导出的文件类型(Excel:application/ms-excel)<br>/// 要保存的文件名<br>public void GridViewToExcel(Control ctrl, string FileType, string FileName)<br>{<br>    bool gridViewAllowPaging = false;<br>    if (ctrl is GridView)<br>    {<br>        gridViewAllowPaging = ((GridView)ctrl).AllowPaging;<br>        if (gridViewAllowPaging)<br>        {<br>            ((GridView)ctrl).AllowPaging = false;<br>        }<br>    }<br>    HttpContext.Current.Response.Charset = “GB2312”;<br>    HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.UTF8;//注意编码<br>    HttpContext.Current.Response.AppendHeader(“Content-Disposition”,<br>        “attachment;filename=” + HttpUtility.UrlEncode(FileName, System.Text.Encoding.UTF8).ToString());<br>    HttpContext.Current.Response.ContentType = FileType;//image/JPEG;text/HTML;image/GIF;vnd.ms-excel/msword<br>    ctrl.Page.EnableViewState = false;<br>    System.IO.StringWriter tw = new System.IO.StringWriter();<br>    HtmlTextWriter hw = new HtmlTextWriter(tw);<br>    ctrl.RenderControl(hw);<br>    HttpContext.Current.Response.Write(tw.ToString());<br>    HttpContext.Current.Response.End();<br>    if (ctrl is GridView &amp;&amp; gridViewAllowPaging)<br>    {<br>        ((GridView)ctrl).AllowPaging = true;<br>    }<br>}</p>
+<p>/// /// 必须重写，否则会报错——类型“GridView”的控件“gridView1”必须放在具有 runat=server 的窗体标记内。<br>///<br>///<br>public override void VerifyRenderingInServerForm(Control control)<br>{<br>}</p>
+<p>调用方法也很简单：</p>
+<pre><code>protected void btnExport_Click(object sender, EventArgs e)
+{
+    // export to excel
+    GridViewToExcel(gridView, &quot;application/ms-excel&quot;, &quot;explode_&quot; + DateTime.Now.ToShortTimeString()+&quot;.xls&quot;);
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/17/gridview-e5-af-bc-e5-87-baexcel-ef-bc-88-e5-9f-ba-e6-9c-ac-e7-89-88-ef-bc-89/" data-id="cjpkyrfue00015h815gkx3qep" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/excel/">excel</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/gridview/">gridview</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-c-e7-94-9f-e6-88-90-e5-a4-a7-e9-87-8f16-e4-bd-8d-e9-9a-8f-e6-9c-ba-e6-95-b0" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/28/c-e7-94-9f-e6-88-90-e5-a4-a7-e9-87-8f16-e4-bd-8d-e9-9a-8f-e6-9c-ba-e6-95-b0/" class="article-date">
+  <time datetime="2015-05-28T10:10:00.000Z" itemprop="datePublished">2015-05-28</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/28/c-e7-94-9f-e6-88-90-e5-a4-a7-e9-87-8f16-e4-bd-8d-e9-9a-8f-e6-9c-ba-e6-95-b0/">C# 生成大量16位随机数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>using System.Collections.Generic;<br>using System.Linq;<br>using System.Text;<br>using System.Security.Cryptography;<br>using System.IO;</p>
+<p>namespace InitRandom<br>{<br>    // 生成16位随机数字，写入D:AAAA16.txt中<br>    //<br>    // todo: 有万分之一左右的数据长度小于16位<br>    class Program<br>    {<br>        static void Main(string[] args)<br>        {<br>            string path = @”D:AAAA16.txt”;<br>            RandomNumberGenerator randgen = new RNGCryptoServiceProvider();<br>            byte[] data = new byte[8];<br>            using (StreamWriter sw = new StreamWriter(path, true)) {<br>                for (long i = 0; i &lt; 100000; i++) {<br>                    randgen.GetBytes(data);<br>                    string n = Math.Abs(BitConverter.ToInt64(data, 0)).ToString();<br>                    if (n.Length &gt;= 16) {<br>                        sw.Write(n.Substring(0,16) + “n”);<br>                    }<br>                }<br>            }<br>            Console.WriteLine(“Finished”);<br>            Console.ReadLine();<br>        }<br>    }<br>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/05/28/c-e7-94-9f-e6-88-90-e5-a4-a7-e9-87-8f16-e4-bd-8d-e9-9a-8f-e6-9c-ba-e6-95-b0/" data-id="cjpkyfukq001h1281zzzvu4js" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-easyui-e5-88-86-e9-a1-b5" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/17/easyui-e5-88-86-e9-a1-b5/" class="article-date">
+  <time datetime="2015-05-17T09:53:41.000Z" itemprop="datePublished">2015-05-17</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/17/easyui-e5-88-86-e9-a1-b5/">EasyUI分页</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>前端代码（ASPX） 开发时的代码，拿来即用主义有福～～～</p>
+<table id="tt" class="easyui-datagrid" style="width: 600px; height: 250px" title="Load Data" iconcls="icon-save" rownumbers="true" pagination="true"><br>        <thead><br>            <tr><br>                <th field="id" width="80"><br>                    id<br>                </th><br>                <th field="Code" width="180"><br>                    Product Code<br>                </th><br>                <th field="StorageName" width="180" align="right"><br>                    List StorageName<br>                </th><br>                <th field="MaxCap" width="80" align="right"><br>                    Unit Cost<br>                </th><br>            </tr><br>        </thead><br>    </table>
+
+<pre><code>前端JS：
+</code></pre><script type="text/javascript">
+        $(function () {
+            $('#tt').datagrid({
+                pageNumber: 1,
+                url: "listData.ashx",
+                columns: \[\[
+             { field: 'id', title: 'id', width: 100 },
+             { field: 'StorageName', title: 'name', width: 100 },
+             { field: 'MaxCap', title: 'maxcap', width: 100 },
+             { field: 'Code', title: 'code', width: 100 },
+            \]\],
+                pagination: true,
+                rownumbers: true,
+
+                pageList: \[10, 20, 30, 50\]
+            });
+            var p = $('#tt').datagrid('getPager');
+            (p).pagination({
+                beforePageText: '第', //页数文本框前显示的汉字
+                afterPageText: '页    共 {pages} 页',
+                displayMsg: '共{total}条数据'
+            });
+        });
+    </script>
+
+<p>后台处理程序（ASHX）：</p>
+<p>public void ProcessRequest(HttpContext context)<br>        {<br>            context.Response.ContentType = “application/json”;<br>            context.Response.Charset = “utf-8”;<br>            //总条数<br>            int count = 1;<br>            // 页码数<br>            string pageNumber = context.Request[“page”] ?? “1”;<br>            // 页尺寸<br>            string pageSize = context.Request[“rows”] ?? “10”;<br>            // 库位编号<br>            string code = context.Request[“code”] ?? “”;<br>            // 仓库编号<br>            string whid = context.Request[“WHID”] ?? “”;<br>            // 库位名称<br>            string sName = context.Request[“sName”] ?? “”;<br>            // 渠道<br>            string channel = context.Request[“Channal”] ?? “”;</p>
+<pre><code>    string strSql = &quot;select top &quot; + pageSize + &quot; * from Base\_Storage bs inner join Base\_Warehouse bw on bs.WHID=bw.ID where 1=1 &quot;;
+    string pageStr = &quot;&quot;;
+    string strWhere = &quot;&quot;;
+
+    if (pageNumber == &quot;1&quot;) {
+        pageStr += &quot;&quot;;
+    } else {
+        pageStr += &quot; and bs.ID not in (SELECT TOP (&quot; + int.Parse(pageSize) * (int.Parse(pageNumber) - 1) + &quot;) ID FROM Base_Storage ORDER BY ID) &quot;;
+    }
+
+    if (code.Length &gt; 0) {
+        strWhere += &quot;and bs.Code like &apos;%&quot; + code + &quot;%&apos; &quot;;
+    }
+    if (whid.Length &gt; 0) {
+        strWhere += &quot;and bs.WHID in (&quot; + whid + &quot;) &quot;;
+    }
+    if (sName.Length &gt; 0) {
+        strWhere += &quot;and bs.StorageName like &apos;&quot; + sName + &quot;%&apos; &quot;;
+    }
+    if (channel.Length &gt; 0) {
+        strWhere += &quot;and bs.Channel=&apos;&quot; + channel + &quot;&apos; &quot;;
+    }
+    strSql = strSql + pageStr;
+
+    string json = string.Empty;
+    DataTable dt = DBHelper.getDataTable(strSql);
+
+    // 获取总页数
+    DataTable dtPage = DBHelper.getDataTable(&quot;select * from Base\_Storage bs inner join Base\_Warehouse bw on bs.WHID=bw.ID where 1=1 &quot; + strWhere);
+    if (dtPage != null &amp;&amp; dtPage.Rows.Count &gt; 0) {
+        count = dtPage.Rows.Count;
+    }
+
+    // 校验是否有数据，并生成 Json格式
+    if (dt.Rows.Count &gt; 0) {
+        json = getJson(dt, count,int.Parse(pageSize),int.Parse(pageNumber),strSql);
+    }
+
+    context.Response.Write(json);
+    context.Response.End();
+}
+/// &lt;summary&gt;
+/// 节点树的组合
+/// &lt;/summary&gt;
+/// &lt;paramname=&quot;dt&quot;&gt;参数为DataTable&lt;/param&gt;
+/// &lt;returns&gt;&lt;/returns&gt;
+public string getJson(DataTable dt, int count, int pageSize, int pageNumber,string strsql)
+{
+    StringBuilder json = new StringBuilder();
+
+    json.Append(&quot;{&quot;);
+    if (dt != null &amp;&amp; dt.Rows.Count &gt; 0) {
+        json.Append(&quot;&quot;rows&quot;:\[&quot;);
+        // 循环出所有一级地理位置
+        foreach (DataRow dr in dt.Rows) {
+            json.Append(&quot;{&quot;id&quot;:&quot; + dr\[&quot;ID&quot;\].ToString());
+            json.Append(&quot;,&quot;Code&quot;:&quot;&quot; + dr\[&quot;Code&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;StorageName&quot;:&quot;&quot; + dr\[&quot;StorageName&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;MaxCap&quot;:&quot;&quot; + dr\[&quot;MaxCap&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;WHID&quot;:&quot;&quot; + dr\[&quot;WHID&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;WarehouseName&quot;:&quot;&quot; + dr\[&quot;WarehouseName&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;Channel&quot;:&quot;&quot; + dr\[&quot;Channal&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;ChannelK3Code&quot;:&quot;&quot; + dr\[&quot;ChannalK3Code&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;Type&quot;:&quot;&quot; + dr\[&quot;Type&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;TypeK3Code&quot;:&quot;&quot; + dr\[&quot;TypeK3Code&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;Category&quot;:&quot;&quot; + dr\[&quot;Category&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;CategoryK3Code&quot;:&quot;&quot; + dr\[&quot;CategoryK3Code&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;CustomerID&quot;:&quot;&quot; + dr\[&quot;CustomerID&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;Disableds&quot;:&quot;&quot; + dr\[&quot;Disableds&quot;\].ToString() + &quot;&quot;&quot;);
+
+            json.Append(&quot;},&quot;);
+        }
+        json.Remove(json.Length - 1, 1); // 去掉 trail 逗号（,）
+        json.Append(&quot;\],&quot;total&quot;:&quot; + count);
+        json.Append(&quot;,&quot;pageSize&quot;:&quot; + pageSize);
+        json.Append(&quot;,&quot;pageNumber&quot;:&quot; + pageNumber);
+    }
+    //json.Remove(json.Length - 1, 1); // 去掉 trail 逗号（,）
+    json.Append(&quot;}&quot;);
+    return json.ToString();
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/05/17/easyui-e5-88-86-e9-a1-b5/" data-id="cjpkyqvno000357810zxeycxe" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/easyui/">easyui</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分页/">分页</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/16/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/18/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/">互联网</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/操作系统/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/数据库/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AES/">AES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GlusterFS/">GlusterFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google云/">Google云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/">Mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAT/">NAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PATH/">PATH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SMTP/">SMTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentry/">Sentry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-factor-authentication/">Two-factor authentication</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T型累加/">T型累加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/M/">^M</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aliyun/">aliyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/application-ini/">application.ini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bashrc/">bashrc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/berkeleydb/">berkeleydb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitcoin/">bitcoin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte/">byte</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cli/">cli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/combobox/">combobox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datagrid/">datagrid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbd/">dbd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dhcp/">dhcp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drupal/">drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic/">dynamic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easyui/">easyui</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ef/">ef</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emac/">emac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity-framework/">entity framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/excel/">excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exception/">exception</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/export/">export</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/final/">final</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fonts/">fonts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/g/">g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get-result/">get_result</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getclass/">getclass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gmail/">gmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google/">google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gridview/">gridview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/inputstream/">inputstream</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jms/">jms</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel-version/">kernel version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j/">log4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/">lvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lxde/">lxde</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mailer/">mailer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/menu/">menu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microtime/">microtime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monaco/">monaco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/msyql/">msyql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql-load-data/">mysql load data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysqldump/">mysqldump</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netbeans/">netbeans</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ocserv/">ocserv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/office/">office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openoffice/">openoffice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openvpn/">openvpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php-ini/">php.ini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/phpinfo/">phpinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redmine/">redmine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/">root</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/">screen</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/slackware/">slackware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sleep/">sleep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sockets/">sockets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sprintboot/">sprintboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/static/">static</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/symfony/">symfony</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tar/">tar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tls-ssl/">tls/ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/token/">token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usort/">usort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virutal-box/">virutal box</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn868错误/">vpn868错误</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xfce/">xfce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaf/">yaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yotube/">yotube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/两步验证/">两步验证</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中文/">中文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/保存/">保存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改密码/">修改密码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/写文件/">写文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数/">函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分级/">分级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分页/">分页</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/创建用户/">创建用户</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除/">删除</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷新/">刷新</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态类型/">动态类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/匹配/">匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卡夫卡/">卡夫卡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化/">参数化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化查询/">参数化查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台/">后台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行/">命令行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备份/">备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/子查询/">子查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/子部门/">子部门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字节流/">字节流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/宏/">宏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对称加密/">对称加密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工厂模式/">工厂模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微软雅黑/">微软雅黑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/德兰修女/">德兰修女</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思科/">思科</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手机/">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/执行时间/">执行时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/挖矿/">挖矿</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/提交/">提交</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敏捷/">敏捷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据备份/">数据备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库错误/">数据库错误</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件句柄/">文件句柄</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件存储/">文件存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/替换/">替换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构/">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构师/">架构师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派/">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/比特币/">比特币</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毫秒/">毫秒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据/">海量数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据导入/">海量数据导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/漏洞/">漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境变量/">环境变量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/用户/">用户</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/疏忽/">疏忽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箴言/">箴言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/累加/">累加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组/">组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/终端/">终端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓冲区/">缓冲区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编程/">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义函数/">自定义函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/菜单/">菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表单/">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解压/">解压</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解锁/">解锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言/">语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/说明书/">说明书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/输入法/">输入法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/追加/">追加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向工程/">逆向工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮件/">邮件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮箱/">邮箱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置文件/">配置文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复数据/">重复数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复记录/">重复记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误提示/">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里/">阿里</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/颜色/">颜色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/默认路径/">默认路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/龙角散/">龙角散</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AES/" style="font-size: 10px;">AES</a> <a href="/tags/ActiveMQ/" style="font-size: 10.83px;">ActiveMQ</a> <a href="/tags/CodeIginter/" style="font-size: 11.67px;">CodeIginter</a> <a href="/tags/CodeIgnitor/" style="font-size: 10px;">CodeIgnitor</a> <a href="/tags/GlusterFS/" style="font-size: 10px;">GlusterFS</a> <a href="/tags/Google云/" style="font-size: 10px;">Google云</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/NAT/" style="font-size: 10px;">NAT</a> <a href="/tags/PATH/" style="font-size: 10px;">PATH</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/SMTP/" style="font-size: 10px;">SMTP</a> <a href="/tags/Sentry/" style="font-size: 10px;">Sentry</a> <a href="/tags/Two-factor-authentication/" style="font-size: 10px;">Two-factor authentication</a> <a href="/tags/T型累加/" style="font-size: 10px;">T型累加</a> <a href="/tags/VMware/" style="font-size: 10.83px;">VMware</a> <a href="/tags/M/" style="font-size: 10px;">^M</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/anyconnect/" style="font-size: 12.5px;">anyconnect</a> <a href="/tags/application-ini/" style="font-size: 10px;">application.ini</a> <a href="/tags/asp-net/" style="font-size: 14.17px;">asp.net</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/bashrc/" style="font-size: 10px;">bashrc</a> <a href="/tags/berkeleydb/" style="font-size: 10px;">berkeleydb</a> <a href="/tags/bitcoin/" style="font-size: 10px;">bitcoin</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/byte/" style="font-size: 10px;">byte</a> <a href="/tags/c/" style="font-size: 12.5px;">c#</a> <a href="/tags/centos/" style="font-size: 15.83px;">centos</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/ci/" style="font-size: 11.67px;">ci</a> <a href="/tags/cisco/" style="font-size: 11.67px;">cisco</a> <a href="/tags/cli/" style="font-size: 10px;">cli</a> <a href="/tags/combobox/" style="font-size: 10px;">combobox</a> <a href="/tags/datagrid/" style="font-size: 11.67px;">datagrid</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/dbd/" style="font-size: 10px;">dbd</a> <a href="/tags/debian/" style="font-size: 11.67px;">debian</a> <a href="/tags/debug/" style="font-size: 10.83px;">debug</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dhcp/" style="font-size: 10px;">dhcp</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/drupal/" style="font-size: 10px;">drupal</a> <a href="/tags/dynamic/" style="font-size: 10px;">dynamic</a> <a href="/tags/easyui/" style="font-size: 15px;">easyui</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/ef/" style="font-size: 10px;">ef</a> <a href="/tags/emac/" style="font-size: 10px;">emac</a> <a href="/tags/emacs/" style="font-size: 14.17px;">emacs</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/entity-framework/" style="font-size: 10px;">entity framework</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/exception/" style="font-size: 10px;">exception</a> <a href="/tags/export/" style="font-size: 10px;">export</a> <a href="/tags/fastdfs/" style="font-size: 13.33px;">fastdfs</a> <a href="/tags/final/" style="font-size: 10px;">final</a> <a href="/tags/fonts/" style="font-size: 10px;">fonts</a> <a href="/tags/freebsd/" style="font-size: 10px;">freebsd</a> <a href="/tags/g/" style="font-size: 10px;">g</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/get-result/" style="font-size: 10px;">get_result</a> <a href="/tags/getclass/" style="font-size: 10px;">getclass</a> <a href="/tags/gmail/" style="font-size: 10px;">gmail</a> <a href="/tags/google/" style="font-size: 10.83px;">google</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/gridview/" style="font-size: 10px;">gridview</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.67px;">https</a> <a href="/tags/inputstream/" style="font-size: 10px;">inputstream</a> <a href="/tags/ip/" style="font-size: 10.83px;">ip</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 18.33px;">java</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/kernel-version/" style="font-size: 10px;">kernel version</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/linux/" style="font-size: 19.17px;">linux</a> <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux jdk proxy mysql</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lxde/" style="font-size: 10px;">lxde</a> <a href="/tags/mailer/" style="font-size: 10px;">mailer</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/menu/" style="font-size: 10px;">menu</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/microtime/" style="font-size: 10px;">microtime</a> <a href="/tags/monaco/" style="font-size: 10px;">monaco</a> <a href="/tags/msyql/" style="font-size: 10.83px;">msyql</a> <a href="/tags/mysql/" style="font-size: 17.5px;">mysql</a> <a href="/tags/mysql-load-data/" style="font-size: 10px;">mysql load data</a> <a href="/tags/mysqldump/" style="font-size: 10px;">mysqldump</a> <a href="/tags/netbeans/" style="font-size: 10px;">netbeans</a> <a href="/tags/nginx/" style="font-size: 15.83px;">nginx</a> <a href="/tags/ocserv/" style="font-size: 10px;">ocserv</a> <a href="/tags/office/" style="font-size: 10px;">office</a> <a href="/tags/openoffice/" style="font-size: 10px;">openoffice</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/openvpn/" style="font-size: 10px;">openvpn</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 11.67px;">owncloud</a> <a href="/tags/php-ini/" style="font-size: 10px;">php.ini</a> <a href="/tags/phpinfo/" style="font-size: 10px;">phpinfo</a> <a href="/tags/pip/" style="font-size: 10.83px;">pip</a> <a href="/tags/post/" style="font-size: 10.83px;">post</a> <a href="/tags/proxy/" style="font-size: 11.67px;">proxy</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/python-pip/" style="font-size: 10.83px;">python-pip</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/redmine/" style="font-size: 10.83px;">redmine</a> <a href="/tags/root/" style="font-size: 10px;">root</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shadowsocks/" style="font-size: 11.67px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/slackware/" style="font-size: 10px;">slackware</a> <a href="/tags/sleep/" style="font-size: 10px;">sleep</a> <a href="/tags/socket/" style="font-size: 12.5px;">socket</a> <a href="/tags/sockets/" style="font-size: 10px;">sockets</a> <a href="/tags/sprintboot/" style="font-size: 10px;">sprintboot</a> <a href="/tags/sql/" style="font-size: 10.83px;">sql</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/ssh/" style="font-size: 10.83px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10.83px;">ssl</a> <a href="/tags/static/" style="font-size: 10px;">static</a> <a href="/tags/symfony/" style="font-size: 10.83px;">symfony</a> <a href="/tags/tar/" style="font-size: 10.83px;">tar</a> <a href="/tags/time/" style="font-size: 10.83px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/tls-ssl/" style="font-size: 10px;">tls/ssl</a> <a href="/tags/token/" style="font-size: 10px;">token</a> <a href="/tags/ubuntu/" style="font-size: 12.5px;">ubuntu</a> <a href="/tags/usort/" style="font-size: 10px;">usort</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/virutal-box/" style="font-size: 10px;">virutal box</a> <a href="/tags/vpn/" style="font-size: 10.83px;">vpn</a> <a href="/tags/vpn868错误/" style="font-size: 10px;">vpn868错误</a> <a href="/tags/wifi/" style="font-size: 10.83px;">wifi</a> <a href="/tags/wordpress/" style="font-size: 10.83px;">wordpress</a> <a href="/tags/xfce/" style="font-size: 10px;">xfce</a> <a href="/tags/yaf/" style="font-size: 11.67px;">yaf</a> <a href="/tags/yotube/" style="font-size: 10px;">yotube</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/两步验证/" style="font-size: 10px;">两步验证</a> <a href="/tags/中文/" style="font-size: 10.83px;">中文</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/云计算/" style="font-size: 10px;">云计算</a> <a href="/tags/代理/" style="font-size: 14.17px;">代理</a> <a href="/tags/优化/" style="font-size: 10px;">优化</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/保存/" style="font-size: 10px;">保存</a> <a href="/tags/修改密码/" style="font-size: 10px;">修改密码</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/写文件/" style="font-size: 10px;">写文件</a> <a href="/tags/函数/" style="font-size: 10px;">函数</a> <a href="/tags/分级/" style="font-size: 10px;">分级</a> <a href="/tags/分页/" style="font-size: 10px;">分页</a> <a href="/tags/创建用户/" style="font-size: 10.83px;">创建用户</a> <a href="/tags/删除/" style="font-size: 10.83px;">删除</a> <a href="/tags/刷新/" style="font-size: 10px;">刷新</a> <a href="/tags/动态类型/" style="font-size: 10px;">动态类型</a> <a href="/tags/匹配/" style="font-size: 10px;">匹配</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/卡夫卡/" style="font-size: 10px;">卡夫卡</a> <a href="/tags/参数化/" style="font-size: 10.83px;">参数化</a> <a href="/tags/参数化查询/" style="font-size: 10px;">参数化查询</a> <a href="/tags/后台/" style="font-size: 10px;">后台</a> <a href="/tags/命令/" style="font-size: 12.5px;">命令</a> <a href="/tags/命令行/" style="font-size: 11.67px;">命令行</a> <a href="/tags/备份/" style="font-size: 10px;">备份</a> <a href="/tags/复选框/" style="font-size: 10px;">复选框</a> <a href="/tags/子查询/" style="font-size: 10px;">子查询</a> <a href="/tags/子部门/" style="font-size: 10px;">子部门</a> <a href="/tags/字体/" style="font-size: 11.67px;">字体</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/字节流/" style="font-size: 10.83px;">字节流</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/宏/" style="font-size: 10px;">宏</a> <a href="/tags/对称加密/" style="font-size: 10px;">对称加密</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/异常/" style="font-size: 11.67px;">异常</a> <a href="/tags/循环/" style="font-size: 10px;">循环</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/微软雅黑/" style="font-size: 10px;">微软雅黑</a> <a href="/tags/德兰修女/" style="font-size: 10px;">德兰修女</a> <a href="/tags/思科/" style="font-size: 10px;">思科</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/手机/" style="font-size: 10px;">手机</a> <a href="/tags/执行时间/" style="font-size: 10px;">执行时间</a> <a href="/tags/挖矿/" style="font-size: 10px;">挖矿</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/提交/" style="font-size: 10px;">提交</a> <a href="/tags/敏捷/" style="font-size: 10px;">敏捷</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据备份/" style="font-size: 10px;">数据备份</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/数据库错误/" style="font-size: 10px;">数据库错误</a> <a href="/tags/数组/" style="font-size: 10.83px;">数组</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/文件句柄/" style="font-size: 10px;">文件句柄</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/文件存储/" style="font-size: 10px;">文件存储</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/替换/" style="font-size: 11.67px;">替换</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/架构师/" style="font-size: 10px;">架构师</a> <a href="/tags/树莓派/" style="font-size: 10.83px;">树莓派</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a> <a href="/tags/毫秒/" style="font-size: 10px;">毫秒</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/海量数据/" style="font-size: 10px;">海量数据</a> <a href="/tags/海量数据导入/" style="font-size: 10px;">海量数据导入</a> <a href="/tags/消息/" style="font-size: 10.83px;">消息</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/漏洞/" style="font-size: 10px;">漏洞</a> <a href="/tags/环境变量/" style="font-size: 10px;">环境变量</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/疏忽/" style="font-size: 10px;">疏忽</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/箴言/" style="font-size: 10px;">箴言</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/累加/" style="font-size: 10px;">累加</a> <a href="/tags/组/" style="font-size: 10px;">组</a> <a href="/tags/终端/" style="font-size: 12.5px;">终端</a> <a href="/tags/缓冲区/" style="font-size: 10px;">缓冲区</a> <a href="/tags/编程/" style="font-size: 10.83px;">编程</a> <a href="/tags/网络/" style="font-size: 10.83px;">网络</a> <a href="/tags/自定义函数/" style="font-size: 10px;">自定义函数</a> <a href="/tags/菜单/" style="font-size: 10px;">菜单</a> <a href="/tags/虚拟机/" style="font-size: 10.83px;">虚拟机</a> <a href="/tags/表单/" style="font-size: 10px;">表单</a> <a href="/tags/解压/" style="font-size: 10px;">解压</a> <a href="/tags/解锁/" style="font-size: 10px;">解锁</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/语言/" style="font-size: 10px;">语言</a> <a href="/tags/说明书/" style="font-size: 10px;">说明书</a> <a href="/tags/调试/" style="font-size: 10.83px;">调试</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 10.83px;">转换</a> <a href="/tags/输入法/" style="font-size: 10px;">输入法</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/追加/" style="font-size: 10px;">追加</a> <a href="/tags/逆向工程/" style="font-size: 10px;">逆向工程</a> <a href="/tags/邮件/" style="font-size: 11.67px;">邮件</a> <a href="/tags/邮箱/" style="font-size: 10.83px;">邮箱</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a> <a href="/tags/配置文件/" style="font-size: 10.83px;">配置文件</a> <a href="/tags/重复数据/" style="font-size: 10px;">重复数据</a> <a href="/tags/重复记录/" style="font-size: 10px;">重复记录</a> <a href="/tags/错误提示/" style="font-size: 10px;">错误提示</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里/" style="font-size: 10px;">阿里</a> <a href="/tags/阿里云/" style="font-size: 10.83px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a> <a href="/tags/颜色/" style="font-size: 10px;">颜色</a> <a href="/tags/默认路径/" style="font-size: 10px;">默认路径</a> <a href="/tags/龙角散/" style="font-size: 10px;">龙角散</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/12/code-tips/">code-tips</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/12/world/">world</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/30/linux-e6-89-b9-e9-87-8f-e6-9b-bf-e6-8d-a2-e6-96-87-e4-bb-b6-e5-86-85-e5-ae-b9/">linux批量替换文件内容</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/24/e6-88-91-e6-8e-a8-e8-8d-90-e7-a6-81-e7-94-a8-e7-9a-84-php-e5-87-bd-e6-95-b0/">我推荐禁用的 PHP 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/09/mysql-e4-b8-ad-e5-88-a0-e9-99-a4-e9-87-8d-e5-a4-8d-e6-95-b0-e6-8d-ae/">mysql 中删除重复数据</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Hello,Stranger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="$$ Welcome 2 mine blog $$">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Hello,Stranger">
+<meta property="og:url" content="http://yoursite.com/page/9/index.html">
+<meta property="og:site_name" content="Hello,Stranger">
+<meta property="og:description" content="$$ Welcome 2 mine blog $$">
+<meta property="og:locale" content="zh-cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hello,Stranger">
+<meta name="twitter:description" content="$$ Welcome 2 mine blog $$">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello,Stranger" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hello,Stranger</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Yet another note</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-jms-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-81-e4-be-8b-e5-ad-90" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/02/jms-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-81-e4-be-8b-e5-ad-90/" class="article-date">
+  <time datetime="2017-08-01T21:14:04.000Z" itemprop="datePublished">2017-08-02</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/02/jms-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-81-e4-be-8b-e5-ad-90/">JMS发布/订阅消息传送例子</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="在Tomcat中配置JNDI"><a href="#在Tomcat中配置JNDI" class="headerlink" title="在Tomcat中配置JNDI"></a>在Tomcat中配置JNDI</h1><p>配置连接工厂和话题 <a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a></p>
+<pre><code>&lt;Resource name=&quot;topic/connectionFactory&quot; auth=&quot;Container&quot;
+    type=&quot;org.apache.activemq.ActiveMQConnectionFactory&quot; description=&quot;JMS Connection Factory&quot;
+    factory=&quot;org.apache.activemq.jndi.JNDIReferenceFactory&quot;
+    brokerURL=&quot;failover:(tcp://localhost:61616)?initialReconnectDelay=100&amp;amp;maxReconnectAttempts=5&quot;
+    brokerName=&quot;LocalActiveMQBroker&quot; useEmbeddedBroker=&quot;false&quot; /&gt;
+
+&lt;Resource name=&quot;topic/topic0&quot; 
+    auth=&quot;Container&quot;
+    type=&quot;org.apache.activemq.command.ActiveMQTopic&quot; description=&quot;My Topic&quot; factory=&quot;org.apache.activemq.jndi.JNDIReferenceFactory&quot;
+    physicalName=&quot;TestTopic&quot; /&gt;
+</code></pre><h1 id="在Web工厂中编写代码"><a href="#在Web工厂中编写代码" class="headerlink" title="在Web工厂中编写代码"></a>在Web工厂中编写代码</h1><p>新建一个发布者Servlet</p>
+<p>package pubSub;</p>
+<p>import java.io.IOException;<br>import java.io.PrintWriter;</p>
+<p>import javax.naming.InitialContext;<br>import javax.servlet.ServletException;<br>import javax.servlet.annotation.WebServlet;<br>import javax.servlet.http.HttpServlet;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;<br>import javax.jms.Topic;<br>import javax.jms.Session;<br>import javax.jms.TextMessage;<br>import javax.jms.TopicPublisher;<br>import javax.jms.DeliveryMode;<br>import javax.jms.TopicSession;<br>import javax.jms.TopicConnection;<br>import javax.jms.TopicConnectionFactory;</p>
+<p>/**<br> * Servlet implementation class JMSTest<br> */<br>@WebServlet(“/Publish”)<br>public class Publisher extends HttpServlet {<br>    private static final long serialVersionUID = 1L;</p>
+<pre><code>/\*\*
+ \* @see HttpServlet#HttpServlet()
+ */
+public Publisher() {
+    super();
+    // TODO Auto-generated constructor stub
+}
+
+/\*\*
+ \* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+ \*      response)
+ */
+protected void doGet(HttpServletRequest request,
+        HttpServletResponse response) throws ServletException, IOException {
+    PrintWriter out = response.getWriter();
+
+    try {
+        // get the initial context
+        InitialContext ctx = new InitialContext();
+
+        // lookup the topic object
+        Topic topic = (Topic) ctx.lookup(&quot;java:comp/env/topic/topic0&quot;);
+
+        // lookup the topic connection factory
+        TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx
+                .lookup(&quot;java:comp/env/topic/connectionFactory&quot;);
+
+        // create a topic connection
+        TopicConnection topicConn = connFactory.createTopicConnection();
+
+        // create a topic session
+        TopicSession topicSession = topicConn.createTopicSession(false,
+                Session.AUTO_ACKNOWLEDGE);
+
+        // create a topic publisher
+        TopicPublisher topicPublisher = topicSession.createPublisher(topic);
+        topicPublisher.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+
+        // create the &quot;Hello World&quot; message
+        TextMessage message = topicSession.createTextMessage();
+        message.setText(&quot;Hello World&quot;);
+
+        // publish the messages
+        topicPublisher.publish(message);
+
+        // print what we did
+        out.write(&quot;Message published: &quot; + message.getText());
+
+        // close the topic connection
+        topicConn.close();
+    } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+
+}
+
+/\*\*
+ \* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+ \*      response)
+ */
+protected void doPost(HttpServletRequest request,
+        HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+}
+</code></pre><p>}</p>
+<p><a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a> 新建一个订阅者Servlet <a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a></p>
+<p>package pubSub;</p>
+<p>import java.io.IOException;<br>import java.io.PrintWriter;</p>
+<p>import javax.jms.Session;<br>import javax.jms.TextMessage;<br>import javax.jms.Topic;<br>import javax.jms.TopicConnection;<br>import javax.jms.TopicConnectionFactory;<br>import javax.jms.TopicSession;<br>import javax.jms.TopicSubscriber;<br>import javax.naming.InitialContext;<br>import javax.servlet.ServletException;<br>import javax.servlet.annotation.WebServlet;<br>import javax.servlet.http.HttpServlet;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;</p>
+<p>/**<br> * Servlet implementation class Receive<br> */<br>@WebServlet(“/Subscribe”)<br>public class Subscriber extends HttpServlet {<br>    private static final long serialVersionUID = 1L;</p>
+<pre><code>/\*\*
+ \* @see HttpServlet#HttpServlet()
+ */
+public Subscriber() {
+    super();
+    // TODO Auto-generated constructor stub
+}
+
+/\*\*
+ \* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+ \*      response)
+ */
+protected void doGet(HttpServletRequest request,
+        HttpServletResponse response) throws ServletException, IOException {
+    PrintWriter out = response.getWriter();
+
+    try {
+        // get the initial context
+        InitialContext ctx = new InitialContext();
+
+        // lookup the topic object
+        Topic topic = (Topic) ctx.lookup(&quot;java:comp/env/topic/topic0&quot;);
+
+        // lookup the topic connection factory
+        TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx
+                .lookup(&quot;java:comp/env/topic/connectionFactory&quot;);
+
+        // create a topic connection
+        TopicConnection topicConn = connFactory.createTopicConnection();
+
+        // create a topic session
+        TopicSession topicSession = topicConn.createTopicSession(false,
+                Session.AUTO_ACKNOWLEDGE);
+
+        // create a topic subscriber
+        TopicSubscriber topicSubscriber = topicSession
+                .createSubscriber(topic);
+
+        // start the connection
+        topicConn.start();
+
+        // receive the message
+        TextMessage message = (TextMessage) topicSubscriber.receive();
+
+        // print the message
+        out.write(&quot;Message received: &quot; + message.getText());
+
+        // close the topic connection
+        topicConn.close();
+    } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+}
+
+/\*\*
+ \* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+ \*      response)
+ */
+protected void doPost(HttpServletRequest request,
+        HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+}
+</code></pre><p>}</p>
+<p><a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a> 运行Web工程，分别打开多个标签访问订阅servlet，然后访问发布servlet，结果如下： <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/48b9eb826fea9ca588ab3a0b3adfdf4a.jpg" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/48b9eb826fea9ca588ab3a0b3adfdf4a.jpg" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/c7dfa2cd42d923c755639abe24e2fa11.jpg" alt=""> 在订阅者订阅消息的时候，一开始没接收到消息，一旦发布者发布消息后，订阅者马上收到消息。 </p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://howtodoinjava.com/jms/jms-publish-subscribe-message-example/" target="_blank" rel="noopener">http://howtodoinjava.com/jms/jms-publish-subscribe-message-example/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/02/jms-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-81-e4-be-8b-e5-ad-90/" data-id="cjpkyrfwv00125h81418dveki" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jms/">jms</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/message/">message</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/socket/">socket</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字节流/">字节流</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/消息/">消息</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-fastdfs-e4-bb-a5-e5-ad-97-e8-8a-82-e6-96-b9-e5-bc-8f-e4-b8-8a-e4-bc-a0-e6-96-87-e4-bb-b6" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/01/fastdfs-e4-bb-a5-e5-ad-97-e8-8a-82-e6-96-b9-e5-bc-8f-e4-b8-8a-e4-bc-a0-e6-96-87-e4-bb-b6/" class="article-date">
+  <time datetime="2017-07-31T19:40:42.000Z" itemprop="datePublished">2017-08-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/01/fastdfs-e4-bb-a5-e5-ad-97-e8-8a-82-e6-96-b9-e5-bc-8f-e4-b8-8a-e4-bc-a0-e6-96-87-e4-bb-b6/">FastDFS 以字节方式上传文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在阅读本文之前，请您先通过<a href="http://blog.csdn.net/poechant/article/details/6977407" target="_blank" rel="noopener">《FastDFS的配置、部署与API使用解读（1）Get Started with FastDFS》</a>一文中给出的参考博文中的部署篇和测试篇来完成前期的准备工作。 1、下载FastDFS的API FastDFS提供Java和PHP等语言的客户端API。可以到FastDFS在Google Code的项目主页 <a href="http://code.google.com/p/fastdfs/downloads/list" target="_blank" rel="noopener">http://code.google.com/p/fastdfs/downloads/list</a> 下载。本文以Java API为例。 2、调用API的上传接口 通过Servlet得到InputStream、文件名称和文件长度，然后通过调用FastDFS提供的Java API把文件上传到FastDFS服务器。下段代码中的getFileBuffer可参考本博客上一篇博文。（by Poechant）</p>
+<ol>
+<li>/** </li>
+<li><ul>
+<li>Upload File to DFS. </li>
+</ul>
+</li>
+<li><ul>
+<li>@param fileBuff, file to be uploaded. </li>
+</ul>
+</li>
+<li><ul>
+<li>@param uploadFileName, the name of the file. </li>
+</ul>
+</li>
+<li><ul>
+<li>@param fileLength, the length of the file. </li>
+</ul>
+</li>
+<li><ul>
+<li>@return the file ID in DFS. </li>
+</ul>
+</li>
+<li><ul>
+<li>@throws IOException  </li>
+</ul>
+</li>
+<li>*/</li>
+<li>public String uploadFile(InputStream inStream, String uploadFileName, long fileLength) throws IOException {  </li>
+<li>byte[] fileBuff = getFileBuffer(inStream, fileLength);  </li>
+<li>String fileId = “”;  </li>
+<li>String fileExtName = “”;  </li>
+<li>if (uploadFileName.contains(“.”)) {  </li>
+<li>fileExtName = uploadFileName.substring(uploadFileName.lastIndexOf(“.”) + 1);  </li>
+<li>} else {  </li>
+<li>logger.warn(“Fail to upload file, because the format of filename is illegal.”);  </li>
+<li>return fileId;  </li>
+<li><p>}  </p>
+</li>
+<li><p>//建立连接</p>
+</li>
+<li>TrackerClient tracker = new TrackerClient();  </li>
+<li>TrackerServer trackerServer = tracker.getConnection();  </li>
+<li>StorageServer storageServer = null;  </li>
+<li><p>StorageClient1 client = new StorageClient1(trackerServer, storageServer);  </p>
+</li>
+<li><p>//设置元信息</p>
+</li>
+<li>NameValuePair[] metaList = new NameValuePair[3];  </li>
+<li>metaList[0] = new NameValuePair(“fileName”, uploadFileName);  </li>
+<li>metaList[1] = new NameValuePair(“fileExtName”, fileExtName);  </li>
+<li><p>metaList[2] = new NameValuePair(“fileLength”, String.valueOf(fileLength));  </p>
+</li>
+<li><p>//上传文件</p>
+</li>
+<li>try {  </li>
+<li>fileId = client.upload_file1(fileBuff, fileExtName, metaList);  </li>
+<li>} catch (Exception e) {  </li>
+<li>logger.warn(“Upload file “” + uploadFileName + “”fails”);  </li>
+<li>}  </li>
+<li>trackerServer.close();  </li>
+<li>return fileId;  </li>
+<li><p>}  </p>
+<p>3、调用方式详解 （1）客户端与Tracker Server通信 根据《FastDFS的配置、部署与API使用解读（1）Get Started with FastDFS》一文中提供的FastDFS的工作原理，结合上面的代码，首先通过TrackerClient构造函数从全局配置中获取Tracker Servers的IP和端口初始化一个TrackerClient对象tracker，并与其建立连接，我们可以从API的源码中看到：</p>
+</li>
+<li><p>/** </p>
+</li>
+<li><ul>
+<li>constructor with global tracker group </li>
+</ul>
+</li>
+<li>*/</li>
+<li>public TrackerClient()  </li>
+<li>{  </li>
+<li>this.tracker_group = ClientGlobal.g_tracker_group;  </li>
+<li>}     </li>
+<li>/** </li>
+<li><ul>
+<li>constructor with specified tracker group </li>
+</ul>
+</li>
+<li><ul>
+<li>@param tracker_group the tracker group object </li>
+</ul>
+</li>
+<li>*/</li>
+<li>public TrackerClient(TrackerGroup tracker_group)  </li>
+<li>{  </li>
+<li>this.tracker_group = tracker_group;  </li>
+<li><p>}  </p>
+<p>上述代码中ClientGlobal是一个提供很多静态成员供外部读取的类。通过tracker这个TrackerClient建立的与Tracker Server的连接，实例化了一个trackerServer对象。   （2）客户端与Storage Server通信 通过trackerServer取得某一个可用的Storage Server的地址并用其实例化一个StorageClient1对象。这样就完成了FastDFS的客户端调用上传、下载、删除等所有操作的前期建立连接的工作。 （3）调用文件操作API 这些操作包括upload、download、append、delete等。上例中提供的是上传的实例。</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/01/fastdfs-e4-bb-a5-e5-ad-97-e8-8a-82-e6-96-b9-e5-bc-8f-e4-b8-8a-e4-bc-a0-e6-96-87-e4-bb-b6/" data-id="cjpkyqvor000y57819u1vhl6k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/socket/">socket</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/字节流/">字节流</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-fastdfs-e5-9c-a8-centos-e4-b8-8b-e9-85-8d-e7-bd-ae-e5-ae-89-e8-a3-85-e9-83-a8-e7-bd-b2" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/01/fastdfs-e5-9c-a8-centos-e4-b8-8b-e9-85-8d-e7-bd-ae-e5-ae-89-e8-a3-85-e9-83-a8-e7-bd-b2/" class="article-date">
+  <time datetime="2017-07-31T18:20:55.000Z" itemprop="datePublished">2017-08-01</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/01/fastdfs-e5-9c-a8-centos-e4-b8-8b-e9-85-8d-e7-bd-ae-e5-ae-89-e8-a3-85-e9-83-a8-e7-bd-b2/">FastDFS 在 CentOS 下配置安装部署</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>centos安装fastdfs</p>
+<h1 id="少啰嗦，直接装"><a href="#少啰嗦，直接装" class="headerlink" title="少啰嗦，直接装"></a>少啰嗦，直接装</h1><p>看过上一篇<a href="http://blog.mayongfa.cn/191.html" target="_blank" rel="noopener">分布式文件系统 - FastDFS 简单了解一下</a>的朋友应该知道，本次安装是使用目前余庆老师开源的最新 V5.05 版本，是余庆老师放在 <a href="https://github.com/happyfish100/fastdfs" target="_blank" rel="noopener">Github</a> 上的，和目前你能在网络上搜索到的 Google Code 的 V4.06 或更低版本不一样，而且按照他们的步骤坑很多，我反正被坑了很久。 你只需要记住，这也许是目前 FastDFS 最新最稳定最简单坑最少的一个配置安装部署教程了。期间我也会把我踩的坑都放出来，我保证大家照着做就几乎不会有坑。哈哈…</p>
+<h1 id="安装-libfastcommon-和-FastDFS"><a href="#安装-libfastcommon-和-FastDFS" class="headerlink" title="安装 libfastcommon 和 FastDFS"></a>安装 libfastcommon 和 FastDFS</h1><p>1.<strong>下载安装 libfastcommon</strong> ，这里是通过<code>wget</code>下载（我喜欢这种方式）。 <code>wget https://github.com/happyfish100/libfastcommon/archive/V1.0.7.tar.gz</code> 压 libfastcommon，命令： <code>tar -zxvf V1.0.7.tar.gz</code> 编译，进入<code>libfastcommon-1.0.7</code>目录，命令： <code>cd libfastcommon-1.0.7./make.sh</code> 安装，命令： <code>./make.sh install</code> 2.<strong>下载安装 FastDFS</strong>，这里也是通过<code>wget</code>下载。 <code>wget https://github.com/happyfish100/fastdfs/archive/V5.05.tar.gz</code> 解压 FastDFS ，命令： <code>tar -zxvf V5.05.tar.gz</code> 编译，进入<code>fastfds-5.05</code>目录，命令： <code>cd fastdfs-5.05./make.sh</code> 安装，命令： <code>./make.sh install</code>   <strong>配置 Tracker 服务</strong> 上述安装成功后，在<code>/etc/</code>目录下会有一个<code>fdfs</code>的目录，进入它。会看到三个<code>.sample</code>后缀的文件，这是作者给我们的示例文件，我们需要把其中的<code>tracker.conf.sample</code>文件改为<code>tracker.conf</code>配置文件并修改它。看命令：</p>
+<pre><code>cp tracker.conf.sample tracker.conf
+vim tracker.conf
+</code></pre><p>打开<code>tracker.conf</code>文件，只需要找到你只需要该这两个参数就可以了。</p>
+<pre><code># the base path to store data and log files
+base_path=/data/fastdfs
+
+# HTTP port on this tracker server
+http.server_port=80
+</code></pre><p>当然前提是你要有或先创建了<code>/data/fastdfs</code>目录。<code>port=22122</code>这个端口参数不建议修改，除非你已经占用它了。 修改完成保存并退出 vim ，这时候我们可以使用<code>/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf start</code>来启动 Tracker服务，但是这个命令不够优雅，怎么做呢？使用<code>ln -s</code> 建立软链接：</p>
+<pre><code>ln -s /usr/bin/fdfs_trackerd /usr/local/bin
+ln -s /usr/bin/stop.sh /usr/local/bin
+ln -s /usr/bin/restart.sh /usr/local/bin
+</code></pre><p>这时候我们就可以使用<code>service fdfs_trackerd start</code>来优雅地启动 Tracker服务了，是不是比刚才带目录的命令好记太多了（懒是社会生产力）。你也可以启动过服务看一下端口是否在监听，命令：</p>
+<pre><code>启动服务：service fdfs_trackerd start
+查看监听：netstat -unltp|grep fdfs
+</code></pre><p>看到<code>22122端口</code>正常被监听后，这时候就算 Tracker服务安装成功啦！</p>
+<h1 id="配置-Storage-服务"><a href="#配置-Storage-服务" class="headerlink" title="配置 Storage 服务"></a>配置 Storage 服务</h1><p>现在开始配置 Storage 服务，由于我这是单机器测试，你把 Storage 服务放在多台服务器也是可以的，它有 <code>Group(组)</code>的概念，同一组内服务器互备同步，这里不再演示。直接开始配置，依然是进入<code>/etc/fdfs</code>的目录操作，首先进入它。会看到三个<code>.sample</code>后缀的文件，我们需要把其中的<code>storage.conf.sample</code>文件改为<code>storage.conf</code>配置文件并修改它。还看命令：</p>
+<pre><code>cp storage.conf.sample storage.conf
+vim storage.conf
+</code></pre><p>打开<code>storage.conf</code>文件后，找到这两个参数进行修改：</p>
+<pre><code># the base path to store data and log files
+base_path=/data/fastdfs/storage
+
+# store_path#, based 0, if store_path0 not exists, it&apos;s value is base_path
+# the paths must be exist
+store_path0=/data/fastdfs/storage
+#store_path1=/home/yuqing/fastdfs2
+
+# tracker_server can ocur more than once, and tracker_server format is
+#  &quot;host:port&quot;, host can be hostname or ip address
+tracker_server=192.168.198.129:22122
+</code></pre><p>当然你的<code>/data/fastdfs</code>目录下要有<code>storage</code>文件夹，没有就创建一个，不然会报错的，日志以及文件都会在这个下面，启动时候会自动生成许多文件夹。stroage的<code>port=23000</code>这个端口参数也不建议修改，默认就好，除非你已经占用它了。 修改完成保存并退出 vim ，这时候我们依然想优雅地启动 Storage服务，带目录的命令不够优雅，这里还是使用<code>ln -s</code> 建立软链接：</p>
+<pre><code>ln -s /usr/bin/fdfs_storaged /usr/local/bin
+</code></pre><p>执行命令启动服务：</p>
+<pre><code>service fdfs_storaged start
+</code></pre><p><code>netstat -unltp|grep fdfs</code> 很好，<code>22122 和 23000</code>端口都在监听了，这个时候你去<code>/data/fastdfs/storage</code>文件夹下看的话，会出现一大堆文件夹，而且进去还有一大堆，哈哈，这就是存放文件的啦！下一篇会讲它们的作用和怎么存储的。</p>
+<h1 id="这就完成了？"><a href="#这就完成了？" class="headerlink" title="这就完成了？"></a>这就完成了？</h1><p>应该是完成了。我们安装配置并启动了 Tracker 和 Storage 服务，也没有报错了。那他俩是不是在通信呢？我们可以监视一下： <code>/usr/bin/fdfs_monitor /etc/fdfs/storage.conf</code> 这个时候你就可以进行上传测试 这篇文章只是进行了 FastDFS 的安装与配置，没有任何难度可言，只要按照步骤一步步走下去就可以搞定。可能中间过程中我们会由于不细心经历各种错误，只要仔细看日志信息都能解决掉的，你解决掉一个个错误的时候难道没有披荆斩棘战士般的感觉么？反正我没遇到错… 由于余老师在 V4.05 以后的版本就把内置 HTTP服务去掉了，推荐大家结合 Nginx 使用 fastdfs-nginx-module 模块，所以，就算这篇你测试上传成功了，你也访问不了，哈哈哈… 下一篇<a href="http://blog.mayongfa.cn/193.html" target="_blank" rel="noopener">分布式文件系统 - FastDFS 配置 Nginx 模块及上传测试</a> 中会进行配合 Nginx 完成全部FastDFS的安装测试上传下载等等全部工作。等着吧…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/01/fastdfs-e5-9c-a8-centos-e4-b8-8b-e9-85-8d-e7-bd-ae-e5-ae-89-e8-a3-85-e9-83-a8-e7-bd-b2/" data-id="cjpkyqvot00125781kofrv47a" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastdfs/">fastdfs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-java-e5-b7-b2-e7-9f-a5inputstream-e9-95-bf-e5-ba-a6-ef-bc-8c-e5-b0-86-e5-85-b6-e8-bd-ac-e6-8d-a2-e4-b8-babyte" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/31/java-e5-b7-b2-e7-9f-a5inputstream-e9-95-bf-e5-ba-a6-ef-bc-8c-e5-b0-86-e5-85-b6-e8-bd-ac-e6-8d-a2-e4-b8-babyte/" class="article-date">
+  <time datetime="2017-07-31T08:02:19.000Z" itemprop="datePublished">2017-07-31</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/31/java-e5-b7-b2-e7-9f-a5inputstream-e9-95-bf-e5-ba-a6-ef-bc-8c-e5-b0-86-e5-85-b6-e8-bd-ac-e6-8d-a2-e4-b8-babyte/">Java已知InputStream长度，将其转换为byte[]</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>###Java已知InputStream长度，将其转换为byte[] <code>/** * Transfer java.io.InpuStream to byte array. * @param inStream, input stream of the uploaded file. * @param fileLength, the length of the file. * @return the byte array transferred from java.io.Inputstream. * @throws IOException occurred by the method read(byte\[\]) of java.io.InputStream. */ private byte\[\] getFileBuffer(InputStream inStream, long fileLength) throws IOException { byte\[\] buffer = new byte\[256 * 1024\]; byte\[\] fileBuffer = new byte\[(int) fileLength\]; int count = 0; int length = 0; while((length = inStream.read(buffer)) != -1){ for (int i = 0; i &lt; length; ++i) { fileBuffer\[count + i\] = buffer\[i\]; } count += length; } return fileBuffer; }</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/31/java-e5-b7-b2-e7-9f-a5inputstream-e9-95-bf-e5-ba-a6-ef-bc-8c-e5-b0-86-e5-85-b6-e8-bd-ac-e6-8d-a2-e4-b8-babyte/" data-id="cjpkyrfwr000z5h81xf2ozmr4" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/byte/">byte</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/inputstream/">inputstream</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-emacs-e6-9b-bf-e6-8d-a2m" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/23/emacs-e6-9b-bf-e6-8d-a2m/" class="article-date">
+  <time datetime="2017-07-23T03:36:55.000Z" itemprop="datePublished">2017-07-23</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/23/emacs-e6-9b-bf-e6-8d-a2m/">Emacs替换^M</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>以为简单的 <code>m-x repl RET s RET</code> 再输入_^M_ 替换一下就可以,但是很快发现,这个办法根本不行, _^M_ 这个根本不是输入的研究了一下, 终于找到了办法:</p>
+<pre><code>1. M-S &lt; # 到文档的最开始处
+2. M-x replace-string RET C-q C-m RET RET
+</code></pre><p>这样就ok了, 注意上面的<code>C-q C-m</code>就是换行符的生成方法,而不是简单的输入_^M_. enjoy.</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/23/emacs-e6-9b-bf-e6-8d-a2m/" data-id="cjpkyqvo7000k5781jzneft4b" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/M/">^M</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/emacs/">emacs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e4-bd-bf-e7-94-a8screen-e5-91-bd-e4-bb-a4-e9-95-bf-e6-9c-9f-e6-89-a7-e8-a1-8c-e8-bf-9c-e7-a8-8b-e5-91-bd-e4-bb-a4" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/19/e4-bd-bf-e7-94-a8screen-e5-91-bd-e4-bb-a4-e9-95-bf-e6-9c-9f-e6-89-a7-e8-a1-8c-e8-bf-9c-e7-a8-8b-e5-91-bd-e4-bb-a4/" class="article-date">
+  <time datetime="2017-07-19T07:41:25.000Z" itemprop="datePublished">2017-07-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/19/e4-bd-bf-e7-94-a8screen-e5-91-bd-e4-bb-a4-e9-95-bf-e6-9c-9f-e6-89-a7-e8-a1-8c-e8-bf-9c-e7-a8-8b-e5-91-bd-e4-bb-a4/">使用screen命令长期执行远程命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用-screen-命令长期执行远程命令"><a href="#使用-screen-命令长期执行远程命令" class="headerlink" title="使用 screen 命令长期执行远程命令"></a>使用 <code>screen</code> 命令长期执行远程命令</h2><p>经常需要登录到 linux 里执行一些长时间运行的命令， 后台执行的方法有很多，包括 <em><code>nhup</code></em> <em><code>&amp;</code></em> 等等 但是这些不支持全部的功能，比如我执行一个命令，需要在开始时接受用户输入，比如 密码、是否确认执行 这个时候比较适合用 <em><code>screen</code></em> 最常用的命令：</p>
+<h3 id="开启一个名为-task1-的-screen："><a href="#开启一个名为-task1-的-screen：" class="headerlink" title="开启一个名为 task1 的 screen："></a>开启一个名为 task1 的 <code>screen</code>：</h3><pre><code>screen -S task1
+</code></pre><p>这时可以看到终端闪了一下，然后屏幕变成干干净净的了，其实标题行还显示着 <code>screen 0 ××××</code> 等信息 即表示已经进入了screen的 Session 中了 然后就可以在这里执行任意的命令，和普通终端一模一样， 如果执行了一个需要很久才能结束的命令 ，又怕中途 SSH 断掉而中断命令， 可以在screen 窗口直接按键：</p>
+<pre><code>Ctrl+a   d
+</code></pre><h3 id="↑-让-screen-进入-Detached-模式"><a href="#↑-让-screen-进入-Detached-模式" class="headerlink" title="↑ 让 screen 进入 Detached 模式"></a>↑ 让 <code>screen</code> 进入 <em>Detached</em> 模式</h3><p>（将任务（Session）转移到后台）</p>
+<h3 id="当你需要再次进入screen"><a href="#当你需要再次进入screen" class="headerlink" title="当你需要再次进入screen"></a>当你需要再次进入screen</h3><p>以查看刚刚的命令执行的怎么样了， 可以先 list 一下：</p>
+<pre><code>screen -ls
+</code></pre><p>现在会显示出所有正在执行的命令，比如</p>
+<pre><code>[root@SJHL199-29 ~]# screen -ls
+There is a screen on:
+    32353.task1 (Detached)
+1 Socket in /var/run/screen/S-root.
+</code></pre><p>然后使用</p>
+<pre><code>screen -r 32353
+</code></pre><h3 id="↑进入刚才执行的命令-session中"><a href="#↑进入刚才执行的命令-session中" class="headerlink" title="↑进入刚才执行的命令/session中"></a>↑进入刚才执行的命令/session中</h3><p>使用 <code>Ctrl + d</code> 可以终止当前窗口</p>
+<hr>
+<p><strong>常用的 screen 命令</strong></p>
+<p>按键方式</p>
+<p>意义</p>
+<p>C-a ?</p>
+<p>显示所有键绑定信息</p>
+<p>C-a w</p>
+<p>显示所有窗口列表</p>
+<p>C-a C-a</p>
+<p>切换到之前显示的窗口</p>
+<p>C-a c</p>
+<p>创建一个新的运行shell的窗口并切换到该窗口</p>
+<p>C-a n</p>
+<p>切换到下一个窗口</p>
+<p>C-a p</p>
+<p>切换到前一个窗口(与C-a n相对)</p>
+<p>C-a 0..9</p>
+<p>切换到窗口0..9</p>
+<p>C-a a</p>
+<p>发送 C-a到当前窗口</p>
+<p>C-a d</p>
+<p><strong>暂时断开screen会话</strong></p>
+<p>C-a k</p>
+<p><strong>杀掉当前窗口</strong></p>
+<p>C-a [</p>
+<p>进入拷贝/回滚模式</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/19/e4-bd-bf-e7-94-a8screen-e5-91-bd-e4-bb-a4-e9-95-bf-e6-9c-9f-e6-89-a7-e8-a1-8c-e8-bf-9c-e7-a8-8b-e5-91-bd-e4-bb-a4/" data-id="cjpkyfuls003d1281usxtbtai" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/screen/">screen</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后台/">后台</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-php-e5-91-bd-e4-bb-a4-e8-a1-8c-e8-be-93-e5-87-ba-e9-a2-9c-e8-89-b2" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/13/php-e5-91-bd-e4-bb-a4-e8-a1-8c-e8-be-93-e5-87-ba-e9-a2-9c-e8-89-b2/" class="article-date">
+  <time datetime="2017-07-13T01:49:05.000Z" itemprop="datePublished">2017-07-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/13/php-e5-91-bd-e4-bb-a4-e8-a1-8c-e8-be-93-e5-87-ba-e9-a2-9c-e8-89-b2/">PHP 命令行输出颜色</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有时候会使用CLI模式运行一些PHP程序，特别是在执行一些任务的时候。 CLI 有不会超时的特点，在执行一些不在意UI 的功能时很适合 而且还不用考虑UI设计。 下面的代码实现了使用命令行时，通过颜色来标识字符串 先看源码：</p>
+<pre><code>&lt;?php
+
+    class Colors {
+        private $foreground_colors = array();
+        private $background_colors = array();
+
+        public function __construct() {
+            // Set up shell colors
+            $this-&gt;foreground_colors[&apos;black&apos;] = &apos;0;30&apos;;
+            $this-&gt;foreground_colors[&apos;dark_gray&apos;] = &apos;1;30&apos;;
+            $this-&gt;foreground_colors[&apos;blue&apos;] = &apos;0;34&apos;;
+            $this-&gt;foreground_colors[&apos;light_blue&apos;] = &apos;1;34&apos;;
+            $this-&gt;foreground_colors[&apos;green&apos;] = &apos;0;32&apos;;
+            $this-&gt;foreground_colors[&apos;light_green&apos;] = &apos;1;32&apos;;
+            $this-&gt;foreground_colors[&apos;cyan&apos;] = &apos;0;36&apos;;
+            $this-&gt;foreground_colors[&apos;light_cyan&apos;] = &apos;1;36&apos;;
+            $this-&gt;foreground_colors[&apos;red&apos;] = &apos;0;31&apos;;
+            $this-&gt;foreground_colors[&apos;light_red&apos;] = &apos;1;31&apos;;
+            $this-&gt;foreground_colors[&apos;purple&apos;] = &apos;0;35&apos;;
+            $this-&gt;foreground_colors[&apos;light_purple&apos;] = &apos;1;35&apos;;
+            $this-&gt;foreground_colors[&apos;brown&apos;] = &apos;0;33&apos;;
+            $this-&gt;foreground_colors[&apos;yellow&apos;] = &apos;1;33&apos;;
+            $this-&gt;foreground_colors[&apos;light_gray&apos;] = &apos;0;37&apos;;
+            $this-&gt;foreground_colors[&apos;white&apos;] = &apos;1;37&apos;;
+
+            $this-&gt;background_colors[&apos;black&apos;] = &apos;40&apos;;
+            $this-&gt;background_colors[&apos;red&apos;] = &apos;41&apos;;
+            $this-&gt;background_colors[&apos;green&apos;] = &apos;42&apos;;
+            $this-&gt;background_colors[&apos;yellow&apos;] = &apos;43&apos;;
+            $this-&gt;background_colors[&apos;blue&apos;] = &apos;44&apos;;
+            $this-&gt;background_colors[&apos;magenta&apos;] = &apos;45&apos;;
+            $this-&gt;background_colors[&apos;cyan&apos;] = &apos;46&apos;;
+            $this-&gt;background_colors[&apos;light_gray&apos;] = &apos;47&apos;;
+        }
+
+        // Returns colored string
+        public function getColoredString($string, $foreground_color = null, $background_color = null) {
+            $colored_string = &quot;&quot;;
+
+            // Check if given foreground color found
+            if (isset($this-&gt;foreground_colors[$foreground_color])) {
+                $colored_string .= &quot;33[&quot; . $this-&gt;foreground_colors[$foreground_color] . &quot;m&quot;;
+            }
+            // Check if given background color found
+            if (isset($this-&gt;background_colors[$background_color])) {
+                $colored_string .= &quot;33[&quot; . $this-&gt;background_colors[$background_color] . &quot;m&quot;;
+            }
+
+            // Add string and end coloring
+            $colored_string .=  $string . &quot;33[0m&quot;;
+
+            return $colored_string;
+        }
+
+        // Returns all foreground color names
+        public function getForegroundColors() {
+            return array_keys($this-&gt;foreground_colors);
+        }
+
+        // Returns all background color names
+        public function getBackgroundColors() {
+            return array_keys($this-&gt;background_colors);
+        }
+    }
+
+?&gt;
+</code></pre><p>使用方式很简单， 调用<code>$colors-&gt;getColoredString([字符串]，[前景色]，[背景色]);</code>方法就可以：</p>
+<pre><code>&lt;?php
+
+    // Create new Colors class
+    $colors = new Colors();
+
+    // Test some basic printing with Colors class
+    echo $colors-&gt;getColoredString(&quot;Testing Colors class, this is purple string on yellow background.&quot;, &quot;purple&quot;, &quot;yellow&quot;) . &quot;n&quot;;
+    echo $colors-&gt;getColoredString(&quot;Testing Colors class, this is blue string on light gray background.&quot;, &quot;blue&quot;, &quot;light_gray&quot;) . &quot;n&quot;;
+    echo $colors-&gt;getColoredString(&quot;Testing Colors class, this is red string on black background.&quot;, &quot;red&quot;, &quot;black&quot;) . &quot;n&quot;;
+    echo $colors-&gt;getColoredString(&quot;Testing Colors class, this is cyan string on green background.&quot;, &quot;cyan&quot;, &quot;green&quot;) . &quot;n&quot;;
+    echo $colors-&gt;getColoredString(&quot;Testing Colors class, this is cyan string on default background.&quot;, &quot;cyan&quot;) . &quot;n&quot;;
+    echo $colors-&gt;getColoredString(&quot;Testing Colors class, this is default string on cyan background.&quot;, null, &quot;cyan&quot;) . &quot;n&quot;;
+
+?&gt;
+</code></pre><p>输出的结果： <img src="http://tech.msla.top:19831/wp-content/uploads/2017/07/Simple_PHP_CLI_coloring-300x104.png" alt="PHP 命令行输出颜色" title="PHP 命令行输出颜色"> 如果你想打印出所有的颜色，参考下面的代码：</p>
+<pre><code>&lt;?php
+
+        // Create new Colors class
+        $colors = new Colors();
+
+        // Get Foreground Colors
+        $fgs = $colors-&gt;getForegroundColors();
+        // Get Background Colors
+        $bgs = $colors-&gt;getBackgroundColors();
+
+        // Loop through all foreground and background colors
+        $count = count($fgs);
+        for ($i = 0; $i &lt; $count; $i++) {
+            echo $colors-&gt;getColoredString(&quot;Test Foreground colors&quot;, $fgs[$i]) . &quot;t&quot;;
+            if (isset($bgs[$i])) {
+                echo $colors-&gt;getColoredString(&quot;Test Background colors&quot;, null, $bgs[$i]);
+            }
+            echo &quot;n&quot;;
+        }
+        echo &quot;n&quot;;
+
+        // Loop through all foreground and background colors
+        foreach ($fgs as $fg) {
+            foreach ($bgs as $bg) {
+                echo $colors-&gt;getColoredString(&quot;Test Colors&quot;, $fg, $bg) . &quot;t&quot;;
+            }
+            echo &quot;n&quot;;
+        }
+
+?&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/13/php-e5-91-bd-e4-bb-a4-e8-a1-8c-e8-be-93-e5-87-ba-e9-a2-9c-e8-89-b2/" data-id="cjpkyufsy00077981j3w2v7hj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cli/">cli</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/命令行/">命令行</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/颜色/">颜色</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-linux-e4-b8-ad-e8-ae-b0-e5-bd-95-e7-bb-88-e7-ab-af-ef-bc-88terminal-ef-bc-89-e8-be-93-e5-87-ba-e5-88-b0-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/linux-e4-b8-ad-e8-ae-b0-e5-bd-95-e7-bb-88-e7-ab-af-ef-bc-88terminal-ef-bc-89-e8-be-93-e5-87-ba-e5-88-b0-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/" class="article-date">
+  <time datetime="2017-07-11T06:02:26.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/linux-e4-b8-ad-e8-ae-b0-e5-bd-95-e7-bb-88-e7-ab-af-ef-bc-88terminal-ef-bc-89-e8-be-93-e5-87-ba-e5-88-b0-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/">Linux中记录终端（Terminal）输出到文本文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="一，如何把命令运行的结果保存到文件当中"><a href="#一，如何把命令运行的结果保存到文件当中" class="headerlink" title="一，如何把命令运行的结果保存到文件当中?"></a>一，如何把命令运行的结果保存到文件当中?</h3><p>这个问题太简单了，大家都知道，用 > 把输出转向就可以了 例子:</p>
+<pre><code>[lhd@hongdi ~]$ ls &gt; ls.txt
+[lhd@hongdi ~]$ cat ls.txt
+1.gtkrc-2.0
+2009
+a
+amsn_received
+a.tar.gz
+</code></pre><p>说明: > 是把输出转向到指定的文件，如文件已存在的话也会重新写入，文件原内容不会保留</p>
+<blockquote>
+<p>> 是把输出附向到文件的后面，文件原内容会保留下来</p>
+</blockquote>
+<h3 id="二，如何能在输出信息的同时把信息记录到文件中"><a href="#二，如何能在输出信息的同时把信息记录到文件中" class="headerlink" title="二，如何能在输出信息的同时把信息记录到文件中?"></a>二，如何能在输出信息的同时把信息记录到文件中?</h3><p>我们在上面的例子中可以看到，我们使用输出转向，命令在终端上的输出转向到了文件中，但如果我希望能同时在终端上看到输出信息怎么办？ 我们可以使用这个命令: <strong><code>tee</code></strong> 解释一下tee的作用:</p>
+<pre><code>read from standard input and write to standard output and files
+</code></pre><p>它从标准输入读取内容并将其写到标准输出和文件中 看例子:</p>
+<pre><code>[lhd@hongdi ~]$ ls | tee ls_tee.txt
+1.gtkrc-2.0
+2009
+a
+amsn_received
+a.tar.gz
+[lhd@hongdi ~]$ cat ls_tee.txt
+1.gtkrc-2.0
+2009
+a
+amsn_received
+a.tar.gz
+</code></pre><p>备注：使用 tee时,如果想保留目标文件原有的内容怎么办？ 可以使用 -a参数</p>
+<pre><code>-a, --append
+append to the given FILEs, do not overwrite
+</code></pre><p>附加至给出的文件，而不是覆盖它</p>
+<h3 id="三，多个命令的输出都需要记录，可以用script"><a href="#三，多个命令的输出都需要记录，可以用script" class="headerlink" title="三，多个命令的输出都需要记录，可以用script"></a>三，多个命令的输出都需要记录，可以用script</h3><p>script这个命令很强大，可以记录终端的所有输出到相应的文件中 看例子:</p>
+<pre><code>[lhd@hongdi ~]$ script
+Script. started, file is typescript
+[lhd@hongdi ~]$ ls
+1.gtkrc-2.0 c.tar kmess-2.0alpha2.tar.gz secpanel-0.5.3-1.noarch.rpm
+2009 DownZipAction.php kmesslog secpanel-0.5.4-2.noarch.rpm
+[lhd@hongdi ~]$ exit
+exit
+Script. done, file is typescript
+[lhd@hongdi ~]$ cat typescript
+Script. started on 2009年02月08日 星期日 18时56分52秒
+[lhd@hongdi ~]$ ls
+1.gtkrc-2.0 c.tar kmess-2.0alpha2.tar.gz secpanel-0.5.3-1.noarch.rpm
+2009 DownZipAction.php kmesslog secpanel-0.5.4-2.noarch.rpm
+[lhd@hongdi ~]$ exit
+exit
+Script. done on 2009年02月08日 星期日 18时57分00秒
+</code></pre><p>说明: 1 我们在启动script时没有指定文件名，它会自动记录到当前目录下一个名为 typescript的文件中。也可以用 -a参数 指定文件名 例子:</p>
+<pre><code>[lhd@hongdi ~]$ script. -a example.txt
+Script. started, file is example.txt
+</code></pre><p>  此时终端的输出内容被记录到 example.txt这个文件中 2 退出script时，用exit 感到奇怪吗？事实上script就是启动了一个shell 看一下ps auxfww 的信息就知道了</p>
+<pre><code>lhd 17738 0.1 3.2 152028 33328 ? Sl 18:30 0:03 /usr/bin/konsole
+lhd 17740 0.0 0.1 6372 1720 pts/1 Ss 18:30 0:00 _ /bin/bash
+lhd 17900 0.0 0.0 5344 628 pts/1 S 19:01 0:00 | _ script
+lhd 17901 0.0 0.0 5348 464 pts/1 S 19:01 0:00 | _ script
+lhd 17902 0.5 0.1 6372 1688 pts/2 Ss 19:01 0:00 | _ bash -i
+</code></pre><p>3,查看typescript的内容，可以看到它同时记录下了script的启动和结束时间</p>
+<h3 id="四，用script录制并播放session的内容"><a href="#四，用script录制并播放session的内容" class="headerlink" title="四，用script录制并播放session的内容"></a>四，用script录制并播放session的内容</h3><p>我们可以用 script把整个终端会话的所有操作和输出录制下来，然后再用scriptreplay进行播放。 如果录制时记录下来了操作时的时间数据，那么播放时和操作时的使用时间完全相同。 这个很有用吧，比如：我们可以把安装软件时编译的过程记录下来，然后给别人进行演示 看例子:</p>
+<pre><code>[lhd@hongdi ~]$ script. -t 2&gt;example.time -a example.txt
+Script. started, file is example.txt
+[lhd@hongdi ~]$ ls
+</code></pre><p>说明: -t 2&gt;example.time -t是把时间数据输出到标准错误(standard error)，所以我们使用 2&gt;example.time 把数据转向到 example.time这个文件当中 如何播放所记录的内容? 第一步：安装<code>scriptreplay</code> <strong>下载</strong> <code>wget ftp://ftp.kernel.org/pub/linux/utils/util-linux/util-linux-2.12r.tar.bz2</code> <strong>解压</strong></p>
+<pre><code>tar -jxvf util-linux-2.12r.tar.bz2
+</code></pre><p>之后复制文件到系统的命令目录中即可</p>
+<pre><code>[root@hongdi 下载]# cp util-linux-2.12r/misc-utils/scriptreplay.pl /usr/bin/scriptreplay
+[root@hongdi 下载]# chmod 755 /usr/bin/scriptreplay
+</code></pre><p>备注: fedora 10的util-linux-ng-2.14.1-3.2.fc10.i386.rpm 此包中已包含 scriptreplay,已无需另行安装 第二步：播放所录制的session内容</p>
+<pre><code>[lhd@hongdi ~]$ scriptreplay example1.time example1.txt
+[lhd@hongdi ~]$ ls
+1.gtkrc-2.0 c.tar jeffray_lee@hotmail.com pass
+[lhd@hongdi ~]$ abcd
+bash: abcd: command not found
+
+[lhd@hongdi ~]$ exit
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/11/linux-e4-b8-ad-e8-ae-b0-e5-bd-95-e7-bb-88-e7-ab-af-ef-bc-88terminal-ef-bc-89-e8-be-93-e5-87-ba-e5-88-b0-e6-96-87-e6-9c-ac-e6-96-87-e4-bb-b6/" data-id="cjpkyswqa00066o81bw37bdhw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/保存/">保存</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/终端/">终端</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-mysql-e5-9c-a8like-e4-b8-ad-e4-bd-bf-e7-94-a8-e5-8f-82-e6-95-b0-e5-8c-96-e6-9f-a5-e8-af-a2" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/10/mysql-e5-9c-a8like-e4-b8-ad-e4-bd-bf-e7-94-a8-e5-8f-82-e6-95-b0-e5-8c-96-e6-9f-a5-e8-af-a2/" class="article-date">
+  <time datetime="2017-07-10T11:06:09.000Z" itemprop="datePublished">2017-07-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/10/mysql-e5-9c-a8like-e4-b8-ad-e4-bd-bf-e7-94-a8-e5-8f-82-e6-95-b0-e5-8c-96-e6-9f-a5-e8-af-a2/">mysql在like中使用参数化查询</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参数化查询是防注入最简单有效的 方式了 推荐在所有需要交互的语句中使用， 只要在<code>where</code>子句中添加一个问号，然后在<code>execute</code>时赋值就好了。 但是 Like 这个语法有个例外，需要这么写:<code>select * from a 
+where a.name like concat(&#39;%&#39;,?,&#39;%&#39;) 
+  or a.mobile like concat(&#39;%&#39;,?,&#39;%&#39;)</code> <strong>记住：</strong>问号(<code>?</code>)上面不用加引号</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/10/mysql-e5-9c-a8like-e4-b8-ad-e4-bd-bf-e7-94-a8-e5-8f-82-e6-95-b0-e5-8c-96-e6-9f-a5-e8-af-a2/" data-id="cjpkyswsa002r6o81jhdo7sle" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/参数化/">参数化</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/参数化查询/">参数化查询</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-msyql-e5-bf-ab-e9-80-9f-e5-88-9b-e5-bb-ba-e7-94-a8-e6-88-b7-e5-8f-8a-e6-95-b0-e6-8d-ae-e5-ba-93" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/10/msyql-e5-bf-ab-e9-80-9f-e5-88-9b-e5-bb-ba-e7-94-a8-e6-88-b7-e5-8f-8a-e6-95-b0-e6-8d-ae-e5-ba-93/" class="article-date">
+  <time datetime="2017-07-10T11:01:53.000Z" itemprop="datePublished">2017-07-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/10/msyql-e5-bf-ab-e9-80-9f-e5-88-9b-e5-bb-ba-e7-94-a8-e6-88-b7-e5-8f-8a-e6-95-b0-e6-8d-ae-e5-ba-93/">msyql 快速创建用户及数据库</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>下面的代码快速建立了一个<code>wordpress</code>数据库，以及一个只能在本地登录的用户<code>wordpress</code> 密码被设置为<code>password</code>，并且拥有对<code>wordpress</code>数据库的所有权限， see it：<code>CREATE DATABASE wordpress;
+GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER
+ON wordpress.*
+TO wordpress@localhost
+IDENTIFIED BY &#39;password&#39;;
+FLUSH PRIVILEGES;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/10/msyql-e5-bf-ab-e9-80-9f-e5-88-9b-e5-bb-ba-e7-94-a8-e6-88-b7-e5-8f-8a-e6-95-b0-e6-8d-ae-e5-ba-93/" data-id="cjpkyswr7000t6o8139ql66pc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/msyql/">msyql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/创建用户/">创建用户</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+
+
+  <nav id="page-nav">
+    <a class="extend prev" rel="prev" href="/page/8/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="page-number" href="/page/11/">11</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/10/">__('next') &raquo;</a>
+  </nav>
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/">互联网</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/操作系统/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/数据库/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AES/">AES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GlusterFS/">GlusterFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google云/">Google云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/">Mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAT/">NAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PATH/">PATH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SMTP/">SMTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentry/">Sentry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-factor-authentication/">Two-factor authentication</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T型累加/">T型累加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/M/">^M</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aliyun/">aliyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/application-ini/">application.ini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bashrc/">bashrc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/berkeleydb/">berkeleydb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitcoin/">bitcoin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bug/">bug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte/">byte</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cli/">cli</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/combobox/">combobox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datagrid/">datagrid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbd/">dbd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dhcp/">dhcp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drupal/">drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic/">dynamic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easyui/">easyui</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ef/">ef</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emac/">emac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity-framework/">entity framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/excel/">excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exception/">exception</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/export/">export</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/final/">final</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fonts/">fonts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/g/">g</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get-result/">get_result</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getclass/">getclass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gmail/">gmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google/">google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gridview/">gridview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/inputstream/">inputstream</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jms/">jms</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel-version/">kernel version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j/">log4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/">lvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lxde/">lxde</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mailer/">mailer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/menu/">menu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microtime/">microtime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monaco/">monaco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/msyql/">msyql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql-load-data/">mysql load data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysqldump/">mysqldump</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netbeans/">netbeans</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ocserv/">ocserv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/office/">office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openoffice/">openoffice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openvpn/">openvpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php-ini/">php.ini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/phpinfo/">phpinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redmine/">redmine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/">root</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/">screen</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/slackware/">slackware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sleep/">sleep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sockets/">sockets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sprintboot/">sprintboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/static/">static</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/symfony/">symfony</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tar/">tar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tls-ssl/">tls/ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/token/">token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usort/">usort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virutal-box/">virutal box</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn868错误/">vpn868错误</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xfce/">xfce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaf/">yaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yotube/">yotube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/两步验证/">两步验证</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中文/">中文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/乱码/">乱码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/保存/">保存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改密码/">修改密码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/写文件/">写文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数/">函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分级/">分级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分页/">分页</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/创建用户/">创建用户</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除/">删除</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷新/">刷新</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态类型/">动态类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/匹配/">匹配</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卡夫卡/">卡夫卡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化/">参数化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化查询/">参数化查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台/">后台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行/">命令行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备份/">备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/子查询/">子查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/子部门/">子部门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字节流/">字节流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/宏/">宏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对称加密/">对称加密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工厂模式/">工厂模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微软雅黑/">微软雅黑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/德兰修女/">德兰修女</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思科/">思科</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手机/">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/执行时间/">执行时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/挖矿/">挖矿</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/提交/">提交</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敏捷/">敏捷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据备份/">数据备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库错误/">数据库错误</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件句柄/">文件句柄</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件存储/">文件存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/替换/">替换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构/">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构师/">架构师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派/">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/比特币/">比特币</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毫秒/">毫秒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据/">海量数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据导入/">海量数据导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/漏洞/">漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境变量/">环境变量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/用户/">用户</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/疏忽/">疏忽</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箴言/">箴言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/累加/">累加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组/">组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/终端/">终端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓冲区/">缓冲区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编程/">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义函数/">自定义函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/菜单/">菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表单/">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解压/">解压</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解锁/">解锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言/">语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/说明书/">说明书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/输入法/">输入法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/追加/">追加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向工程/">逆向工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮件/">邮件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮箱/">邮箱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置文件/">配置文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复数据/">重复数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复记录/">重复记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误提示/">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里/">阿里</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/颜色/">颜色</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/默认路径/">默认路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/龙角散/">龙角散</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/AES/" style="font-size: 10px;">AES</a> <a href="/tags/ActiveMQ/" style="font-size: 10.83px;">ActiveMQ</a> <a href="/tags/CodeIginter/" style="font-size: 11.67px;">CodeIginter</a> <a href="/tags/CodeIgnitor/" style="font-size: 10px;">CodeIgnitor</a> <a href="/tags/GlusterFS/" style="font-size: 10px;">GlusterFS</a> <a href="/tags/Google云/" style="font-size: 10px;">Google云</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/NAT/" style="font-size: 10px;">NAT</a> <a href="/tags/PATH/" style="font-size: 10px;">PATH</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/SMTP/" style="font-size: 10px;">SMTP</a> <a href="/tags/Sentry/" style="font-size: 10px;">Sentry</a> <a href="/tags/Two-factor-authentication/" style="font-size: 10px;">Two-factor authentication</a> <a href="/tags/T型累加/" style="font-size: 10px;">T型累加</a> <a href="/tags/VMware/" style="font-size: 10.83px;">VMware</a> <a href="/tags/M/" style="font-size: 10px;">^M</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/anyconnect/" style="font-size: 12.5px;">anyconnect</a> <a href="/tags/application-ini/" style="font-size: 10px;">application.ini</a> <a href="/tags/asp-net/" style="font-size: 14.17px;">asp.net</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/bashrc/" style="font-size: 10px;">bashrc</a> <a href="/tags/berkeleydb/" style="font-size: 10px;">berkeleydb</a> <a href="/tags/bitcoin/" style="font-size: 10px;">bitcoin</a> <a href="/tags/bug/" style="font-size: 10px;">bug</a> <a href="/tags/byte/" style="font-size: 10px;">byte</a> <a href="/tags/c/" style="font-size: 12.5px;">c#</a> <a href="/tags/centos/" style="font-size: 15.83px;">centos</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/ci/" style="font-size: 11.67px;">ci</a> <a href="/tags/cisco/" style="font-size: 11.67px;">cisco</a> <a href="/tags/cli/" style="font-size: 10px;">cli</a> <a href="/tags/combobox/" style="font-size: 10px;">combobox</a> <a href="/tags/datagrid/" style="font-size: 11.67px;">datagrid</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/dbd/" style="font-size: 10px;">dbd</a> <a href="/tags/debian/" style="font-size: 11.67px;">debian</a> <a href="/tags/debug/" style="font-size: 10.83px;">debug</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dhcp/" style="font-size: 10px;">dhcp</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/drupal/" style="font-size: 10px;">drupal</a> <a href="/tags/dynamic/" style="font-size: 10px;">dynamic</a> <a href="/tags/easyui/" style="font-size: 15px;">easyui</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/ef/" style="font-size: 10px;">ef</a> <a href="/tags/emac/" style="font-size: 10px;">emac</a> <a href="/tags/emacs/" style="font-size: 14.17px;">emacs</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/entity-framework/" style="font-size: 10px;">entity framework</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/exception/" style="font-size: 10px;">exception</a> <a href="/tags/export/" style="font-size: 10px;">export</a> <a href="/tags/fastdfs/" style="font-size: 13.33px;">fastdfs</a> <a href="/tags/final/" style="font-size: 10px;">final</a> <a href="/tags/fonts/" style="font-size: 10px;">fonts</a> <a href="/tags/freebsd/" style="font-size: 10px;">freebsd</a> <a href="/tags/g/" style="font-size: 10px;">g</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/get-result/" style="font-size: 10px;">get_result</a> <a href="/tags/getclass/" style="font-size: 10px;">getclass</a> <a href="/tags/gmail/" style="font-size: 10px;">gmail</a> <a href="/tags/google/" style="font-size: 10.83px;">google</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/gridview/" style="font-size: 10px;">gridview</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.67px;">https</a> <a href="/tags/inputstream/" style="font-size: 10px;">inputstream</a> <a href="/tags/ip/" style="font-size: 10.83px;">ip</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 18.33px;">java</a> <a href="/tags/javascript/" style="font-size: 13.33px;">javascript</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jquery/" style="font-size: 12.5px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/kernel-version/" style="font-size: 10px;">kernel version</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/linux/" style="font-size: 19.17px;">linux</a> <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux jdk proxy mysql</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lxde/" style="font-size: 10px;">lxde</a> <a href="/tags/mailer/" style="font-size: 10px;">mailer</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/menu/" style="font-size: 10px;">menu</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/microtime/" style="font-size: 10px;">microtime</a> <a href="/tags/monaco/" style="font-size: 10px;">monaco</a> <a href="/tags/msyql/" style="font-size: 10.83px;">msyql</a> <a href="/tags/mysql/" style="font-size: 17.5px;">mysql</a> <a href="/tags/mysql-load-data/" style="font-size: 10px;">mysql load data</a> <a href="/tags/mysqldump/" style="font-size: 10px;">mysqldump</a> <a href="/tags/netbeans/" style="font-size: 10px;">netbeans</a> <a href="/tags/nginx/" style="font-size: 15.83px;">nginx</a> <a href="/tags/ocserv/" style="font-size: 10px;">ocserv</a> <a href="/tags/office/" style="font-size: 10px;">office</a> <a href="/tags/openoffice/" style="font-size: 10px;">openoffice</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/openvpn/" style="font-size: 10px;">openvpn</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 11.67px;">owncloud</a> <a href="/tags/php-ini/" style="font-size: 10px;">php.ini</a> <a href="/tags/phpinfo/" style="font-size: 10px;">phpinfo</a> <a href="/tags/pip/" style="font-size: 10.83px;">pip</a> <a href="/tags/post/" style="font-size: 10.83px;">post</a> <a href="/tags/proxy/" style="font-size: 11.67px;">proxy</a> <a href="/tags/python/" style="font-size: 11.67px;">python</a> <a href="/tags/python-pip/" style="font-size: 10.83px;">python-pip</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/redmine/" style="font-size: 10.83px;">redmine</a> <a href="/tags/root/" style="font-size: 10px;">root</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shadowsocks/" style="font-size: 11.67px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/slackware/" style="font-size: 10px;">slackware</a> <a href="/tags/sleep/" style="font-size: 10px;">sleep</a> <a href="/tags/socket/" style="font-size: 12.5px;">socket</a> <a href="/tags/sockets/" style="font-size: 10px;">sockets</a> <a href="/tags/sprintboot/" style="font-size: 10px;">sprintboot</a> <a href="/tags/sql/" style="font-size: 10.83px;">sql</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/ssh/" style="font-size: 10.83px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10.83px;">ssl</a> <a href="/tags/static/" style="font-size: 10px;">static</a> <a href="/tags/symfony/" style="font-size: 10.83px;">symfony</a> <a href="/tags/tar/" style="font-size: 10.83px;">tar</a> <a href="/tags/time/" style="font-size: 10.83px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/tls-ssl/" style="font-size: 10px;">tls/ssl</a> <a href="/tags/token/" style="font-size: 10px;">token</a> <a href="/tags/ubuntu/" style="font-size: 12.5px;">ubuntu</a> <a href="/tags/usort/" style="font-size: 10px;">usort</a> <a href="/tags/vim/" style="font-size: 16.67px;">vim</a> <a href="/tags/virutal-box/" style="font-size: 10px;">virutal box</a> <a href="/tags/vpn/" style="font-size: 10.83px;">vpn</a> <a href="/tags/vpn868错误/" style="font-size: 10px;">vpn868错误</a> <a href="/tags/wifi/" style="font-size: 10.83px;">wifi</a> <a href="/tags/wordpress/" style="font-size: 10.83px;">wordpress</a> <a href="/tags/xfce/" style="font-size: 10px;">xfce</a> <a href="/tags/yaf/" style="font-size: 11.67px;">yaf</a> <a href="/tags/yotube/" style="font-size: 10px;">yotube</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/两步验证/" style="font-size: 10px;">两步验证</a> <a href="/tags/中文/" style="font-size: 10.83px;">中文</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/乱码/" style="font-size: 10px;">乱码</a> <a href="/tags/云计算/" style="font-size: 10px;">云计算</a> <a href="/tags/代理/" style="font-size: 14.17px;">代理</a> <a href="/tags/优化/" style="font-size: 10px;">优化</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/保存/" style="font-size: 10px;">保存</a> <a href="/tags/修改密码/" style="font-size: 10px;">修改密码</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/写文件/" style="font-size: 10px;">写文件</a> <a href="/tags/函数/" style="font-size: 10px;">函数</a> <a href="/tags/分级/" style="font-size: 10px;">分级</a> <a href="/tags/分页/" style="font-size: 10px;">分页</a> <a href="/tags/创建用户/" style="font-size: 10.83px;">创建用户</a> <a href="/tags/删除/" style="font-size: 10.83px;">删除</a> <a href="/tags/刷新/" style="font-size: 10px;">刷新</a> <a href="/tags/动态类型/" style="font-size: 10px;">动态类型</a> <a href="/tags/匹配/" style="font-size: 10px;">匹配</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/卡夫卡/" style="font-size: 10px;">卡夫卡</a> <a href="/tags/参数化/" style="font-size: 10.83px;">参数化</a> <a href="/tags/参数化查询/" style="font-size: 10px;">参数化查询</a> <a href="/tags/后台/" style="font-size: 10px;">后台</a> <a href="/tags/命令/" style="font-size: 12.5px;">命令</a> <a href="/tags/命令行/" style="font-size: 11.67px;">命令行</a> <a href="/tags/备份/" style="font-size: 10px;">备份</a> <a href="/tags/复选框/" style="font-size: 10px;">复选框</a> <a href="/tags/子查询/" style="font-size: 10px;">子查询</a> <a href="/tags/子部门/" style="font-size: 10px;">子部门</a> <a href="/tags/字体/" style="font-size: 11.67px;">字体</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/字节流/" style="font-size: 10.83px;">字节流</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/宏/" style="font-size: 10px;">宏</a> <a href="/tags/对称加密/" style="font-size: 10px;">对称加密</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/异常/" style="font-size: 11.67px;">异常</a> <a href="/tags/循环/" style="font-size: 10px;">循环</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/微软雅黑/" style="font-size: 10px;">微软雅黑</a> <a href="/tags/德兰修女/" style="font-size: 10px;">德兰修女</a> <a href="/tags/思科/" style="font-size: 10px;">思科</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/手机/" style="font-size: 10px;">手机</a> <a href="/tags/执行时间/" style="font-size: 10px;">执行时间</a> <a href="/tags/挖矿/" style="font-size: 10px;">挖矿</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/提交/" style="font-size: 10px;">提交</a> <a href="/tags/敏捷/" style="font-size: 10px;">敏捷</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据备份/" style="font-size: 10px;">数据备份</a> <a href="/tags/数据库/" style="font-size: 11.67px;">数据库</a> <a href="/tags/数据库错误/" style="font-size: 10px;">数据库错误</a> <a href="/tags/数组/" style="font-size: 10.83px;">数组</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/文件句柄/" style="font-size: 10px;">文件句柄</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/文件存储/" style="font-size: 10px;">文件存储</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/替换/" style="font-size: 11.67px;">替换</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/架构师/" style="font-size: 10px;">架构师</a> <a href="/tags/树莓派/" style="font-size: 10.83px;">树莓派</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a> <a href="/tags/毫秒/" style="font-size: 10px;">毫秒</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/海量数据/" style="font-size: 10px;">海量数据</a> <a href="/tags/海量数据导入/" style="font-size: 10px;">海量数据导入</a> <a href="/tags/消息/" style="font-size: 10.83px;">消息</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/漏洞/" style="font-size: 10px;">漏洞</a> <a href="/tags/环境变量/" style="font-size: 10px;">环境变量</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/疏忽/" style="font-size: 10px;">疏忽</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/箴言/" style="font-size: 10px;">箴言</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/累加/" style="font-size: 10px;">累加</a> <a href="/tags/组/" style="font-size: 10px;">组</a> <a href="/tags/终端/" style="font-size: 12.5px;">终端</a> <a href="/tags/缓冲区/" style="font-size: 10px;">缓冲区</a> <a href="/tags/编程/" style="font-size: 10.83px;">编程</a> <a href="/tags/网络/" style="font-size: 10.83px;">网络</a> <a href="/tags/自定义函数/" style="font-size: 10px;">自定义函数</a> <a href="/tags/菜单/" style="font-size: 10px;">菜单</a> <a href="/tags/虚拟机/" style="font-size: 10.83px;">虚拟机</a> <a href="/tags/表单/" style="font-size: 10px;">表单</a> <a href="/tags/解压/" style="font-size: 10px;">解压</a> <a href="/tags/解锁/" style="font-size: 10px;">解锁</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/语言/" style="font-size: 10px;">语言</a> <a href="/tags/说明书/" style="font-size: 10px;">说明书</a> <a href="/tags/调试/" style="font-size: 10.83px;">调试</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 10.83px;">转换</a> <a href="/tags/输入法/" style="font-size: 10px;">输入法</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/追加/" style="font-size: 10px;">追加</a> <a href="/tags/逆向工程/" style="font-size: 10px;">逆向工程</a> <a href="/tags/邮件/" style="font-size: 11.67px;">邮件</a> <a href="/tags/邮箱/" style="font-size: 10.83px;">邮箱</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a> <a href="/tags/配置文件/" style="font-size: 10.83px;">配置文件</a> <a href="/tags/重复数据/" style="font-size: 10px;">重复数据</a> <a href="/tags/重复记录/" style="font-size: 10px;">重复记录</a> <a href="/tags/错误提示/" style="font-size: 10px;">错误提示</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里/" style="font-size: 10px;">阿里</a> <a href="/tags/阿里云/" style="font-size: 10.83px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a> <a href="/tags/颜色/" style="font-size: 10px;">颜色</a> <a href="/tags/默认路径/" style="font-size: 10px;">默认路径</a> <a href="/tags/龙角散/" style="font-size: 10px;">龙角散</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/12/code-tips/">code-tips</a>
+          </li>
+        
+          <li>
+            <a href="/2018/12/12/world/">world</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/30/linux-e6-89-b9-e9-87-8f-e6-9b-bf-e6-8d-a2-e6-96-87-e4-bb-b6-e5-86-85-e5-ae-b9/">linux批量替换文件内容</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/24/e6-88-91-e6-8e-a8-e8-8d-90-e7-a6-81-e7-94-a8-e7-9a-84-php-e5-87-bd-e6-95-b0/">我推荐禁用的 PHP 函数</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/09/mysql-e4-b8-ad-e5-88-a0-e9-99-a4-e9-87-8d-e5-a4-8d-e6-95-b0-e6-8d-ae/">mysql 中删除重复数据</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
