@@ -92,11 +92,9 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="Proxy-On-Google-Chrome-Linux"><a href="#Proxy-On-Google-Chrome-Linux" class="headerlink" title="Proxy On Google Chrome, Linux:"></a>Proxy On Google Chrome, Linux:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">google-chrome --proxy-server=socks5://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
-<h2 id="DB"><a href="#DB" class="headerlink" title="DB:"></a>DB:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create database [DB-NAME] CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</span><br></pre></td></tr></table></figure>
-<hr>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">GRANT ALL PRIVILEGES ON *.* TO zhangsan@&quot;%&quot; IDENTIFIED BY &quot;lisi11226t54&quot;; </span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
+<h2 id="DB"><a href="#DB" class="headerlink" title="DB:"></a>DB:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">create database [DB-NAME] CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;</span><br><span class="line">GRANT ALL PRIVILEGES ON *.* TO zhangsan@&quot;%&quot; IDENTIFIED BY &quot;lisi11226t54&quot;; </span><br><span class="line">FLUSH PRIVILEGES;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>执行上面两句话。自动创建用户zhangs,密码 lisi11226t54<br>格式：grant 权限 on 数据库名.表名 to 用户@登录主机 identified by “用户密码”;<br>@ 后面是访问mysql的客户端IP地址（或是 主机名） % 代表任意的客户端  </p>
+<p>执行上面两句话。自动创建用户 <code>zhangs</code> ,密码 <code>lisi11226t54</code><br>格式：<code>grant 权限 on 数据库名.表名 to 用户@登录主机 identified by &quot;用户密码&quot;;</code><br><code>@</code> 后面是访问 mysql 的客户端IP地址（或是 主机名） <code>%</code> 代表任意的客户端  </p>
 </blockquote>
 <h2 id="i-Network"><a href="#i-Network" class="headerlink" title="i Network"></a>i Network</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"># ==Nat==</span><br><span class="line">10.11.11.1 # gateway</span><br><span class="line">10.11.11.110~120 # DHCP</span><br><span class="line"></span><br><span class="line"># ==Local Only==</span><br><span class="line">192.168.22.1</span><br><span class="line">192.168.22.110~120</span><br><span class="line"></span><br><span class="line"># === Fixed IP/Port ===</span><br><span class="line">Dev: 8080</span><br><span class="line">test: 10086</span><br><span class="line">ss1: 1239 / 22 / 443</span><br><span class="line">mysql: 2304</span><br><span class="line">proxy-socks5: 3389(Auth) / 3306</span><br><span class="line">proxy-http: 1209</span><br></pre></td></tr></table></figure>
 <h2 id="Bitnami-远程访问"><a href="#Bitnami-远程访问" class="headerlink" title="Bitnami 远程访问:"></a>Bitnami 远程访问:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># vim ~/apps/phpmyadmin/conf/httpd-app.conf</span><br><span class="line"># Modify to this:</span><br><span class="line">Allow from all</span><br><span class="line">Require all granted</span><br></pre></td></tr></table></figure>
@@ -114,10 +112,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/12/code-tips/" data-id="cjpkvd6kr000dop81r945rjot" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/12/12/code-tips/" data-id="cjpky1lkk0000wi81vqvokzn6" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux, jdk, proxy, mysql</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li></ul>
 
     </footer>
   </div>
@@ -126,12 +124,16 @@
 
 
   
-    <article id="hello-world" class="article article-type-hello" itemscope="" itemprop="blogPost">
+    <article id="post-debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2018/12/12/world/" class="article-date">
-  <time datetime="2018-12-12T07:13:38.000Z" itemprop="datePublished">2018-12-12</time>
+    <a href="/2018/04/19/debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99/" class="article-date">
+  <time datetime="2018-04-19T10:18:28.000Z" itemprop="datePublished">2018-04-19</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
@@ -140,7 +142,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2018/12/12/world/">world</a>
+      <a class="article-title" href="/2018/04/19/debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99/">Debian下使用iptables防火墙</a>
     </h1>
   
 
@@ -148,13 +150,935 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <p>Iptables 是建立在 netfilter 架构基础上的一个包过滤管理工具，最主要的作用是用来做防火墙或透明代理。Iptables 从 ipchains 发展而来，它的功能更为强大。Iptables 提供以下三种功能：包过滤、NAT（网络地址转换）和通用的 pre-route packet mangling。 在之前的文章中我对Iptables 进行了概念和原理上的介绍：Iptables介绍及命令，但是在实际应用中，很多实用的命令会反复用到，所以在这里对这些命令进行一下总结，方便大家查看。</p>
+<h2 id="安装iptables防火墙"><a href="#安装iptables防火墙" class="headerlink" title="安装iptables防火墙"></a>安装iptables防火墙</h2><p>如果没有安装iptables需要先安装，CentOS执行：</p>
+<pre><code>yum install iptables
+</code></pre><p>Debian/Ubuntu执行：</p>
+<pre><code>apt-get install iptables
+</code></pre><p>PS：一般默认的VPS Linux发行版都会带有iptables。 iptables规则的查看与删除</p>
+<h2 id="查看iptables规则"><a href="#查看iptables规则" class="headerlink" title="查看iptables规则"></a>查看iptables规则</h2><p>命令后面的line-number为显示行号（将规则一则一则输出，并显示行号），可选，方便后文的删除指令。</p>
+<pre><code>iptables -L -n --line-numbers
+</code></pre><h2 id="清除已有iptables规则"><a href="#清除已有iptables规则" class="headerlink" title="清除已有iptables规则"></a>清除已有iptables规则</h2><pre><code>iptables -F
+iptables -X
+iptables -Z
+</code></pre><h3 id="删除某iptables规则"><a href="#删除某iptables规则" class="headerlink" title="删除某iptables规则"></a>删除某iptables规则</h3><p>例如，删除第12行的规则，行号可由之前的命令查看</p>
+<pre><code>iptables -D INPUT 12
+</code></pre><h2 id="常用的iptables规则"><a href="#常用的iptables规则" class="headerlink" title="常用的iptables规则"></a>常用的iptables规则</h2><h3 id="开放指定的端口"><a href="#开放指定的端口" class="headerlink" title="开放指定的端口"></a>开放指定的端口</h3><pre><code>#允许本机访问
+iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT
+# 允许已建立的或相关连的通行
+iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+#允许所有本机向外的访问
+iptables -A OUTPUT -j ACCEPT
+# 允许访问22端口
+iptables -A INPUT -p tcp --dport 22 -j ACCEPT
+#允许访问80端口
+iptables -A INPUT -p tcp --dport 80 -j ACCEPT
+#允许FTP服务的21和20端口
+iptables -A INPUT -p tcp --dport 21 -j ACCEPT
+iptables -A INPUT -p tcp --dport 20 -j ACCEPT
+#如果有其他端口的话，规则也类似，稍微修改上述语句就行
+#禁止其他未允许的规则访问
+iptables -A INPUT -j REJECT
+iptables -A FORWARD -j REJECT
+</code></pre><h3 id="屏蔽IP"><a href="#屏蔽IP" class="headerlink" title="屏蔽IP"></a>屏蔽IP</h3><p>有些IP如果你不想被VPS访问的到（原因很多，例如搜索引擎蜘蛛，DOS攻击者之类），可以用iptables屏蔽这些IP的访问：</p>
+<pre><code>#如果只是想屏蔽IP的话“3、开放指定的端口”可以直接跳过。
+#屏蔽单个IP的命令是
+iptables -I INPUT -s 123.45.6.7 -j DROP
+#封整个段即从123.0.0.1到123.255.255.254的命令
+iptables -I INPUT -s 123.0.0.0/8 -j DROP
+#封IP段即从123.45.0.1到123.45.255.254的命令
+iptables -I INPUT -s 124.45.0.0/16 -j DROP
+#封IP段即从123.45.6.1到123.45.6.254的命令是
+iptables -I INPUT -s 123.45.6.0/24 -j DROP
+</code></pre><h2 id="保存iptables规则"><a href="#保存iptables规则" class="headerlink" title="保存iptables规则"></a>保存iptables规则</h2><p><strong>CentOS上可以执行：</strong></p>
+<pre><code>service iptables save
+</code></pre><p>一般在安装iptables完成后，开机启动会自动设置成功，但在个别CentOS系统上，貌似还有些问题，可以使用如下命令手动设置:</p>
+<pre><code>chkconfig --level 345 iptables on
+</code></pre><p>另外更需要注意的是Debian/Ubuntu上iptables是不会保存规则的。 需要按如下步骤进行，让网卡关闭是保存iptables规则，启动时加载iptables规则： 创建/etc/network/if-post-down.d/iptables 文件，添加如下内容：</p>
+<pre><code>#!/bin/bash
+iptables-save &gt; /etc/iptables.rules
+</code></pre><p>添加执行权限。</p>
+<pre><code>chmod +x /etc/network/if-post-down.d/iptables
+</code></pre><p>创建/etc/network/if-pre-up.d/iptables 文件，添加如下内容：</p>
+<pre><code>#!/bin/bash
+iptables-restore &lt; /etc/iptables.rules
+</code></pre><p>添加执行权限</p>
+<pre><code>chmod +x /etc/network/if-pre-up.d/iptables
+</code></pre><hr>
+<p>本文出自 TENNFY博客，转载时请注明出处及相应链接。 本文永久链接: <a href="https://www.tennfy.com/2552.html" target="_blank" rel="noopener">https://www.tennfy.com/2552.html</a></p>
+
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/12/12/world/" data-id="cjpkvd6kt000fop81teofaz65" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/04/19/debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99/" data-id="cjpky1ll40005wi813a6wpism" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iptables/">iptables</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/防火墙/">防火墙</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/" class="article-date">
+  <time datetime="2017-12-26T10:12:01.000Z" itemprop="datePublished">2017-12-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/">CentOS 7.2下编译安装PHP 7</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>注意此配置针对开发环境，如果线上环境，那么phpdbg和dtrace这两个建议不要编译 编译安装参数</p>
+<pre><code># prefix 可根据实际情况自定义
+# with-fpm-systemd参数可以使PHP7支持centos7的systemd服务管理
+# 安装过程中可能有一些扩展需要额外库支持，如果configure运行报错，直接goolge 搜索，基本上yum install xxx-devel 就可
+
+./configure --prefix=/data/soft/php7
+ --enable-fpm
+ --with-fpm-user=php-fpm
+ --with-fpm-group=www
+ --with-fpm-systemd
+ --enable-phpdbg
+ --enable-dtrace
+ --enable-mysqlnd
+ --with-mysqli=mysqlnd
+ --with-pdo-mysql=mysqlnd
+ --enable-opcache
+ --enable-pcntl
+ --enable-mbstring
+ --enable-soap
+ --enable-zip
+ --enable-calendar
+ --enable-bcmath
+ --enable-ftp
+ --enable-intl
+ --enable-sockets
+ --with-openssl
+ --with-mhash
+ --with-zlib
+ --with-curl
+ --with-gettext
+ --with-gd
+ --enable-exif
+ --enable-gd-native-ttf
+ --enable-gd-jis-conv
+ --with-png-dir=/usr/lib
+ --with-jpeg-dir=/usr/lib
+ --with-freetype-dir=/usr/lib
+</code></pre><p>执行以上编译前配置，如果没有错误 运行命令</p>
+<pre><code>make &amp; make install
+</code></pre><p>编译完成，copy php-develpment.ini 文件到 PREFIX/lib/目录下</p>
+<hr>
+<p>一些特别需要注意安装的包</p>
+<pre><code>yum install systemd-devel
+yum isntall freetype-devel
+yum isntall libpng-devel
+yum install openjpeg-devel
+</code></pre><p>安装完，如果想要systemd控制启动 copy ./sapi/fpm/php-fpm.service 到 /usr/lib/systemd/system/下 systemctl enable php-fpm systemctl start php-fpm 即可 编译安装完，就是一些第三方扩展安装，能用pecl的尽量使用pecl，不能用的编译安装也简单，使用phize 这个即可，具体自己搜索网上文章 另外就是php.ini配置文件的修改和php-fpm.conf文件的修改，一些最基本的优化都可以在这两个文件里面实现，比如opcache的配置，php-fpm启动进程数量等，php-fpm配置文件在PREFIX/etc目录下 因为是开发环境，优化的就不写了，如果有需要，网上搜索，基本上优化的建议都很通用 文章来源： <a href="https://segmentfault.com/a/1190000005363212" target="_blank" rel="noopener">https://segmentfault.com/a/1190000005363212</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/" data-id="cjpky12zx0000w8811u4o8orv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/" class="article-date">
+  <time datetime="2017-09-26T02:55:58.000Z" itemprop="datePublished">2017-09-26</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/">centos7 mysql数据库安装和配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="一、系统环境"><a href="#一、系统环境" class="headerlink" title="一、系统环境"></a>一、系统环境</h1><p>yum update升级以后的系统版本为</p>
+<p>[root@yl-web yl]# cat /etc/redhat-release<br>CentOS Linux release 7.1.1503 (Core) </p>
+<h1 id="二、mysql安装"><a href="#二、mysql安装" class="headerlink" title="二、mysql安装"></a>二、mysql安装</h1><p>一般网上给出的资料都是</p>
+<p>#yum install mysql</p>
+<p>#yum install mysql-server</p>
+<p>#yum install mysql-devel</p>
+<p>安装mysql和mysql-devel都成功，但是安装mysql-server失败，如下：</p>
+<p><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></p>
+<p>[root@yl-web yl]# yum install mysql-server<br>Loaded plugins: fastestmirror<br>Loading mirror speeds from cached hostfile<br> * base: mirrors.sina.cn<br> * extras: mirrors.sina.cn<br> * updates: mirrors.sina.cn<br>No package mysql-server available.<br>Error: Nothing to do</p>
+<p><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></p>
+<p>查资料发现是CentOS 7 版本将MySQL数据库软件从默认的程序列表中移除，用mariadb代替了。 有两种解决办法：</p>
+<h2 id="1、方法一：安装mariadb"><a href="#1、方法一：安装mariadb" class="headerlink" title="1、方法一：安装mariadb"></a>1、方法一：安装mariadb</h2><p>MariaDB数据库管理系统是MySQL的一个分支，主要由开源社区在维护，采用GPL授权许可。开发这个分支的原因之一是：甲骨文公司收购了MySQL后，有将MySQL闭源的潜在风险，因此社区采用分支的方式来避开这个风险。MariaDB的目的是完全兼容MySQL，包括API和命令行，使之能轻松成为MySQL的代替品。 安装mariadb，大小59 M。</p>
+<p>[root@yl-web yl]# yum install mariadb-server mariadb</p>
+<p>mariadb数据库的相关命令是： systemctl start mariadb  #启动MariaDB systemctl stop mariadb  #停止MariaDB systemctl restart mariadb  #重启MariaDB systemctl enable mariadb  #设置开机启动 所以先启动数据库</p>
+<p>[root@yl-web yl]# systemctl start mariadb</p>
+<p>然后就可以正常使用mysql了</p>
+<p><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></p>
+<p>[root@yl-web yl]# mysql -u root -p<br>Enter password:<br>Welcome to the MariaDB monitor.  Commands end with ; or g.<br>Your MariaDB connection id is 3<br>Server version: 5.5.41-MariaDB MariaDB Server</p>
+<p>Copyright (c) 2000, 2014, Oracle, MariaDB Corporation Ab and others.</p>
+<p>Type ‘help;’ or ‘h’ for help. Type ‘c’ to clear the current input statement.</p>
+<p>MariaDB [(none)]&gt; show databases;<br>+——————–+<br>| Database           |<br>+——————–+<br>| information_schema |<br>| mysql              |<br>| performance_schema |<br>| test               |<br>+——————–+<br>4 rows in set (0.00 sec)</p>
+<p>MariaDB [(none)]&gt;</p>
+<p><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></p>
+<p>安装mariadb后显示的也是 MariaDB [(none)]&gt; ，可能看起来有点不习惯。下面是第二种方法。</p>
+<h2 id="2、方法二：官网下载安装mysql-server"><a href="#2、方法二：官网下载安装mysql-server" class="headerlink" title="2、方法二：官网下载安装mysql-server"></a>2、方法二：官网下载安装mysql-server</h2><p># wget <a href="http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm" target="_blank" rel="noopener">http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm</a><br># rpm -ivh mysql-community-release-el7-5.noarch.rpm<br># yum install mysql-community-server</p>
+<p>安装成功后重启mysql服务。</p>
+<p># service mysqld restart</p>
+<p>初次安装mysql，root账户没有密码。</p>
+<p><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></p>
+<p>[root@yl-web yl]# mysql -u root<br>Welcome to the MySQL monitor.  Commands end with ; or g.<br>Your MySQL connection id is 3<br>Server version: 5.6.26 MySQL Community Server (GPL)</p>
+<p>Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.</p>
+<p>Oracle is a registered trademark of Oracle Corporation and/or its<br>affiliates. Other names may be trademarks of their respective<br>owners.</p>
+<p>Type ‘help;’ or ‘h’ for help. Type ‘c’ to clear the current input statement.</p>
+<p>mysql&gt; show databases;<br>+——————–+<br>| Database           |<br>+——————–+<br>| information_schema |<br>| mysql              |<br>| performance_schema |<br>| test               |<br>+——————–+<br>4 rows in set (0.01 sec)</p>
+<p>mysql&gt;</p>
+<p><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></p>
+<p>设置密码</p>
+<p>mysql&gt; set password for ‘root‘@’localhost’ =password(‘password’);<br>Query OK, 0 rows affected (0.00 sec)</p>
+<p>mysql&gt;</p>
+<p>不需要重启数据库即可生效。 在mysql安装过程中如下内容：</p>
+<p><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></p>
+<p>Installed:<br>  mysql-community-client.x86_64 0:5.6.26-2.el7                mysql-community-devel.x86_64 0:5.6.26-2.el7<br>  mysql-community-libs.x86_64 0:5.6.26-2.el7                  mysql-community-server.x86_64 0:5.6.26-2.el7               </p>
+<p>Dependency Installed:<br>  mysql-community-common.x86_64 0:5.6.26-2.el7                                                                            </p>
+<p>Replaced:<br>  mariadb.x86_64 1:5.5.41-2.el7_0          mariadb-devel.x86_64 1:5.5.41-2.el7_0   mariadb-libs.x86_64 1:5.5.41-2.el7_0<br>  mariadb-server.x86_64 1:5.5.41-2.el7_0</p>
+<p><img src="http://common.cnblogs.com/images/copycode.gif" alt="复制代码"></p>
+<p>所以安装完以后mariadb自动就被替换了，将不再生效。</p>
+<p>[root@yl-web yl]# rpm -qa |grep mariadb<br>[root@yl-web yl]#</p>
+<h1 id="三、配置mysql"><a href="#三、配置mysql" class="headerlink" title="三、配置mysql"></a>三、配置mysql</h1><h2 id="1、编码"><a href="#1、编码" class="headerlink" title="1、编码"></a>1、编码</h2><p>mysql配置文件为/etc/my.cnf 最后加上编码配置</p>
+<p>[mysql]<br>default-character-set =utf8</p>
+<p>这里的字符编码必须和/usr/share/mysql/charsets/Index.xml中一致。 <img src="https://tech.msla.top/wp-content/uploads/2018/04/271615224693150.png" alt=""></p>
+<h2 id="2、远程连接设置"><a href="#2、远程连接设置" class="headerlink" title="2、远程连接设置"></a>2、远程连接设置</h2><p>把在所有数据库的所有表的所有权限赋值给位于所有IP地址的root用户。</p>
+<p>mysql&gt; grant all privileges on <em>.</em> to root@’%’identified by ‘password’;</p>
+<p>如果是新用户而不是root，则要先新建用户</p>
+<p>mysql&gt;create user ‘username‘@’%’ identified by ‘password’;</p>
+<p>此时就可以进行远程连接了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/" data-id="cjpky130g000bw881hxu00xr6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数据库/">数据库</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e3-80-90-e8-bd-ac-e3-80-91-e5-88-a9-e7-94-a8-e5-8f-8d-e5-90-91ssh-e4-bb-8e-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e5-86-85-e7-bd-91-e4-b8-bb-e6-9c-ba" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/15/e3-80-90-e8-bd-ac-e3-80-91-e5-88-a9-e7-94-a8-e5-8f-8d-e5-90-91ssh-e4-bb-8e-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e5-86-85-e7-bd-91-e4-b8-bb-e6-9c-ba/" class="article-date">
+  <time datetime="2017-09-15T10:41:06.000Z" itemprop="datePublished">2017-09-15</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/15/e3-80-90-e8-bd-ac-e3-80-91-e5-88-a9-e7-94-a8-e5-8f-8d-e5-90-91ssh-e4-bb-8e-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e5-86-85-e7-bd-91-e4-b8-bb-e6-9c-ba/">【转】利用反向ssh从外网访问内网主机</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近遇到一个问题，就是过几天我需要离开学校，而且到时候仍然想登陆校园网里的一台服务器进行工作；但是我又没有校园网网关的操作权限，不能做端口映射，也不能搞到校园网内部主机的外网ip，而且学校自己提供的vpn又根本没法用。研究了半天，总算找到了一个比较不错的利用反向ssh(reverse ssh tunnel)进行内网登陆的解决方案。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>之所以很多转发的方法无法应用在这里，就是因为内网主机对外网其实是不可见的，也就是说外部主机不能用一般的方法访问到内部主机。那么我们就想了，能不能用内网主机找外网主机，找到之后再把这条内网主机登陆外网的信道转换成外网主机登陆内网的信道呢？辛运的是，这个方法的确是可行的，这也就是所谓反向ssh最通俗的理解，这就像寄信一样，”虽然我不知道你的地址，但是你知道我的地址，那么你就先给我写封信，告诉我你的地址，然后我不就可以回信给你了么？“。</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><p>由于我们自己使用的电脑未必有外网ip，因此我们需要一个有固定外网ip的服务器(随便搞个腾讯云阿里云的小机子就行)，然后用这台服务器与内网的机子进行通信，我们到时候要先登陆自己的服务器，然后再利用这个服务器去访问内网的主机。 1、准备好有固定ip的服务器A，以及待访问的内网机器B。两者都开着sshd服务，端口号默认都是22。顺便做好ssh免密码登陆。 2、内网主机B主动连接服务器A，执行以下命令：</p>
+<p>1</p>
+<p>$ ssh -NfR 1111:localhost:22 username@servername -p 22</p>
+<p>这条命令的意思是在后台执行(-f)，不实际连接而是做port forwarding(-N)，做反向ssh(-R)，将远程服务器的1111端口映射成连接本机(B)与该服务器的反向ssh的端口。 附：这里有必要加强一下记忆，这个端口号一不小心就容易搞混。。man文档中的参数命令是这样的：</p>
+<p>1</p>
+<p>-R [bind_address:]port:host:hostport</p>
+<p>bind_address以及其后面的port是指远程主机的ip以及端口，host以及其后的hostport是指本机的ip和端口。由于ssh命令本身需要远程主机的ip(上上条命令中的servername)，因此这个bind_address原则上是可以省略的。 执行完这条命令，我们可以在服务器A上看到他的1111端口已经开始监听：</p>
+<p>1</p>
+<p>2</p>
+<p>$ ss -ant |grep 1111</p>
+<p>LISTEN 0 128 127.0.0.1:1111 <em>:</em></p>
+<p>3、在上面的操作中，这个1111端口就已经映射成了内网主机B的22端口了，现在我们只要ssh到自己的这个端口就行了。在服务器A中执行：</p>
+<p>1</p>
+<p>$ ssh username@localhost -p1111</p>
+<p>这样就成功的登陆了内网的主机了。</p>
+<h2 id="功能优化"><a href="#功能优化" class="headerlink" title="功能优化"></a>功能优化</h2><p>上面的做法其实有一个问题，就是反向ssh可能会不稳定，主机B对服务器A的端口映射可能会断掉，那么这时候就需要主机B重新链接，而显然远在外地的我无法登陆B。。。这其实有一个非常简单的解决方案，就是用autossh替代步骤2中的ssh：</p>
+<p>1</p>
+<p>$ autossh -M 2222 -NfR 1111:localhost:22 username@servername -p 22</p>
+<p>后面的参数跟ssh都一样，只是多了一个-M参数，这个参数的意思就是用本机的2222端口来监听ssh，每当他断了就重新把他连起来。。。不过man文档中也说了，这个端口又叫echo port，他其实是有一对端口的形式出现，第二个端口就是这个端口号加一。因此我们要保证这个端口号和这个端口号加一的端口号不被占用。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://www.cnblogs.com/eshizhan/archive/2012/07/16/2592902.html" target="_blank" rel="noopener">SSH反向连接及Autossh</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/15/e3-80-90-e8-bd-ac-e3-80-91-e5-88-a9-e7-94-a8-e5-8f-8d-e5-90-91ssh-e4-bb-8e-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e5-86-85-e7-bd-91-e4-b8-bb-e6-9c-ba/" data-id="cjpky21pg0003ws817ui4lqf6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/远程访问/">远程访问</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-anyconnect-e7-9a-84vpn-e7-8e-af-e5-a2-83-e9-83-a8-e7-bd-b21-ubuntu-e7-b3-bb-e7-bb-9f-e4-b8-8b-e5-ae-89-e8-a3-85cisco-anyconnect-vpn-e6-95-a3-e5-b0-bd-e6-b5-ae-e5-8d-8e-e5-8d-9a-e5-ae-a2" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/13/anyconnect-e7-9a-84vpn-e7-8e-af-e5-a2-83-e9-83-a8-e7-bd-b21-ubuntu-e7-b3-bb-e7-bb-9f-e4-b8-8b-e5-ae-89-e8-a3-85cisco-anyconnect-vpn-e6-95-a3-e5-b0-bd-e6-b5-ae-e5-8d-8e-e5-8d-9a-e5-ae-a2/" class="article-date">
+  <time datetime="2017-09-13T04:54:48.000Z" itemprop="datePublished">2017-09-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/13/anyconnect-e7-9a-84vpn-e7-8e-af-e5-a2-83-e9-83-a8-e7-bd-b21-ubuntu-e7-b3-bb-e7-bb-9f-e4-b8-8b-e5-ae-89-e8-a3-85cisco-anyconnect-vpn-e6-95-a3-e5-b0-bd-e6-b5-ae-e5-8d-8e-e5-8d-9a-e5-ae-a2/">Ubuntu系统下安装Cisco AnyConnect VPN</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打算在公司IDC机房部署一套VPN环境，经过考虑，最终决定采用Cisco下的开源技术AnyConnect。AnyConnect的优势有： 1）长连接，待机不会断开； 2）速度快，稳定性好； 3）安全性好，全程加密；另外，支持freeradius认证功能； 4）能够下发路由表给客户端，这个功能是最激动人心的。因为如果长期连接，那么肯定是某些服务走VPN，而国内的网站可以走自己的网络体验最好。 5）耗电量较低； <code>AnyConnect</code>是思科的安全远程接入解决方案，部署Anyconnect需要安装<code>ocserv(OpenConnect server)</code>， 它是一个OpenConnect SSL协议服务端，0.3.0版后兼容使用AnyConnect SSL 协议的终端。 ocserv（OpenConnect Server）是由 GnuTLS 的作者 Nikos Mavrogiannopoulos 开发的一个能够兼容 Cisco Anyconnect 的开源服务端（ SSL VPN），支持*nix/BSD 平台，最早是作为 OpenConnect（Linux下的兼容Cisco ASA的开源客户端）对应的服务端，在后续版本（ 0.3.0 开始）中加入了对 Cisco Anyconnect 客户端的支持。 下面介绍在ubuntu系统下安装Anyconnect的操作记录： 安装过程如下（采用一键安装方式） root@localhost:~# apt-get update &amp;&amp; apt-get upgrade -y root@localhost:~# apt-get install wget root@localhost:~# wget <a href="http://git.io/p9r8" target="_blank" rel="noopener">http://git.io/p9r8</a> –no-check-certificate -O ocservauto.sh      </p>
+<h2 id="下载地址-https-pan-baidu-com-s-1i59e2hB-（提取密码-bp4w）"><a href="#下载地址-https-pan-baidu-com-s-1i59e2hB-（提取密码-bp4w）" class="headerlink" title="//下载地址:https://pan.baidu.com/s/1i59e2hB （提取密码:bp4w）"></a>//下载地址:<a href="https://pan.baidu.com/s/1i59e2hB%20" target="_blank" rel="noopener">https://pan.baidu.com/s/1i59e2hB</a> （提取密码:bp4w）</h2><p>如果以前使用了该脚本进行安装，只需要输入下面命令更新（只更新相关脚本，服务器不会更新）</p>
+<h2 id="root-localhost-wget-http-git-io-ocservauto-O-–no-check-certificate-bash"><a href="#root-localhost-wget-http-git-io-ocservauto-O-–no-check-certificate-bash" class="headerlink" title="root@localhost:~# wget http://git.io/ocservauto -O- –no-check-certificate|bash"></a>root@localhost:~# wget <a href="http://git.io/ocservauto" target="_blank" rel="noopener">http://git.io/ocservauto</a> -O- –no-check-certificate|bash</h2><p>root@localhost:~# bash ocservauto.sh <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a26388ee6cd7543a441f03edfb0d1454.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8638813ae7cd533784f070c2113249fb.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6162e98f48bd305fd81fd7e78a46afc4.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a90aa6f5b8ee0cbf40f3130baddae971.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8c9c80914eeaa4033c9af81d03cd532f.png" alt=""> 接着会进行一段时间的安装，如果顺利的话，出现下面信息则说明安装成功了！ <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/2e53c05420a89e2417b18ddc5749db32.png" alt=""> —————————————————————————————————————————————————————–如果安装失败可以查阅安装日志文件ocinstall.log，日志文件在脚本所在文件夹下，可以使用下面命令逐步阅读一般情况下安装成功之后，服务器就在启动状态了。 我的部署机器由于是虚拟机(没有外网ip)，采用squid代理方式对外访问，导致脚本中定义的ftp方式对freeradius-client-1.1.7.tar.gz和ocserv-0.10.8.tar.xz安装包下载失败。解决办法：将上面这两个包单独下载下来，放在和ocservauto.sh脚本同一目录路径下，然后再重新执行脚本进行安装即可。—————————————————————————————————————————————————————— 这里可以简单使用本地浏览器查看服务器信息，在本地浏览器输入 <a href="https://IP" target="_blank" rel="noopener">https://IP</a> 或域名:（英文冒号）端口 ocserv的默认安装目录是/etc/ocserv，相关文件都在这个路径下，如配置文件ocserv.conf等</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p><code>root@localhost:~`</code># cd /etc/ocserv/`</p>
+<p><code>root@localhost:`</code>/etc/ocserv<code></code># ls`</p>
+<p><code>ca-cert.pem  config-per-group  dh.pem    ocserv.conf     ocserv-up.sh  server-cert.pem</code></p>
+<p><code>CAforOC      defaults          ocpasswd  ocserv-down.sh  profile.xml   server-key.pem</code></p>
+<p>ocserv服务在安装后默认就启动了，安装中选择证书登陆方式，即https方式，所以tcp端口选择的是443</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>6</p>
+<p>7</p>
+<p>8</p>
+<p><code>root@localhost:~`</code># ps -ef|grep ocserv`</p>
+<p><code>root       726     1  0 01:22 ?        00:00:00 ocserv-main</code></p>
+<p><code>root       728   726  0 01:22 ?        00:00:00 ocserv-secm</code></p>
+<p><code>root       865   849  0 01:26 pts`</code>/1<code></code>00:00:00<code></code>grep` &lt;code–&lt;color=auto ocserv</p>
+<p><code>root@localhost:~`</code># lsof -i:443`</p>
+<p><code>COMMAND   PID USER   FD   TYPE   DEVICE SIZE`</code>/OFF<code></code>NODE NAME`</p>
+<p><code>ocserv-ma 726 root    4u  IPv4 10406026      0t0  TCP *:https (LISTEN)</code></p>
+<p><code>ocserv-ma 726 root    5u  IPv6 10406027      0t0  TCP *:https (LISTEN)</code></p>
+<p>ocserv服务启动命令：/etc/init.d/ocserv   start/stop/restart/status—————————————————————————————————————————————-ocserv服务启动过程中若是出现下面两个小报错：1）/usr/sbin/ocserv: error while loading shared libraries: libtspi.so.1: cannot open shared object file:No such file or directory解决办法：root@localhost:~# apt-get install libtspi-dev 2）/usr/sbin/ocserv: error while loading shared libraries: libgnutls.so.28: cannot open shared objectfile: No such file or directory解决办法：安装libgnutls下载地址：<a href="https://pan.baidu.com/s/1skJxpI9" target="_blank" rel="noopener">https://pan.baidu.com/s/1skJxpI9</a>提取密码：ic3yroot@localhost:~# dpkg -i gnutls_3.3.8-13_amd64.debroot@localhost:~# find / -name libgnutls.so.28/usr/lib64/libgnutls.so.28root@localhost:~# ln -s /usr/lib64/libgnutls.so.28 /usr/lib/————————————————————————————————————————————– 可以在ocserv.conf文件里修改ocserv服务端口和域名等信息，修改后重启ocserv服务即可</p>
+<p>1</p>
+<p>2</p>
+<p><code>root@localhost:~`</code># /etc/init.d/ocserv restart`</p>
+<p><code>[ ok ] Restarting ocserv (via systemctl): ocserv.service.</code></p>
+<p>———————————————————————————————————-Anyconnect客户端工具下载地址：<a href="https://pan.baidu.com/s/1eSvDvEi" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSvDvEi</a>提取密码：ckdi———————————————————————————————————- 安装Anyconnect客户端工具，安装后，就可以使用上面安装ocserv过程中定义的信息连接了： <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/0f32d9d55cfedeb73def0423c0900cd5.png" alt=""> 特别注意：由于安装过程中选择的是自签证书，是不受信任的证书，所以客户端连接时需要关掉设置中的“阻止不信任的服务器”，即下面截图中的第四项”Block connection to untrusted servers”不要勾选!不管采不采用证书验证，都不要勾选第四项！。然后勾选第三项（第二项勾选与否都不要紧） <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/3ce3726273262ff0c7a00b07cf509336.png" alt=""> 点击“connect”，接着点击提示窗口中点击“Connect Anyway”，接着按照提示输入用户名和密码，正常连接就ok了。 <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/f06c61ba3551f4ed7ac504eda1e7ffab.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/829399aa040efd621f99e680802a34b5.png" alt=""> 连接成功后，点击右下角的Anyconnect标志图，图上有一把钥匙的状态就说明已经连上了。 <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6171c0def4996e64b205e9c41da1c2ac.png" alt=""> —————————————————-用户管理即登陆验证方式————————————————-1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p><code>root@localhost:~`</code># cat /etc/ocserv/ocserv.conf`</p>
+<p><code>........</code></p>
+<p><code>auth =</code> <code>&quot;plain[passwd=/etc/ocserv/ocpasswd]&quot;</code>            <code>//`</code>默认用户名和密码验证`</p>
+<p><code>enable`</code>-auth = certificate<code></code>//<code></code>用户名和密码验证同时，允许证书验证`</p>
+<p><code>auth-timeout = 40</code></p>
+<p>创建用户名和密码命令（或重置用户密码）：</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>6</p>
+<p>7</p>
+<p>8</p>
+<p>9</p>
+<p>10</p>
+<p><code>root@localhost:~`</code># ocpasswd -c /etc/ocserv/ocpasswd guohuihui`</p>
+<p><code>Enter password:</code></p>
+<p><code>Re-enter password:</code></p>
+<p><code>root@localhost:~`</code># ocpasswd -c /etc/ocserv/ocpasswd liumengnan`</p>
+<p><code>Enter password:</code></p>
+<p><code>Re-enter password:</code></p>
+<p><code>root@localhost:~`</code># cat /etc/ocserv/ocpasswd`</p>
+<p><code>wangshibo:*:$5$.GQf1omiKmvGElhU$q1yNyUxPRAHygEGaG98cwVGfYuJjSarsTkXROinhBX8</code></p>
+<p><code>guohuihui:*:$5$z.H5ipnHSJCSigFU$30mseKwk13ZG9MuD3QSeBtYmX6xLOcafVPpioXkulA2</code></p>
+<p><code>liumengnan:*:$5$mVSHMbBekX9vofxV$n7bc8LkJB9kjXl6OADGWySfTqkIBeyIGJRvk5A`</code>/ehHC`</p>
+<p>2）证书验证除了用户名和密码验证之外，还可以进行证书验证。用户在AnyConnect客户端第一次登陆时会提示加载证书。首次登陆加载后，后面再登陆就不会提示加载证书了！所有用户的 p12 证书文件可以在放置脚本的目录下找到，导入证书时需要输入证书创建时设定的密码。新建用户证书命令：root@localhost:~# bash ocservauto.sh gc <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/e31e31ee178c20764f146089769d5266.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/ad390816c9873e0fe8fdcb5b22cf5ed8.png" alt=""> 用户证书创建后会保存到和脚本同一路径下：root@localhost:~# lshuanqiu.p12 ocinstall.log ocservauto.sh vars_ocservauto 吊销客户证书命令root@localhost:~# bash ocservauto.sh rc <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/7a5f957b028968e12c92dd3dd67d6289.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/5f5821d5681456079d8c7c79c58e7323.png" alt=""> ——————————————————-脚本其他参数说明—————————————————0）查看帮助root@localhost:~# bash ocservauto.sh help <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/97d3b030c5ff75d0192c91df5f34c2fd.png" alt=""> 1）平滑升级ocserv（升级后原来的用户数据都会保留）root@localhost:~# bash ocservauto.sh ug 2）强制重装ocserv（注意这样会丢失之前的用户数据和配置）root@localhost:~# bash ocservauto.sh ri 3）同时开启证书登录和用户名密码登录（请务必首先选择任意一种登录方式来完成安装，接着再使用下面命令）root@localhost:~# bash ocservauto.sh pc 4）关于相同客户端证书可以登录多个服务器的方案</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>6</p>
+<p>7</p>
+<p>8</p>
+<p>9</p>
+<p>10</p>
+<p>11</p>
+<p>12</p>
+<p>13</p>
+<p>14</p>
+<p>15</p>
+<p>16</p>
+<p>17</p>
+<p>18</p>
+<p>19</p>
+<p><code>假定有三台服务器ABC:</code></p>
+<p><code>在A服务器上，通过本脚本安装ocserv并选择使用证书登录方式。</code></p>
+<p><code>在`</code>/etc/ocserv<code></code>目录下可以找到ca-cert.pem文件。这里复制备用，ca-cert.pem不用保密，可以直接挂在公网上。`</p>
+<p><code>在BC服务器上下载本脚本，并且请在同文件夹下放置A服务器上的ca-cert.pem，然后执行:</code></p>
+<p><code># bash ocservauto.sh occ</code></p>
+<p><code>这里ABC服务器共用了A服务器的验证证书。</code></p>
+<p><code>想要获取新证书，请在A服务器上执行</code></p>
+<p><code># bash ocservauto.sh gc</code></p>
+<p><code>也可以使用该客户端证书登录BC服务器。</code></p>
+<p><code>如想要吊销证书，请在A服务器上执行</code></p>
+<p><code># bash ocservauto.sh rc</code></p>
+<p><code>吊销所有想要吊销的证书。</code></p>
+<p><code>由于不支持在线吊销证书列表，所以必须还要把A服务器上的`</code>/etc/ocserv/crl<code></code>.pem文件同时复制到BC服务器相同位置，且修改ocserv的配置文件：`</p>
+<p><code>crl =</code> <code>/etc/ocserv/crl`</code>.pem`</p>
+<p>—————————————————登陆方式解说—————————————————在上面一键安装过程中，选择了自签CA，安装后产生pem文件，如下：</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>6</p>
+<p>7</p>
+<p>8</p>
+<p>9</p>
+<p>10</p>
+<p>11</p>
+<p>12</p>
+<p>13</p>
+<p>14</p>
+<p><code>root@localhost:~`</code># cd /etc/ocserv/`</p>
+<p><code>root@localhost:`</code>/etc/ocserv<code></code># ll *.pem`</p>
+<p><code>-rw-r--r-- 1 root root 1793 Jan 16 23:34 ca-cert.pem</code></p>
+<p><code>-rw-r--r-- 1 root root 1003 Jan 17 02:46 crl.pem</code></p>
+<p><code>-rw-r--r-- 1 root root 2406 Jan 16 23:34 dh.pem</code></p>
+<p><code>-rw-r--r-- 1 root root 3322 Jan 16 23:34 server-cert.pem</code></p>
+<p><code>-rw-r--r-- 1 root root 1675 Jan 16 23:34 server-key.pem</code></p>
+<p><code>root@localhost:`</code>/etc/ocserv<code></code># cat ocserv.conf |grep pem`</p>
+<p><code>server-cert =</code> <code>/etc/ocserv/server-cert`</code>.pem`</p>
+<p><code>server-key =</code> <code>/etc/ocserv/server-key`</code>.pem`</p>
+<p><code>dh-params =</code> <code>/etc/ocserv/dh`</code>.pem`</p>
+<p><code>ca-cert =</code> <code>/etc/ocserv/ca-cert`</code>.pem`</p>
+<p><code>crl =</code> <code>/etc/ocserv/crl`</code>.pem`</p>
+<p><code># http_anchors = FILE:/etc/ocserv-ca.pem</code></p>
+<p>1）用户名密码登录1–自签CA（证书授权中心），取得ca-cert.pem（不需要保密，类比公钥）和ca-key.pem（需要保密，类比私钥）。2–CA签发信任服务器证书，取得server-cert.pem（不需要保密，类比公钥）、server-key.pem（需要保密，类比私钥）。3–该模式下，密码库是/etc/ocserv/ocpasswd文件。4–如果想使用购买的服务器证书，请参考Nginx服务器证书配置，只需将对应的crt、key 文件重命名为server-cert.pem、server-key.pem，并覆盖到/etc/ocserv/文件夹下面。 2）证书登录1–自签CA（证书授权中心），取得ca-cert.pem（不需要保密，类比公钥）和ca-key.pem（需要保密，类比私钥）。2–CA签发信任服务器证书，取得server-cert.pem（不需要保密，类比公钥）、server-key.pem（需要保密，类比私钥）。3–CA签发信任客户端证书，最终取得username.p12。4–这里证书授权中心的ca-cert.pem既当作服务器证书的根证书，也当作客户端证书的验证证书。5–由于CA证书当作验证证书，签发客户端证书就需要这个ca-key.pem，可以比同为密码库。6–如果想使用购买的服务器证书，请参考Nginx服务器证书配置（<a href="http://www.cnblogs.com/kevingrace/p/5865501.html" target="_blank" rel="noopener">http://www.cnblogs.com/kevingrace/p/5865501.html</a>），只需将对应的crt、key 文件重命名为server-cert.pem、server-key.pem，并覆盖到/etc/ocserv/文件夹下面。 3）改善优化修改的参数都在/etc/ocserv/ocserv.conf文件中。a）对于某些移动宽带、长城带宽等，往往经过了很多重NAT，容易出现连接成功但是无法打开网页情况，请改小dpd、mobile-dpd数值。b）如果vps对于本地延迟甚高，取消注释output-buffer项。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/13/anyconnect-e7-9a-84vpn-e7-8e-af-e5-a2-83-e9-83-a8-e7-bd-b21-ubuntu-e7-b3-bb-e7-bb-9f-e4-b8-8b-e5-ae-89-e8-a3-85cisco-anyconnect-vpn-e6-95-a3-e5-b0-bd-e6-b5-ae-e5-8d-8e-e5-8d-9a-e5-ae-a2/" data-id="cjpky081g0000vn812im2iwbp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cisco/">cisco</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e3-80-90-e8-bd-ac-e3-80-91-e4-bd-bf-e7-94-a8owncloudoss-e6-90-ad-e5-bb-ba-e5-b1-9e-e4-ba-8e-e8-87-aa-e5-b7-b1-e7-9a-84-e7-a7-81-e6-9c-89-e4-ba-91-e7-9b-98" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/12/e3-80-90-e8-bd-ac-e3-80-91-e4-bd-bf-e7-94-a8owncloudoss-e6-90-ad-e5-bb-ba-e5-b1-9e-e4-ba-8e-e8-87-aa-e5-b7-b1-e7-9a-84-e7-a7-81-e6-9c-89-e4-ba-91-e7-9b-98/" class="article-date">
+  <time datetime="2017-09-12T06:26:30.000Z" itemprop="datePublished">2017-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/12/e3-80-90-e8-bd-ac-e3-80-91-e4-bd-bf-e7-94-a8owncloudoss-e6-90-ad-e5-bb-ba-e5-b1-9e-e4-ba-8e-e8-87-aa-e5-b7-b1-e7-9a-84-e7-a7-81-e6-9c-89-e4-ba-91-e7-9b-98/">【转】使用owncloud+oss搭建属于自己的私有云盘</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="之前使用的云盘"><a href="#之前使用的云盘" class="headerlink" title="之前使用的云盘"></a>之前使用的云盘</h3><ol>
+<li>坚果云<br>个人认为是现在市面上最好的同步盘了，支持增量同步，多平台有linux版本，可以使用webdav。美中不足的免费版每个月限制上传下载流量，收费版不限制流量有空间限制。有段时间突然有大量文件需要备份导致流量不足，但是平时又用不了太多，开一个月专业版的空间又不够，用的有点憋屈所以就弃用了。</li>
+</ol>
+<blockquote>
+<p>ps： 其实现在本博主还是在用坚果云的，商用产品有他的优势，不可全盘否定，一年300多也不算贵，我一年的服务器费用都2000多了。。。【捂脸】自己维护也不错，但是服务跟不上～～客户端，速度，版本历史等等</p>
+</blockquote>
+<ol start="3">
+<li>百度云等<br>在使用坚果云之前的主力网盘，同步盘功能竟然要会员才能用，而且同步盘做的很不好用，不过用来做资源分享之类的还不错</li>
+</ol>
+<h3 id="为什么使用oss"><a href="#为什么使用oss" class="headerlink" title="为什么使用oss"></a>为什么使用oss</h3><ol>
+<li>数据的稳定性，我比较喜欢折腾所以服务器有时候就会重装这时候对于文件就非常的不好管理和备份，放在oss上面能够更好的管理</li>
+<li>第二个就是便宜，不和其他几家的云服务对比仅仅和阿里云的云盘，就是买服务器的时候的一个选项，便宜很多。40g的话一年也就差不多10多块的样子。而且和ECS搭配使用没有流量费用</li>
+</ol>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>安装lnmp架构</p>
+<blockquote>
+<p>其实owncloud官方更加推荐lamp，但是我个人更喜欢nginx，要比Apache省资源一些，能够用Apache的也很不错，可以少踩很多配置的坑，owncloud的nginx官方示例配置很多坑，之后会说到</p>
+</blockquote>
+<h3 id="安装ossfs"><a href="#安装ossfs" class="headerlink" title="安装ossfs"></a>安装ossfs</h3><blockquote>
+<p>注意：在这之前你需要先开通oss，最好是和你的ECS是一个地区的，当然不是用的ECS也可以用，只是速度会慢一些，还有就是下载会使用公网流量，上传没有</p>
+</blockquote>
+<p>1.<a href="https://help.aliyun.com/document_detail/32196.html" target="_blank" rel="noopener">点击打开ossfs的下载页面下载对应系统的安装包</a> 2.我已Ubuntu为例，安装ossfs，其他系统看官方的文档就行</p>
+<pre><code>sudo apt-get update
+sudo apt-get install gdebi-core
+sudo gdebi your_ossfs_package
+</code></pre><p>3.将<code>my-bucket</code>这个bucket挂载到<code>/data/cloud</code>目录下，AccessKeyId是<code>faint</code>， AccessKeySecret是<code>123</code>，oss endpoint是<code>http://oss-cn-hangzhou.aliyuncs.com</code></p>
+<pre><code>echo my-bucket:faint:123 &gt; /etc/passwd-ossfs
+chmod 640 /etc/passwd-ossfs
+mkdir /data/cloud
+</code></pre><p><strong>最后一步很重要，不能直接照官方文档上面的来，不然安装owncloud的时候可能会出现没有访问权限的问题</strong></p>
+<ul>
+<li><p>首先先看一下nginx的用户id，以我的是<code>www</code>为例</p>
+<p>id www</p>
+</li>
+</ul>
+<p>会返回给你用户的uid和gid等等,我假设返回的uid和gid都为1001</p>
+<pre><code>ossfs my-bucket /data/cloud -ourl=http://oss-cn-hangzhou-internal.aliyuncs.com -ouid=1001 -ogid=1001 -o allow_other -o umask=007
+</code></pre><p>这里面<code>allow_other</code>是允许其他用户访问，但是默认设置的是777权限这样owncloud会提示不安全，用<code>umask=007</code>挂载为770权限，不知道为啥这里0代表7,7表示0</p>
+<blockquote>
+<p>到这里ossfs就安装完毕了下面开始安装owncloud</p>
+</blockquote>
+<h3 id="安装OWNCLOUD"><a href="#安装OWNCLOUD" class="headerlink" title="安装OWNCLOUD"></a>安装OWNCLOUD</h3><blockquote>
+<p>owncloud的安装网上已经有很多的教程我就不多说了</p>
+</blockquote>
+<p>先打开<a href="https://owncloud.org/install/#instructions-server" target="_blank" rel="noopener">owncloud的官网的服务器端的安装地址</a>，我安装的时候最新稳定版是<code>9.0.2</code>建议国内主机用迅雷之类的下载软件先下载下来上传到服务器，直接wget比较慢 1.下载并解压</p>
+<pre><code>wget  https://download.owncloud.org/community/owncloud-9.0.2.tar.bz2 //手动上传这一步就不用了
+tar xvf owncloud-9.0.2.tar.bz2 //以实际的文件名为准
+</code></pre><p>2.移动到站点目录,假设站点目录为<code>/data/wwwroot</code></p>
+<pre><code>mv owncloud/ /data/wwwroot/
+</code></pre><p><strong>3.设置目录权限，这一步很重要</strong></p>
+<pre><code>chown -R www:www /data/wwwroot/owncloud/
+chmod 777 /data/wwwroot/owncloud//config/
+</code></pre><h3 id="设置nginx规则（Apache基本不用改，只需要自己去设置一下ssl，和常规的设置就行了）"><a href="#设置nginx规则（Apache基本不用改，只需要自己去设置一下ssl，和常规的设置就行了）" class="headerlink" title="设置nginx规则（Apache基本不用改，只需要自己去设置一下ssl，和常规的设置就行了）"></a>设置nginx规则（Apache基本不用改，只需要自己去设置一下ssl，和常规的设置就行了）</h3><p><strong>注意规则设置好之后，安装的时候点高级设置，使用mysql或者其他数据库，<code>sqllite</code>的性能不够，然后就是数据文件目录填写之前你ossfs的挂载目录，我之前挂载的是<code>/data/cloud</code></strong></p>
+<blockquote>
+<p>后面有9.x官方的示例，我这儿提示一下有些坑的地方</p>
+</blockquote>
+<p>1.本身的设置里面没有log的设置，不方便debug，access_log可以不用，error_log还是需要加上的 2.里面没有index的设置，如果打开首页一片空白，加上index.php之后没有问题的话，</p>
+<pre><code>location / {
+      index index.php #加上这一句
+      rewrite ^ /index.php$uri;
+}
+</code></pre><p>3.如果你进入安装页面，按照提示安装好了之后出现说<code>找不到文件目录</code>之类的话，那么很有可能是你没有开启<code>pathinfo</code>，owncloud需要pathinfo的支持(示例的配置里面是有pathinfo的设置的)</p>
+<h3 id="NEXT"><a href="#NEXT" class="headerlink" title="NEXT"></a>NEXT</h3><blockquote>
+<p>到这里基本上owncloud的安装应该就结束了，使用也没有什么问题，我建议开启ssl，不知道为什么，我开了ssl之后访问的速度提升了好几倍</p>
+</blockquote>
+<p>附送官方插件的地址<a href="https://apps.owncloud.com/" target="_blank" rel="noopener">点我点我</a>,国内主机在线安装插件可能装不上，可以FQ之后在这里面下载相应插件包，上传到apps目录下即可，下一篇说一下用owncloud实现离线下载功能，现在9.0.2版本的使用owncloud的离线下载插件有问题，但是看了一下这个bug很早就有，只是好像一直没有修复。之后我改一下能够用了再写下一篇吧</p>
+<h3 id="9-x官方示例"><a href="#9-x官方示例" class="headerlink" title="9.x官方示例"></a>9.x官方示例</h3><pre><code> upstream php-handler {
+    server 127.0.0.1:9000; #注意一下你自己的php服务设置，这一行可能需要自己调整
+    #server unix:/var/run/php5-fpm.sock;
+}
+server {
+    listen 80;
+    server_name cloud.example.com;
+    # enforce https
+    return 301 https://$server_name$request_uri;
+}
+server {
+    listen 443 ssl;
+    server_name cloud.example.com;
+
+    #ssl证书的位置
+    ssl_certificate /etc/ssl/nginx/cloud.example.com.crt;
+    ssl_certificate_key /etc/ssl/nginx/cloud.example.com.key;
+
+    # Add headers to serve security related headers
+    # Before enabling Strict-Transport-Security headers please read into this
+    # topic first.
+
+    # 安装好之后，后台可能会提示相应错误，把这一段的注释去掉就行
+    # add_header Strict-Transport-Security &quot;max-age=15768000;
+    # includeSubDomains; preload;&quot;;
+
+    #后面安装好了之后后台可能会提示header的错误，把这一短删除掉即可
+    add_header X-Content-Type-Options nosniff;
+    add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
+    add_header X-XSS-Protection &quot;1; mode=block&quot;;
+    add_header X-Robots-Tag none;
+    add_header X-Download-Options noopen;
+    add_header X-Permitted-Cross-Domain-Policies none;
+
+    # Path to the root of your installation
+    root /var/www/owncloud/;
+
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+
+    # The following 2 rules are only needed for the user_webfinger app.
+    # Uncomment it if you&apos;re planning to use this app.
+    #rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+    #rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json
+    # last;
+
+    location = /.well-known/carddav { return 301
+     $scheme://$host/remote.php/dav; }
+    location = /.well-known/caldav { return 301
+     $scheme://$host/remote.php/dav; }
+
+    location /.well-known/acme-challenge { }
+
+    # set max upload size
+    client_max_body_size 512M;
+    fastcgi_buffers 64 4K;
+
+    # Disable gzip to avoid the removal of the ETag header
+    gzip off;
+
+    # Uncomment if your server is build with the ngx_pagespeed module
+    # This module is currently not supported.
+    #pagespeed off;
+
+    error_page 403 /core/templates/403.php;
+    error_page 404 /core/templates/404.php;
+
+    location / {
+        rewrite ^ /index.php$uri;
+    }
+
+    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+        deny all;
+    }
+    location ~ ^/(?:.|autotest|occ|issue|indie|db_|console) {
+        deny all;
+    }
+
+    location ~
+    ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater
+    /.+|ocs-provider/.+|core/templates/40[34]).php(?:$|/) {
+        include fastcgi_params;
+        fastcgi_split_path_info ^(.+.php)(/.+)$;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param HTTPS on;
+        #Avoid sending the security headers twice
+        fastcgi_param modHeadersAvailable true;
+        fastcgi_param front_controller_active true;
+        fastcgi_pass php-handler;
+        fastcgi_intercept_errors on;
+        fastcgi_request_buffering off;
+    }
+
+    location ~ ^/(?:updater|ocs-provider)(?:$|/) {
+        try_files $uri/ =404;
+        index index.php;
+    }
+
+    # Adding the cache control header for js and css files
+    # Make sure it is BELOW the PHP block
+    location ~* .(?:css|js)$ {
+        try_files $uri /index.php$uri$is_args$args;
+        add_header Cache-Control &quot;public, max-age=7200&quot;;
+        # Add headers to serve security related headers (It is intended to
+        # have those duplicated to the ones above)
+        # Before enabling Strict-Transport-Security headers please read into
+        # this topic first.
+        # add_header Strict-Transport-Security &quot;max-age=15768000;
+        #  includeSubDomains; preload;&quot;;
+        add_header X-Content-Type-Options nosniff;
+        add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
+        add_header X-XSS-Protection &quot;1; mode=block&quot;;
+        add_header X-Robots-Tag none;
+        add_header X-Download-Options noopen;
+        add_header X-Permitted-Cross-Domain-Policies none;
+        # Optional: Don&apos;t log access to assets
+        access_log off;
+    }
+
+    location ~* .(?:svg|gif|png|html|ttf|woff|ico|jpg|jpeg)$ {
+        try_files $uri /index.php$uri$is_args$args;
+        # Optional: Don&apos;t log access to other assets
+        access_log off;
+    }
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/12/e3-80-90-e8-bd-ac-e3-80-91-e4-bd-bf-e7-94-a8owncloudoss-e6-90-ad-e5-bb-ba-e5-b1-9e-e4-ba-8e-e8-87-aa-e5-b7-b1-e7-9a-84-e7-a7-81-e6-9c-89-e4-ba-91-e7-9b-98/" data-id="cjpky21p90001ws81bkijkxav" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oss/">oss</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云/">阿里云</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-3-e7-a7-8djava-e4-bb-8e-e6-96-87-e4-bb-b6-e8-b7-af-e5-be-84-e4-b8-ad-e8-8e-b7-e5-8f-96-e6-96-87-e4-bb-b6-e5-90-8d-e7-9a-84-e6-96-b9-e6-b3-95" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/07/3-e7-a7-8djava-e4-bb-8e-e6-96-87-e4-bb-b6-e8-b7-af-e5-be-84-e4-b8-ad-e8-8e-b7-e5-8f-96-e6-96-87-e4-bb-b6-e5-90-8d-e7-9a-84-e6-96-b9-e6-b3-95/" class="article-date">
+  <time datetime="2017-09-07T02:00:45.000Z" itemprop="datePublished">2017-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/07/3-e7-a7-8djava-e4-bb-8e-e6-96-87-e4-bb-b6-e8-b7-af-e5-be-84-e4-b8-ad-e8-8e-b7-e5-8f-96-e6-96-87-e4-bb-b6-e5-90-8d-e7-9a-84-e6-96-b9-e6-b3-95/">3种Java从文件路径中获取文件名的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>package test;  
+
+import java.io.File;  
+
+public class FileName {  
+
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+//      举例：  
+        String fName =&quot; G:Java_Sourcenavigation_tigra_menudemo1imglev1_arrow.gif &quot;;  
+
+//      方法一：  
+
+        File tempFile =new File( fName.trim());  
+
+        String fileName = tempFile.getName();  
+
+        System.out.println(&quot;fileName = &quot; + fileName);  
+
+//      方法二：  
+
+        String fName = fName.trim();  
+
+        String fileName = fName.substring(fName.lastIndexOf(&quot;/&quot;)+1);  
+        //或者  
+        String fileName = fName.substring(fName.lastIndexOf(&quot;&quot;)+1);  
+
+        System.out.println(&quot;fileName = &quot; + fileName);  
+
+//      方法三：  
+
+        String fName = fName.trim();  
+
+        String temp[] = fName.split(&quot;&quot;); /**split里面必须是正则表达式，&quot;&quot;的作用是对字符串转义*/  
+
+        String fileName = temp[temp.length-1];  
+
+        System.out.println(&quot;fileName = &quot; + fileName);  
+
+    }  
+
+}
+</code></pre><p>文章来源： <a href="http://rogerfederer.iteye.com/blog/1039666" target="_blank" rel="noopener">http://rogerfederer.iteye.com/blog/1039666</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/07/3-e7-a7-8djava-e4-bb-8e-e6-96-87-e4-bb-b6-e8-b7-af-e5-be-84-e4-b8-ad-e8-8e-b7-e5-8f-96-e6-96-87-e4-bb-b6-e5-90-8d-e7-9a-84-e6-96-b9-e6-b3-95/" data-id="cjpkxzik70003vd81t18p0shc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件名/">文件名</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路径/">路径</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e3-80-90pip-e3-80-91pypi-e9-95-9c-e5-83-8f-e4-bd-bf-e7-94-a8-e5-b8-ae-e5-8a-a9" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/30/e3-80-90pip-e3-80-91pypi-e9-95-9c-e5-83-8f-e4-bd-bf-e7-94-a8-e5-b8-ae-e5-8a-a9/" class="article-date">
+  <time datetime="2017-08-30T02:16:23.000Z" itemprop="datePublished">2017-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/30/e3-80-90pip-e3-80-91pypi-e9-95-9c-e5-83-8f-e4-bd-bf-e7-94-a8-e5-b8-ae-e5-8a-a9/">【pip】PyPI 镜像使用帮助</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>如何使用科大 mirrors 加速 pip？</strong> 编辑 <code>~/.pip/pip.conf</code> 文件（如果没有则创建之），将 index-url 开头的一行修改为下面一行：</p>
+<p>index-url = <a href="https://mirrors.ustc.edu.cn/pypi/web/simple" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/pypi/web/simple</a></p>
+<p>如果运行 pip 时, 提示如下错误</p>
+<p>configparser.MissingSectionHeaderError: File contains no section headers.</p>
+<p>请在 <code>~/.pip/pip.conf</code> 最上方加上 [global] 这一 section header 如：</p>
+<pre><code>[global]
+index-url = https://mirrors.ustc.edu.cn/pypi/web/simple
+format = columns
+</code></pre><p><strong>&gt;同步方式</strong> 使用 bandersnatch，每4小时从 pypi.python.org 官方同步。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/30/e3-80-90pip-e3-80-91pypi-e9-95-9c-e5-83-8f-e4-bd-bf-e7-94-a8-e5-b8-ae-e5-8a-a9/" data-id="cjpky21pi0005ws8101n834ho" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pip/">pip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/中科大/">中科大</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-centos7-e4-b8-8b-e5-ae-89-e8-a3-85pip" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/30/centos7-e4-b8-8b-e5-ae-89-e8-a3-85pip/" class="article-date">
+  <time datetime="2017-08-30T01:50:55.000Z" itemprop="datePublished">2017-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/30/centos7-e4-b8-8b-e5-ae-89-e8-a3-85pip/">Centos7下安装pip</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>pip简介 pip 是一个Python计算机程序语言写成的软件包管理系统，它可以安装和管理软件包</li>
+<li><p>Centos 7 下安装pip 我的Python版本是2.7.5，所以需要安装pip，安装教程上说：如果从<a href="https://www.python.org/" target="_blank" rel="noopener">Python.org</a> 上下载的python2版本&gt;= 2.7.9 或者 Python3 版本&gt;=3.4 已经安装了pip，只需update</p>
+<ul>
+<li><p>下载get-pip.py</p>
+<p>wget <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="noopener">https://bootstrap.pypa.io/get-pip.py</a></p>
+</li>
+<li><p>执行get-pip.py</p>
+<p>python get-pip.py</p>
+</li>
+</ul>
+<p>会自动安装pip需要的依赖包</p>
+<ul>
+<li><p>查看pip命令</p>
+<p>pip</p>
+</li>
+<li><p>修改~/.pip/pip.conf文件</p>
+</li>
+</ul>
+<p>这个文件如果没有就创建一个，为了让pip下载安装包速度快一点，做如下修改：</p>
+<pre><code>[global]
+timeout = 60
+index-url = https://mirrors.ustc.edu.cn/pypi/web/simple
+</code></pre></li>
+<li><p>参考地址 <a href="https://pip.pypa.io/en/stable/installing/" target="_blank" rel="noopener">https://pip.pypa.io/en/stable/installing/</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/30/centos7-e4-b8-8b-e5-ae-89-e8-a3-85pip/" data-id="cjpky130c0005w881dobrqz6x" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pip/">pip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-pip/">python-pip</a></li></ul>
+
     </footer>
   </div>
   
@@ -163,6 +1087,10 @@
 
   
 
+
+  <nav id="page-nav">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+  </nav>
 </section>
         
           <aside id="sidebar">
@@ -171,7 +1099,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
     </div>
   </div>
 
@@ -181,7 +1109,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux, jdk, proxy, mysql</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表单/">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误提示/">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
     </div>
   </div>
 
@@ -191,7 +1119,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux, jdk, proxy, mysql</a>
+      <a href="/tags/CodeIginter/" style="font-size: 10px;">CodeIginter</a> <a href="/tags/CodeIgnitor/" style="font-size: 10px;">CodeIgnitor</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/anyconnect/" style="font-size: 10px;">anyconnect</a> <a href="/tags/asp-net/" style="font-size: 12.5px;">asp.net</a> <a href="/tags/c/" style="font-size: 10px;">c#</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/ci/" style="font-size: 12.5px;">ci</a> <a href="/tags/cisco/" style="font-size: 10px;">cisco</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/fastdfs/" style="font-size: 12.5px;">fastdfs</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux jdk proxy mysql</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 10px;">owncloud</a> <a href="/tags/pip/" style="font-size: 12.5px;">pip</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/python-pip/" style="font-size: 12.5px;">python-pip</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/消息/" style="font-size: 10px;">消息</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/表单/" style="font-size: 10px;">表单</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/错误提示/" style="font-size: 10px;">错误提示</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里云/" style="font-size: 10px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
     </div>
   </div>
 
@@ -200,7 +1128,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li></ul>
     </div>
   </div>
 
@@ -217,7 +1145,19 @@
           </li>
         
           <li>
-            <a href="/2018/12/12/world/">world</a>
+            <a href="/2018/04/19/debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99/">Debian下使用iptables防火墙</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/">CentOS 7.2下编译安装PHP 7</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/">centos7 mysql数据库安装和配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/15/e3-80-90-e8-bd-ac-e3-80-91-e5-88-a9-e7-94-a8-e5-8f-8d-e5-90-91ssh-e4-bb-8e-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e5-86-85-e7-bd-91-e4-b8-bb-e6-9c-ba/">【转】利用反向ssh从外网访问内网主机</a>
           </li>
         
       </ul>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>Ubuntu系统下安装Cisco AnyConnect VPN | Hello,Stranger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="打算在公司IDC机房部署一套VPN环境，经过考虑，最终决定采用Cisco下的开源技术AnyConnect。AnyConnect的优势有： 1）长连接，待机不会断开； 2）速度快，稳定性好； 3）安全性好，全程加密；另外，支持freeradius认证功能； 4）能够下发路由表给客户端，这个功能是最激动人心的。因为如果长期连接，那么肯定是某些服务走VPN，而国内的网站可以走自己的网络体验最好。 5）耗">
+<meta name="keywords" content="anyconnect,cisco">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu系统下安装Cisco AnyConnect VPN">
+<meta property="og:url" content="http://yoursite.com/2017/09/13/anyconnect-e7-9a-84vpn-e7-8e-af-e5-a2-83-e9-83-a8-e7-bd-b21-ubuntu-e7-b3-bb-e7-bb-9f-e4-b8-8b-e5-ae-89-e8-a3-85cisco-anyconnect-vpn-e6-95-a3-e5-b0-bd-e6-b5-ae-e5-8d-8e-e5-8d-9a-e5-ae-a2/index.html">
+<meta property="og:site_name" content="Hello,Stranger">
+<meta property="og:description" content="打算在公司IDC机房部署一套VPN环境，经过考虑，最终决定采用Cisco下的开源技术AnyConnect。AnyConnect的优势有： 1）长连接，待机不会断开； 2）速度快，稳定性好； 3）安全性好，全程加密；另外，支持freeradius认证功能； 4）能够下发路由表给客户端，这个功能是最激动人心的。因为如果长期连接，那么肯定是某些服务走VPN，而国内的网站可以走自己的网络体验最好。 5）耗">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a26388ee6cd7543a441f03edfb0d1454.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8638813ae7cd533784f070c2113249fb.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6162e98f48bd305fd81fd7e78a46afc4.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a90aa6f5b8ee0cbf40f3130baddae971.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8c9c80914eeaa4033c9af81d03cd532f.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/2e53c05420a89e2417b18ddc5749db32.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/0f32d9d55cfedeb73def0423c0900cd5.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/3ce3726273262ff0c7a00b07cf509336.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/f06c61ba3551f4ed7ac504eda1e7ffab.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/829399aa040efd621f99e680802a34b5.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6171c0def4996e64b205e9c41da1c2ac.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/e31e31ee178c20764f146089769d5266.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/ad390816c9873e0fe8fdcb5b22cf5ed8.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/7a5f957b028968e12c92dd3dd67d6289.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/5f5821d5681456079d8c7c79c58e7323.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/97d3b030c5ff75d0192c91df5f34c2fd.png">
+<meta property="og:updated_time" content="2018-12-12T08:58:16.414Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu系统下安装Cisco AnyConnect VPN">
+<meta name="twitter:description" content="打算在公司IDC机房部署一套VPN环境，经过考虑，最终决定采用Cisco下的开源技术AnyConnect。AnyConnect的优势有： 1）长连接，待机不会断开； 2）速度快，稳定性好； 3）安全性好，全程加密；另外，支持freeradius认证功能； 4）能够下发路由表给客户端，这个功能是最激动人心的。因为如果长期连接，那么肯定是某些服务走VPN，而国内的网站可以走自己的网络体验最好。 5）耗">
+<meta name="twitter:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a26388ee6cd7543a441f03edfb0d1454.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello,Stranger" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hello,Stranger</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Yet another note</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-anyconnect-e7-9a-84vpn-e7-8e-af-e5-a2-83-e9-83-a8-e7-bd-b21-ubuntu-e7-b3-bb-e7-bb-9f-e4-b8-8b-e5-ae-89-e8-a3-85cisco-anyconnect-vpn-e6-95-a3-e5-b0-bd-e6-b5-ae-e5-8d-8e-e5-8d-9a-e5-ae-a2" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/13/anyconnect-e7-9a-84vpn-e7-8e-af-e5-a2-83-e9-83-a8-e7-bd-b21-ubuntu-e7-b3-bb-e7-bb-9f-e4-b8-8b-e5-ae-89-e8-a3-85cisco-anyconnect-vpn-e6-95-a3-e5-b0-bd-e6-b5-ae-e5-8d-8e-e5-8d-9a-e5-ae-a2/" class="article-date">
+  <time datetime="2017-09-13T04:54:48.000Z" itemprop="datePublished">2017-09-13</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ubuntu系统下安装Cisco AnyConnect VPN
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>打算在公司IDC机房部署一套VPN环境，经过考虑，最终决定采用Cisco下的开源技术AnyConnect。AnyConnect的优势有： 1）长连接，待机不会断开； 2）速度快，稳定性好； 3）安全性好，全程加密；另外，支持freeradius认证功能； 4）能够下发路由表给客户端，这个功能是最激动人心的。因为如果长期连接，那么肯定是某些服务走VPN，而国内的网站可以走自己的网络体验最好。 5）耗电量较低； <code>AnyConnect</code>是思科的安全远程接入解决方案，部署Anyconnect需要安装<code>ocserv(OpenConnect server)</code>， 它是一个OpenConnect SSL协议服务端，0.3.0版后兼容使用AnyConnect SSL 协议的终端。 ocserv（OpenConnect Server）是由 GnuTLS 的作者 Nikos Mavrogiannopoulos 开发的一个能够兼容 Cisco Anyconnect 的开源服务端（ SSL VPN），支持*nix/BSD 平台，最早是作为 OpenConnect（Linux下的兼容Cisco ASA的开源客户端）对应的服务端，在后续版本（ 0.3.0 开始）中加入了对 Cisco Anyconnect 客户端的支持。 下面介绍在ubuntu系统下安装Anyconnect的操作记录： 安装过程如下（采用一键安装方式） root@localhost:~# apt-get update &amp;&amp; apt-get upgrade -y root@localhost:~# apt-get install wget root@localhost:~# wget <a href="http://git.io/p9r8" target="_blank" rel="noopener">http://git.io/p9r8</a> –no-check-certificate -O ocservauto.sh      </p>
+<h2 id="下载地址-https-pan-baidu-com-s-1i59e2hB-（提取密码-bp4w）"><a href="#下载地址-https-pan-baidu-com-s-1i59e2hB-（提取密码-bp4w）" class="headerlink" title="//下载地址:https://pan.baidu.com/s/1i59e2hB （提取密码:bp4w）"></a>//下载地址:<a href="https://pan.baidu.com/s/1i59e2hB%20" target="_blank" rel="noopener">https://pan.baidu.com/s/1i59e2hB</a> （提取密码:bp4w）</h2><p>如果以前使用了该脚本进行安装，只需要输入下面命令更新（只更新相关脚本，服务器不会更新）</p>
+<h2 id="root-localhost-wget-http-git-io-ocservauto-O-–no-check-certificate-bash"><a href="#root-localhost-wget-http-git-io-ocservauto-O-–no-check-certificate-bash" class="headerlink" title="root@localhost:~# wget http://git.io/ocservauto -O- –no-check-certificate|bash"></a>root@localhost:~# wget <a href="http://git.io/ocservauto" target="_blank" rel="noopener">http://git.io/ocservauto</a> -O- –no-check-certificate|bash</h2><p>root@localhost:~# bash ocservauto.sh <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a26388ee6cd7543a441f03edfb0d1454.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8638813ae7cd533784f070c2113249fb.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6162e98f48bd305fd81fd7e78a46afc4.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a90aa6f5b8ee0cbf40f3130baddae971.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8c9c80914eeaa4033c9af81d03cd532f.png" alt=""> 接着会进行一段时间的安装，如果顺利的话，出现下面信息则说明安装成功了！ <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/2e53c05420a89e2417b18ddc5749db32.png" alt=""> —————————————————————————————————————————————————————–如果安装失败可以查阅安装日志文件ocinstall.log，日志文件在脚本所在文件夹下，可以使用下面命令逐步阅读一般情况下安装成功之后，服务器就在启动状态了。 我的部署机器由于是虚拟机(没有外网ip)，采用squid代理方式对外访问，导致脚本中定义的ftp方式对freeradius-client-1.1.7.tar.gz和ocserv-0.10.8.tar.xz安装包下载失败。解决办法：将上面这两个包单独下载下来，放在和ocservauto.sh脚本同一目录路径下，然后再重新执行脚本进行安装即可。—————————————————————————————————————————————————————— 这里可以简单使用本地浏览器查看服务器信息，在本地浏览器输入 <a href="https://IP" target="_blank" rel="noopener">https://IP</a> 或域名:（英文冒号）端口 ocserv的默认安装目录是/etc/ocserv，相关文件都在这个路径下，如配置文件ocserv.conf等</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p><code>root@localhost:~`</code># cd /etc/ocserv/`</p>
+<p><code>root@localhost:`</code>/etc/ocserv<code></code># ls`</p>
+<p><code>ca-cert.pem  config-per-group  dh.pem    ocserv.conf     ocserv-up.sh  server-cert.pem</code></p>
+<p><code>CAforOC      defaults          ocpasswd  ocserv-down.sh  profile.xml   server-key.pem</code></p>
+<p>ocserv服务在安装后默认就启动了，安装中选择证书登陆方式，即https方式，所以tcp端口选择的是443</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>6</p>
+<p>7</p>
+<p>8</p>
+<p><code>root@localhost:~`</code># ps -ef|grep ocserv`</p>
+<p><code>root       726     1  0 01:22 ?        00:00:00 ocserv-main</code></p>
+<p><code>root       728   726  0 01:22 ?        00:00:00 ocserv-secm</code></p>
+<p><code>root       865   849  0 01:26 pts`</code>/1<code></code>00:00:00<code></code>grep` &lt;code–&lt;color=auto ocserv</p>
+<p><code>root@localhost:~`</code># lsof -i:443`</p>
+<p><code>COMMAND   PID USER   FD   TYPE   DEVICE SIZE`</code>/OFF<code></code>NODE NAME`</p>
+<p><code>ocserv-ma 726 root    4u  IPv4 10406026      0t0  TCP *:https (LISTEN)</code></p>
+<p><code>ocserv-ma 726 root    5u  IPv6 10406027      0t0  TCP *:https (LISTEN)</code></p>
+<p>ocserv服务启动命令：/etc/init.d/ocserv   start/stop/restart/status—————————————————————————————————————————————-ocserv服务启动过程中若是出现下面两个小报错：1）/usr/sbin/ocserv: error while loading shared libraries: libtspi.so.1: cannot open shared object file:No such file or directory解决办法：root@localhost:~# apt-get install libtspi-dev 2）/usr/sbin/ocserv: error while loading shared libraries: libgnutls.so.28: cannot open shared objectfile: No such file or directory解决办法：安装libgnutls下载地址：<a href="https://pan.baidu.com/s/1skJxpI9" target="_blank" rel="noopener">https://pan.baidu.com/s/1skJxpI9</a>提取密码：ic3yroot@localhost:~# dpkg -i gnutls_3.3.8-13_amd64.debroot@localhost:~# find / -name libgnutls.so.28/usr/lib64/libgnutls.so.28root@localhost:~# ln -s /usr/lib64/libgnutls.so.28 /usr/lib/————————————————————————————————————————————– 可以在ocserv.conf文件里修改ocserv服务端口和域名等信息，修改后重启ocserv服务即可</p>
+<p>1</p>
+<p>2</p>
+<p><code>root@localhost:~`</code># /etc/init.d/ocserv restart`</p>
+<p><code>[ ok ] Restarting ocserv (via systemctl): ocserv.service.</code></p>
+<p>———————————————————————————————————-Anyconnect客户端工具下载地址：<a href="https://pan.baidu.com/s/1eSvDvEi" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSvDvEi</a>提取密码：ckdi———————————————————————————————————- 安装Anyconnect客户端工具，安装后，就可以使用上面安装ocserv过程中定义的信息连接了： <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/0f32d9d55cfedeb73def0423c0900cd5.png" alt=""> 特别注意：由于安装过程中选择的是自签证书，是不受信任的证书，所以客户端连接时需要关掉设置中的“阻止不信任的服务器”，即下面截图中的第四项”Block connection to untrusted servers”不要勾选!不管采不采用证书验证，都不要勾选第四项！。然后勾选第三项（第二项勾选与否都不要紧） <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/3ce3726273262ff0c7a00b07cf509336.png" alt=""> 点击“connect”，接着点击提示窗口中点击“Connect Anyway”，接着按照提示输入用户名和密码，正常连接就ok了。 <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/f06c61ba3551f4ed7ac504eda1e7ffab.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/829399aa040efd621f99e680802a34b5.png" alt=""> 连接成功后，点击右下角的Anyconnect标志图，图上有一把钥匙的状态就说明已经连上了。 <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6171c0def4996e64b205e9c41da1c2ac.png" alt=""> —————————————————-用户管理即登陆验证方式————————————————-1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p><code>root@localhost:~`</code># cat /etc/ocserv/ocserv.conf`</p>
+<p><code>........</code></p>
+<p><code>auth =</code> <code>&quot;plain[passwd=/etc/ocserv/ocpasswd]&quot;</code>            <code>//`</code>默认用户名和密码验证`</p>
+<p><code>enable`</code>-auth = certificate<code></code>//<code></code>用户名和密码验证同时，允许证书验证`</p>
+<p><code>auth-timeout = 40</code></p>
+<p>创建用户名和密码命令（或重置用户密码）：</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>6</p>
+<p>7</p>
+<p>8</p>
+<p>9</p>
+<p>10</p>
+<p><code>root@localhost:~`</code># ocpasswd -c /etc/ocserv/ocpasswd guohuihui`</p>
+<p><code>Enter password:</code></p>
+<p><code>Re-enter password:</code></p>
+<p><code>root@localhost:~`</code># ocpasswd -c /etc/ocserv/ocpasswd liumengnan`</p>
+<p><code>Enter password:</code></p>
+<p><code>Re-enter password:</code></p>
+<p><code>root@localhost:~`</code># cat /etc/ocserv/ocpasswd`</p>
+<p><code>wangshibo:*:$5$.GQf1omiKmvGElhU$q1yNyUxPRAHygEGaG98cwVGfYuJjSarsTkXROinhBX8</code></p>
+<p><code>guohuihui:*:$5$z.H5ipnHSJCSigFU$30mseKwk13ZG9MuD3QSeBtYmX6xLOcafVPpioXkulA2</code></p>
+<p><code>liumengnan:*:$5$mVSHMbBekX9vofxV$n7bc8LkJB9kjXl6OADGWySfTqkIBeyIGJRvk5A`</code>/ehHC`</p>
+<p>2）证书验证除了用户名和密码验证之外，还可以进行证书验证。用户在AnyConnect客户端第一次登陆时会提示加载证书。首次登陆加载后，后面再登陆就不会提示加载证书了！所有用户的 p12 证书文件可以在放置脚本的目录下找到，导入证书时需要输入证书创建时设定的密码。新建用户证书命令：root@localhost:~# bash ocservauto.sh gc <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/e31e31ee178c20764f146089769d5266.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/ad390816c9873e0fe8fdcb5b22cf5ed8.png" alt=""> 用户证书创建后会保存到和脚本同一路径下：root@localhost:~# lshuanqiu.p12 ocinstall.log ocservauto.sh vars_ocservauto 吊销客户证书命令root@localhost:~# bash ocservauto.sh rc <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/7a5f957b028968e12c92dd3dd67d6289.png" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/5f5821d5681456079d8c7c79c58e7323.png" alt=""> ——————————————————-脚本其他参数说明—————————————————0）查看帮助root@localhost:~# bash ocservauto.sh help <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/97d3b030c5ff75d0192c91df5f34c2fd.png" alt=""> 1）平滑升级ocserv（升级后原来的用户数据都会保留）root@localhost:~# bash ocservauto.sh ug 2）强制重装ocserv（注意这样会丢失之前的用户数据和配置）root@localhost:~# bash ocservauto.sh ri 3）同时开启证书登录和用户名密码登录（请务必首先选择任意一种登录方式来完成安装，接着再使用下面命令）root@localhost:~# bash ocservauto.sh pc 4）关于相同客户端证书可以登录多个服务器的方案</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>6</p>
+<p>7</p>
+<p>8</p>
+<p>9</p>
+<p>10</p>
+<p>11</p>
+<p>12</p>
+<p>13</p>
+<p>14</p>
+<p>15</p>
+<p>16</p>
+<p>17</p>
+<p>18</p>
+<p>19</p>
+<p><code>假定有三台服务器ABC:</code></p>
+<p><code>在A服务器上，通过本脚本安装ocserv并选择使用证书登录方式。</code></p>
+<p><code>在`</code>/etc/ocserv<code></code>目录下可以找到ca-cert.pem文件。这里复制备用，ca-cert.pem不用保密，可以直接挂在公网上。`</p>
+<p><code>在BC服务器上下载本脚本，并且请在同文件夹下放置A服务器上的ca-cert.pem，然后执行:</code></p>
+<p><code># bash ocservauto.sh occ</code></p>
+<p><code>这里ABC服务器共用了A服务器的验证证书。</code></p>
+<p><code>想要获取新证书，请在A服务器上执行</code></p>
+<p><code># bash ocservauto.sh gc</code></p>
+<p><code>也可以使用该客户端证书登录BC服务器。</code></p>
+<p><code>如想要吊销证书，请在A服务器上执行</code></p>
+<p><code># bash ocservauto.sh rc</code></p>
+<p><code>吊销所有想要吊销的证书。</code></p>
+<p><code>由于不支持在线吊销证书列表，所以必须还要把A服务器上的`</code>/etc/ocserv/crl<code></code>.pem文件同时复制到BC服务器相同位置，且修改ocserv的配置文件：`</p>
+<p><code>crl =</code> <code>/etc/ocserv/crl`</code>.pem`</p>
+<p>—————————————————登陆方式解说—————————————————在上面一键安装过程中，选择了自签CA，安装后产生pem文件，如下：</p>
+<p>1</p>
+<p>2</p>
+<p>3</p>
+<p>4</p>
+<p>5</p>
+<p>6</p>
+<p>7</p>
+<p>8</p>
+<p>9</p>
+<p>10</p>
+<p>11</p>
+<p>12</p>
+<p>13</p>
+<p>14</p>
+<p><code>root@localhost:~`</code># cd /etc/ocserv/`</p>
+<p><code>root@localhost:`</code>/etc/ocserv<code></code># ll *.pem`</p>
+<p><code>-rw-r--r-- 1 root root 1793 Jan 16 23:34 ca-cert.pem</code></p>
+<p><code>-rw-r--r-- 1 root root 1003 Jan 17 02:46 crl.pem</code></p>
+<p><code>-rw-r--r-- 1 root root 2406 Jan 16 23:34 dh.pem</code></p>
+<p><code>-rw-r--r-- 1 root root 3322 Jan 16 23:34 server-cert.pem</code></p>
+<p><code>-rw-r--r-- 1 root root 1675 Jan 16 23:34 server-key.pem</code></p>
+<p><code>root@localhost:`</code>/etc/ocserv<code></code># cat ocserv.conf |grep pem`</p>
+<p><code>server-cert =</code> <code>/etc/ocserv/server-cert`</code>.pem`</p>
+<p><code>server-key =</code> <code>/etc/ocserv/server-key`</code>.pem`</p>
+<p><code>dh-params =</code> <code>/etc/ocserv/dh`</code>.pem`</p>
+<p><code>ca-cert =</code> <code>/etc/ocserv/ca-cert`</code>.pem`</p>
+<p><code>crl =</code> <code>/etc/ocserv/crl`</code>.pem`</p>
+<p><code># http_anchors = FILE:/etc/ocserv-ca.pem</code></p>
+<p>1）用户名密码登录1–自签CA（证书授权中心），取得ca-cert.pem（不需要保密，类比公钥）和ca-key.pem（需要保密，类比私钥）。2–CA签发信任服务器证书，取得server-cert.pem（不需要保密，类比公钥）、server-key.pem（需要保密，类比私钥）。3–该模式下，密码库是/etc/ocserv/ocpasswd文件。4–如果想使用购买的服务器证书，请参考Nginx服务器证书配置，只需将对应的crt、key 文件重命名为server-cert.pem、server-key.pem，并覆盖到/etc/ocserv/文件夹下面。 2）证书登录1–自签CA（证书授权中心），取得ca-cert.pem（不需要保密，类比公钥）和ca-key.pem（需要保密，类比私钥）。2–CA签发信任服务器证书，取得server-cert.pem（不需要保密，类比公钥）、server-key.pem（需要保密，类比私钥）。3–CA签发信任客户端证书，最终取得username.p12。4–这里证书授权中心的ca-cert.pem既当作服务器证书的根证书，也当作客户端证书的验证证书。5–由于CA证书当作验证证书，签发客户端证书就需要这个ca-key.pem，可以比同为密码库。6–如果想使用购买的服务器证书，请参考Nginx服务器证书配置（<a href="http://www.cnblogs.com/kevingrace/p/5865501.html" target="_blank" rel="noopener">http://www.cnblogs.com/kevingrace/p/5865501.html</a>），只需将对应的crt、key 文件重命名为server-cert.pem、server-key.pem，并覆盖到/etc/ocserv/文件夹下面。 3）改善优化修改的参数都在/etc/ocserv/ocserv.conf文件中。a）对于某些移动宽带、长城带宽等，往往经过了很多重NAT，容易出现连接成功但是无法打开网页情况，请改小dpd、mobile-dpd数值。b）如果vps对于本地延迟甚高，取消注释output-buffer项。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/13/anyconnect-e7-9a-84vpn-e7-8e-af-e5-a2-83-e9-83-a8-e7-bd-b21-ubuntu-e7-b3-bb-e7-bb-9f-e4-b8-8b-e5-ae-89-e8-a3-85cisco-anyconnect-vpn-e6-95-a3-e5-b0-bd-e6-b5-ae-e5-8d-8e-e5-8d-9a-e5-ae-a2/" data-id="cjpky081g0000vn812im2iwbp" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cisco/">cisco</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/15/e3-80-90-e8-bd-ac-e3-80-91-e5-88-a9-e7-94-a8-e5-8f-8d-e5-90-91ssh-e4-bb-8e-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e5-86-85-e7-bd-91-e4-b8-bb-e6-9c-ba/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          【转】利用反向ssh从外网访问内网主机
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/12/e3-80-90-e8-bd-ac-e3-80-91-e4-bd-bf-e7-94-a8owncloudoss-e6-90-ad-e5-bb-ba-e5-b1-9e-e4-ba-8e-e8-87-aa-e5-b7-b1-e7-9a-84-e7-a7-81-e6-9c-89-e4-ba-91-e7-9b-98/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">【转】使用owncloud+oss搭建属于自己的私有云盘</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表单/">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误提示/">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CodeIginter/" style="font-size: 10px;">CodeIginter</a> <a href="/tags/CodeIgnitor/" style="font-size: 10px;">CodeIgnitor</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/anyconnect/" style="font-size: 10px;">anyconnect</a> <a href="/tags/asp-net/" style="font-size: 12.5px;">asp.net</a> <a href="/tags/c/" style="font-size: 10px;">c#</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/ci/" style="font-size: 12.5px;">ci</a> <a href="/tags/cisco/" style="font-size: 10px;">cisco</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/fastdfs/" style="font-size: 12.5px;">fastdfs</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux jdk proxy mysql</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 10px;">owncloud</a> <a href="/tags/pip/" style="font-size: 12.5px;">pip</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/python-pip/" style="font-size: 12.5px;">python-pip</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/消息/" style="font-size: 10px;">消息</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/表单/" style="font-size: 10px;">表单</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/错误提示/" style="font-size: 10px;">错误提示</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里云/" style="font-size: 10px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/12/code-tips/">code-tips</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99/">Debian下使用iptables防火墙</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/">CentOS 7.2下编译安装PHP 7</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/">centos7 mysql数据库安装和配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/15/e3-80-90-e8-bd-ac-e3-80-91-e5-88-a9-e7-94-a8-e5-8f-8d-e5-90-91ssh-e4-bb-8e-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e5-86-85-e7-bd-91-e4-b8-bb-e6-9c-ba/">【转】利用反向ssh从外网访问内网主机</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

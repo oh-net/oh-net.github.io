@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>【转】使用owncloud+oss搭建属于自己的私有云盘 | Hello,Stranger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前使用的云盘 坚果云个人认为是现在市面上最好的同步盘了，支持增量同步，多平台有linux版本，可以使用webdav。美中不足的免费版每个月限制上传下载流量，收费版不限制流量有空间限制。有段时间突然有大量文件需要备份导致流量不足，但是平时又用不了太多，开一个月专业版的空间又不够，用的有点憋屈所以就弃用了。   ps： 其实现在本博主还是在用坚果云的，商用产品有他的优势，不可全盘否定，一年300多也">
+<meta name="keywords" content="oss,owncloud,阿里云">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转】使用owncloud+oss搭建属于自己的私有云盘">
+<meta property="og:url" content="http://yoursite.com/2017/09/12/e3-80-90-e8-bd-ac-e3-80-91-e4-bd-bf-e7-94-a8owncloudoss-e6-90-ad-e5-bb-ba-e5-b1-9e-e4-ba-8e-e8-87-aa-e5-b7-b1-e7-9a-84-e7-a7-81-e6-9c-89-e4-ba-91-e7-9b-98/index.html">
+<meta property="og:site_name" content="Hello,Stranger">
+<meta property="og:description" content="之前使用的云盘 坚果云个人认为是现在市面上最好的同步盘了，支持增量同步，多平台有linux版本，可以使用webdav。美中不足的免费版每个月限制上传下载流量，收费版不限制流量有空间限制。有段时间突然有大量文件需要备份导致流量不足，但是平时又用不了太多，开一个月专业版的空间又不够，用的有点憋屈所以就弃用了。   ps： 其实现在本博主还是在用坚果云的，商用产品有他的优势，不可全盘否定，一年300多也">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-12T08:59:53.198Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【转】使用owncloud+oss搭建属于自己的私有云盘">
+<meta name="twitter:description" content="之前使用的云盘 坚果云个人认为是现在市面上最好的同步盘了，支持增量同步，多平台有linux版本，可以使用webdav。美中不足的免费版每个月限制上传下载流量，收费版不限制流量有空间限制。有段时间突然有大量文件需要备份导致流量不足，但是平时又用不了太多，开一个月专业版的空间又不够，用的有点憋屈所以就弃用了。   ps： 其实现在本博主还是在用坚果云的，商用产品有他的优势，不可全盘否定，一年300多也">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello,Stranger" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hello,Stranger</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Yet another note</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-e3-80-90-e8-bd-ac-e3-80-91-e4-bd-bf-e7-94-a8owncloudoss-e6-90-ad-e5-bb-ba-e5-b1-9e-e4-ba-8e-e8-87-aa-e5-b7-b1-e7-9a-84-e7-a7-81-e6-9c-89-e4-ba-91-e7-9b-98" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/12/e3-80-90-e8-bd-ac-e3-80-91-e4-bd-bf-e7-94-a8owncloudoss-e6-90-ad-e5-bb-ba-e5-b1-9e-e4-ba-8e-e8-87-aa-e5-b7-b1-e7-9a-84-e7-a7-81-e6-9c-89-e4-ba-91-e7-9b-98/" class="article-date">
+  <time datetime="2017-09-12T06:26:30.000Z" itemprop="datePublished">2017-09-12</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      【转】使用owncloud+oss搭建属于自己的私有云盘
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="之前使用的云盘"><a href="#之前使用的云盘" class="headerlink" title="之前使用的云盘"></a>之前使用的云盘</h3><ol>
+<li>坚果云<br>个人认为是现在市面上最好的同步盘了，支持增量同步，多平台有linux版本，可以使用webdav。美中不足的免费版每个月限制上传下载流量，收费版不限制流量有空间限制。有段时间突然有大量文件需要备份导致流量不足，但是平时又用不了太多，开一个月专业版的空间又不够，用的有点憋屈所以就弃用了。</li>
+</ol>
+<blockquote>
+<p>ps： 其实现在本博主还是在用坚果云的，商用产品有他的优势，不可全盘否定，一年300多也不算贵，我一年的服务器费用都2000多了。。。【捂脸】自己维护也不错，但是服务跟不上～～客户端，速度，版本历史等等</p>
+</blockquote>
+<ol start="3">
+<li>百度云等<br>在使用坚果云之前的主力网盘，同步盘功能竟然要会员才能用，而且同步盘做的很不好用，不过用来做资源分享之类的还不错</li>
+</ol>
+<h3 id="为什么使用oss"><a href="#为什么使用oss" class="headerlink" title="为什么使用oss"></a>为什么使用oss</h3><ol>
+<li>数据的稳定性，我比较喜欢折腾所以服务器有时候就会重装这时候对于文件就非常的不好管理和备份，放在oss上面能够更好的管理</li>
+<li>第二个就是便宜，不和其他几家的云服务对比仅仅和阿里云的云盘，就是买服务器的时候的一个选项，便宜很多。40g的话一年也就差不多10多块的样子。而且和ECS搭配使用没有流量费用</li>
+</ol>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>安装lnmp架构</p>
+<blockquote>
+<p>其实owncloud官方更加推荐lamp，但是我个人更喜欢nginx，要比Apache省资源一些，能够用Apache的也很不错，可以少踩很多配置的坑，owncloud的nginx官方示例配置很多坑，之后会说到</p>
+</blockquote>
+<h3 id="安装ossfs"><a href="#安装ossfs" class="headerlink" title="安装ossfs"></a>安装ossfs</h3><blockquote>
+<p>注意：在这之前你需要先开通oss，最好是和你的ECS是一个地区的，当然不是用的ECS也可以用，只是速度会慢一些，还有就是下载会使用公网流量，上传没有</p>
+</blockquote>
+<p>1.<a href="https://help.aliyun.com/document_detail/32196.html" target="_blank" rel="noopener">点击打开ossfs的下载页面下载对应系统的安装包</a> 2.我已Ubuntu为例，安装ossfs，其他系统看官方的文档就行</p>
+<pre><code>sudo apt-get update
+sudo apt-get install gdebi-core
+sudo gdebi your_ossfs_package
+</code></pre><p>3.将<code>my-bucket</code>这个bucket挂载到<code>/data/cloud</code>目录下，AccessKeyId是<code>faint</code>， AccessKeySecret是<code>123</code>，oss endpoint是<code>http://oss-cn-hangzhou.aliyuncs.com</code></p>
+<pre><code>echo my-bucket:faint:123 &gt; /etc/passwd-ossfs
+chmod 640 /etc/passwd-ossfs
+mkdir /data/cloud
+</code></pre><p><strong>最后一步很重要，不能直接照官方文档上面的来，不然安装owncloud的时候可能会出现没有访问权限的问题</strong></p>
+<ul>
+<li><p>首先先看一下nginx的用户id，以我的是<code>www</code>为例</p>
+<p>id www</p>
+</li>
+</ul>
+<p>会返回给你用户的uid和gid等等,我假设返回的uid和gid都为1001</p>
+<pre><code>ossfs my-bucket /data/cloud -ourl=http://oss-cn-hangzhou-internal.aliyuncs.com -ouid=1001 -ogid=1001 -o allow_other -o umask=007
+</code></pre><p>这里面<code>allow_other</code>是允许其他用户访问，但是默认设置的是777权限这样owncloud会提示不安全，用<code>umask=007</code>挂载为770权限，不知道为啥这里0代表7,7表示0</p>
+<blockquote>
+<p>到这里ossfs就安装完毕了下面开始安装owncloud</p>
+</blockquote>
+<h3 id="安装OWNCLOUD"><a href="#安装OWNCLOUD" class="headerlink" title="安装OWNCLOUD"></a>安装OWNCLOUD</h3><blockquote>
+<p>owncloud的安装网上已经有很多的教程我就不多说了</p>
+</blockquote>
+<p>先打开<a href="https://owncloud.org/install/#instructions-server" target="_blank" rel="noopener">owncloud的官网的服务器端的安装地址</a>，我安装的时候最新稳定版是<code>9.0.2</code>建议国内主机用迅雷之类的下载软件先下载下来上传到服务器，直接wget比较慢 1.下载并解压</p>
+<pre><code>wget  https://download.owncloud.org/community/owncloud-9.0.2.tar.bz2 //手动上传这一步就不用了
+tar xvf owncloud-9.0.2.tar.bz2 //以实际的文件名为准
+</code></pre><p>2.移动到站点目录,假设站点目录为<code>/data/wwwroot</code></p>
+<pre><code>mv owncloud/ /data/wwwroot/
+</code></pre><p><strong>3.设置目录权限，这一步很重要</strong></p>
+<pre><code>chown -R www:www /data/wwwroot/owncloud/
+chmod 777 /data/wwwroot/owncloud//config/
+</code></pre><h3 id="设置nginx规则（Apache基本不用改，只需要自己去设置一下ssl，和常规的设置就行了）"><a href="#设置nginx规则（Apache基本不用改，只需要自己去设置一下ssl，和常规的设置就行了）" class="headerlink" title="设置nginx规则（Apache基本不用改，只需要自己去设置一下ssl，和常规的设置就行了）"></a>设置nginx规则（Apache基本不用改，只需要自己去设置一下ssl，和常规的设置就行了）</h3><p><strong>注意规则设置好之后，安装的时候点高级设置，使用mysql或者其他数据库，<code>sqllite</code>的性能不够，然后就是数据文件目录填写之前你ossfs的挂载目录，我之前挂载的是<code>/data/cloud</code></strong></p>
+<blockquote>
+<p>后面有9.x官方的示例，我这儿提示一下有些坑的地方</p>
+</blockquote>
+<p>1.本身的设置里面没有log的设置，不方便debug，access_log可以不用，error_log还是需要加上的 2.里面没有index的设置，如果打开首页一片空白，加上index.php之后没有问题的话，</p>
+<pre><code>location / {
+      index index.php #加上这一句
+      rewrite ^ /index.php$uri;
+}
+</code></pre><p>3.如果你进入安装页面，按照提示安装好了之后出现说<code>找不到文件目录</code>之类的话，那么很有可能是你没有开启<code>pathinfo</code>，owncloud需要pathinfo的支持(示例的配置里面是有pathinfo的设置的)</p>
+<h3 id="NEXT"><a href="#NEXT" class="headerlink" title="NEXT"></a>NEXT</h3><blockquote>
+<p>到这里基本上owncloud的安装应该就结束了，使用也没有什么问题，我建议开启ssl，不知道为什么，我开了ssl之后访问的速度提升了好几倍</p>
+</blockquote>
+<p>附送官方插件的地址<a href="https://apps.owncloud.com/" target="_blank" rel="noopener">点我点我</a>,国内主机在线安装插件可能装不上，可以FQ之后在这里面下载相应插件包，上传到apps目录下即可，下一篇说一下用owncloud实现离线下载功能，现在9.0.2版本的使用owncloud的离线下载插件有问题，但是看了一下这个bug很早就有，只是好像一直没有修复。之后我改一下能够用了再写下一篇吧</p>
+<h3 id="9-x官方示例"><a href="#9-x官方示例" class="headerlink" title="9.x官方示例"></a>9.x官方示例</h3><pre><code> upstream php-handler {
+    server 127.0.0.1:9000; #注意一下你自己的php服务设置，这一行可能需要自己调整
+    #server unix:/var/run/php5-fpm.sock;
+}
+server {
+    listen 80;
+    server_name cloud.example.com;
+    # enforce https
+    return 301 https://$server_name$request_uri;
+}
+server {
+    listen 443 ssl;
+    server_name cloud.example.com;
+
+    #ssl证书的位置
+    ssl_certificate /etc/ssl/nginx/cloud.example.com.crt;
+    ssl_certificate_key /etc/ssl/nginx/cloud.example.com.key;
+
+    # Add headers to serve security related headers
+    # Before enabling Strict-Transport-Security headers please read into this
+    # topic first.
+
+    # 安装好之后，后台可能会提示相应错误，把这一段的注释去掉就行
+    # add_header Strict-Transport-Security &quot;max-age=15768000;
+    # includeSubDomains; preload;&quot;;
+
+    #后面安装好了之后后台可能会提示header的错误，把这一短删除掉即可
+    add_header X-Content-Type-Options nosniff;
+    add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
+    add_header X-XSS-Protection &quot;1; mode=block&quot;;
+    add_header X-Robots-Tag none;
+    add_header X-Download-Options noopen;
+    add_header X-Permitted-Cross-Domain-Policies none;
+
+    # Path to the root of your installation
+    root /var/www/owncloud/;
+
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+
+    # The following 2 rules are only needed for the user_webfinger app.
+    # Uncomment it if you&apos;re planning to use this app.
+    #rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+    #rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json
+    # last;
+
+    location = /.well-known/carddav { return 301
+     $scheme://$host/remote.php/dav; }
+    location = /.well-known/caldav { return 301
+     $scheme://$host/remote.php/dav; }
+
+    location /.well-known/acme-challenge { }
+
+    # set max upload size
+    client_max_body_size 512M;
+    fastcgi_buffers 64 4K;
+
+    # Disable gzip to avoid the removal of the ETag header
+    gzip off;
+
+    # Uncomment if your server is build with the ngx_pagespeed module
+    # This module is currently not supported.
+    #pagespeed off;
+
+    error_page 403 /core/templates/403.php;
+    error_page 404 /core/templates/404.php;
+
+    location / {
+        rewrite ^ /index.php$uri;
+    }
+
+    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+        deny all;
+    }
+    location ~ ^/(?:.|autotest|occ|issue|indie|db_|console) {
+        deny all;
+    }
+
+    location ~
+    ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater
+    /.+|ocs-provider/.+|core/templates/40[34]).php(?:$|/) {
+        include fastcgi_params;
+        fastcgi_split_path_info ^(.+.php)(/.+)$;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        fastcgi_param HTTPS on;
+        #Avoid sending the security headers twice
+        fastcgi_param modHeadersAvailable true;
+        fastcgi_param front_controller_active true;
+        fastcgi_pass php-handler;
+        fastcgi_intercept_errors on;
+        fastcgi_request_buffering off;
+    }
+
+    location ~ ^/(?:updater|ocs-provider)(?:$|/) {
+        try_files $uri/ =404;
+        index index.php;
+    }
+
+    # Adding the cache control header for js and css files
+    # Make sure it is BELOW the PHP block
+    location ~* .(?:css|js)$ {
+        try_files $uri /index.php$uri$is_args$args;
+        add_header Cache-Control &quot;public, max-age=7200&quot;;
+        # Add headers to serve security related headers (It is intended to
+        # have those duplicated to the ones above)
+        # Before enabling Strict-Transport-Security headers please read into
+        # this topic first.
+        # add_header Strict-Transport-Security &quot;max-age=15768000;
+        #  includeSubDomains; preload;&quot;;
+        add_header X-Content-Type-Options nosniff;
+        add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
+        add_header X-XSS-Protection &quot;1; mode=block&quot;;
+        add_header X-Robots-Tag none;
+        add_header X-Download-Options noopen;
+        add_header X-Permitted-Cross-Domain-Policies none;
+        # Optional: Don&apos;t log access to assets
+        access_log off;
+    }
+
+    location ~* .(?:svg|gif|png|html|ttf|woff|ico|jpg|jpeg)$ {
+        try_files $uri /index.php$uri$is_args$args;
+        # Optional: Don&apos;t log access to other assets
+        access_log off;
+    }
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/12/e3-80-90-e8-bd-ac-e3-80-91-e4-bd-bf-e7-94-a8owncloudoss-e6-90-ad-e5-bb-ba-e5-b1-9e-e4-ba-8e-e8-87-aa-e5-b7-b1-e7-9a-84-e7-a7-81-e6-9c-89-e4-ba-91-e7-9b-98/" data-id="cjpky21p90001ws81bkijkxav" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oss/">oss</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里云/">阿里云</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/09/13/anyconnect-e7-9a-84vpn-e7-8e-af-e5-a2-83-e9-83-a8-e7-bd-b21-ubuntu-e7-b3-bb-e7-bb-9f-e4-b8-8b-e5-ae-89-e8-a3-85cisco-anyconnect-vpn-e6-95-a3-e5-b0-bd-e6-b5-ae-e5-8d-8e-e5-8d-9a-e5-ae-a2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Ubuntu系统下安装Cisco AnyConnect VPN
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/09/07/3-e7-a7-8djava-e4-bb-8e-e6-96-87-e4-bb-b6-e8-b7-af-e5-be-84-e4-b8-ad-e8-8e-b7-e5-8f-96-e6-96-87-e4-bb-b6-e5-90-8d-e7-9a-84-e6-96-b9-e6-b3-95/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">3种Java从文件路径中获取文件名的方法</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表单/">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误提示/">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CodeIginter/" style="font-size: 10px;">CodeIginter</a> <a href="/tags/CodeIgnitor/" style="font-size: 10px;">CodeIgnitor</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/anyconnect/" style="font-size: 10px;">anyconnect</a> <a href="/tags/asp-net/" style="font-size: 12.5px;">asp.net</a> <a href="/tags/c/" style="font-size: 10px;">c#</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/ci/" style="font-size: 12.5px;">ci</a> <a href="/tags/cisco/" style="font-size: 10px;">cisco</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/fastdfs/" style="font-size: 12.5px;">fastdfs</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux jdk proxy mysql</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 10px;">owncloud</a> <a href="/tags/pip/" style="font-size: 12.5px;">pip</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/python-pip/" style="font-size: 12.5px;">python-pip</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/消息/" style="font-size: 10px;">消息</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/表单/" style="font-size: 10px;">表单</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/错误提示/" style="font-size: 10px;">错误提示</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里云/" style="font-size: 10px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/12/code-tips/">code-tips</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99/">Debian下使用iptables防火墙</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/">CentOS 7.2下编译安装PHP 7</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/">centos7 mysql数据库安装和配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/15/e3-80-90-e8-bd-ac-e3-80-91-e5-88-a9-e7-94-a8-e5-8f-8d-e5-90-91ssh-e4-bb-8e-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e5-86-85-e7-bd-91-e4-b8-bb-e6-9c-ba/">【转】利用反向ssh从外网访问内网主机</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>

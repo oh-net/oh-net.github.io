@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+  
+  <title>在 Debian 下安装 WordPress | Hello,Stranger</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Basic Installation guide for Wheezy# apt-get install wordpress curl apache2 mysql-server Set the mysql admin root user password when prompted Create a site# nano /etc/apache2/sites-available/wp.conf A">
+<meta name="keywords" content="debian,linux,PHP,wordpress">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在 Debian 下安装 WordPress">
+<meta property="og:url" content="http://yoursite.com/2017/07/04/745/index.html">
+<meta property="og:site_name" content="Hello,Stranger">
+<meta property="og:description" content="Basic Installation guide for Wheezy# apt-get install wordpress curl apache2 mysql-server Set the mysql admin root user password when prompted Create a site# nano /etc/apache2/sites-available/wp.conf A">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://wiki.debian.org/htdocs/debwiki/img/attention.png">
+<meta property="og:image" content="https://wiki.debian.org/htdocs/debwiki/img/attention.png">
+<meta property="og:image" content="https://wiki.debian.org/htdocs/debwiki/img/attention.png">
+<meta property="og:updated_time" content="2018-12-12T08:57:54.157Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在 Debian 下安装 WordPress">
+<meta name="twitter:description" content="Basic Installation guide for Wheezy# apt-get install wordpress curl apache2 mysql-server Set the mysql admin root user password when prompted Create a site# nano /etc/apache2/sites-available/wp.conf A">
+<meta name="twitter:image" content="https://wiki.debian.org/htdocs/debwiki/img/attention.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello,Stranger" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hello,Stranger</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">Yet another note</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-745" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/04/745/" class="article-date">
+  <time datetime="2017-07-04T06:44:42.000Z" itemprop="datePublished">2017-07-04</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      在 Debian 下安装 WordPress
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Basic-Installation-guide-for-Wheezy"><a href="#Basic-Installation-guide-for-Wheezy" class="headerlink" title="Basic Installation guide for Wheezy"></a>Basic Installation guide for Wheezy</h2><p># apt-get install wordpress curl apache2 mysql-server</p>
+<p>Set the mysql admin root user password when prompted</p>
+<h3 id="Create-a-site"><a href="#Create-a-site" class="headerlink" title="Create a site"></a>Create a site</h3><p># nano /etc/apache2/sites-available/wp.conf</p>
+<p>Add this content:</p>
+<pre><code> Alias /wp/wp-content /var/lib/wordpress/wp-content
+Alias /wp /usr/share/wordpress
+&lt;Directory /usr/share/wordpress&gt;
+    Options FollowSymLinks
+    AllowOverride Limit Options FileInfo
+    DirectoryIndex index.php
+    Order allow,deny
+     Allow from all
+&lt;/Directory&gt;
+&lt;Directory /var/lib/wordpress/wp-content&gt;
+    Options FollowSymLinks
+    Order allow,deny
+    Allow from all
+&lt;/Directory&gt;
+</code></pre><p>For Apache 2.4 (Jessie) you’ll need a slightly different site configuration:</p>
+<p># nano /etc/apache2/sites-available/wp.conf</p>
+<p>add this content:</p>
+<pre><code>Alias /wp/wp-content /var/lib/wordpress/wp-content
+Alias /wp /usr/share/wordpress
+&lt;Directory /usr/share/wordpress&gt;
+    Options FollowSymLinks
+    AllowOverride Limit Options FileInfo
+    DirectoryIndex index.php
+    Require all granted
+&lt;/Directory&gt;
+&lt;Directory /var/lib/wordpress/wp-content&gt;
+    Options FollowSymLinks
+    Require all granted
+&lt;/Directory&gt;
+</code></pre><h3 id="Enable-the-site"><a href="#Enable-the-site" class="headerlink" title="Enable the site"></a>Enable the site</h3><p># a2ensite wp</p>
+<p>Restart the webserver  </p>
+<p># service apache2 reload</p>
+<p>Create /etc/wordpress/config-$DM.php. $DM is the domain name e.g. if the fully qualified domain name is <a href="http://www.debianwordpress.dev" target="_blank" rel="noopener">www.debianwordpress.dev</a>, create one of the following files:</p>
+<ul>
+<li>/etc/wordpress/config-<a href="http://www.debianwordpress.dev.php" target="_blank" rel="noopener">www.debianwordpress.dev.php</a> (this is the default, use it if you are unsure)</li>
+<li>/etc/wordpress/config-debianwordpress.dev.php (this is used for multisite with subdomains)</li>
+<li>/etc/wordpress/config-default.php (this is used as a fallback if no other file matches your domain name)</li>
+</ul>
+<p>WordPress searches in the above order and uses the first configuration file it can find. The domain name is taken from the HTTP-Request of your browser. That way you may be able to define different configuration files for different domains you are hosting.</p>
+<p># nano /etc/wordpress/config-<a href="http://www.debianwordpress.dev.php" target="_blank" rel="noopener">www.debianwordpress.dev.php</a></p>
+<p>Add this content:-</p>
+<p> &lt;?php<br> define(‘DB_NAME’, ‘wordpress’);<br> define(‘DB_USER’, ‘wordpress’);<br> define(‘DB_PASSWORD’, ‘password’);<br> define(‘DB_HOST’, ‘localhost’);<br> define(‘WP_CONTENT_DIR’, ‘/var/lib/wordpress/wp-content’);<br> ?&gt;</p>
+<p><img src="https://wiki.debian.org/htdocs/debwiki/img/attention.png" alt="&lt;!&gt;" title="&lt;!&gt;"> replace password with a suitably secure password Create a file to hold the database creation instructions</p>
+<p># nano ~/wp.sql</p>
+<p>Add this content:-</p>
+<p>CREATE DATABASE wordpress;<br>GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER<br>ON wordpress.*<br>TO wordpress@localhost<br>IDENTIFIED BY ‘password’;<br>FLUSH PRIVILEGES;</p>
+<p><img src="https://wiki.debian.org/htdocs/debwiki/img/attention.png" alt="&lt;!&gt;" title="&lt;!&gt;"> replace password with your “suitably secure password” Create the database:-</p>
+<p># cat ~/wp.sql | mysql –defaults-extra-file=/etc/mysql/debian.cnf</p>
+<p>Navigate to the wordpress directory in browser e.g.:- <a href="http://debianwordpress.dev/wp" target="_blank" rel="noopener">http://debianwordpress.dev/wp</a> which redirects to <a href="http://debianwordpress.dev/wp/wp-admin/install.php" target="_blank" rel="noopener">http://debianwordpress.dev/wp/wp-admin/install.php</a> where you’ll see the “classic” wordpress 5 minute install page (actually a 5 second install thanks to the Debian packaging) <img src="https://wiki.debian.org/htdocs/debwiki/img/attention.png" alt="&lt;!&gt;" title="&lt;!&gt;"> replace debianwordpress.dev with your domain name (or localhost if running on the same box as your browser). At time of writing this provides WordPress v3.6.1. WordPress v3.7.1 is available in Testing and Unstable. I haven’t tested it but it should install fine on Wheezy.</p>
+<h2 id="Upgrading-the-installed-WordPress-version"><a href="#Upgrading-the-installed-WordPress-version" class="headerlink" title="Upgrading the installed WordPress version"></a>Upgrading the installed WordPress version</h2><p>For keep your WordPress up to date and receive security fixes use Debian package manager:</p>
+<p># apt-get update &amp;&amp; apt-get upgrade</p>
+<p>If you would like to use a more recent version of WordPress, consider using Backports or Debian testing.</p>
+<h2 id="An-alternate-installation-method"><a href="#An-alternate-installation-method" class="headerlink" title="An alternate installation method"></a>An alternate installation method</h2><p>I believe this method conforms more with how the maintainer recommends it should be done. Various sources are drawn upon using this method, and it is also affected by a few bugs as at this writing. It is basically centric around a “kind of” multisite install, but I recommend this method even for a single blog, otherwise when you decide down the track to have more than one and share the packages’ codebase, you’ll have a fair bit of work on your hands. The key useful script here is /usr/share/doc/wordpress/examples/setup-mysql. This gem does a few things:</p>
+<ul>
+<li>Creates a WordPress config file under /etc/wordpress</li>
+<li>Creates the WordPress database and user</li>
+<li>Sets up a wp-content structure under /srv/www/wp-content/DOMAIN (this is key for a non-WordPress multisite install, which is covered more below)</li>
+</ul>
+<h3 id="Install-required-packages"><a href="#Install-required-packages" class="headerlink" title="Install required packages"></a>Install required packages</h3><p># apt-get install wordpress apache2 mysql-server</p>
+<h3 id="Run-the-helper-script"><a href="#Run-the-helper-script" class="headerlink" title="Run the helper script"></a>Run the helper script</h3><p>Now run /usr/share/doc/wordpress/examples/setup-mysql, passing an argument of your site name; eg. myblog.com. You will most probably need other arguments too – just try an initial -h to get help. At this point, as per above, you should have a database created for you, and the /etc/wordpress/config-myblog.com.php config file. Peruse that and sanity check it.</p>
+<h3 id="Create-the-Apache-site"><a href="#Create-the-Apache-site" class="headerlink" title="Create the Apache site"></a>Create the Apache site</h3><p>Quoting /usr/share/doc/wordpress/examples/apache.conf: There are several ways to setup Wordpress &amp; Apache in Debian. However the maintainer’s recommended way with the helper script setup-mysql uses:</p>
+<p>## Virtual host VirtualDocumentRoot</p>
+<pre><code>NameVirtualHost *:80
+
+&lt;VirtualHost *:80&gt;
+UseCanonicalName Off
+VirtualDocumentRoot /usr/share/wordpress
+Options All
+
+# wp-content in /srv/www/wp-content/$0
+RewriteEngine On
+RewriteRule ^/wp-content/(.*)$ /srv/www/wp-content/%{HTTP_HOST}/$1
+&lt;/VirtualHost&gt;
+</code></pre><p>For this configuration to work you’ll also need to have mod_rewrite and mod_vhost_alias loaded and working in Apache. To enable these modules run</p>
+<p># a2enmod rewrite &amp;&amp; a2enmod vhost_alias &amp;&amp; service apache2 restart</p>
+<p>Place this config into something like /etc/apache2/sites-available/myblog.com and modify according to your needs (IP-based virtual host, name-based, logging, etc.) If you’re using any Wordpress functionality that requires URL rewriting (such as permalinks), then you will also need something like this in your Apache config:</p>
+<pre><code>RewriteRule ^index.php$ - \[L\]
+RewriteCond /usr/share/wordpress%{REQUEST_URI} !-f
+RewriteCond /usr/share/wordpress%{REQUEST_URI} !-d
+RewriteRule . /usr/share/wordpress/index.php \[L\]
+# Also needed if using PHP-FPM / Fast-CGI
+RewriteCond %{REQUEST_URI} !^/php5-fcgi/*
+</code></pre><p>The above rewrite conditions rely on Apache finding the required files in /usr/share/wordpress for non-permalinks (such as wp-admin). This may require the following line to ensure it finds the index file when requesting /wp-admin/</p>
+<pre><code>DirectoryIndex index.php
+</code></pre><h3 id="Final-reading-before-actual-configuration"><a href="#Final-reading-before-actual-configuration" class="headerlink" title="Final reading before actual configuration"></a>Final reading before actual configuration</h3><p>Now would be a great time to read /usr/share/doc/wordpress/README.Debian if you haven’t already. All the rest of the pieces should fall into place once you do. Amongst other things, it explains the great way that the Debian WordPress package utilises the WordPress wp-config.php framework, and more importantly, how to handle the infamous “themes” and “plugins” directories in a WordPress install. The key point is that by symlinking under /var/lib/wordpress, users better abide by the <a href="https://wiki.debian.org/FilesystemHierarchyStandard" target="_blank" rel="noopener">FilesystemHierarchyStandard</a>, and can use the in-app upgrade mechanisms of WordPress to upgrade plugins and themes, without clobbering the package, and risking server security. It also discusses the two choices regarding multisite installs, of which this here describes the non-WordPress version.</p>
+<h3 id="Enable-the-Apache-site"><a href="#Enable-the-Apache-site" class="headerlink" title="Enable the Apache site"></a>Enable the Apache site</h3><p>Now we enable the Apache site config made earlier using a2ensite, which basically just creates a symlink in /etc/apache2/sites-enabled from sites-available, then reload Apache:</p>
+<p># a2ensite myblog.com<br># service apache2 reload</p>
+<h3 id="Configure-WordPress"><a href="#Configure-WordPress" class="headerlink" title="Configure WordPress"></a>Configure WordPress</h3><p>Now, browse to your new domain, and follow the normal WP configuration process, and you should be done.</p>
+<h3 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h3><p>Sadly at this point, there are some issues with symlinking, and messing around generally with WP_CONTENT_DIR. The main bug is being tracked at <a href="http://core.trac.wordpress.org/ticket/16953" target="_blank" rel="noopener">http://core.trac.wordpress.org/ticket/16953</a>. At this point, basically a fair few things break, especially if plugin or theme authors don’t do things right when determining correct filesystem and URI paths to use. There seems no easy fix right now, other than not using symlinks or non-standard (but configurable!) paths.</p>
+<h2 id="See-also"><a href="#See-also" class="headerlink" title="See also"></a>See also</h2><ul>
+<li>Sample configurations can be found in /usr/share/doc/wordpress/examples/</li>
+<li>Debian specific instructions are /usr/share/doc/wordpress/README.Debian</li>
+<li><a href="https://wiki.debian.org/LaMp" target="_blank" rel="noopener">LAMP</a></li>
+</ul>
+<h2 id="External-links"><a href="#External-links" class="headerlink" title="External links"></a>External links</h2><ul>
+<li><a href="http://wordpress.org/" target="_blank" rel="noopener">Home Page</a></li>
+<li><a href="http://codex.wordpress.org/" target="_blank" rel="noopener">WordPress Online Documentation</a></li>
+<li><a href="http://codex.wordpress.org/Updating_WordPress#Manual_Update" target="_blank" rel="noopener">WordPress Manual Update Guide</a></li>
+</ul>
+<p>WordPress (<a href="https://wiki.debian.org/WordPress?action=info" target="_blank" rel="noopener">最后修改时间 2017-06-10 18:26:06</a>)</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/04/745/" data-id="cjpkxzikb0005vd81isxdkabk" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debian/">debian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wordpress/">wordpress</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/07/a-freebsd-11-desktop-how-to/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          A FreeBSD 11 Desktop How-to
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/06/26/codeingitor-form-e8-a1-a8-e5-8d-95-e5-b8-a6-e9-94-99-e8-af-af-e5-92-8cflash-message-e4-bb-a3-e7-a0-81/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CodeIngitor  表单带错误和Flash Message代码</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表单/">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误提示/">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/CodeIginter/" style="font-size: 10px;">CodeIginter</a> <a href="/tags/CodeIgnitor/" style="font-size: 10px;">CodeIgnitor</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/anyconnect/" style="font-size: 10px;">anyconnect</a> <a href="/tags/asp-net/" style="font-size: 12.5px;">asp.net</a> <a href="/tags/c/" style="font-size: 10px;">c#</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/ci/" style="font-size: 12.5px;">ci</a> <a href="/tags/cisco/" style="font-size: 10px;">cisco</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/fastdfs/" style="font-size: 12.5px;">fastdfs</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux jdk proxy mysql</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 10px;">owncloud</a> <a href="/tags/pip/" style="font-size: 12.5px;">pip</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/python-pip/" style="font-size: 12.5px;">python-pip</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/消息/" style="font-size: 10px;">消息</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/表单/" style="font-size: 10px;">表单</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/错误提示/" style="font-size: 10px;">错误提示</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里云/" style="font-size: 10px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/12/12/code-tips/">code-tips</a>
+          </li>
+        
+          <li>
+            <a href="/2018/04/19/debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99/">Debian下使用iptables防火墙</a>
+          </li>
+        
+          <li>
+            <a href="/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/">CentOS 7.2下编译安装PHP 7</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/">centos7 mysql数据库安装和配置</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/15/e3-80-90-e8-bd-ac-e3-80-91-e5-88-a9-e7-94-a8-e5-8f-8d-e5-90-91ssh-e4-bb-8e-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e5-86-85-e7-bd-91-e4-b8-bb-e6-9c-ba/">【转】利用反向ssh从外网访问内网主机</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
