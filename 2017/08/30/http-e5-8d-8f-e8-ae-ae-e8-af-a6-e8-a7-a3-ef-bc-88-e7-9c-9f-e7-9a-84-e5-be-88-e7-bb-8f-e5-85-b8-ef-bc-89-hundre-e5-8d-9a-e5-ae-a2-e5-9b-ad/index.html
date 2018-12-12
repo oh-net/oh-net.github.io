@@ -1,12 +1,115 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
+
+
+
+
+
+
+
+
+
+
+
+
   
-  <title>HTTP协议详解（真的很经典） - Hundre - 博客园 | Hello,Stranger</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<html class="theme-next gemini use-motion" lang="zh-cn">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
   <meta name="description" content="转自：http://blog.csdn.net/gueter/archive/2007/03/08/1524447.aspx 引言 HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。目前在WWW中使用的是HTTP/1.0的第六版，HTTP/1.1的规范化工作正在进行之中，而且HTTP-NG(">
-<meta name="keywords" content="http,https">
+<meta name="keywords" content="https,http">
 <meta property="og:type" content="article">
 <meta property="og:title" content="HTTP协议详解（真的很经典） - Hundre - 博客园">
 <meta property="og:url" content="http://yoursite.com/2017/08/30/http-e5-8d-8f-e8-ae-ae-e8-af-a6-e8-a7-a3-ef-bc-88-e7-9c-9f-e7-9a-84-e5-be-88-e7-bb-8f-e5-85-b8-ef-bc-89-hundre-e5-8d-9a-e5-ae-a2-e5-9b-ad/index.html">
@@ -17,225 +120,1293 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP协议详解（真的很经典） - Hundre - 博客园">
 <meta name="twitter:description" content="转自：http://blog.csdn.net/gueter/archive/2007/03/08/1524447.aspx 引言 HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。目前在WWW中使用的是HTTP/1.0的第六版，HTTP/1.1的规范化工作正在进行之中，而且HTTP-NG(">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/30/http-e5-8d-8f-e8-ae-ae-e8-af-a6-e8-a7-a3-ef-bc-88-e7-9c-9f-e7-9a-84-e5-be-88-e7-bb-8f-e5-85-b8-ef-bc-89-hundre-e5-8d-9a-e5-ae-a2-e5-9b-ad/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>HTTP协议详解（真的很经典） - Hundre - 博客园 | Hello,Stranger</title>
   
-    <link rel="alternate" href="/atom.xml" title="Hello,Stranger" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
-</html>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hello,Stranger</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Yet another note</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-http-e5-8d-8f-e8-ae-ae-e8-af-a6-e8-a7-a3-ef-bc-88-e7-9c-9f-e7-9a-84-e5-be-88-e7-bb-8f-e5-85-b8-ef-bc-89-hundre-e5-8d-9a-e5-ae-a2-e5-9b-ad" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/08/30/http-e5-8d-8f-e8-ae-ae-e8-af-a6-e8-a7-a3-ef-bc-88-e7-9c-9f-e7-9a-84-e5-be-88-e7-bb-8f-e5-85-b8-ef-bc-89-hundre-e5-8d-9a-e5-ae-a2-e5-9b-ad/" class="article-date">
-  <time datetime="2017-08-29T22:15:38.000Z" itemprop="datePublished">2017-08-30</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-cn">
+
   
-    <h1 class="article-title" itemprop="name">
-      HTTP协议详解（真的很经典） - Hundre - 博客园
-    </h1>
+  
+    
   
 
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hello,Stranger</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Yet another note</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/30/http-e5-8d-8f-e8-ae-ae-e8-af-a6-e8-a7-a3-ef-bc-88-e7-9c-9f-e7-9a-84-e5-be-88-e7-bb-8f-e5-85-b8-ef-bc-89-hundre-e5-8d-9a-e5-ae-a2-e5-9b-ad/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome 2 mine blog $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello,Stranger">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">HTTP协议详解（真的很经典） - Hundre - 博客园
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-08-30 06:15:38" itemprop="dateCreated datePublished" datetime="2017-08-30T06:15:38+08:00">2017-08-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:19:37" itemprop="dateModified" datetime="2018-12-12T17:19:37+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <p><strong>转自：<a href="http://blog.csdn.net/gueter/archive/2007/03/08/1524447.aspx" target="_blank" rel="noopener">http://blog.csdn.net/gueter/archive/2007/03/08/1524447.aspx</a></strong> <strong>引言</strong> HTTP是一个属于应用层的面向对象的协议，由于其简捷、快速的方式，适用于分布式超媒体信息系统。它于1990年提出，经过几年的使用与发展，得到不断地完善和扩展。目前在WWW中使用的是HTTP/1.0的第六版，HTTP/1.1的规范化工作正在进行之中，而且HTTP-NG(Next Generation of HTTP)的建议已经提出。 HTTP协议的主要特点可概括如下： 1.支持客户/服务器模式。 2.简单快速：客户向服务器请求服务时，只需传送请求方法和路径。请求方法常用的有GET、HEAD、POST。每种方法规定了客户与服务器联系的类型不同。由于HTTP协议简单，使得HTTP服务器的程序规模小，因而通信速度很快。 3.灵活：HTTP允许传输任意类型的数据对象。正在传输的类型由Content-Type加以标记。 4.无连接：无连接的含义是限制每次连接只处理一个请求。服务器处理完客户的请求，并收到客户的应答后，即断开连接。采用这种方式可以节省传输时间。 5.无状态：HTTP协议是无状态协议。无状态是指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。另一方面，在服务器不需要先前信息时它的应答就较快。 <strong>一、HTTP协议详解之URL篇</strong>     http（超文本传输协议）是一个基于请求与响应模式的、无状态的、应用层的协议，常基于TCP的连接方式，HTTP1.1版本中给出一种持续连接的机制，绝大多数的Web开发，都是构建在HTTP协议之上的Web应用。 HTTP URL (URL是一种特殊类型的URI，包含了用于查找某个资源的足够的信息)的格式如下： <a href="http://host[%22%22port][abs_path/" target="_blank" rel="noopener">http://host[“:”port][abs_path</a>] http表示要通过HTTP协议来定位网络资源；host表示合法的Internet主机域名或者IP地址；port指定一个端口号，为空则使用缺省端口80；abs_path指定请求资源的URI；如果URL中没有给出abs_path，那么当它作为请求URI时，必须以“/”的形式给出，通常这个工作浏览器自动帮我们完成。 eg: 1、输入：<a href="http://www.guet.edu.cn/" target="_blank" rel="noopener">www.guet.edu.cn</a> 浏览器自动转换成：<a href="http://www.guet.edu.cn/" target="_blank" rel="noopener">http://www.guet.edu.cn/</a> 2、http:192.168.0.116:8080/index.jsp  <strong>二、HTTP协议详解之请求篇</strong>     http请求由三部分组成，分别是：请求行、消息报头、请求正文 1、请求行以一个方法符号开头，以空格分开，后面跟着请求的URI和协议的版本，格式如下：Method Request-URI HTTP-Version CRLF 其中 Method表示请求方法；Request-URI是一个统一资源标识符；HTTP-Version表示请求的HTTP协议版本；CRLF表示回车和换行（除了作为结尾的CRLF外，不允许出现单独的CR或LF字符）。 请求方法（所有方法全为大写）有多种，各个方法的解释如下： GET     请求获取Request-URI所标识的资源 POST    在Request-URI所标识的资源后附加新的数据 HEAD    请求获取由Request-URI所标识的资源的响应消息报头 PUT     请求服务器存储一个资源，并用Request-URI作为其标识 DELETE  请求服务器删除Request-URI所标识的资源 TRACE   请求服务器回送收到的请求信息，主要用于测试或诊断 CONNECT 保留将来使用 OPTIONS 请求查询服务器的性能，或者查询与资源相关的选项和需求 应用举例： GET方法：在浏览器的地址栏中输入网址的方式访问网页时，浏览器采用GET方法向服务器获取资源，eg:GET /form.html HTTP/1.1 (CRLF) POST方法要求被请求服务器接受附在请求后面的数据，常用于提交表单。 eg：POST /reg.jsp HTTP/ (CRLF) Accept:image/gif,image/x-xbit,… (CRLF) … HOST:<a href="http://www.guet.edu.cn" target="_blank" rel="noopener">www.guet.edu.cn</a> (CRLF) Content-Length:22 (CRLF) Connection:Keep-Alive (CRLF) Cache-Control:no-cache (CRLF) (CRLF)         //该CRLF表示消息报头已经结束，在此之前为消息报头 user=jeffrey&amp;pwd=1234  //此行以下为提交的数据 HEAD方法与GET方法几乎是一样的，对于HEAD请求的回应部分来说，它的HTTP头部中包含的信息与通过GET请求所得到的信息是相同的。利用这个方法，不必传输整个资源内容，就可以得到Request-URI所标识的资源的信息。该方法常用于测试超链接的有效性，是否可以访问，以及最近是否更新。 2、请求报头后述 3、请求正文(略)  <strong>三、HTTP协议详解之响应篇</strong>     在接收和解释请求消息后，服务器返回一个HTTP响应消息。 HTTP响应也是由三个部分组成，分别是：状态行、消息报头、响应正文 1、状态行格式如下： HTTP-Version Status-Code Reason-Phrase CRLF 其中，HTTP-Version表示服务器HTTP协议的版本；Status-Code表示服务器发回的响应状态代码；Reason-Phrase表示状态代码的文本描述。 状态代码有三位数字组成，第一个数字定义了响应的类别，且有五种可能取值： 1xx：指示信息–表示请求已接收，继续处理 2xx：成功–表示请求已被成功接收、理解、接受 3xx：重定向–要完成请求必须进行更进一步的操作 4xx：客户端错误–请求有语法错误或请求无法实现 5xx：服务器端错误–服务器未能实现合法的请求 常见状态代码、状态描述、说明： 200 OK      //客户端请求成功 400 Bad Request  //客户端请求有语法错误，不能被服务器所理解 401 Unauthorized //请求未经授权，这个状态代码必须和WWW-Authenticate报头域一起使用 403 Forbidden  //服务器收到请求，但是拒绝提供服务 404 Not Found  //请求资源不存在，eg：输入了错误的URL 500 Internal Server Error //服务器发生不可预期的错误 503 Server Unavailable  //服务器当前不能处理客户端的请求，一段时间后可能恢复正常 eg：HTTP/1.1 200 OK （CRLF） 2、响应报头后述 3、响应正文就是服务器返回的资源的内容  <strong>四、HTTP协议详解之消息报头篇</strong>     HTTP消息由客户端到服务器的请求和服务器到客户端的响应组成。请求消息和响应消息都是由开始行（对于请求消息，开始行就是请求行，对于响应消息，开始行就是状态行），消息报头（可选），空行（只有CRLF的行），消息正文（可选）组成。 HTTP消息报头包括普通报头、请求报头、响应报头、实体报头。 每一个报头域都是由名字+“：”+空格+值 组成，消息报头域的名字是大小写无关的。 1、普通报头 在普通报头中，有少数报头域用于所有的请求和响应消息，但并不用于被传输的实体，只用于传输的消息。 eg： Cache-Control   用于指定缓存指令，缓存指令是单向的（响应中出现的缓存指令在请求中未必会出现），且是独立的（一个消息的缓存指令不会影响另一个消息处理的缓存机制），HTTP1.0使用的类似的报头域为Pragma。 请求时的缓存指令包括：no-cache（用于指示请求或响应消息不能缓存）、no-store、max-age、max-stale、min-fresh、only-if-cached; 响应时的缓存指令包括：public、private、no-cache、no-store、no-transform、must-revalidate、proxy-revalidate、max-age、s-maxage. eg：为了指示IE浏览器（客户端）不要缓存页面，服务器端的JSP程序可以编写如下：response.sehHeader(“Cache-Control”,”no-cache”); //response.setHeader(“Pragma”,”no-cache”);作用相当于上述代码，通常两者//合用 这句代码将在发送的响应消息中设置普通报头域：Cache-Control:no-cache Date普通报头域表示消息产生的日期和时间 Connection普通报头域允许发送指定连接的选项。例如指定连接是连续，或者指定“close”选项，通知服务器，在响应完成后，关闭连接 2、请求报头 请求报头允许客户端向服务器端传递请求的附加信息以及客户端自身的信息。 常用的请求报头 Accept Accept请求报头域用于指定客户端接受哪些类型的信息。eg：Accept：image/gif，表明客户端希望接受GIF图象格式的资源；Accept：text/html，表明客户端希望接受html文本。 Accept-Charset Accept-Charset请求报头域用于指定客户端接受的字符集。eg：Accept-Charset:iso-8859-1,gb2312.如果在请求消息中没有设置这个域，缺省是任何字符集都可以接受。 Accept-Encoding Accept-Encoding请求报头域类似于Accept，但是它是用于指定可接受的内容编码。eg：Accept-Encoding:gzip.deflate.如果请求消息中没有设置这个域服务器假定客户端对各种内容编码都可以接受。 Accept-Language Accept-Language请求报头域类似于Accept，但是它是用于指定一种自然语言。eg：Accept-Language:zh-cn.如果请求消息中没有设置这个报头域，服务器假定客户端对各种语言都可以接受。 Authorization Authorization请求报头域主要用于证明客户端有权查看某个资源。当浏览器访问一个页面时，如果收到服务器的响应代码为401（未授权），可以发送一个包含Authorization请求报头域的请求，要求服务器对其进行验证。 Host（发送请求时，该报头域是必需的） Host请求报头域主要用于指定被请求资源的Internet主机和端口号，它通常从HTTP URL中提取出来的，eg： 我们在浏览器中输入：<a href="http://www.guet.edu.cn/index.html" target="_blank" rel="noopener">http://www.guet.edu.cn/index.html</a> 浏览器发送的请求消息中，就会包含Host请求报头域，如下： Host：<a href="http://www.guet.edu.cn/" target="_blank" rel="noopener">www.guet.edu.cn</a> 此处使用缺省端口号80，若指定了端口号，则变成：Host：<a href="http://www.guet.edu.cn/" target="_blank" rel="noopener">www.guet.edu.cn</a>:指定端口号 User-Agent 我们上网登陆论坛的时候，往往会看到一些欢迎信息，其中列出了你的操作系统的名称和版本，你所使用的浏览器的名称和版本，这往往让很多人感到很神奇，实际上，服务器应用程序就是从User-Agent这个请求报头域中获取到这些信息。User-Agent请求报头域允许客户端将它的操作系统、浏览器和其它属性告诉服务器。不过，这个报头域不是必需的，如果我们自己编写一个浏览器，不使用User-Agent请求报头域，那么服务器端就无法得知我们的信息了。 请求报头举例： GET /form.html HTTP/1.1 (CRLF) Accept:image/gif,image/x-xbitmap,image/jpeg,application/x-shockwave-flash,application/vnd.ms-excel,application/vnd.ms-powerpoint,application/msword,<em>/</em> (CRLF) Accept-Language:zh-cn (CRLF) Accept-Encoding:gzip,deflate (CRLF) If-Modified-Since:Wed,05 Jan 2007 11:21:25 GMT (CRLF) If-None-Match:W/“80b1a4c018f3c41:8317” (CRLF) User-Agent:Mozilla/4.0(compatible;MSIE6.0;Windows NT 5.0) (CRLF) Host:<a href="http://www.guet.edu.cn" target="_blank" rel="noopener">www.guet.edu.cn</a> (CRLF) Connection:Keep-Alive (CRLF) (CRLF) 3、响应报头 响应报头允许服务器传递不能放在状态行中的附加响应信息，以及关于服务器的信息和对Request-URI所标识的资源进行下一步访问的信息。 常用的响应报头 Location Location响应报头域用于重定向接受者到一个新的位置。Location响应报头域常用在更换域名的时候。 Server Server响应报头域包含了服务器用来处理请求的软件信息。与User-Agent请求报头域是相对应的。下面是 Server响应报头域的一个例子： Server：Apache-Coyote/1.1 WWW-Authenticate WWW-Authenticate响应报头域必须被包含在401（未授权的）响应消息中，客户端收到401响应消息时候，并发送Authorization报头域请求服务器对其进行验证时，服务端响应报头就包含该报头域。 eg：WWW-Authenticate:Basic realm=”Basic Auth Test!”  //可以看出服务器对请求资源采用的是基本验证机制。 4、实体报头 请求和响应消息都可以传送一个实体。一个实体由实体报头域和实体正文组成，但并不是说实体报头域和实体正文要在一起发送，可以只发送实体报头域。实体报头定义了关于实体正文（eg：有无实体正文）和请求所标识的资源的元信息。 常用的实体报头 Content-Encoding Content-Encoding实体报头域被用作媒体类型的修饰符，它的值指示了已经被应用到实体正文的附加内容的编码，因而要获得Content-Type报头域中所引用的媒体类型，必须采用相应的解码机制。Content-Encoding这样用于记录文档的压缩方法，eg：Content-Encoding：gzip Content-Language Content-Language实体报头域描述了资源所用的自然语言。没有设置该域则认为实体内容将提供给所有的语言阅读 者。eg：Content-Language:da Content-Length Content-Length实体报头域用于指明实体正文的长度，以字节方式存储的十进制数字来表示。 Content-Type Content-Type实体报头域用语指明发送给接收者的实体正文的媒体类型。eg： Content-Type:text/html;charset=ISO-8859-1 Content-Type:text/html;charset=GB2312 Last-Modified Last-Modified实体报头域用于指示资源的最后修改日期和时间。 Expires Expires实体报头域给出响应过期的日期和时间。为了让代理服务器或浏览器在一段时间以后更新缓存中(再次访问曾访问过的页面时，直接从缓存中加载，缩短响应时间和降低服务器负载)的页面，我们可以使用Expires实体报头域指定页面过期的时间。eg：Expires：Thu，15 Sep 2006 16:23:12 GMT HTTP1.1的客户端和缓存必须将其他非法的日期格式（包括0）看作已经过期。eg：为了让浏览器不要缓存页面，我们也可以利用Expires实体报头域，设置为0，jsp中程序如下：response.setDateHeader(“Expires”,”0”); <strong>五、利用telnet观察http协议的通讯过程</strong>     实验目的及原理： 利用MS的telnet工具，通过手动输入http请求信息的方式，向服务器发出请求，服务器接收、解释和接受请求后，会返回一个响应，该响应会在telnet窗口上显示出来，从而从感性上加深对http协议的通讯过程的认识。     实验步骤： 1、打开telnet 1.1 打开telnet 运行–&gt;cmd–&gt;telnet 1.2 打开telnet回显功能 set localecho 2、连接服务器并发送请求 2.1 open <a href="http://www.guet.edu.cn/" target="_blank" rel="noopener">www.guet.edu.cn</a> 80  //注意端口号不能省略     HEAD /index.asp HTTP/1.0 Host:<a href="http://www.guet.edu.cn" target="_blank" rel="noopener">www.guet.edu.cn</a> /<em>我们可以变换请求方法,请求桂林电子主页内容,输入消息如下</em>/ open <a href="http://www.guet.edu.cn/" target="_blank" rel="noopener">www.guet.edu.cn</a> 80  GET /index.asp HTTP/1.0  //请求资源的内容 Host:<a href="http://www.guet.edu.cn" target="_blank" rel="noopener">www.guet.edu.cn</a> 2.2 open <a href="http://www.sina.com.cn/" target="_blank" rel="noopener">www.sina.com.cn</a> 80  //在命令提示符号下直接输入telnet <a href="http://www.sina.com.cn/" target="_blank" rel="noopener">www.sina.com.cn</a>80 HEAD /index.asp HTTP/1.0 Host:<a href="http://www.sina.com.cn" target="_blank" rel="noopener">www.sina.com.cn</a> 3 实验结果： 3.1 请求信息2.1得到的响应是: HTTP/1.1 200 OK                                              //请求成功 Server: Microsoft-IIS/5.0                                    //web服务器 Date: Thu,08 Mar 200707:17:51 GMT Connection: Keep-Alive Content-Length: 23330 Content-Type: text/html Expries: Thu,08 Mar 2007 07:16:51 GMT Set-Cookie: ASPSESSIONIDQAQBQQQB=BEJCDGKADEDJKLKKAJEOIMMH; path=/ Cache-control: private //资源内容省略 3.2 请求信息2.2得到的响应是: HTTP/1.0 404 Not Found       //请求失败 Date: Thu, 08 Mar 2007 07:50:50 GMT Server: Apache/2.0.54 <unix> Last-Modified: Thu, 30 Nov 2006 11:35:41 GMT ETag: “6277a-415-e7c76980” Accept-Ranges: bytes X-Powered-By: mod_xlayout_jh/0.0.1vhs.markII.remix Vary: Accept-Encoding Content-Type: text/html X-Cache: MISS from zjm152-78.sina.com.cn Via: 1.0 zjm152-78.sina.com.cn:80&lt;squid/2.6.STABLES-20061207&gt; X-Cache: MISS from th-143.sina.com.cn Connection: close 失去了跟主机的连接 按任意键继续… 4 .注意事项：1、出现输入错误，则请求不会成功。 2、报头域不分大小写。 3、更深一步了解HTTP协议，可以查看RFC2616，在<a href="http://www.letf.org/rfc" target="_blank" rel="noopener">http://www.letf.org/rfc</a>上找到该文件。 4、开发后台程序必须掌握http协议 <strong>六、</strong><a href="http://blog.csdn.net/gueter/archive/2007/04/23/1575543.aspx" target="_blank" rel="noopener"><strong>HTTP协议相关技术补充</strong></a>     1、基础： 高层协议有：文件传输协议FTP、电子邮件传输协议SMTP、域名系统服务DNS、网络新闻传输协议NNTP和HTTP协议等 中介由三种：代理(Proxy)、网关(Gateway)和通道(Tunnel)，一个代理根据URI的绝对格式来接受请求，重写全部或部分消息，通过 URI的标识把已格式化过的请求发送到服务器。网关是一个接收代理，作为一些其它服务器的上层，并且如果必须的话，可以把请求翻译给下层的服务器协议。一 个通道作为不改变消息的两个连接之间的中继点。当通讯需要通过一个中介(例如：防火墙等)或者是中介不能识别消息的内容时，通道经常被使用。 代理(Proxy)：一个中间程序，它可以充当一个服务器，也可以充当一个客户机，为其它客户机建立请求。请求是通过可能的翻译在内部或经过传递到其它的 服务器中。一个代理在发送请求信息之前，必须解释并且如果可能重写它。代理经常作为通过防火墙的客户机端的门户，代理还可以作为一个帮助应用来通过协议处 理没有被用户代理完成的请求。 网关(Gateway)：一个作为其它服务器中间媒介的服务器。与代理不同的是，网关接受请求就好象对被请求的资源来说它就是源服务器；发出请求的客户机并没有意识到它在同网关打交道。 网关经常作为通过防火墙的服务器端的门户，网关还可以作为一个协议翻译器以便存取那些存储在非HTTP系统中的资源。 通道(Tunnel)：是作为两个连接中继的中介程序。一旦激活，通道便被认为不属于HTTP通讯，尽管通道可能是被一个HTTP请求初始化的。当被中继 的连接两端关闭时，通道便消失。当一个门户(Portal)必须存在或中介(Intermediary)不能解释中继的通讯时通道被经常使用。 2、协议分析的优势—HTTP分析器检测网络攻击 以模块化的方式对高层协议进行分析处理，将是未来入侵检测的方向。 HTTP及其代理的常用端口80、3128和8080在network部分用port标签进行了规定 3、HTTP协议Content Lenth限制漏洞导致拒绝服务攻击 使用POST方法时，可以设置ContentLenth来定义需要传送的数据长度，例如ContentLenth:999999999，在传送完成前，内 存不会释放，攻击者可以利用这个缺陷，连续向WEB服务器发送垃圾数据直至WEB服务器内存耗尽。这种攻击方法基本不会留下痕迹。 <a href="http://www.cnpaf.net/Class/HTTP/0532918532667330.html" target="_blank" rel="noopener">http://www.cnpaf.net/Class/HTTP/0532918532667330.html</a> 4、利用HTTP协议的特性进行拒绝服务攻击的一些构思 服务器端忙于处理攻击者伪造的TCP连接请求而无暇理睬客户的正常请求（毕竟客户端的正常请求比率非常之小），此时从正常客户的角度看来，服务器失去响应，这种情况我们称作：服务器端受到了SYNFlood攻击（SYN洪水攻击）。 而Smurf、TearDrop等是利用ICMP报文来Flood和IP碎片攻击的。本文用“正常连接”的方法来产生拒绝服务攻击。 19端口在早期已经有人用来做Chargen攻击了，即Chargen_Denial_of_Service，但是！他们用的方法是在两台Chargen 服务器之间产生UDP连接，让服务器处理过多信息而DOWN掉，那么，干掉一台WEB服务器的条件就必须有2个：1.有Chargen服务2.有HTTP 服务 方法：攻击者伪造源IP给N台Chargen发送连接请求（Connect），Chargen接收到连接后就会返回每秒72字节的字符流（实际上根据网络实际情况，这个速度更快）给服务器。 5、Http指纹识别技术 Http指纹识别的原理大致上也是相同的：记录不同服务器对Http协议执行中的微小差别进行识别.Http指纹识别比TCP/IP堆栈指纹识别复杂许 多,理由是定制Http服务器的配置文件、增加插件或组件使得更改Http的响应信息变的很容易,这样使得识别变的困难；然而定制TCP/IP堆栈的行为 需要对核心层进行修改,所以就容易识别. 要让服务器返回不同的Banner信息的设置是很简单的,象Apache这样的开放源代码的Http服务器,用户可以在源代码里修改Banner信息,然 后重起Http服务就生效了；对于没有公开源代码的Http服务器比如微软的IIS或者是Netscape,可以在存放Banner信息的Dll文件中修 改,相关的文章有讨论的,这里不再赘述,当然这样的修改的效果还是不错的.另外一种模糊Banner信息的方法是使用插件。 常用测试请求： 1：HEAD/Http/1.0发送基本的Http请求 2：DELETE/Http/1.0发送那些不被允许的请求,比如Delete请求 3：GET/Http/3.0发送一个非法版本的Http协议请求 4：GET/JUNK/1.0发送一个不正确规格的Http协议请求 Http指纹识别工具Httprint,它通过运用统计学原理,组合模糊的逻辑学技术,能很有效的确定Http服务器的类型.它可以被用来收集和分析不同Http服务器产生的签名。 6、其他：为了提高用户使用浏览器时的性能，现代浏览器还支持并发的访问方式，浏览一个网页时同时建立多个连接，以迅速获得一个网页上的多个图标，这样能更快速完成整个网页的传输。 HTTP1.1中提供了这种持续连接的方式，而下一代HTTP协议：HTTP-NG更增加了有关会话控制、丰富的内容协商等方式的支持，来提供 更高效率的连接。</unix></p>
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/30/http-e5-8d-8f-e8-ae-ae-e8-af-a6-e8-a7-a3-ef-bc-88-e7-9c-9f-e7-9a-84-e5-be-88-e7-bb-8f-e5-85-b8-ef-bc-89-hundre-e5-8d-9a-e5-ae-a2-e5-9b-ad/" data-id="cjpl1t5g300ishh81yie8q0ue" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/http/">http</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/https/">https</a></li></ul>
 
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.v2ex.co/v4dDksUbl.jpeg" alt="John Doe Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/https/" rel="tag"># https</a>
+          
+            <a href="/tags/http/" rel="tag"># http</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/28/java-e4-b8-adgetclass-e5-92-8cclass-ef-bc-89-e7-9a-84-e8-81-94-e7-b3-bb-e5-92-8c-e5-8c-ba-e5-88-ab/" rel="next" title="java中getClass( )和class(）的联系和区别">
+                <i class="fa fa-chevron-left"></i> java中getClass( )和class(）的联系和区别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/30/centos7-e4-b8-8b-e5-ae-89-e8-a3-85pip/" rel="prev" title="Centos7下安装pip">
+                Centos7下安装pip <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
   
-    <a href="/2017/08/30/centos7-e4-b8-8b-e5-ae-89-e8-a3-85pip/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
         
-          Centos7下安装pip
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description">$$ Welcome 2 mine blog $$</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">182</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">263</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-    </a>
-  
-  
-    <a href="/2017/08/28/java-e4-b8-adgetclass-e5-92-8cclass-ef-bc-89-e7-9a-84-e8-81-94-e7-b3-bb-e5-92-8c-e5-8c-ba-e5-88-ab/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">java中getClass( )和class(）的联系和区别</div>
-    </a>
-  
-</nav>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
 
   
-</article>
 
-</section>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/">互联网</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/操作系统/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/数据库/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AES/">AES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GlusterFS/">GlusterFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google云/">Google云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/">Mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAT/">NAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PATH/">PATH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SMTP/">SMTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentry/">Sentry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-factor-authentication/">Two-factor authentication</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T型累加/">T型累加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aliyun/">aliyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/application-ini/">application.ini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bashrc/">bashrc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/berkeleydb/">berkeleydb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitcoin/">bitcoin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte/">byte</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/combobox/">combobox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datagrid/">datagrid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbd/">dbd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dhcp/">dhcp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drupal/">drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic/">dynamic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easyui/">easyui</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ef/">ef</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity-framework/">entity framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/excel/">excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exception/">exception</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/export/">export</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/final/">final</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fonts/">fonts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get-result/">get_result</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getclass/">getclass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gmail/">gmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google/">google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gridview/">gridview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/inputstream/">inputstream</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jms/">jms</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel-version/">kernel version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j/">log4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/">lvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lxde/">lxde</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mailer/">mailer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/menu/">menu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microtime/">microtime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monaco/">monaco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql-load-data/">mysql load data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysqldump/">mysqldump</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netbeans/">netbeans</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ocserv/">ocserv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/office/">office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openoffice/">openoffice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openvpn/">openvpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php-ini/">php.ini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/phpinfo/">phpinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redmine/">redmine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/">root</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/">screen</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/slackware/">slackware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sleep/">sleep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sockets/">sockets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sprintboot/">sprintboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/static/">static</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/symfony/">symfony</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tar/">tar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tls-ssl/">tls/ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/token/">token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usort/">usort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virutal-box/">virutal box</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn868错误/">vpn868错误</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xfce/">xfce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaf/">yaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yotube/">yotube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/两步验证/">两步验证</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中文/">中文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/保存/">保存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改密码/">修改密码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/写文件/">写文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数/">函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分级/">分级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分页/">分页</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/创建用户/">创建用户</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除/">删除</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷新/">刷新</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态类型/">动态类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卡夫卡/">卡夫卡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化/">参数化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化查询/">参数化查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台/">后台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行/">命令行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备份/">备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/子查询/">子查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/子部门/">子部门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字节流/">字节流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/宏/">宏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对称加密/">对称加密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工厂模式/">工厂模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微软雅黑/">微软雅黑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/德兰修女/">德兰修女</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思科/">思科</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手机/">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/执行时间/">执行时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/挖矿/">挖矿</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/提交/">提交</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敏捷/">敏捷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据备份/">数据备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件存储/">文件存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/替换/">替换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构/">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构师/">架构师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派/">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/比特币/">比特币</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毫秒/">毫秒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据/">海量数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据导入/">海量数据导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/漏洞/">漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境变量/">环境变量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/用户/">用户</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箴言/">箴言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/累加/">累加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组/">组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/终端/">终端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓冲区/">缓冲区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编程/">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义函数/">自定义函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/菜单/">菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表单/">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解压/">解压</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解锁/">解锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言/">语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/说明书/">说明书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/输入法/">输入法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/追加/">追加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向工程/">逆向工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮件/">邮件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮箱/">邮箱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置文件/">配置文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复数据/">重复数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复记录/">重复记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误提示/">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里/">阿里</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/默认路径/">默认路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/龙角散/">龙角散</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/AES/" style="font-size: 10px;">AES</a> <a href="/tags/ActiveMQ/" style="font-size: 11px;">ActiveMQ</a> <a href="/tags/CodeIginter/" style="font-size: 12px;">CodeIginter</a> <a href="/tags/CodeIgnitor/" style="font-size: 10px;">CodeIgnitor</a> <a href="/tags/GlusterFS/" style="font-size: 10px;">GlusterFS</a> <a href="/tags/Google云/" style="font-size: 10px;">Google云</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/NAT/" style="font-size: 10px;">NAT</a> <a href="/tags/PATH/" style="font-size: 10px;">PATH</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/SMTP/" style="font-size: 10px;">SMTP</a> <a href="/tags/Sentry/" style="font-size: 10px;">Sentry</a> <a href="/tags/Two-factor-authentication/" style="font-size: 10px;">Two-factor authentication</a> <a href="/tags/T型累加/" style="font-size: 10px;">T型累加</a> <a href="/tags/VMware/" style="font-size: 11px;">VMware</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/anyconnect/" style="font-size: 13px;">anyconnect</a> <a href="/tags/application-ini/" style="font-size: 10px;">application.ini</a> <a href="/tags/asp-net/" style="font-size: 15px;">asp.net</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/bashrc/" style="font-size: 10px;">bashrc</a> <a href="/tags/berkeleydb/" style="font-size: 10px;">berkeleydb</a> <a href="/tags/bitcoin/" style="font-size: 10px;">bitcoin</a> <a href="/tags/byte/" style="font-size: 10px;">byte</a> <a href="/tags/c/" style="font-size: 13px;">c#</a> <a href="/tags/centos/" style="font-size: 17px;">centos</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/ci/" style="font-size: 12px;">ci</a> <a href="/tags/cisco/" style="font-size: 12px;">cisco</a> <a href="/tags/combobox/" style="font-size: 10px;">combobox</a> <a href="/tags/datagrid/" style="font-size: 12px;">datagrid</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/dbd/" style="font-size: 10px;">dbd</a> <a href="/tags/debian/" style="font-size: 12px;">debian</a> <a href="/tags/debug/" style="font-size: 11px;">debug</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dhcp/" style="font-size: 10px;">dhcp</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/drupal/" style="font-size: 10px;">drupal</a> <a href="/tags/dynamic/" style="font-size: 10px;">dynamic</a> <a href="/tags/easyui/" style="font-size: 16px;">easyui</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/ef/" style="font-size: 10px;">ef</a> <a href="/tags/emacs/" style="font-size: 16px;">emacs</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/entity-framework/" style="font-size: 10px;">entity framework</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/exception/" style="font-size: 10px;">exception</a> <a href="/tags/export/" style="font-size: 10px;">export</a> <a href="/tags/fastdfs/" style="font-size: 14px;">fastdfs</a> <a href="/tags/final/" style="font-size: 10px;">final</a> <a href="/tags/fonts/" style="font-size: 10px;">fonts</a> <a href="/tags/freebsd/" style="font-size: 10px;">freebsd</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/get-result/" style="font-size: 10px;">get_result</a> <a href="/tags/getclass/" style="font-size: 10px;">getclass</a> <a href="/tags/gmail/" style="font-size: 10px;">gmail</a> <a href="/tags/google/" style="font-size: 11px;">google</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/gridview/" style="font-size: 10px;">gridview</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 12px;">https</a> <a href="/tags/inputstream/" style="font-size: 10px;">inputstream</a> <a href="/tags/ip/" style="font-size: 11px;">ip</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/javascript/" style="font-size: 14px;">javascript</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jquery/" style="font-size: 13px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/kernel-version/" style="font-size: 10px;">kernel version</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/linux/" style="font-size: 19px;">linux</a> <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux jdk proxy mysql</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lxde/" style="font-size: 10px;">lxde</a> <a href="/tags/mailer/" style="font-size: 10px;">mailer</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/menu/" style="font-size: 10px;">menu</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/microtime/" style="font-size: 10px;">microtime</a> <a href="/tags/monaco/" style="font-size: 10px;">monaco</a> <a href="/tags/mysql/" style="font-size: 18px;">mysql</a> <a href="/tags/mysql-load-data/" style="font-size: 10px;">mysql load data</a> <a href="/tags/mysqldump/" style="font-size: 10px;">mysqldump</a> <a href="/tags/netbeans/" style="font-size: 10px;">netbeans</a> <a href="/tags/nginx/" style="font-size: 17px;">nginx</a> <a href="/tags/ocserv/" style="font-size: 10px;">ocserv</a> <a href="/tags/office/" style="font-size: 10px;">office</a> <a href="/tags/openoffice/" style="font-size: 10px;">openoffice</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/openvpn/" style="font-size: 10px;">openvpn</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 12px;">owncloud</a> <a href="/tags/php-ini/" style="font-size: 10px;">php.ini</a> <a href="/tags/phpinfo/" style="font-size: 10px;">phpinfo</a> <a href="/tags/pip/" style="font-size: 11px;">pip</a> <a href="/tags/post/" style="font-size: 11px;">post</a> <a href="/tags/proxy/" style="font-size: 12px;">proxy</a> <a href="/tags/python/" style="font-size: 12px;">python</a> <a href="/tags/python-pip/" style="font-size: 11px;">python-pip</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/redmine/" style="font-size: 11px;">redmine</a> <a href="/tags/root/" style="font-size: 10px;">root</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shadowsocks/" style="font-size: 12px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/slackware/" style="font-size: 10px;">slackware</a> <a href="/tags/sleep/" style="font-size: 10px;">sleep</a> <a href="/tags/socket/" style="font-size: 13px;">socket</a> <a href="/tags/sockets/" style="font-size: 10px;">sockets</a> <a href="/tags/sprintboot/" style="font-size: 10px;">sprintboot</a> <a href="/tags/sql/" style="font-size: 11px;">sql</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/ssh/" style="font-size: 11px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11px;">ssl</a> <a href="/tags/static/" style="font-size: 10px;">static</a> <a href="/tags/symfony/" style="font-size: 11px;">symfony</a> <a href="/tags/tar/" style="font-size: 11px;">tar</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/time/" style="font-size: 11px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/tls-ssl/" style="font-size: 10px;">tls/ssl</a> <a href="/tags/token/" style="font-size: 10px;">token</a> <a href="/tags/ubuntu/" style="font-size: 13px;">ubuntu</a> <a href="/tags/usort/" style="font-size: 10px;">usort</a> <a href="/tags/vim/" style="font-size: 17px;">vim</a> <a href="/tags/virutal-box/" style="font-size: 10px;">virutal box</a> <a href="/tags/vpn/" style="font-size: 11px;">vpn</a> <a href="/tags/vpn868错误/" style="font-size: 10px;">vpn868错误</a> <a href="/tags/wifi/" style="font-size: 11px;">wifi</a> <a href="/tags/wordpress/" style="font-size: 11px;">wordpress</a> <a href="/tags/xfce/" style="font-size: 10px;">xfce</a> <a href="/tags/yaf/" style="font-size: 12px;">yaf</a> <a href="/tags/yotube/" style="font-size: 10px;">yotube</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/两步验证/" style="font-size: 10px;">两步验证</a> <a href="/tags/中文/" style="font-size: 10px;">中文</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/云计算/" style="font-size: 10px;">云计算</a> <a href="/tags/代理/" style="font-size: 15px;">代理</a> <a href="/tags/优化/" style="font-size: 10px;">优化</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/保存/" style="font-size: 10px;">保存</a> <a href="/tags/修改密码/" style="font-size: 10px;">修改密码</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/写文件/" style="font-size: 10px;">写文件</a> <a href="/tags/函数/" style="font-size: 10px;">函数</a> <a href="/tags/分级/" style="font-size: 10px;">分级</a> <a href="/tags/分页/" style="font-size: 10px;">分页</a> <a href="/tags/创建用户/" style="font-size: 10px;">创建用户</a> <a href="/tags/删除/" style="font-size: 10px;">删除</a> <a href="/tags/刷新/" style="font-size: 10px;">刷新</a> <a href="/tags/动态类型/" style="font-size: 10px;">动态类型</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/卡夫卡/" style="font-size: 10px;">卡夫卡</a> <a href="/tags/参数化/" style="font-size: 11px;">参数化</a> <a href="/tags/参数化查询/" style="font-size: 10px;">参数化查询</a> <a href="/tags/后台/" style="font-size: 10px;">后台</a> <a href="/tags/命令/" style="font-size: 12px;">命令</a> <a href="/tags/命令行/" style="font-size: 12px;">命令行</a> <a href="/tags/备份/" style="font-size: 10px;">备份</a> <a href="/tags/复选框/" style="font-size: 10px;">复选框</a> <a href="/tags/子查询/" style="font-size: 10px;">子查询</a> <a href="/tags/子部门/" style="font-size: 10px;">子部门</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/字节流/" style="font-size: 11px;">字节流</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/宏/" style="font-size: 10px;">宏</a> <a href="/tags/对称加密/" style="font-size: 10px;">对称加密</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/异常/" style="font-size: 12px;">异常</a> <a href="/tags/循环/" style="font-size: 10px;">循环</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/微软雅黑/" style="font-size: 10px;">微软雅黑</a> <a href="/tags/德兰修女/" style="font-size: 10px;">德兰修女</a> <a href="/tags/思科/" style="font-size: 10px;">思科</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/手机/" style="font-size: 10px;">手机</a> <a href="/tags/执行时间/" style="font-size: 10px;">执行时间</a> <a href="/tags/挖矿/" style="font-size: 10px;">挖矿</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/提交/" style="font-size: 10px;">提交</a> <a href="/tags/敏捷/" style="font-size: 10px;">敏捷</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据备份/" style="font-size: 10px;">数据备份</a> <a href="/tags/数据库/" style="font-size: 12px;">数据库</a> <a href="/tags/数组/" style="font-size: 11px;">数组</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/文件存储/" style="font-size: 10px;">文件存储</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/替换/" style="font-size: 12px;">替换</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/架构师/" style="font-size: 10px;">架构师</a> <a href="/tags/树莓派/" style="font-size: 11px;">树莓派</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a> <a href="/tags/毫秒/" style="font-size: 10px;">毫秒</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/海量数据/" style="font-size: 10px;">海量数据</a> <a href="/tags/海量数据导入/" style="font-size: 10px;">海量数据导入</a> <a href="/tags/消息/" style="font-size: 11px;">消息</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/漏洞/" style="font-size: 10px;">漏洞</a> <a href="/tags/环境变量/" style="font-size: 10px;">环境变量</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/箴言/" style="font-size: 10px;">箴言</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/累加/" style="font-size: 10px;">累加</a> <a href="/tags/组/" style="font-size: 10px;">组</a> <a href="/tags/终端/" style="font-size: 13px;">终端</a> <a href="/tags/缓冲区/" style="font-size: 10px;">缓冲区</a> <a href="/tags/编程/" style="font-size: 10px;">编程</a> <a href="/tags/网络/" style="font-size: 11px;">网络</a> <a href="/tags/自定义函数/" style="font-size: 10px;">自定义函数</a> <a href="/tags/菜单/" style="font-size: 10px;">菜单</a> <a href="/tags/虚拟机/" style="font-size: 11px;">虚拟机</a> <a href="/tags/表单/" style="font-size: 10px;">表单</a> <a href="/tags/解压/" style="font-size: 10px;">解压</a> <a href="/tags/解锁/" style="font-size: 10px;">解锁</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/语言/" style="font-size: 10px;">语言</a> <a href="/tags/说明书/" style="font-size: 10px;">说明书</a> <a href="/tags/调试/" style="font-size: 11px;">调试</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 11px;">转换</a> <a href="/tags/输入法/" style="font-size: 10px;">输入法</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/追加/" style="font-size: 10px;">追加</a> <a href="/tags/逆向工程/" style="font-size: 10px;">逆向工程</a> <a href="/tags/邮件/" style="font-size: 12px;">邮件</a> <a href="/tags/邮箱/" style="font-size: 11px;">邮箱</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a> <a href="/tags/配置文件/" style="font-size: 10px;">配置文件</a> <a href="/tags/重复数据/" style="font-size: 10px;">重复数据</a> <a href="/tags/重复记录/" style="font-size: 10px;">重复记录</a> <a href="/tags/错误提示/" style="font-size: 10px;">错误提示</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里/" style="font-size: 10px;">阿里</a> <a href="/tags/阿里云/" style="font-size: 11px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a> <a href="/tags/默认路径/" style="font-size: 10px;">默认路径</a> <a href="/tags/龙角散/" style="font-size: 10px;">龙角散</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/12/12/code-tips/">code-tips</a>
-          </li>
-        
-          <li>
-            <a href="/2018/12/12/world/">world</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/30/linux-e6-89-b9-e9-87-8f-e6-9b-bf-e6-8d-a2-e6-96-87-e4-bb-b6-e5-86-85-e5-ae-b9/">linux批量替换文件内容</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/24/e6-88-91-e6-8e-a8-e8-8d-90-e7-a6-81-e7-94-a8-e7-9a-84-php-e5-87-bd-e6-95-b0/">我推荐禁用的 PHP 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/09/mysql-e4-b8-ad-e5-88-a0-e9-99-a4-e9-87-8d-e5-a4-8d-e6-95-b0-e6-8d-ae/">mysql 中删除重复数据</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+	
+    
 
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
+    
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('Copied')
+          else $(this).text('Copy failed')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('Copy')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
 </body>
 </html>

@@ -1,12 +1,115 @@
 <!DOCTYPE html>
-<html>
-<head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
+
+
+
+
+
+
+
+
+
+
+
+
   
-  <title>CentOS下pip和shadowsocks的安装使用 | Hello,Stranger</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<html class="theme-next gemini use-motion" lang="zh-cn">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
   <meta name="description" content="centos 我机器上装的时候，不能直接通过yum install pip, 而通过下面的， easy_install 安装成功了。  可以通过使用 “sudo yum install epel-release” 来安装 python-pip  另一点要注意的是，配置文件中的名称和值之间虽然是通过冒号分割的，但是还是要留出空格，否则会提示找不到服务器: “server”:”123.123.123.">
-<meta name="keywords" content="linux,centos,shadowsocks">
+<meta name="keywords" content="centos,linux,shadowsocks">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CentOS下pip和shadowsocks的安装使用">
 <meta property="og:url" content="http://yoursite.com/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/index.html">
@@ -19,83 +122,298 @@
 <meta name="twitter:title" content="CentOS下pip和shadowsocks的安装使用">
 <meta name="twitter:description" content="centos 我机器上装的时候，不能直接通过yum install pip, 而通过下面的， easy_install 安装成功了。  可以通过使用 “sudo yum install epel-release” 来安装 python-pip  另一点要注意的是，配置文件中的名称和值之间虽然是通过冒号分割的，但是还是要留出空格，否则会提示找不到服务器: “server”:”123.123.123.">
 <meta name="twitter:image" content="https://tech.msla.top/wp-content/uploads/2018/04/20140227040626597.png">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>CentOS下pip和shadowsocks的安装使用 | Hello,Stranger</title>
   
-    <link rel="alternate" href="/atom.xml" title="Hello,Stranger" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
 
 </head>
-</html>
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hello,Stranger</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/" id="subtitle">Yet another note</a>
-        </h2>
-      
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/" class="article-date">
-  <time datetime="2016-04-27T06:57:13.000Z" itemprop="datePublished">2016-04-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
-  </div>
 
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-cn">
+
   
-    <h1 class="article-title" itemprop="name">
-      CentOS下pip和shadowsocks的安装使用
-    </h1>
+  
+    
   
 
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Hello,Stranger</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Yet another note</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome 2 mine blog $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello,Stranger">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CentOS下pip和shadowsocks的安装使用
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2016-04-27 14:57:13" itemprop="dateCreated datePublished" datetime="2016-04-27T14:57:13+08:00">2016-04-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 16:59:08" itemprop="dateModified" datetime="2018-12-12T16:59:08+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
       </header>
     
-    <div class="article-entry" itemprop="articleBody">
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
       
         <p>centos 我机器上装的时候，不能直接通过yum install pip, 而通过下面的， easy_install 安装成功了。</p>
 <blockquote>
@@ -175,143 +493,992 @@ Encryptor:   加密方法，填入在服务器端设置的加密方法（method�
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/" data-id="cjpl1t55p001uhh81f5krdfb4" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li></ul>
 
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.v2ex.co/v4dDksUbl.jpeg" alt="John Doe Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/centos/" rel="tag"># centos</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/shadowsocks/" rel="tag"># shadowsocks</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/11/e4-bb-80-e4-b9-88-e6-97-b6-e5-80-99-e8-af-a5-e4-bd-bf-e7-94-a8-lvm-ef-bc-9f/" rel="next" title="什么时候该使用 LVM？">
+                <i class="fa fa-chevron-left"></i> 什么时候该使用 LVM？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/15/coding-asp-net-in-emacs24/" rel="prev" title="Emacs编辑ASP.NET">
+                Emacs编辑ASP.NET <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
     </footer>
   </div>
   
-    
-<nav id="article-nav">
   
-    <a href="/2017/03/15/coding-asp-net-in-emacs24/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
         
-          Emacs编辑ASP.NET
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description">$$ Welcome 2 mine blog $$</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">182</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">263</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
         
       </div>
-    </a>
-  
-  
-    <a href="/2016/04/11/e4-bb-80-e4-b9-88-e6-97-b6-e5-80-99-e8-af-a5-e4-bd-bf-e7-94-a8-lvm-ef-bc-9f/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">什么时候该使用 LVM？</div>
-    </a>
-  
-</nav>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
 
   
-</article>
 
-</section>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> v6.6.0</div>
+
+
+
+
         
-          <aside id="sidebar">
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Categories</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/">互联网</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/操作系统/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/数据库/">数据库</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AES/">AES</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GlusterFS/">GlusterFS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google云/">Google云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/">Mongodb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAT/">NAT</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PATH/">PATH</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SMTP/">SMTP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentry/">Sentry</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-factor-authentication/">Two-factor authentication</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T型累加/">T型累加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/">VMware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aliyun/">aliyun</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/application-ini/">application.ini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/awk/">awk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/">backup</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bashrc/">bashrc</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/berkeleydb/">berkeleydb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitcoin/">bitcoin</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte/">byte</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/combobox/">combobox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datagrid/">datagrid</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbd/">dbd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dhcp/">dhcp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drupal/">drupal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic/">dynamic</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easyui/">easyui</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ef/">ef</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/">email</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity-framework/">entity framework</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/excel/">excel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exception/">exception</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/export/">export</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/final/">final</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fonts/">fonts</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/">get</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get-result/">get_result</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getclass/">getclass</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gmail/">gmail</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google/">google</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gridview/">gridview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/inputstream/">inputstream</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jms/">jms</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/js/">js</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel-version/">kernel version</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j/">log4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/">lvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lxde/">lxde</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mailer/">mailer</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/menu/">menu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microtime/">microtime</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monaco/">monaco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql-load-data/">mysql load data</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysqldump/">mysqldump</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netbeans/">netbeans</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ocserv/">ocserv</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/office/">office</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openoffice/">openoffice</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openvpn/">openvpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php-ini/">php.ini</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/phpinfo/">phpinfo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redmine/">redmine</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/">root</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/">screen</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/">sed</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/slackware/">slackware</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sleep/">sleep</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sockets/">sockets</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sprintboot/">sprintboot</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/static/">static</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/symfony/">symfony</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tar/">tar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/">terminal</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tls-ssl/">tls/ssl</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/token/">token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usort/">usort</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virutal-box/">virutal box</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn868错误/">vpn868错误</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xfce/">xfce</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaf/">yaf</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yotube/">yotube</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/两步验证/">两步验证</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中文/">中文</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/保存/">保存</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改密码/">修改密码</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/写文件/">写文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数/">函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分级/">分级</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分页/">分页</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/创建用户/">创建用户</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除/">删除</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷新/">刷新</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态类型/">动态类型</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卡夫卡/">卡夫卡</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化/">参数化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化查询/">参数化查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台/">后台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行/">命令行</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备份/">备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/子查询/">子查询</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/子部门/">子部门</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字节流/">字节流</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/安全/">安全</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/宏/">宏</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对称加密/">对称加密</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工厂模式/">工厂模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微软雅黑/">微软雅黑</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/德兰修女/">德兰修女</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思科/">思科</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手机/">手机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/执行时间/">执行时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/挖矿/">挖矿</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/提交/">提交</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敏捷/">敏捷</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据备份/">数据备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件存储/">文件存储</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/替换/">替换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构/">架构</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构师/">架构师</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派/">树莓派</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/比特币/">比特币</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毫秒/">毫秒</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据/">海量数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据导入/">海量数据导入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/漏洞/">漏洞</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境变量/">环境变量</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/用户/">用户</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箴言/">箴言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/累加/">累加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组/">组</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/终端/">终端</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓冲区/">缓冲区</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编程/">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义函数/">自定义函数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/菜单/">菜单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表单/">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解压/">解压</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解锁/">解锁</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/语言/">语言</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/说明书/">说明书</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/输入法/">输入法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/追加/">追加</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向工程/">逆向工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮件/">邮件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮箱/">邮箱</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置文件/">配置文件</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复数据/">重复数据</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复记录/">重复记录</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误提示/">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里/">阿里</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/默认路径/">默认路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/龙角散/">龙角散</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/AES/" style="font-size: 10px;">AES</a> <a href="/tags/ActiveMQ/" style="font-size: 11px;">ActiveMQ</a> <a href="/tags/CodeIginter/" style="font-size: 12px;">CodeIginter</a> <a href="/tags/CodeIgnitor/" style="font-size: 10px;">CodeIgnitor</a> <a href="/tags/GlusterFS/" style="font-size: 10px;">GlusterFS</a> <a href="/tags/Google云/" style="font-size: 10px;">Google云</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/NAT/" style="font-size: 10px;">NAT</a> <a href="/tags/PATH/" style="font-size: 10px;">PATH</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/SMTP/" style="font-size: 10px;">SMTP</a> <a href="/tags/Sentry/" style="font-size: 10px;">Sentry</a> <a href="/tags/Two-factor-authentication/" style="font-size: 10px;">Two-factor authentication</a> <a href="/tags/T型累加/" style="font-size: 10px;">T型累加</a> <a href="/tags/VMware/" style="font-size: 11px;">VMware</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/anyconnect/" style="font-size: 13px;">anyconnect</a> <a href="/tags/application-ini/" style="font-size: 10px;">application.ini</a> <a href="/tags/asp-net/" style="font-size: 15px;">asp.net</a> <a href="/tags/awk/" style="font-size: 10px;">awk</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/bashrc/" style="font-size: 10px;">bashrc</a> <a href="/tags/berkeleydb/" style="font-size: 10px;">berkeleydb</a> <a href="/tags/bitcoin/" style="font-size: 10px;">bitcoin</a> <a href="/tags/byte/" style="font-size: 10px;">byte</a> <a href="/tags/c/" style="font-size: 13px;">c#</a> <a href="/tags/centos/" style="font-size: 17px;">centos</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/ci/" style="font-size: 12px;">ci</a> <a href="/tags/cisco/" style="font-size: 12px;">cisco</a> <a href="/tags/combobox/" style="font-size: 10px;">combobox</a> <a href="/tags/datagrid/" style="font-size: 12px;">datagrid</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/dbd/" style="font-size: 10px;">dbd</a> <a href="/tags/debian/" style="font-size: 12px;">debian</a> <a href="/tags/debug/" style="font-size: 11px;">debug</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dhcp/" style="font-size: 10px;">dhcp</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/drupal/" style="font-size: 10px;">drupal</a> <a href="/tags/dynamic/" style="font-size: 10px;">dynamic</a> <a href="/tags/easyui/" style="font-size: 16px;">easyui</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/ef/" style="font-size: 10px;">ef</a> <a href="/tags/emacs/" style="font-size: 16px;">emacs</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/entity-framework/" style="font-size: 10px;">entity framework</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/exception/" style="font-size: 10px;">exception</a> <a href="/tags/export/" style="font-size: 10px;">export</a> <a href="/tags/fastdfs/" style="font-size: 14px;">fastdfs</a> <a href="/tags/final/" style="font-size: 10px;">final</a> <a href="/tags/fonts/" style="font-size: 10px;">fonts</a> <a href="/tags/freebsd/" style="font-size: 10px;">freebsd</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/get-result/" style="font-size: 10px;">get_result</a> <a href="/tags/getclass/" style="font-size: 10px;">getclass</a> <a href="/tags/gmail/" style="font-size: 10px;">gmail</a> <a href="/tags/google/" style="font-size: 11px;">google</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/gridview/" style="font-size: 10px;">gridview</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 12px;">https</a> <a href="/tags/inputstream/" style="font-size: 10px;">inputstream</a> <a href="/tags/ip/" style="font-size: 11px;">ip</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 18px;">java</a> <a href="/tags/javascript/" style="font-size: 14px;">javascript</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jquery/" style="font-size: 13px;">jquery</a> <a href="/tags/js/" style="font-size: 10px;">js</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/kernel-version/" style="font-size: 10px;">kernel version</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/linux/" style="font-size: 19px;">linux</a> <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux jdk proxy mysql</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lxde/" style="font-size: 10px;">lxde</a> <a href="/tags/mailer/" style="font-size: 10px;">mailer</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/menu/" style="font-size: 10px;">menu</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/microtime/" style="font-size: 10px;">microtime</a> <a href="/tags/monaco/" style="font-size: 10px;">monaco</a> <a href="/tags/mysql/" style="font-size: 18px;">mysql</a> <a href="/tags/mysql-load-data/" style="font-size: 10px;">mysql load data</a> <a href="/tags/mysqldump/" style="font-size: 10px;">mysqldump</a> <a href="/tags/netbeans/" style="font-size: 10px;">netbeans</a> <a href="/tags/nginx/" style="font-size: 17px;">nginx</a> <a href="/tags/ocserv/" style="font-size: 10px;">ocserv</a> <a href="/tags/office/" style="font-size: 10px;">office</a> <a href="/tags/openoffice/" style="font-size: 10px;">openoffice</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/openvpn/" style="font-size: 10px;">openvpn</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 12px;">owncloud</a> <a href="/tags/php-ini/" style="font-size: 10px;">php.ini</a> <a href="/tags/phpinfo/" style="font-size: 10px;">phpinfo</a> <a href="/tags/pip/" style="font-size: 11px;">pip</a> <a href="/tags/post/" style="font-size: 11px;">post</a> <a href="/tags/proxy/" style="font-size: 12px;">proxy</a> <a href="/tags/python/" style="font-size: 12px;">python</a> <a href="/tags/python-pip/" style="font-size: 11px;">python-pip</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/redmine/" style="font-size: 11px;">redmine</a> <a href="/tags/root/" style="font-size: 10px;">root</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shadowsocks/" style="font-size: 12px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/slackware/" style="font-size: 10px;">slackware</a> <a href="/tags/sleep/" style="font-size: 10px;">sleep</a> <a href="/tags/socket/" style="font-size: 13px;">socket</a> <a href="/tags/sockets/" style="font-size: 10px;">sockets</a> <a href="/tags/sprintboot/" style="font-size: 10px;">sprintboot</a> <a href="/tags/sql/" style="font-size: 11px;">sql</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/ssh/" style="font-size: 11px;">ssh</a> <a href="/tags/ssl/" style="font-size: 11px;">ssl</a> <a href="/tags/static/" style="font-size: 10px;">static</a> <a href="/tags/symfony/" style="font-size: 11px;">symfony</a> <a href="/tags/tar/" style="font-size: 11px;">tar</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/time/" style="font-size: 11px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/tls-ssl/" style="font-size: 10px;">tls/ssl</a> <a href="/tags/token/" style="font-size: 10px;">token</a> <a href="/tags/ubuntu/" style="font-size: 13px;">ubuntu</a> <a href="/tags/usort/" style="font-size: 10px;">usort</a> <a href="/tags/vim/" style="font-size: 17px;">vim</a> <a href="/tags/virutal-box/" style="font-size: 10px;">virutal box</a> <a href="/tags/vpn/" style="font-size: 11px;">vpn</a> <a href="/tags/vpn868错误/" style="font-size: 10px;">vpn868错误</a> <a href="/tags/wifi/" style="font-size: 11px;">wifi</a> <a href="/tags/wordpress/" style="font-size: 11px;">wordpress</a> <a href="/tags/xfce/" style="font-size: 10px;">xfce</a> <a href="/tags/yaf/" style="font-size: 12px;">yaf</a> <a href="/tags/yotube/" style="font-size: 10px;">yotube</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/两步验证/" style="font-size: 10px;">两步验证</a> <a href="/tags/中文/" style="font-size: 10px;">中文</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/云计算/" style="font-size: 10px;">云计算</a> <a href="/tags/代理/" style="font-size: 15px;">代理</a> <a href="/tags/优化/" style="font-size: 10px;">优化</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/保存/" style="font-size: 10px;">保存</a> <a href="/tags/修改密码/" style="font-size: 10px;">修改密码</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/写文件/" style="font-size: 10px;">写文件</a> <a href="/tags/函数/" style="font-size: 10px;">函数</a> <a href="/tags/分级/" style="font-size: 10px;">分级</a> <a href="/tags/分页/" style="font-size: 10px;">分页</a> <a href="/tags/创建用户/" style="font-size: 10px;">创建用户</a> <a href="/tags/删除/" style="font-size: 10px;">删除</a> <a href="/tags/刷新/" style="font-size: 10px;">刷新</a> <a href="/tags/动态类型/" style="font-size: 10px;">动态类型</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/卡夫卡/" style="font-size: 10px;">卡夫卡</a> <a href="/tags/参数化/" style="font-size: 11px;">参数化</a> <a href="/tags/参数化查询/" style="font-size: 10px;">参数化查询</a> <a href="/tags/后台/" style="font-size: 10px;">后台</a> <a href="/tags/命令/" style="font-size: 12px;">命令</a> <a href="/tags/命令行/" style="font-size: 12px;">命令行</a> <a href="/tags/备份/" style="font-size: 10px;">备份</a> <a href="/tags/复选框/" style="font-size: 10px;">复选框</a> <a href="/tags/子查询/" style="font-size: 10px;">子查询</a> <a href="/tags/子部门/" style="font-size: 10px;">子部门</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/字节流/" style="font-size: 11px;">字节流</a> <a href="/tags/安全/" style="font-size: 10px;">安全</a> <a href="/tags/宏/" style="font-size: 10px;">宏</a> <a href="/tags/对称加密/" style="font-size: 10px;">对称加密</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/异常/" style="font-size: 12px;">异常</a> <a href="/tags/循环/" style="font-size: 10px;">循环</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/微软雅黑/" style="font-size: 10px;">微软雅黑</a> <a href="/tags/德兰修女/" style="font-size: 10px;">德兰修女</a> <a href="/tags/思科/" style="font-size: 10px;">思科</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/手机/" style="font-size: 10px;">手机</a> <a href="/tags/执行时间/" style="font-size: 10px;">执行时间</a> <a href="/tags/挖矿/" style="font-size: 10px;">挖矿</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/提交/" style="font-size: 10px;">提交</a> <a href="/tags/敏捷/" style="font-size: 10px;">敏捷</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据备份/" style="font-size: 10px;">数据备份</a> <a href="/tags/数据库/" style="font-size: 12px;">数据库</a> <a href="/tags/数组/" style="font-size: 11px;">数组</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/文件存储/" style="font-size: 10px;">文件存储</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/替换/" style="font-size: 12px;">替换</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/架构师/" style="font-size: 10px;">架构师</a> <a href="/tags/树莓派/" style="font-size: 11px;">树莓派</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a> <a href="/tags/毫秒/" style="font-size: 10px;">毫秒</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/海量数据/" style="font-size: 10px;">海量数据</a> <a href="/tags/海量数据导入/" style="font-size: 10px;">海量数据导入</a> <a href="/tags/消息/" style="font-size: 11px;">消息</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/漏洞/" style="font-size: 10px;">漏洞</a> <a href="/tags/环境变量/" style="font-size: 10px;">环境变量</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/箴言/" style="font-size: 10px;">箴言</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/累加/" style="font-size: 10px;">累加</a> <a href="/tags/组/" style="font-size: 10px;">组</a> <a href="/tags/终端/" style="font-size: 13px;">终端</a> <a href="/tags/缓冲区/" style="font-size: 10px;">缓冲区</a> <a href="/tags/编程/" style="font-size: 10px;">编程</a> <a href="/tags/网络/" style="font-size: 11px;">网络</a> <a href="/tags/自定义函数/" style="font-size: 10px;">自定义函数</a> <a href="/tags/菜单/" style="font-size: 10px;">菜单</a> <a href="/tags/虚拟机/" style="font-size: 11px;">虚拟机</a> <a href="/tags/表单/" style="font-size: 10px;">表单</a> <a href="/tags/解压/" style="font-size: 10px;">解压</a> <a href="/tags/解锁/" style="font-size: 10px;">解锁</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/语言/" style="font-size: 10px;">语言</a> <a href="/tags/说明书/" style="font-size: 10px;">说明书</a> <a href="/tags/调试/" style="font-size: 11px;">调试</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 11px;">转换</a> <a href="/tags/输入法/" style="font-size: 10px;">输入法</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/追加/" style="font-size: 10px;">追加</a> <a href="/tags/逆向工程/" style="font-size: 10px;">逆向工程</a> <a href="/tags/邮件/" style="font-size: 12px;">邮件</a> <a href="/tags/邮箱/" style="font-size: 11px;">邮箱</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a> <a href="/tags/配置文件/" style="font-size: 10px;">配置文件</a> <a href="/tags/重复数据/" style="font-size: 10px;">重复数据</a> <a href="/tags/重复记录/" style="font-size: 10px;">重复记录</a> <a href="/tags/错误提示/" style="font-size: 10px;">错误提示</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里/" style="font-size: 10px;">阿里</a> <a href="/tags/阿里云/" style="font-size: 11px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a> <a href="/tags/默认路径/" style="font-size: 10px;">默认路径</a> <a href="/tags/龙角散/" style="font-size: 10px;">龙角散</a>
-    </div>
-  </div>
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a></li></ul>
-    </div>
-  </div>
 
 
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2018/12/12/code-tips/">code-tips</a>
-          </li>
-        
-          <li>
-            <a href="/2018/12/12/world/">world</a>
-          </li>
-        
-          <li>
-            <a href="/2018/11/30/linux-e6-89-b9-e9-87-8f-e6-9b-bf-e6-8d-a2-e6-96-87-e4-bb-b6-e5-86-85-e5-ae-b9/">linux批量替换文件内容</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/24/e6-88-91-e6-8e-a8-e8-8d-90-e7-a6-81-e7-94-a8-e7-9a-84-php-e5-87-bd-e6-95-b0/">我推荐禁用的 PHP 函数</a>
-          </li>
-        
-          <li>
-            <a href="/2018/08/09/mysql-e4-b8-ad-e5-88-a0-e9-99-a4-e9-87-8d-e5-a4-8d-e6-95-b0-e6-8d-ae/">mysql 中删除重复数据</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
 
-  
-</aside>
+
         
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    
+	
+    
 
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
-
+    
   </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('Copied')
+          else $(this).text('Copy failed')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('Copy')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
 </body>
 </html>

@@ -17,6 +17,7 @@ function ago( $datetime )
 }
 
 function text_to_array($str) {
+
     //Initialize arrays
     $keys = array();
     $values = array();
@@ -24,6 +25,7 @@ function text_to_array($str) {
 
     //Is it an array?
     if( substr($str, 0, 5) == 'Array' ) {
+
         //Let's parse it (hopefully it won't clash)
         $array_contents = substr($str, 7, -2);
         $array_contents = str_replace(array('[', ']', '=>'), array('#!#', '#?#', ''), $array_contents);
@@ -40,9 +42,12 @@ function text_to_array($str) {
 
             }
         }
+
         //Return the output.
         return $output;
+
     } else {
+
         //Duh, not an array.
         echo 'The given parameter is not an array.';
         return null;
@@ -55,14 +60,13 @@ error_reporting(E_ALL);
 // other wise, get last
 if (isset($_POST['respi_info'])){
     // delete all file in dir:
-    array_map('unlink', glob(__DIR__ . "/dir_respi_req_info/info.txt"));
-    file_put_contents(__DIR__ . '/dir_respi_req_info/info.txt', print_r($_POST,true));
+    array_map('unlink', glob("./dir_respi_req_info/info.txt"));
+    file_put_contents('./dir_respi_req_info/info.txt', print_r($_POST,true));
 } else {
-    $ip = file_get_contents(__DIR__ . "/dir_respi_req_info/info.txt");
-    if (is_array($ip) === false){ $ip=['msg'=>'get ip error']; }
+    $ip = file_get_contents("./dir_respi_req_info/info.txt");
     $lastArr = text_to_array($ip);
     $date_to_cal = trim($lastArr["updateAt:_"]);
-    print_r('<pre>'.file_get_contents(__DIR__ . '/dir_respi_req_info/info.txt').'</pre>');
+    print_r('<pre>'.file_get_contents('./dir_respi_req_info/info.txt').'</pre>');
     echo 'Server Time: ' . date('Y-m-d H:i:s') . '<span style="color:red;"> [ '.ago(date_create($date_to_cal)).'更新 ]</span>';
 }
 
