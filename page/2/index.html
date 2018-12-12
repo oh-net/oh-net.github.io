@@ -69,6 +69,302 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-e4-bb-8b-e7-bb-8djava-e4-b8-ad-e7-9a-84log4j" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/11/e4-bb-8b-e7-bb-8djava-e4-b8-ad-e7-9a-84log4j/" class="article-date">
+  <time datetime="2017-09-11T11:04:50.000Z" itemprop="datePublished">2017-09-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/11/e4-bb-8b-e7-bb-8djava-e4-b8-ad-e7-9a-84log4j/">介绍Java中的Log4j</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>log4j ,是java中使用的最多的日志记录工具了，虽然现在随着各种更加优秀的服务不断的涌现， 比如kafka等 但是对于小的项目Log4k无疑仍然是最强大的记录日志的方式。 虽然Log4J小组曾竭力游说JCP（Java Community Process）采用Log4J作为JDK 1.4的“标准”日志API，但是最终因Sun的日志API规范的负责人Graham Hamilton的一句“Merlin的开发已经到了最后阶段，这时不允许再对主要API做出改变”而没有被采纳。 但Log4J还是对新的日志API产生 了重要影响。我们来了解下，怎么使用。 ##Log4j的配置文件</p>
+<pre><code>log4j.rootLogger=debug,to_stdout,to_logfile
+log4j.appender.to_stdout=org.apache.log4j.ConsoleAppender
+log4j.appender.to_stdout.layout=org.apache.log4j.PatternLayout
+log4j.appender.to_stdout.layout.ConversionPattern=%5p [%t] (%F:%L) - %m%n
+
+log4j.appender.to_logfile=org.apache.log4j.RollingFileAppender
+log4j.appender.to_logfile.File=/var/log/java/logfile.log
+log4j.appender.to_logfile.MaxFileSize=512KB
+log4j.appender.to_logfile.MaxBackupIndex=3
+log4j.appender.to_logfile.layout=org.apache.log4j.PatternLayout
+log4j.appender.to_logfile.layout.ConversionPattern=%d %p [%c] - %m%n
+</code></pre><p>##第一种方法：从src中读取 ###示例代码：</p>
+<pre><code>public class TestLog4j {
+    public static  void main(String [] args){
+        // 1. Create log
+        Logger log = Logger.getLogger(TestLog4j.class);
+        // 2. Get log config
+        PropertyConfigurator.configure(&quot;src/log4j.properties&quot;);
+        // 3. Start log
+        log.debug(&quot;Here is some DEBUG&quot;);
+        log.info(&quot;Here is some INFO&quot;);
+        log.warn(&quot;Here is some WARN&quot;);
+        log.error(&quot;Here is some ERROR&quot;);
+        log.fatal(&quot;Here is some FATAL&quot;);
+    }
+}
+</code></pre><p>###需要注意的地方：### <strong>1. 关于配置文件内容</strong><br>仔细的同学应该已经发现了，我故意把配置文件中的 <code>rootLogger</code> 属性名做了一些改动：“<strong>to_</strong>stdout”、“<strong>to_</strong>logfile”<br>用逗号分割的参数，第一个是日志级别，后面两个实际上是日志输出的目的地（名称而已） <strong>2. 关于 <code>log4j.properties</code> 放置的路径</strong><br>如下图所示，<code>log4j.properties</code> 放在红色的地方是错误的，应该放置在绿色区域，<strong><em>也就是项目的根目录（src的目录中）</em></strong> 参考网站这里：<a href="https://stackoverflow.com/questions/11302531/how-to-place-a-file-on-classpath-in-eclipse" target="_blank" rel="noopener">stackoverflow</a> 虽然网上很多教程都说 resources 是用来放置一些配置文件。但是，代码中的这种方式，不是放这里。 <img src="//solo.qiniu.cdn.msla.top//file/2017/9/af6a56eea70c4bfeb5f02800e5e20ada-001.png" alt="af6a56eea70c4bfeb5f02800e5e20ada-001.png"> ##第二种方法：从资源文件夹中读取 ###示例代码：</p>
+<pre><code>public class TestLog4j {
+    public static  void main(String [] args){
+        // 1. Create log
+        Logger log = Logger.getLogger(TestLog4j.class);
+        // 2. Get log config
+        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+        URL url = loader.getResource(&quot;log4j.properties&quot;);
+        PropertyConfigurator.configure(url);
+
+        // 3. Start log
+        log.debug(&quot;====== debug info below ======&quot;);
+        log.debug(&quot;Here is some DEBUG&quot;);
+        log.info(&quot;Here is some INFO&quot;);
+        log.warn(&quot;Here is some WARN&quot;);
+        log.error(&quot;Here is some ERROR&quot;);
+        log.fatal(&quot;Here is some FATAL&quot;);
+    }
+}
+</code></pre><p><strong>配置文件路径</strong> <code>resources/log4j.properties</code> <img src="//solo.qiniu.cdn.msla.top//file/2017/9/2b6200a67eef4250a997137afd63d061-002.png" alt="2b6200a67eef4250a997137afd63d061-002.png"> 这种方式通过先读取当前上下文的执行路径， 然后获取配置文件对应的路径 这样才可以顺利的读取到 resources 中的配置文件， 我个人更喜欢第种方式，虽然写的代码多了一点， 但是看起来比较整洁～配置文件放在了该放置的地方。。。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/11/e4-bb-8b-e7-bb-8djava-e4-b8-ad-e7-9a-84log4j/" data-id="cjpky9dpe0031z281vxd0opf5" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/log4j/">log4j</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日志/">日志</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-3-e7-a7-8djava-e4-bb-8e-e6-96-87-e4-bb-b6-e8-b7-af-e5-be-84-e4-b8-ad-e8-8e-b7-e5-8f-96-e6-96-87-e4-bb-b6-e5-90-8d-e7-9a-84-e6-96-b9-e6-b3-95" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/07/3-e7-a7-8djava-e4-bb-8e-e6-96-87-e4-bb-b6-e8-b7-af-e5-be-84-e4-b8-ad-e8-8e-b7-e5-8f-96-e6-96-87-e4-bb-b6-e5-90-8d-e7-9a-84-e6-96-b9-e6-b3-95/" class="article-date">
+  <time datetime="2017-09-07T02:00:45.000Z" itemprop="datePublished">2017-09-07</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/07/3-e7-a7-8djava-e4-bb-8e-e6-96-87-e4-bb-b6-e8-b7-af-e5-be-84-e4-b8-ad-e8-8e-b7-e5-8f-96-e6-96-87-e4-bb-b6-e5-90-8d-e7-9a-84-e6-96-b9-e6-b3-95/">3种Java从文件路径中获取文件名的方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>package test;  
+
+import java.io.File;  
+
+public class FileName {  
+
+    /** 
+     * @param args 
+     */  
+    public static void main(String[] args) {  
+//      举例：  
+        String fName =&quot; G:Java_Sourcenavigation_tigra_menudemo1imglev1_arrow.gif &quot;;  
+
+//      方法一：  
+
+        File tempFile =new File( fName.trim());  
+
+        String fileName = tempFile.getName();  
+
+        System.out.println(&quot;fileName = &quot; + fileName);  
+
+//      方法二：  
+
+        String fName = fName.trim();  
+
+        String fileName = fName.substring(fName.lastIndexOf(&quot;/&quot;)+1);  
+        //或者  
+        String fileName = fName.substring(fName.lastIndexOf(&quot;&quot;)+1);  
+
+        System.out.println(&quot;fileName = &quot; + fileName);  
+
+//      方法三：  
+
+        String fName = fName.trim();  
+
+        String temp[] = fName.split(&quot;&quot;); /**split里面必须是正则表达式，&quot;&quot;的作用是对字符串转义*/  
+
+        String fileName = temp[temp.length-1];  
+
+        System.out.println(&quot;fileName = &quot; + fileName);  
+
+    }  
+
+}
+</code></pre><p>文章来源： <a href="http://rogerfederer.iteye.com/blog/1039666" target="_blank" rel="noopener">http://rogerfederer.iteye.com/blog/1039666</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/09/07/3-e7-a7-8djava-e4-bb-8e-e6-96-87-e4-bb-b6-e8-b7-af-e5-be-84-e4-b8-ad-e8-8e-b7-e5-8f-96-e6-96-87-e4-bb-b6-e5-90-8d-e7-9a-84-e6-96-b9-e6-b3-95/" data-id="cjpky9do2000tz2816j4c05fc" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/文件名/">文件名</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/路径/">路径</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e3-80-90pip-e3-80-91pypi-e9-95-9c-e5-83-8f-e4-bd-bf-e7-94-a8-e5-b8-ae-e5-8a-a9" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/30/e3-80-90pip-e3-80-91pypi-e9-95-9c-e5-83-8f-e4-bd-bf-e7-94-a8-e5-b8-ae-e5-8a-a9/" class="article-date">
+  <time datetime="2017-08-30T02:16:23.000Z" itemprop="datePublished">2017-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/30/e3-80-90pip-e3-80-91pypi-e9-95-9c-e5-83-8f-e4-bd-bf-e7-94-a8-e5-b8-ae-e5-8a-a9/">【pip】PyPI 镜像使用帮助</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>如何使用科大 mirrors 加速 pip？</strong> 编辑 <code>~/.pip/pip.conf</code> 文件（如果没有则创建之），将 index-url 开头的一行修改为下面一行：</p>
+<p>index-url = <a href="https://mirrors.ustc.edu.cn/pypi/web/simple" target="_blank" rel="noopener">https://mirrors.ustc.edu.cn/pypi/web/simple</a></p>
+<p>如果运行 pip 时, 提示如下错误</p>
+<p>configparser.MissingSectionHeaderError: File contains no section headers.</p>
+<p>请在 <code>~/.pip/pip.conf</code> 最上方加上 [global] 这一 section header 如：</p>
+<pre><code>[global]
+index-url = https://mirrors.ustc.edu.cn/pypi/web/simple
+format = columns
+</code></pre><p><strong>&gt;同步方式</strong> 使用 bandersnatch，每4小时从 pypi.python.org 官方同步。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/30/e3-80-90pip-e3-80-91pypi-e9-95-9c-e5-83-8f-e4-bd-bf-e7-94-a8-e5-b8-ae-e5-8a-a9/" data-id="cjpky9dp9002rz281ykagrhdv" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pip/">pip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/中科大/">中科大</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-centos7-e4-b8-8b-e5-ae-89-e8-a3-85pip" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/30/centos7-e4-b8-8b-e5-ae-89-e8-a3-85pip/" class="article-date">
+  <time datetime="2017-08-30T01:50:55.000Z" itemprop="datePublished">2017-08-30</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/30/centos7-e4-b8-8b-e5-ae-89-e8-a3-85pip/">Centos7下安装pip</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li>pip简介 pip 是一个Python计算机程序语言写成的软件包管理系统，它可以安装和管理软件包</li>
+<li><p>Centos 7 下安装pip 我的Python版本是2.7.5，所以需要安装pip，安装教程上说：如果从<a href="https://www.python.org/" target="_blank" rel="noopener">Python.org</a> 上下载的python2版本&gt;= 2.7.9 或者 Python3 版本&gt;=3.4 已经安装了pip，只需update</p>
+<ul>
+<li><p>下载get-pip.py</p>
+<p>wget <a href="https://bootstrap.pypa.io/get-pip.py" target="_blank" rel="noopener">https://bootstrap.pypa.io/get-pip.py</a></p>
+</li>
+<li><p>执行get-pip.py</p>
+<p>python get-pip.py</p>
+</li>
+</ul>
+<p>会自动安装pip需要的依赖包</p>
+<ul>
+<li><p>查看pip命令</p>
+<p>pip</p>
+</li>
+<li><p>修改~/.pip/pip.conf文件</p>
+</li>
+</ul>
+<p>这个文件如果没有就创建一个，为了让pip下载安装包速度快一点，做如下修改：</p>
+<pre><code>[global]
+timeout = 60
+index-url = https://mirrors.ustc.edu.cn/pypi/web/simple
+</code></pre></li>
+<li><p>参考地址 <a href="https://pip.pypa.io/en/stable/installing/" target="_blank" rel="noopener">https://pip.pypa.io/en/stable/installing/</a></p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/08/30/centos7-e4-b8-8b-e5-ae-89-e8-a3-85pip/" data-id="cjpky9dos001uz281ncoemyac" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/pip/">pip</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-pip/">python-pip</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-874" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/08/16/874/" class="article-date">
@@ -116,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/16/874/" data-id="cjpkxzik30001vd811htxuf2i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/16/874/" data-id="cjpky9doa0010z2812e5mtlra" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/date/">date</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/time/">time</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/日期时间/">日期时间</a></li></ul>
@@ -726,10 +1022,93 @@ cap_mkdb /etc/login.conf
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/08/07/a-freebsd-11-desktop-how-to/" data-id="cjpky081s0003vn81645di3in" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/08/07/a-freebsd-11-desktop-how-to/" data-id="cjpky9dqx0085z2813kj59pcl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/desktop/">desktop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/消息/">消息</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-e4-bd-bf-e7-94-a8screen-e5-91-bd-e4-bb-a4-e9-95-bf-e6-9c-9f-e6-89-a7-e8-a1-8c-e8-bf-9c-e7-a8-8b-e5-91-bd-e4-bb-a4" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/19/e4-bd-bf-e7-94-a8screen-e5-91-bd-e4-bb-a4-e9-95-bf-e6-9c-9f-e6-89-a7-e8-a1-8c-e8-bf-9c-e7-a8-8b-e5-91-bd-e4-bb-a4/" class="article-date">
+  <time datetime="2017-07-19T07:41:25.000Z" itemprop="datePublished">2017-07-19</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/19/e4-bd-bf-e7-94-a8screen-e5-91-bd-e4-bb-a4-e9-95-bf-e6-9c-9f-e6-89-a7-e8-a1-8c-e8-bf-9c-e7-a8-8b-e5-91-bd-e4-bb-a4/">使用screen命令长期执行远程命令</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="使用-screen-命令长期执行远程命令"><a href="#使用-screen-命令长期执行远程命令" class="headerlink" title="使用 screen 命令长期执行远程命令"></a>使用 <code>screen</code> 命令长期执行远程命令</h2><p>经常需要登录到 linux 里执行一些长时间运行的命令， 后台执行的方法有很多，包括 <em><code>nhup</code></em> <em><code>&amp;</code></em> 等等 但是这些不支持全部的功能，比如我执行一个命令，需要在开始时接受用户输入，比如 密码、是否确认执行 这个时候比较适合用 <em><code>screen</code></em> 最常用的命令：</p>
+<h3 id="开启一个名为-task1-的-screen："><a href="#开启一个名为-task1-的-screen：" class="headerlink" title="开启一个名为 task1 的 screen："></a>开启一个名为 task1 的 <code>screen</code>：</h3><pre><code>screen -S task1
+</code></pre><p>这时可以看到终端闪了一下，然后屏幕变成干干净净的了，其实标题行还显示着 <code>screen 0 ××××</code> 等信息 即表示已经进入了screen的 Session 中了 然后就可以在这里执行任意的命令，和普通终端一模一样， 如果执行了一个需要很久才能结束的命令 ，又怕中途 SSH 断掉而中断命令， 可以在screen 窗口直接按键：</p>
+<pre><code>Ctrl+a   d
+</code></pre><h3 id="↑-让-screen-进入-Detached-模式"><a href="#↑-让-screen-进入-Detached-模式" class="headerlink" title="↑ 让 screen 进入 Detached 模式"></a>↑ 让 <code>screen</code> 进入 <em>Detached</em> 模式</h3><p>（将任务（Session）转移到后台）</p>
+<h3 id="当你需要再次进入screen"><a href="#当你需要再次进入screen" class="headerlink" title="当你需要再次进入screen"></a>当你需要再次进入screen</h3><p>以查看刚刚的命令执行的怎么样了， 可以先 list 一下：</p>
+<pre><code>screen -ls
+</code></pre><p>现在会显示出所有正在执行的命令，比如</p>
+<pre><code>[root@SJHL199-29 ~]# screen -ls
+There is a screen on:
+    32353.task1 (Detached)
+1 Socket in /var/run/screen/S-root.
+</code></pre><p>然后使用</p>
+<pre><code>screen -r 32353
+</code></pre><h3 id="↑进入刚才执行的命令-session中"><a href="#↑进入刚才执行的命令-session中" class="headerlink" title="↑进入刚才执行的命令/session中"></a>↑进入刚才执行的命令/session中</h3><p>使用 <code>Ctrl + d</code> 可以终止当前窗口</p>
+<hr>
+<p><strong>常用的 screen 命令</strong></p>
+<p>按键方式</p>
+<p>意义</p>
+<p>C-a ?</p>
+<p>显示所有键绑定信息</p>
+<p>C-a w</p>
+<p>显示所有窗口列表</p>
+<p>C-a C-a</p>
+<p>切换到之前显示的窗口</p>
+<p>C-a c</p>
+<p>创建一个新的运行shell的窗口并切换到该窗口</p>
+<p>C-a n</p>
+<p>切换到下一个窗口</p>
+<p>C-a p</p>
+<p>切换到前一个窗口(与C-a n相对)</p>
+<p>C-a 0..9</p>
+<p>切换到窗口0..9</p>
+<p>C-a a</p>
+<p>发送 C-a到当前窗口</p>
+<p>C-a d</p>
+<p><strong>暂时断开screen会话</strong></p>
+<p>C-a k</p>
+<p><strong>杀掉当前窗口</strong></p>
+<p>C-a [</p>
+<p>进入拷贝/回滚模式</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/07/19/e4-bd-bf-e7-94-a8screen-e5-91-bd-e4-bb-a4-e9-95-bf-e6-9c-9f-e6-89-a7-e8-a1-8c-e8-bf-9c-e7-a8-8b-e5-91-bd-e4-bb-a4/" data-id="cjpky9dpn003dz281nan9spwr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/screen/">screen</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssh/">ssh</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/后台/">后台</a></li></ul>
 
     </footer>
   </div>
@@ -872,7 +1251,7 @@ RewriteCond %{REQUEST_URI} !^/php5-fcgi/*
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/07/04/745/" data-id="cjpkxzikb0005vd81isxdkabk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/07/04/745/" data-id="cjpky9do9000yz281yr51ppqm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debian/">debian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wordpress/">wordpress</a></li></ul>
@@ -932,7 +1311,7 @@ HTML_FLASH_MSG;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/26/codeingitor-form-e8-a1-a8-e5-8d-95-e5-b8-a6-e9-94-99-e8-af-af-e5-92-8cflash-message-e4-bb-a3-e7-a0-81/" data-id="cjpky1ll10003wi813rovjb1x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/06/26/codeingitor-form-e8-a1-a8-e5-8d-95-e5-b8-a6-e9-94-99-e8-af-af-e5-92-8cflash-message-e4-bb-a3-e7-a0-81/" data-id="cjpky9dp10027z281ijrz5eoj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ci/">ci</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/表单/">表单</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/错误提示/">错误提示</a></li></ul>
@@ -1022,7 +1401,7 @@ $KEY_INFO = array(
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/06/02/codeigniter-e9-a1-b9-e7-9b-ae-e7-8e-af-e5-a2-83-e9-85-8d-e7-bd-ae/" data-id="cjpky1lkx0001wi81zfcg25jw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/06/02/codeigniter-e9-a1-b9-e7-9b-ae-e7-8e-af-e5-a2-83-e9-85-8d-e7-bd-ae/" data-id="cjpky9doz0024z281q8djdofa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ci/">ci</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
@@ -1034,388 +1413,10 @@ $KEY_INFO = array(
 
 
   
-    <article id="post-centos7-e5-ae-89-e8-a3-85-fastdfs" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/16/centos7-e5-ae-89-e8-a3-85-fastdfs/" class="article-date">
-  <time datetime="2017-03-16T07:17:58.000Z" itemprop="datePublished">2017-03-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/16/centos7-e5-ae-89-e8-a3-85-fastdfs/">centos7 安装 fastdfs</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong>安装编译环境</strong>  yum -y install gcc gcc-c++  <strong>其他依赖库（是否必须尚未验证）</strong>  yum -y groupinstall ‘Development Tools’ yum -y install wget</p>
-<p><strong>公共依赖，不执行会在编译</strong> <strong>FASTDFS</strong> <strong>时提示找不到</strong> <strong>logger.h</strong>  wget <a href="https://github.com/happyfish100/libfastcommon/archive/master.zip" target="_blank" rel="noopener">https://github.com/happyfish100/libfastcommon/archive/master.zip</a> unzip master.zip cd libfastcommon-master ./make.sh ./make.sh install</p>
-<p><strong>安装主体程序</strong>  wget <a href="https://github.com/happyfish100/fastdfs/archive/V5.05.tar.gz" target="_blank" rel="noopener">https://github.com/happyfish100/fastdfs/archive/V5.05.tar.gz</a> tar -zxvf V5.05.tar.gz cd fastdfs-5.05/ ./make.sh ./make.sh install</p>
-<p><strong>关闭**</strong>firewall<strong>**：</strong>  systemctl stop firewalld.service #停止firewall systemctl disable firewalld.service #禁止firewall开机启动</p>
-<p><strong>测试</strong></p>
-<p><strong>连接**</strong>/<strong>**调用</strong></p>
-<p>Java 客户端： <a href="https://github.com/happyfish100/fastdfs-client-java" target="_blank" rel="noopener">https://github.com/happyfish100/fastdfs-client-java</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/16/centos7-e5-ae-89-e8-a3-85-fastdfs/" data-id="cjpky130e0008w8813n6lrqyx" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastdfs/">fastdfs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-centos-7-e5-ae-89-e8-a3-85-lnmp" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/03/16/centos-7-e5-ae-89-e8-a3-85-lnmp/" class="article-date">
-  <time datetime="2017-03-16T07:02:41.000Z" itemprop="datePublished">2017-03-16</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/16/centos-7-e5-ae-89-e8-a3-85-lnmp/">CentOS 7 安装 LNMP</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>FROM <a href="https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysql-php-lemp-stack-on-centos-7" target="_blank" rel="noopener">DigitalOcean</a></p>
-<h2 id="Install-Nginx"><a href="#Install-Nginx" class="headerlink" title="Install Nginx"></a>Install Nginx</h2><pre><code>sudo yum install epel-release
-
-
-sudo yum install nginx
-
-sudo systemctl start nginx
-
-sudo systemctl enable nginx
-</code></pre><h2 id="Install-MySQL-MariaDB"><a href="#Install-MySQL-MariaDB" class="headerlink" title="Install MySQL (MariaDB)"></a>Install MySQL (MariaDB)</h2><pre><code>sudo yum install mariadb-server mariadb
-
-sudo systemctl start mariadb
-
-sudo mysql_secure_installation
-
-sudo systemctl enable mariadb
-</code></pre><h2 id="Install-PHP"><a href="#Install-PHP" class="headerlink" title="Install PHP"></a>Install PHP</h2><pre><code>sudo yum install php php-mysql php-fpm
-
-sudo vi /etc/php.ini
-
-/* 设置对应配置为： */
-cgi.fix_pathinfo=0
-
-sudo vi /etc/php-fpm.d/www.conf
-</code></pre><p>修改相应配置：</p>
-<pre><code>listen = /var/run/php-fpm/php-fpm.sock
-
-listen.owner = nobody
-listen.group = nobody
-
-user = nginx
-group = nginx
-
-
-sudo systemctl start php-fpm
-
-sudo systemctl enable php-fpm
-</code></pre><h2 id="Configure-Nginx-to-Process-PHP-Pages"><a href="#Configure-Nginx-to-Process-PHP-Pages" class="headerlink" title="Configure Nginx to Process PHP Pages"></a>Configure Nginx to Process PHP Pages</h2><pre><code>sudo vi /etc/nginx/conf.d/default.conf
-</code></pre><p>修改为类似下面的：</p>
-<pre><code>server {
-    listen       80;
-    server_name  server_domain_name_or_IP;
-
-    # note that these lines are originally from the &quot;location /&quot; block
-    root   /usr/share/nginx/html;
-    index index.php index.html index.htm;
-
-    location / {
-        try_files $uri $uri/ =404;
-    }
-    error_page 404 /404.html;
-    error_page 500 502 503 504 /50x.html;
-    location = /50x.html {
-        root /usr/share/nginx/html;
-    }
-
-    location ~ .php$ {
-        try_files $uri =404;
-        fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
-        fastcgi_index index.php;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-}
-
-
-
-sudo systemctl restart nginx
-</code></pre><h2 id="Test-PHP-Processing-on-your-Web-Server"><a href="#Test-PHP-Processing-on-your-Web-Server" class="headerlink" title="Test PHP Processing on your Web Server"></a>Test PHP Processing on your Web Server</h2><pre><code>sudo vi /usr/share/nginx/html/info.php
-
-&lt;?php phpinfo(); ?&gt;
-
-sudo rm /usr/share/nginx/html/info.php
-</code></pre><p>sdfs sd</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/03/16/centos-7-e5-ae-89-e8-a3-85-lnmp/" data-id="cjpky13030001w881w89ftv2y" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/" class="article-date">
-  <time datetime="2016-04-27T06:57:13.000Z" itemprop="datePublished">2016-04-27</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/">CentOS下pip和shadowsocks的安装使用</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>centos 我机器上装的时候，不能直接通过yum install pip, 而通过下面的， easy_install 安装成功了。</p>
-<blockquote>
-<p>可以通过使用 “sudo yum install epel-release” 来安装 python-pip</p>
-</blockquote>
-<p>另一点要注意的是，配置文件中的名称和值之间虽然是通过冒号分割的，但是还是要留出空格，否则会提示找不到服务器: <strong>“server”:”123.123.123.123” // 错误！</strong> <strong>“server” : “123.123.123.123” // 正确</strong> Pip是安装Python包的工具，提供了安装、列举已安装包、升级以及卸载包的功能。Pip 是对easy_install的取代，提供了和easy_install相同的查找包的功能，因此可以使用easy_install安装的包也同样可以使用pip进行安装。 目前有很多Python程序都是可以直接通过Pip来一键安装了，比如众所周知的Django、Markdown、Shadowsocks等。 简要介绍一下Pip的用法（以安装Shadowsocks举例）： 1、安装package</p>
-<pre><code>pip install shadowsocks
-</code></pre><p>  2、列出已安装的packages</p>
-<pre><code>pip freeze
-</code></pre><p>3、安装特定版本的package</p>
-<pre><code>pip install shadowsocks=1.3.3′
-pip install shadowsocks&gt;1.0,&lt;1.3.3′
-</code></pre><p>4、升级已安装的package到最新版本</p>
-<pre><code>pip install -U shadowsocks
-</code></pre><p>5、卸载已安装的package</p>
-<pre><code>pip uninstall shadowsocks
-</code></pre><p>6、查询已安装的package</p>
-<pre><code>pip search “shadowsocks”
-</code></pre><p>安装Pip之前必须要先安装setuptools，安装setuptools之前，必须要安装了Python，这之间的安装过程存在依赖关系，缺一不可。因此，整个过程还是比较麻烦的。 1、 检查Python版本</p>
-<pre><code>python –version
-</code></pre><p>CentOS 6.5默认安装的Python版本是2.6.6，返回值为：Python 2.6.6 2、 安装setuptools</p>
-<pre><code>yum install -y python-setuptools
-</code></pre><p>安装完毕后，easy_install命令就可以使用了。 3、 安装pip</p>
-<pre><code>easy_install pip
-</code></pre><p>通过easy_install安装pip是最为简单的方法。pip默认安装到/usr/bin目录下。 4、 安装shadowsocks</p>
-<pre><code>pip install shadowsocks
-</code></pre><p>截至目前，通过pip安装的shadowsocks版本为2.8.2 [2018-2-1] Shadowsocks的配置和使用 至于Shadowsocks可以拿来做什么，这里就毋须赘述了。直接开始吧。 1、 创建Shadowsocks的配置文件： CentOS下通过vim创建该配置，运行命令：</p>
-<pre><code>vi /etc/config.json
-</code></pre><p>内容如下：</p>
-<pre><code>{
-  &quot;server&quot;:&quot;my_server_ip&quot;,
-  &quot;server_port&quot;:8989,
-  &quot;local_port&quot;:1080,
-  &quot;password&quot;:&quot;teddysun.com&quot;,
-  &quot;timeout&quot;:600,
-  &quot;method&quot;:&quot;aes-256-cfb&quot;
-}
-</code></pre><p>  各字段的含义：</p>
-<pre><code>server  服务器 IP (IPv4/IPv6)，注意这也将是服务端监听的 IP 地址
-server_port  服务器端口
-local_port  本地端端口
-password  用来加密的密码
-timeout  超时时间（秒）
-method  加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”, “rc4″, 等等。默认是一种不安全的加密，推荐用 “aes-256-cfb”
-</code></pre><p>创建完毕后，赋予权限：</p>
-<pre><code>chmod 755 /etc/config.json
-</code></pre><p>2、 安装M2Crypto 默认加密方法 table 速度很快，但很不安全。推荐使用 “aes-256-cfb” 或者 “bf-cfb”。请不要使用 “rc4″，它不安全。如果选择 “table” 之外的加密，需要安装 M2Crypto。 先安装依赖包：</p>
-<pre><code>yum install -y openssl-devel gcc swig python-devel autoconf libtool
-</code></pre><p>安装setuptools：</p>
-<pre><code>wget --no-check-certificate https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
-python ez_setup.py install再通过pip安装M2Crypto：
-pip install M2Crypto
-</code></pre><p>  3、 安装 gevent 安装 gevent可以提高 Shadowsocks 的性能。CentOS下安装gevent依赖libevent和greenlet。 安装libevent：</p>
-<pre><code>yum install -y libevent
-</code></pre><p>安装greenlet：</p>
-<pre><code>pip install greenlet
-</code></pre><p>安装gevent：</p>
-<pre><code>pip install gevent
-</code></pre><p>4、 命令行参数（服务器端启动命令）</p>
-<pre><code>ssserver -c /etc/config.json
-</code></pre><p>如果想在后台一直运行Shadowsocks，启动命令如下：</p>
-<pre><code>nohup ssserver -c /etc/config.json &gt; /dev/null 2&gt;&amp;1 &amp;备注：关于nohup，是可以让程序在后台运行的命令，当执行以上命令后，屏幕输出进程的pid，同时提示：
-nohup: ignoring input and redirecting stderr to stdout
-</code></pre><p>此时，再次回车一下，回到shell输入命令窗口即可。 同时可以用命令行参数覆盖 config.json 里的设置：</p>
-<pre><code>sslocal -s 服务器地址 -p 服务器端口 -l 本地端端口 -k 密码 -m 加密方法
-ssserver -p 服务器端口 -k 密码 -m 加密方法
-</code></pre><p>备注：sslocal是客户端程序；ssserver是服务端程序。 5、 防火墙设置（如有） 编辑防火墙配置文件/etc/sysconfig/iptables，将服务器端口（server_port）放行。 新增一条防火墙规则：</p>
-<pre><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 8989 -j ACCEPT重启防火墙iptables：
-service iptables restart
-</code></pre><p>至此，服务器端的Shadowsocks安装和配置完毕。 6、客户端配置 Windows客户端有图形界面也有命令行，我们这里以配置图形化界面的shadowsocks-csharp为例说明。 下载客户端shadowsocks-csharp（最新版1.1.2）： <a href="https://shadowsocks-csharp.googlecode.com/files/shadowsocks-csharp-1.1.2.zip" target="_blank" rel="noopener">https://shadowsocks-csharp.googlecode.com/files/shadowsocks-csharp-1.1.2.zip</a> 解压至任意目录下，双击shadowsocks-csharp.exe运行程序，各参数选项填入： <img src="https://tech.msla.top/wp-content/uploads/2018/04/20140227040626597.png" alt="CentOS下pip和shadowsocks的安装使用"></p>
-<pre><code>Server IP:   服务器 IP (IPv4/IPv6)，填入在服务器端设置的IP地址（server）
-Server Port: 服务器端口，填入在服务器端设置的端口号（server_port）
-Password:    用来加密的密码，填入在服务器端设置的加密密码（password）
-Proxy Port:  本地端代理的端口，填入在服务器端设置的本地端端口（local_port）
-Encryptor:   加密方法，填入在服务器端设置的加密方法（method）
-</code></pre><p>备注：本地客户端填写的参数一定要与服务器端设置的一致才可以。 下面就可以利用浏览器插件无障碍浏览国外网站了。插件的设置过程这里略过。 AutoProxy（用于Firefox）、Proxy SwitchySharp（用于Chrome）</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/" data-id="cjpky13090003w881kaw0cmdw" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/centos/">centos</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-474" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/25/474/" class="article-date">
-  <time datetime="2016-03-25T02:21:23.000Z" itemprop="datePublished">2016-03-25</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/25/474/">依赖注入</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h1><p>###1. 依赖<br>如果在 Class A 中，有 Class B 的实例，则称 Class A 对 Class B 有一个依赖。例如下面类 Human 中用到一个 Father 对象，我们就说类 Human 对类 Father 有一个依赖。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Human</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    Father father;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Human</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        father = <span class="keyword">new</span> Father();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>仔细看这段代码我们会发现存在一些问题：<br>(1). 如果现在要改变 father 生成方式，如需要用`new Father(String name)`初始化 father，需要修改 Human 代码；<br>(2). 如果想测试不同 Father 对象对 Human 的影响很困难，因为 father 的初始化被写死在了 Human 的构造函数中；<br>(3). 如果`new Father()`过程非常缓慢，单测时我们希望用已经初始化好的 father 对象 Mock 掉这个过程也很困难。</p>
-<p>###2. 依赖注入<br>上面将依赖在构造函数中直接初始化是一种 Hard init 方式，弊端在于两个类不够独立，不方便测试。我们还有另外一种 Init 方式，如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Human</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    Father father;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Human</span><span class="params">(Father father)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.father = father;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面代码中，我们将 father 对象作为构造函数的一个参数传入。在调用 Human 的构造方法之前外部就已经初始化好了 Father 对象。<strong>像这种非自己主动初始化依赖，而通过外部来传入依赖的方式，我们就称为依赖注入。</strong><br>现在我们发现上面 1 中存在的两个问题都很好解决了，简单的说依赖注入主要有两个好处：<br>(1). 解耦，将依赖之间解耦。<br>(2). 因为已经解耦，所以方便做单元测试，尤其是 Mock 测试。</p>
-<p>###3. Java 中的依赖注入</p>
-<p>依赖注入的实现有多种途径，而在 Java 中，使用注解是最常用的。通过在字段的声明前添加 @Inject 注解进行标记，来实现依赖对象的自动注入。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Human</span> </span>&#123;</span><br><span class="line">    ...</span><br><span class="line">    <span class="meta">@Inject</span> Father father;</span><br><span class="line">    ...</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Human</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>上面这段代码看起来很神奇：只是增加了一个注解，Father 对象就能自动注入了？这个注入过程是怎么完成的？</p>
-<p>实质上，如果你只是写了一个 @Inject 注解，Father 并不会被自动注入。你还需要使用一个依赖注入框架，并进行简单的配置。现在 Java 语言中较流行的依赖注入框架有 [Google Guice](<a href="https://github.com/google/guice)、\[Spring\](http://projects.spring.io/spring-framework/)" target="_blank" rel="noopener">https://github.com/google/guice)、\[Spring\](http://projects.spring.io/spring-framework/)</a> 等，而在 Android 上比较流行的有 [RoboGuice](<a href="https://github.com/roboguice/roboguice)、\[Dagger\](http://square.github.io/dagger/)" target="_blank" rel="noopener">https://github.com/roboguice/roboguice)、\[Dagger\](http://square.github.io/dagger/)</a> 等。其中 Dagger 是我现在正在项目中使用的。如果感兴趣，你可以到 [Dagger 实现原理解析](<a href="https://github.com/android-cn/android-open-project-analysis/tree/master/dagger" target="_blank" rel="noopener">https://github.com/android-cn/android-open-project-analysis/tree/master/dagger</a>) 了解更多依赖注入和 Dagger 实现原理相关信息。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/25/474/" data-id="cjpkxziju0000vd81lldkl5ch" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/依赖注入/">依赖注入</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-dropbox-e4-bd-bf-e7-94-a8-e6-8a-80-e5-b7-a7" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/03/19/dropbox-e4-bd-bf-e7-94-a8-e6-8a-80-e5-b7-a7/" class="article-date">
-  <time datetime="2016-03-19T11:57:02.000Z" itemprop="datePublished">2016-03-19</time>
-</a>
-    
-  <div class="article-category">
-    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
-  </div>
-
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/03/19/dropbox-e4-bd-bf-e7-94-a8-e6-8a-80-e5-b7-a7/">Dropbox 使用技巧</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><em>原文：<a href="https://link.zhihu.com/?target=http%3A//www.labnol.org/internet/best-dropbox-apps/20672/" target="_blank" rel="noopener">The Best Apps for your Dropbox</a></em> Dropbox全球拥有五千万用户，因为这种巨大的普及，围绕Dropbox创建的基于在线存储服务的新的功能和扩展已经形成了一个完整的生态系统。下面是一些最好的应用程序，你应该用你的Dropbox帐户体验一下。 1。使用Dropbox的搭建一个网站或博客 你的Dropbox有一个公共文件夹，你在这个文件夹中添加的文件，网络上任何人都可以访问到，只要他们有一个链接指向该文件。从而可以把所有的HTML，JAVASCRIPT，CSS和图像文件放到这个文件夹中， 定向到你的域名，你的迷你网站就正式上线了。 另外，如果你想有一个更简单的解决方案，使用 <a href="https://link.zhihu.com/?target=http%3A//DropPages.com" target="_blank" rel="noopener">http://DropPages.com</a>，Scriptogr.am 和 <a href="https://link.zhihu.com/?target=http%3A//Pancake.io" target="_blank" rel="noopener">http://Pancake.io</a>这样的应用，它们都可以使用Dropbox免费的发布你的简单的网站。DropPages和Pancake适合定期发布网页，而Scriptogram更适合于博客格式（按时间倒序）。 2。同步Google Docs和Dropbox。 如果你在“Google Docs中写一个文档，离线后在你的Dropbox文件夹内就可以访问到，岂不是很给力？或反之亦然，你在Dropbox中添加一个或多个文件，它们奇迹般地出现在你的Google Docs 帐户中？ 有 一个优秀的服务，叫做insync，可以通过哥小技巧使得你的Google Docs文件可以与你的桌面文件夹同步，你也可以将它与Dropbox整合使用。启动Insync应用程序（在Mac和Windows下都可使用），在 “首选项”下，只是改变默认Insync目录到Dropbox文件夹下。另一种方法是cloudHQ ，不过他们的免费服务有一些限制。 3。在Dropbox中保存电子邮件附件 通过<a href="https://link.zhihu.com/?target=http%3A//attachments.me" target="_blank" rel="noopener">Attachments.me is Shutting Down</a>，你只需要点击一下，就可以快速地将Gmail帐户中的附件保存到你的Dropbox文件夹中。 这样做有两个途径。您既可以安装<a href="https://link.zhihu.com/?target=http%3A//attachments.me" target="_blank" rel="noopener">Attachments.me is Shutting Down</a>的Chrome扩展，只要你正在Gmail中读取消息，就可以发送任意附件到你的Dropbox中，而无需离开Gmail。另外，你可以使用<a href="https://link.zhihu.com/?target=http%3A//attachments.me" target="_blank" rel="noopener">Attachments.me is Shutting Down</a>的网站，来将你的电子邮件附件保存到Dropbox中。 4。保存到网页剪辑到Dropbox Gimme Bar是一个整洁的书签服务，让你剪辑网页，照片和其他一切你在网络上所看到的。它甚至抓取整个网页的截图，所以存档页面的外观酷似你在屏幕上看到的。 你可以将Gimme Bar 帐户与Dropbox帐户连接，它会定期将你保存的所有网页剪报转存到你的Dropbox文件夹中。尽管备份不是及时的。 5。下载在线文件到Dropbox 通过URL Droplet，你可以下载任意在线文件，甚至远程计算机中的文件，到你的Dropbox文件夹。 只需复制和粘贴任何网络文件的网址到URL Droplet，这个应用程序将在后台自动保存该文件到你的Dropbox文件夹。当你想下载文件当你的Dropbox，但你使用的电脑，例如办公室的电脑，登录的不是你的Dropbox帐户时将非常有用。 6。在Dropbox文件夹中接收文件 你希望他人（比如你的客户）将文件上传到你的Dropbox，但又不想与他们分享你的Dropbox文件夹吗？ 有一个称为“DropItToMe”的免费服务，让你可以从任何人、任何地方接收文件，这些文件将直接添加到你的Dropbox中。或者，你可以使用JotForm创建一个在线的表格，通过这个表格上传的任何文件将发送到你的Dropbox。 7。将Dropbox的文件传输到任何云服务 如果你正在寻找一种简单的方式，在不同云服务（例如Dropbox，Google Docs， Picasa等）中传输文件，Otixo是一个近乎完美的解决方案。 Otixo连接到所有流行的云服务，包括Dropbox，并可以让你你在一个地方访问到你所有的在线文件。然后，就像Windows资源管理器或苹果的Finder，你通过简单的拖拽就可以从这个云服务复制或移动文件到另一个云服务。 8。通过电子邮件将文件上传到Dropbox Dropbox，与SugarSync不同，并没有提供一个选项来通过电子邮件上传文件，但有一个叫做“Send To Dropbox”的免费的应用，可以帮助你做到这一点。 一旦你通过这个应用连接到你的Dropbox帐户，它就会提供一个唯一的电子邮件地址，发送到该地址的任何文件将保存到你的Dropbox帐户。从手机上传文件到Dropbox或快速保存Gmail附件保存到Dropbox，这将是很有用的。还有一个DIY 应用备用 。 相关提示：利用Dropbox从手机打印文件。 9。用Dropbox进行无干扰写作 Write Box是最小的用于写作的浏览器应用，自动保存文本到你的Dropbox任意文件夹中。你也可以在Write Box中打开Dropbox中的任意文本文件，并在浏览器中编辑它们。 这个应用没有工具栏，你可以切换到浏览器的全屏模式（按F11）进行更舒适的无干扰写作。按Ctrl + S随时快速同步你编辑文档到Dropbox。 10。让你的Dropbox爆发威力 有了像IFTTT和Dropbox Automator这样的工具，你可以很容易地将Dropbox与其他各种服务，如Facebook、Evernote、Twitter、Instagram等整合，做一些非常有意思的东西，否则可能需要编程。 例 如，你可以设置一个任务，只要在你的Dropbox文件夹添加图片将自动上传到Facebook。或设置任务，当你在指定的Dropbox文件夹添加电子 书或者其他文档时，自动将其添加到你的Kindle。可能性是无穷无尽的，如果你花一些时间理解IFTTT，它可能会是Dropbox所需的唯一插件。 <strong>还有..</strong> 这些应用使用OAuth连接到Dropbox，这样你不用分别去登录它们。这就是说，如果你已经尝试了一个Dropbox应用，并且以后不打算再使用它，到这里，并从你的帐户中永久删除该应用程序。 喜欢它的话。这里有更多关于Dropbox的技巧和窍门。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2016/03/19/dropbox-e4-bd-bf-e7-94-a8-e6-8a-80-e5-b7-a7/" data-id="cjpky1ll60007wi81dpk1ut3k" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dropbox/">dropbox</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
   </nav>
 </section>
         
@@ -1425,7 +1426,7 @@ Encryptor:   加密方法，填入在服务器端设置的加密方法（method�
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/操作系统/">操作系统</a></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a></li></ul>
     </div>
   </div>
 
@@ -1435,7 +1436,7 @@ Encryptor:   加密方法，填入在服务器端设置的加密方法（method�
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表单/">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误提示/">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgnitor/">CodeIgnitor</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux-jdk-proxy-mysql/">linux jdk proxy mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lnmp/">lnmp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j/">log4j</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/">lvm</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/">screen</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/token/">token</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台/">后台</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数学/">数学</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据备份/">数据备份</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/替换/">替换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/编程/">编程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/表单/">表单</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向工程/">逆向工程</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/错误提示/">错误提示</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a></li></ul>
     </div>
   </div>
 
@@ -1445,7 +1446,7 @@ Encryptor:   加密方法，填入在服务器端设置的加密方法（method�
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/CodeIginter/" style="font-size: 10px;">CodeIginter</a> <a href="/tags/CodeIgnitor/" style="font-size: 10px;">CodeIgnitor</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/anyconnect/" style="font-size: 10px;">anyconnect</a> <a href="/tags/asp-net/" style="font-size: 12.5px;">asp.net</a> <a href="/tags/c/" style="font-size: 10px;">c#</a> <a href="/tags/centos/" style="font-size: 20px;">centos</a> <a href="/tags/ci/" style="font-size: 12.5px;">ci</a> <a href="/tags/cisco/" style="font-size: 10px;">cisco</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/fastdfs/" style="font-size: 12.5px;">fastdfs</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 10px;">java</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux jdk proxy mysql</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 10px;">owncloud</a> <a href="/tags/pip/" style="font-size: 12.5px;">pip</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/python-pip/" style="font-size: 12.5px;">python-pip</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/消息/" style="font-size: 10px;">消息</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/表单/" style="font-size: 10px;">表单</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/错误提示/" style="font-size: 10px;">错误提示</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里云/" style="font-size: 10px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
+      <a href="/tags/CodeIginter/" style="font-size: 10px;">CodeIginter</a> <a href="/tags/CodeIgnitor/" style="font-size: 10px;">CodeIgnitor</a> <a href="/tags/PHP/" style="font-size: 17.5px;">PHP</a> <a href="/tags/anyconnect/" style="font-size: 10px;">anyconnect</a> <a href="/tags/asp-net/" style="font-size: 12.5px;">asp.net</a> <a href="/tags/c/" style="font-size: 12.5px;">c#</a> <a href="/tags/centos/" style="font-size: 17.5px;">centos</a> <a href="/tags/ci/" style="font-size: 12.5px;">ci</a> <a href="/tags/cisco/" style="font-size: 10px;">cisco</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/debian/" style="font-size: 10px;">debian</a> <a href="/tags/debug/" style="font-size: 10px;">debug</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/fastdfs/" style="font-size: 12.5px;">fastdfs</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 12.5px;">java</a> <a href="/tags/linux/" style="font-size: 20px;">linux</a> <a href="/tags/linux-jdk-proxy-mysql/" style="font-size: 10px;">linux jdk proxy mysql</a> <a href="/tags/lnmp/" style="font-size: 10px;">lnmp</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/mysql/" style="font-size: 15px;">mysql</a> <a href="/tags/nginx/" style="font-size: 12.5px;">nginx</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 10px;">owncloud</a> <a href="/tags/pip/" style="font-size: 12.5px;">pip</a> <a href="/tags/post/" style="font-size: 10px;">post</a> <a href="/tags/python-pip/" style="font-size: 12.5px;">python-pip</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/shadowsocks/" style="font-size: 10px;">shadowsocks</a> <a href="/tags/ssh/" style="font-size: 12.5px;">ssh</a> <a href="/tags/time/" style="font-size: 10px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/token/" style="font-size: 10px;">token</a> <a href="/tags/vim/" style="font-size: 12.5px;">vim</a> <a href="/tags/wordpress/" style="font-size: 10px;">wordpress</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/后台/" style="font-size: 10px;">后台</a> <a href="/tags/命令/" style="font-size: 10px;">命令</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/数学/" style="font-size: 10px;">数学</a> <a href="/tags/数据备份/" style="font-size: 10px;">数据备份</a> <a href="/tags/数据库/" style="font-size: 10px;">数据库</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/替换/" style="font-size: 10px;">替换</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/消息/" style="font-size: 10px;">消息</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/编程/" style="font-size: 10px;">编程</a> <a href="/tags/表单/" style="font-size: 10px;">表单</a> <a href="/tags/调试/" style="font-size: 10px;">调试</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 10px;">转换</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/逆向工程/" style="font-size: 10px;">逆向工程</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a> <a href="/tags/错误提示/" style="font-size: 10px;">错误提示</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里云/" style="font-size: 10px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a>
     </div>
   </div>
 
@@ -1454,7 +1455,7 @@ Encryptor:   加密方法，填入在服务器端设置的加密方法（method�
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a></li></ul>
     </div>
   </div>
 
@@ -1471,19 +1472,19 @@ Encryptor:   加密方法，填入在服务器端设置的加密方法（method�
           </li>
         
           <li>
+            <a href="/2018/08/09/e4-b8-80-e8-a1-8c-e5-91-bd-e4-bb-a4-e5-88-a0-e9-99-a4-e6-96-87-e4-bb-b6-e4-b8-ad-e7-9a-84-e7-a9-ba-e8-a1-8c/">一行命令删除文件中的空行</a>
+          </li>
+        
+          <li>
             <a href="/2018/04/19/debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99/">Debian下使用iptables防火墙</a>
           </li>
         
           <li>
+            <a href="/2018/02/28/e4-bd-9c-e4-b8-ba-e7-a8-8b-e5-ba-8f-e5-91-98-e7-9a-84-e4-bd-a0-e6-88-96-e8-80-85-e5-8d-b3-e5-b0-86-e6-88-90-e4-b8-ba-e7-a8-8b-e5-ba-8f-e5-91-98-e4-bd-95-e6-97-b6-e6-84-8f-e8-af-86-e5-88-b0-e6-95-b0/">作为程序员的你，何时意识到数学的重要性?</a>
+          </li>
+        
+          <li>
             <a href="/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/">CentOS 7.2下编译安装PHP 7</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/">centos7 mysql数据库安装和配置</a>
-          </li>
-        
-          <li>
-            <a href="/2017/09/15/e3-80-90-e8-bd-ac-e3-80-91-e5-88-a9-e7-94-a8-e5-8f-8d-e5-90-91ssh-e4-bb-8e-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e5-86-85-e7-bd-91-e4-b8-bb-e6-9c-ba/">【转】利用反向ssh从外网访问内网主机</a>
           </li>
         
       </ul>
