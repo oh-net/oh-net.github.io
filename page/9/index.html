@@ -304,270 +304,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/fastdfs-e4-bb-a5-e5-ad-97-e8-8a-82-e6-96-b9-e5-bc-8f-e4-b8-8a-e4-bc-a0-e6-96-87-e4-bb-b6/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome 2 mine blog $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hello,Stranger">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/08/01/fastdfs-e4-bb-a5-e5-ad-97-e8-8a-82-e6-96-b9-e5-bc-8f-e4-b8-8a-e4-bc-a0-e6-96-87-e4-bb-b6/" class="post-title-link" itemprop="http://yoursite.com/page/9/index.html">FastDFS 以字节方式上传文件</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-08-01 03:40:42" itemprop="dateCreated datePublished" datetime="2017-08-01T03:40:42+08:00">2017-08-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-12 17:19:14" itemprop="dateModified" datetime="2018-12-12T17:19:14+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在阅读本文之前，请您先通过<a href="http://blog.csdn.net/poechant/article/details/6977407" target="_blank" rel="noopener">《FastDFS的配置、部署与API使用解读（1）Get Started with FastDFS》</a>一文中给出的参考博文中的部署篇和测试篇来完成前期的准备工作。 1、下载FastDFS的API FastDFS提供Java和PHP等语言的客户端API。可以到FastDFS在Google Code的项目主页 <a href="http://code.google.com/p/fastdfs/downloads/list" target="_blank" rel="noopener">http://code.google.com/p/fastdfs/downloads/list</a> 下载。本文以Java API为例。 2、调用API的上传接口 通过Servlet得到InputStream、文件名称和文件长度，然后通过调用FastDFS提供的Java API把文件上传到FastDFS服务器。下段代码中的getFileBuffer可参考本博客上一篇博文。（by Poechant）</p>
-<ol>
-<li>/** </li>
-<li><ul>
-<li>Upload File to DFS. </li>
-</ul>
-</li>
-<li><ul>
-<li>@param fileBuff, file to be uploaded. </li>
-</ul>
-</li>
-<li><ul>
-<li>@param uploadFileName, the name of the file. </li>
-</ul>
-</li>
-<li><ul>
-<li>@param fileLength, the length of the file. </li>
-</ul>
-</li>
-<li><ul>
-<li>@return the file ID in DFS. </li>
-</ul>
-</li>
-<li><ul>
-<li>@throws IOException  </li>
-</ul>
-</li>
-<li>*/</li>
-<li>public String uploadFile(InputStream inStream, String uploadFileName, long fileLength) throws IOException {  </li>
-<li>byte[] fileBuff = getFileBuffer(inStream, fileLength);  </li>
-<li>String fileId = “”;  </li>
-<li>String fileExtName = “”;  </li>
-<li>if (uploadFileName.contains(“.”)) {  </li>
-<li>fileExtName = uploadFileName.substring(uploadFileName.lastIndexOf(“.”) + 1);  </li>
-<li>} else {  </li>
-<li>logger.warn(“Fail to upload file, because the format of filename is illegal.”);  </li>
-<li>return fileId;  </li>
-<li><p>}  </p>
-</li>
-<li><p>//建立连接</p>
-</li>
-<li>TrackerClient tracker = new TrackerClient();  </li>
-<li>TrackerServer trackerServer = tracker.getConnection();  </li>
-<li>StorageServer storageServer = null;  </li>
-<li><p>StorageClient1 client = new StorageClient1(trackerServer, storageServer);  </p>
-</li>
-<li><p>//设置元信息</p>
-</li>
-<li>NameValuePair[] metaList = new NameValuePair[3];  </li>
-<li>metaList[0] = new NameValuePair(“fileName”, uploadFileName);  </li>
-<li>metaList[1] = new NameValuePair(“fileExtName”, fileExtName);  </li>
-<li><p>metaList[2] = new NameValuePair(“fileLength”, String.valueOf(fileLength));  </p>
-</li>
-<li><p>//上传文件</p>
-</li>
-<li>try {  </li>
-<li>fileId = client.upload_file1(fileBuff, fileExtName, metaList);  </li>
-<li>} catch (Exception e) {  </li>
-<li>logger.warn(“Upload file “” + uploadFileName + “”fails”);  </li>
-<li>}  </li>
-<li>trackerServer.close();  </li>
-<li>return fileId;  </li>
-<li><p>}  </p>
-<p>3、调用方式详解 （1）客户端与Tracker Server通信 根据《FastDFS的配置、部署与API使用解读（1）Get Started with FastDFS》一文中提供的FastDFS的工作原理，结合上面的代码，首先通过TrackerClient构造函数从全局配置中获取Tracker Servers的IP和端口初始化一个TrackerClient对象tracker，并与其建立连接，我们可以从API的源码中看到：</p>
-</li>
-<li><p>/** </p>
-</li>
-<li><ul>
-<li>constructor with global tracker group </li>
-</ul>
-</li>
-<li>*/</li>
-<li>public TrackerClient()  </li>
-<li>{  </li>
-<li>this.tracker_group = ClientGlobal.g_tracker_group;  </li>
-<li>}     </li>
-<li>/** </li>
-<li><ul>
-<li>constructor with specified tracker group </li>
-</ul>
-</li>
-<li><ul>
-<li>@param tracker_group the tracker group object </li>
-</ul>
-</li>
-<li>*/</li>
-<li>public TrackerClient(TrackerGroup tracker_group)  </li>
-<li>{  </li>
-<li>this.tracker_group = tracker_group;  </li>
-<li><p>}  </p>
-<p>上述代码中ClientGlobal是一个提供很多静态成员供外部读取的类。通过tracker这个TrackerClient建立的与Tracker Server的连接，实例化了一个trackerServer对象。   （2）客户端与Storage Server通信 通过trackerServer取得某一个可用的Storage Server的地址并用其实例化一个StorageClient1对象。这样就完成了FastDFS的客户端调用上传、下载、删除等所有操作的前期建立连接的工作。 （3）调用文件操作API 这些操作包括upload、download、append、delete等。上例中提供的是上传的实例。</p>
-</li>
-</ol>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/01/fastdfs-e5-9c-a8-centos-e4-b8-8b-e9-85-8d-e7-bd-ae-e5-ae-89-e8-a3-85-e9-83-a8-e7-bd-b2/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2344,6 +2080,200 @@ where a.name like concat(&#39;%&#39;,?,&#39;%&#39;)
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/07/07/linux-e4-b8-8b-e9-9d-a2-e9-85-8d-e7-bd-ae-oracle-jdk/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome 2 mine blog $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hello,Stranger">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/07/07/linux-e4-b8-8b-e9-9d-a2-e9-85-8d-e7-bd-ae-oracle-jdk/" class="post-title-link" itemprop="http://yoursite.com/page/9/index.html">Linux 下面配置 Oracle JDK</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-07-07 10:55:34" itemprop="dateCreated datePublished" datetime="2017-07-07T10:55:34+08:00">2017-07-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:20:50" itemprop="dateModified" datetime="2018-12-12T17:20:50+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>关于这个我好像已经写了无数次了。。。。 假设你已经下载到 Oracle 的JDK 安装包了：</p>
+<pre><code>mv jdk-8u131-linux-x64.tar.gz /usr/lib/jvm/
+cd /usr/lib/jvm/
+tar xzf jdk-8u131-linux-x64.tar.gz 
+ln -s jdk1.8.0_131/ java-8
+vi /etc/profile 
+</code></pre><p># 这里注意， 按 G 到文件最后，然后按 a 进入 Insert 模式，把下面的配置粘贴进去， （Shift+Insert 或者 Ctrl+Shift + v）</p>
+<pre><code>export JAVA_HOME=/usr/lib/jvm/java-8  
+export JRE_HOME=${JAVA_HOME}/jre  
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib  
+export PATH=${JAVA_HOME}/bin:$PATH
+</code></pre><p>接下来，配置默认JDK版本</p>
+<pre><code>update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-8/bin/java 300
+update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-8/bin/javac 300
+update-alternatives --config java
+</code></pre><p>根据你想要的版本选择序号，然后回车就好，通常是最后一个（如果系统中已有open JDK的话）</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2391,7 +2321,7 @@ where a.name like concat(&#39;%&#39;,?,&#39;%&#39;)
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">182</span>
+                    <span class="site-state-item-count">181</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2959,9 +2889,7 @@ where a.name like concat(&#39;%&#39;,?,&#39;%&#39;)
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">263</span>
+                    <span class="site-state-item-count">262</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
