@@ -1,0 +1,250 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #4CAF50;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: Tahoma, Helvetica, Arial, sans-serif;
+  margin: 8px;
+  padding: 10px 0px 10px 0px;
+  margin: 0px;
+}
+
+p {
+  display: flex;
+}
+
+a:link, a:visited, a:hover, a:active {
+  color: LightBlue;
+}
+
+.pagelink {
+  white-space: nowrap;
+  margin-left: 15px;
+}
+
+.content {
+  width: 95%;
+  max-width: calc(100vw - 16px);
+  margin: 0 auto;
+}
+
+div.section {
+  overflow: hidden;
+  break-inside: avoid-column;
+  -webkit-column-break-inside: avoid;
+  top: 0;
+  position: relative;
+  transition: all ease 1s;
+}
+
+h3 {
+  font-size: 20px;
+  font-weight: 900;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+div.section>div.list>div.line {
+  width: 100%;
+  position: absolute;
+  height: 18px;
+  margin: 1px 0;
+  transition: all ease .5s;
+  display: flex;
+  padding-left: 3px;
+}
+
+div.section>div.list>div.line>div.bar {
+  content: "";
+  position: absolute;
+  left: 55px;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  transition: all ease 1s;
+  height: 18px;
+  display: inline-block;
+}
+
+div.section>div.list>div.line>span.milliseconds {
+  display: inline-block;
+  width: 55px;
+  font-family: 'Lucida Console', Monaco, monospace;
+  font-size: 12px;
+  text-align: right;
+  padding-right: .5em;
+}
+
+div.section>div.list>div.line>span.name {
+  display: inline-block;
+  height: 18px;
+  vertical-align: middle;
+  line-height: 18px;
+}
+
+div.section>div.list>div.line>span.name>span.tip {
+  position: absolute;
+  z-index: 100;
+  width: 140px;
+  left: 0px;
+  opacity: 0.2;
+  visibility: hidden;
+  background-color: SeaGreen;
+  color: #fff;
+  text-align: center;
+  border-radius: 4px;
+  display: inline-block;
+  height: 18px;
+  font-weight: normal !important;
+  font-style: normal !important;
+}
+
+div.section>div.list>div.line>span.name:hover span.tip {
+  animation: tipAnimation 5s ease forwards;
+}
+
+div.section>div.list>div.line>span.name:hover {
+  font-weight: bold;
+  font-style: italic;
+}
+
+@keyframes tipAnimation {
+  10% {
+    visibility: visible;
+    left: 140px;
+    opacity:1;
+  }
+  60% {
+    visibility: visible;
+    left: 140px;
+    opacity: 1;
+  }
+  100% {
+    visibility: hidden;
+    left: 140px;
+    opacity: 0;
+  }
+}
+
+.usage {
+  font-style: italic;
+}
+
+img {
+  position: absolute;
+  opacity: 0;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  padding: 0px 0px 10px 0px;
+}
+
+.title{
+  font-size: 26px;
+  font-weight: bold;
+  padding: 0px 0px 0px 0px;
+}
+
+.introduction {
+  font-size: 13px;
+  padding: 0px 0px 0px 10px;
+}
+
+.message {
+  position: fixed;
+  top: 0px;
+  left: 50%;
+  width: 200px;
+  margin-top: 0px;
+  margin-left: -100px;
+  background-color: DarkGreen;
+  color: white;
+  z-index: 10000;
+  padding: 10px;
+  padding-top: 20px;
+  border-radius: 0px 0px 25px 25px;
+  box-shadow: 0 0 5px 5px #000;
+}
+
+.notice {
+  position: fixed;
+  bottom: 0px;
+  left: 50%;
+  width: 240px;
+  margin-top: 0px;
+  margin-left: -120px;
+  background-color: green;
+  color: white;
+  z-index: 10000;
+  padding: 10px;
+  padding-top: 20px;
+  border-radius: 25px 25px 0px 0px;
+  text-align: center;
+  box-shadow: 0 0 5px 5px #000;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.larger {
+  font-size: 125%;
+}
+
+.server {
+  width: 150px;
+  height: 68px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: 'Lucida Console', Monaco, monospace;
+  font-size: 16px;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 650px) and (max-width: 949px) {
+  #result {
+    column-count: 2;
+    column-gap: 20px;
+    column-rule-style: solid;
+    column-rule-width: 1px;
+    column-rule-color: white;
+  }
+  .content {
+    width: 600px;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+  }
+  .title {
+    padding: 6px 0px 0px 0px;
+  }
+}
+
+@media (min-width: 950px) {
+  #result {
+    column-count: 3;
+    column-gap: 20px;
+    column-rule-style: solid;
+    column-rule-width: 1px;
+    column-rule-color: white;
+  }
+  .content {
+    width: 900px;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+  }
+  .title {
+    padding: 0px 0px 0px 0px;
+  }
+}
