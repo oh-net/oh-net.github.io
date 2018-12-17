@@ -355,6 +355,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2015/03/13/ubuntu-64bit-e5-ae-89-e8-a3-85openoffice-e7-9a-84-e4-b8-80-e7-82-b9-e8-af-b4-e6-98-8e/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2015/03/13/ubuntu-64bit-e5-ae-89-e8-a3-85openoffice-e7-9a-84-e4-b8-80-e7-82-b9-e8-af-b4-e6-98-8e/" class="post-title-link" itemprop="https://www.cobsun.com/page/19/index.html">Ubuntu 64bit 安装OpenOffice的一点说明</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-03-13 11:46:22" itemprop="dateCreated datePublished" datetime="2015-03-13T11:46:22+08:00">2015-03-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:24:02" itemprop="dateModified" datetime="2018-12-12T17:24:02+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>(1) 安装OpenOffice前，务必先卸载ubuntu默认安装的LibreOffice,否则会发生冲突</p>
+<pre><code>apt-get --purge remove libreoffice?
+//卸载一个已安装的软件包，不保留配置文件
+//注意需要加通配符?或者*
+</code></pre><p>(2) 下载并解压OpenOffice，下载64bit deb包</p>
+<pre><code>tar -xzvf Apache_OpenOffice_4.1.1_Linux_x86-64_install-deb_en-US.tar.gz
+</code></pre><p>(3) 安装OpenOffice</p>
+<pre><code>//进入en-US/DEBS 目录下, 然后执行如下命令进行安装
+$sudo dpkg -i *.deb
+</code></pre><p>(4) 安装菜单项，必须安装该菜单项后，刚才安装的OpenOffice才能够使用。 (在en-US/DEBS/desktop-integration 目录下)</p>
+<pre><code>sudo dpkg -i openoffice4.1-debian-menus_4.1.1-9775_all.deb
+//$sudo dpkg -i  安装即可
+</code></pre><p>至此完成安装。 转自 <a href="http://blog.csdn.net/cnmilan/article/details/39205585" target="_blank" rel="noopener">http://blog.csdn.net/cnmilan/article/details/39205585</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2014/12/02/python-e5-ad-97-e7-ac-a6-e4-b8-b2/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -747,7 +936,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">182</span>
+                    <span class="site-state-item-count">183</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

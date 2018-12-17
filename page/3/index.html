@@ -355,6 +355,205 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/03/28/linux-e4-b8-8b-e5-ae-89-e8-a3-85eclipse/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/03/28/linux-e4-b8-8b-e5-ae-89-e8-a3-85eclipse/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">Linux下安装Eclipse</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-03-28 18:46:23" itemprop="dateCreated datePublished" datetime="2018-03-28T18:46:23+08:00">2018-03-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:20:50" itemprop="dateModified" datetime="2018-12-12T17:20:50+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h2><p>若要在Linux下面安装Oracle 的Java， 参见本博另一篇文章：<a href="https://tech.msla.top/?p=762" target="_blank" rel="noopener">Linux 下面配置 Oracle JDK</a></p>
+<h2 id="下载："><a href="#下载：" class="headerlink" title="下载："></a>下载：</h2><p>官方地址： <a href="https://www.eclipse.org/downloads/eclipse-packages/?osType=linux&amp;release=undefined" target="_blank" rel="noopener">https://www.eclipse.org/downloads/eclipse-packages/?osType=linux&amp;release=undefined</a> 国内维护： happiz.msla.qiniu.cdn.msla.top/eclipse-java-oxygen-3-linux-gtk-x86_64.tar.gz</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p># 以下操作均已root账户执行，或者具有sudo权限的用户按需要在命令前面加 sudo</p>
+<pre><code># 将文件复制到安装路径下/usr/local/，并解压，最后执行：
+cp eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz /usr/local/
+# 解压
+tar -zxvf eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz
+cd eclipse
+# 命令行中启动Eclipse
+./eclipse
+</code></pre><h2 id="制作快捷方式"><a href="#制作快捷方式" class="headerlink" title="制作快捷方式"></a>制作快捷方式</h2><p># 以下操作均以root账户执行，或者具有sudo权限的用户按需要在命令前面加 sudo</p>
+<pre><code>vi Eclipse.desktop
+# 在文件中输入下面的内容
+[Desktop Entry]
+Name=Eclipse
+Exec=/usr/local/eclipse/eclipse -desktop
+Icon=/usr/local/eclipse/plugins/org.eclipse.platform_xxxx.xxx.xxx/eclipse64.png
+Type=Application
+Comment=Run eclipse
+Path=
+Terminal=false
+StartupNotify=false
+
+# 复制到桌面中
+mv Eclipse.desktop /home/user123/Desktop/
+</code></pre><h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>有可能会提示“Eclipse 没有标记为可信任” 的问题，右键查看时，已设定为可执行。 解决方法： 使用root帐号将这个文件所有者设置为执行的用户：</p>
+<pre><code>su
+chown user123:user123 Eclipse.desktop
+</code></pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/02/28/e4-bd-9c-e4-b8-ba-e7-a8-8b-e5-ba-8f-e5-91-98-e7-9a-84-e4-bd-a0-e6-88-96-e8-80-85-e5-8d-b3-e5-b0-86-e6-88-90-e4-b8-ba-e7-a8-8b-e5-ba-8f-e5-91-98-e4-bd-95-e6-97-b6-e6-84-8f-e8-af-86-e5-88-b0-e6-95-b0/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2157,236 +2356,6 @@ yum install openjpeg-devel
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/12/22/e4-bd-bf-e7-94-a8snk-e5-af-86-e9-92-a5-e6-96-87-e4-bb-b6-e4-bf-9d-e6-8a-a4-e4-bd-a0-e7-9a-84dll-e5-92-8c-e4-bb-a3-e7-a0-81-e4-b8-8d-e8-a2-ab-e5-8f-8d-e7-bc-96-e8-af-91-e6-95-99-e7-a8-8b/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/12/22/e4-bd-bf-e7-94-a8snk-e5-af-86-e9-92-a5-e6-96-87-e4-bb-b6-e4-bf-9d-e6-8a-a4-e4-bd-a0-e7-9a-84dll-e5-92-8c-e4-bb-a3-e7-a0-81-e4-b8-8d-e8-a2-ab-e5-8f-8d-e7-bc-96-e8-af-91-e6-95-99-e7-a8-8b/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">使用SNK密钥文件保护你的DLL和代码不被反编译教程</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-12-22 16:45:46" itemprop="dateCreated datePublished" datetime="2017-12-22T16:45:46+08:00">2017-12-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-12 17:05:36" itemprop="dateModified" datetime="2018-12-12T17:05:36+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>大家做项目开发一般都是分层的，比如UI层，业务层，数据访问层。业务层引用数据访问层的DLL(比如dataAccess.dll)，并使用dataAccess.dll中的方法。当项目完成并给客户用了，可有些心里BT的客户这个时候也可以请个稍微懂NET的人来引用你的dataAccess.dll并调用其中的方法搞破坏。比如可以直接使用里面的ChangePwd(string UserName,string Pwd)方法把其他用户的密码改了，这个时候就你就……. 好了，该开始说怎么保护我们的代码了：</p>
-<h3 id="首先我们需要把我们的程序集做成强命名的程序集。"><a href="#首先我们需要把我们的程序集做成强命名的程序集。" class="headerlink" title="首先我们需要把我们的程序集做成强命名的程序集。"></a>首先我们需要把我们的程序集做成强命名的程序集。</h3><p>这里我们在.NET 命令提示中输入<code>sn -k c:test.snk</code> 创建一个新的随机密钥对并将其存储在 <code>c:test.snk</code> 中 然后新建立类库<code>ClassLibrary1</code>，里面只有个类文件<code>Class1.cs</code>，代码如下：</p>
-<pre><code>using System;
-namespace ClassLibrary1
-{
-    public class Class1
-    {
-        public Class1()
-        {
-            //
-            // TODO: 在此处添加构造函数逻辑
-            //
-        }
-
-        public string Insert()
-        {
-            return &quot;ok&quot;;
-        }
-    }
-}
-</code></pre><p><strong>AssemblyInfo.cs代码：</strong></p>
-<pre><code>//............其他的就用默认
-
-[assembly: AssemblyKeyFile(&quot;c:test.snk&quot;)] // 连接上面用强命名工具SN.exe生成的文件.
-</code></pre><p>接着创建个WindowApplication来调用我们的ClassLibrary1，代码：</p>
-<pre><code>private void button1_Click(object sender, System.EventArgs e)
-{
-    MessageBox.Show(new ClassLibrary1.Class1().Insert());
-}
-</code></pre><p>不修改WindowApplication的AssemblyInfo.cs。 在这里就可以直接运行了，不过大家都看的出来，这样是能成功调用Class1中的方法的。 现在让我们来修改下<code>Class1.cs</code>，代码：</p>
-<pre><code>using System;
-using System.Security.Permissions;
-
-namespace ClassLibrary1
-{
-[StrongNameIdentityPermissionAttribute(SecurityAction.LinkDemand, PublicKey =
-&quot;00240000048000009400000006020000002400005253413100040000010001000551684edd1600&quot;+
-&quot;8ccbdd337b1cf1490490d97fe0048c5f3629cc4f5104578499eace9b2a94115022edd620def472&quot;+
-&quot;8b4f088291cfa77a40659afba611fdafbb7894b93a64049d439936bd0cd8dc0704625aeb735892&quot;+
-&quot;e9eb3f910a49a2925af10515d935654d7adac5567ff6d780d23d587de0ff4d271da7b30680fa88&quot;+
-&quot;a47a4ba4&quot;)]
-public class Class1
-{
-    public Class1()
-    {
-        //
-        // TODO: 在此处添加构造函数逻辑
-        //
-    }
-
-    public string Insert()
-    {
-        return &quot;ok&quot;;
-    }
-    }
-}
-</code></pre><p>然后再编译后运行windowapplication调用class1中的方法就会出错。 这里的<code>StrongNameIdentityPermissionAttribute</code>是NET提供的<code>CAS(Code Access Security)</code>中的1个类，具体可参考MSDN， <code>SecurityAction.LinkDemand</code> 是要求直接调用方已被授予了指定的权限，这里即windowapplication要授予了权限才行， 如果使用<code>SecurityAction.Demand</code>要求调用堆栈中的所有高级调用方都已被授予了当前权限对象所指定的权限。 他们的区别是： 如果windowapplication已授权访问，而还有个windowapplication2(未授权访问)通过调用windowapplication中的<code>button1_Click</code>方法来调用class1，这个时候如果使用<code>SecurityAction.LinkDemand</code>就能成功调用， 而使用<code>SecurityAction.Demand windowapplication2</code>就不能调用，windowapplication 在这2种情况下都能调用。 说到这里大家一定再问PublicKey＝后面一串那么长的字符串怎么来。PublicKey后面的字符串是你开始生成的<code>c:test.snk</code>文件中保存的公钥。那怎么才能看到这个公钥了，照样是用SN.EXE。 输入<code>sn -p c:test.snk c:publicKey.snk</code> (从 test.snk 中提取公钥并将其存储在 publicKey.snk 中) 再输入<code>sn -tp c:publicKey.snk</code> (显示公钥信息) 上面这个命令就能看到PublicKey后面的字符串了，还想什么啊，把那字符串copy下来啊。 最后大家一定在关心这个时候windowapplication 要怎么调用class1了，其实也简单，只要把<code>windowapplication</code> 的<code>AssemblyInfo.cs</code>修改为：</p>
-<pre><code>[assembly: AssemblyKeyFile(&quot;c:test.snk&quot;)]
-</code></pre><p>到这里就一切OK了，大家都看到最关键的就是test.snk文件了，所以一定要保护好你自己的test.snk文件。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2434,7 +2403,7 @@ public class Class1
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">182</span>
+                    <span class="site-state-item-count">183</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

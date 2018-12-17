@@ -355,6 +355,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/16/e5-a6-82-e4-bd-95-e5-b0-86lantern-e5-85-b1-e4-ba-ab-e7-bb-99-e4-bb-bb-e4-bd-95-e8-ae-be-e5-a4-87/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/08/16/e5-a6-82-e4-bd-95-e5-b0-86lantern-e5-85-b1-e4-ba-ab-e7-bb-99-e4-bb-bb-e4-bd-95-e8-ae-be-e5-a4-87/" class="post-title-link" itemprop="https://www.cobsun.com/page/8/index.html">如何将lantern共享给任何设备</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-08-16 16:12:49" itemprop="dateCreated datePublished" datetime="2017-08-16T16:12:49+08:00">2017-08-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:08:58" itemprop="dateModified" datetime="2018-12-12T17:08:58+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><strong>前言</strong> 本方法需要您懂得必要的网络基本知识，如固定IP地址、DHCP，熟悉计算机操作，如设置固定IP地址、查询计算机的IP地址、设置浏览器代理。如果不懂这些，请不要操作，以免造成混乱。 本方法只在局域网内有效，如家庭网络和办公网。 <strong>lantern的代理服务器模式</strong> 默认启动时，lantern只能通过管理系统代理来供本机（127.0.0.1）使用。事实上，lantern支持作为HTTP代理服务器的模式使用。在项目主页的Building Lantern for running on a server标题下有说明。 <strong>启用代理服务器模式的方法</strong> （1）启动时，添加绑定IP地址的参数 <code>--addr 0.0.0.0:8787</code>。 在Windows上可修改启动的快捷方式（没有就创建）的属性（鼠标右键 – 属性 – 快捷方式 – 目标）来添加。在Linux下，运行<code>lantern --addr 0.0.0.0:8787</code>即可。这样启动后，lantern就成为局域网内的代理服务器了。假设这台机器的IP地址是<code>192.168.1.250</code>。 （2）为浏览器或系统配置代理 运行lantern的机器上，浏览器中的代理可依旧设置为<code>127.0.0.1:8787</code>或用<code>192.168.1.250:8787</code>，局域网内的其它设备，如iPad, iPhone，需要使用<code>192.168.1.250:8787</code>端口作为代理。 <strong>几点说明</strong> （1）感谢Adam Fisk及所有的开发者的多年努力，3.x版本的lantern性能卓越。通过本法，配置iOS上的系统代理，可非常流畅地让家庭网络环境下的iPad, iPhone上Google、Twitter、YouTube、Facebook等被墙网站。在较新版本的iOS上，建议安装Wingy来管理系统代理。 （2）如果有条件，建议使用有线联网的机器运行lantern作为代理服务器，同时使用固定IP地址，以便稳定。当然，使用无线联网的机器也没有问题，也可为它配置固定IP地址。 （3）如果懂得路由器的配置，请调整路由器中DHCP分配的范围，留下一段地址不自动分配 ，作为固定IP地址池使用，如从2-20。这样，可方便上述固定IP地址的配置，以避免产生IP地址冲突。如果不想更改路由器的配置，可用一个较大的数字作为代理服务器的固定IP地址，如192.168.0.250或192.168.1.250。 （4）强烈建议使用Chrome(可从bing.com上搜索下载或让能翻墙的朋友从Google官网下载）或Opera浏览器配合扩展SwitchyOmega来使用，作为翻墙浏览的专用浏览器。在SwitchyOmega上创建一个HTTP代理情景模式并使用之。若使用Firefox，请安装AutoProxy或Foxyproxy扩展。提示：可通过拖拽来安装浏览器扩展。 （5）若在Windows上以代理服务器模式运行lantern，请关闭防火墙。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/16/874/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -3025,330 +3197,6 @@ Do you want to enable rate-limiting (y/n) y
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/02/jms-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-81-e4-be-8b-e5-ad-90/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/08/02/jms-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-81-e4-be-8b-e5-ad-90/" class="post-title-link" itemprop="https://www.cobsun.com/page/8/index.html">JMS发布/订阅消息传送例子</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-08-02 05:14:04" itemprop="dateCreated datePublished" datetime="2017-08-02T05:14:04+08:00">2017-08-02</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-12 17:19:37" itemprop="dateModified" datetime="2018-12-12T17:19:37+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="在Tomcat中配置JNDI"><a href="#在Tomcat中配置JNDI" class="headerlink" title="在Tomcat中配置JNDI"></a>在Tomcat中配置JNDI</h1><p>配置连接工厂和话题 <a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a></p>
-<pre><code>&lt;Resource name=&quot;topic/connectionFactory&quot; auth=&quot;Container&quot;
-    type=&quot;org.apache.activemq.ActiveMQConnectionFactory&quot; description=&quot;JMS Connection Factory&quot;
-    factory=&quot;org.apache.activemq.jndi.JNDIReferenceFactory&quot;
-    brokerURL=&quot;failover:(tcp://localhost:61616)?initialReconnectDelay=100&amp;amp;maxReconnectAttempts=5&quot;
-    brokerName=&quot;LocalActiveMQBroker&quot; useEmbeddedBroker=&quot;false&quot; /&gt;
-
-&lt;Resource name=&quot;topic/topic0&quot; 
-    auth=&quot;Container&quot;
-    type=&quot;org.apache.activemq.command.ActiveMQTopic&quot; description=&quot;My Topic&quot; factory=&quot;org.apache.activemq.jndi.JNDIReferenceFactory&quot;
-    physicalName=&quot;TestTopic&quot; /&gt;
-</code></pre><h1 id="在Web工厂中编写代码"><a href="#在Web工厂中编写代码" class="headerlink" title="在Web工厂中编写代码"></a>在Web工厂中编写代码</h1><p>新建一个发布者Servlet</p>
-<p>package pubSub;</p>
-<p>import java.io.IOException;<br>import java.io.PrintWriter;</p>
-<p>import javax.naming.InitialContext;<br>import javax.servlet.ServletException;<br>import javax.servlet.annotation.WebServlet;<br>import javax.servlet.http.HttpServlet;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;<br>import javax.jms.Topic;<br>import javax.jms.Session;<br>import javax.jms.TextMessage;<br>import javax.jms.TopicPublisher;<br>import javax.jms.DeliveryMode;<br>import javax.jms.TopicSession;<br>import javax.jms.TopicConnection;<br>import javax.jms.TopicConnectionFactory;</p>
-<p>/**<br> * Servlet implementation class JMSTest<br> */<br>@WebServlet(“/Publish”)<br>public class Publisher extends HttpServlet {<br>    private static final long serialVersionUID = 1L;</p>
-<pre><code>/\*\*
- \* @see HttpServlet#HttpServlet()
- */
-public Publisher() {
-    super();
-    // TODO Auto-generated constructor stub
-}
-
-/\*\*
- \* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
- \*      response)
- */
-protected void doGet(HttpServletRequest request,
-        HttpServletResponse response) throws ServletException, IOException {
-    PrintWriter out = response.getWriter();
-
-    try {
-        // get the initial context
-        InitialContext ctx = new InitialContext();
-
-        // lookup the topic object
-        Topic topic = (Topic) ctx.lookup(&quot;java:comp/env/topic/topic0&quot;);
-
-        // lookup the topic connection factory
-        TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx
-                .lookup(&quot;java:comp/env/topic/connectionFactory&quot;);
-
-        // create a topic connection
-        TopicConnection topicConn = connFactory.createTopicConnection();
-
-        // create a topic session
-        TopicSession topicSession = topicConn.createTopicSession(false,
-                Session.AUTO_ACKNOWLEDGE);
-
-        // create a topic publisher
-        TopicPublisher topicPublisher = topicSession.createPublisher(topic);
-        topicPublisher.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
-
-        // create the &quot;Hello World&quot; message
-        TextMessage message = topicSession.createTextMessage();
-        message.setText(&quot;Hello World&quot;);
-
-        // publish the messages
-        topicPublisher.publish(message);
-
-        // print what we did
-        out.write(&quot;Message published: &quot; + message.getText());
-
-        // close the topic connection
-        topicConn.close();
-    } catch (Exception e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-
-}
-
-/\*\*
- \* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
- \*      response)
- */
-protected void doPost(HttpServletRequest request,
-        HttpServletResponse response) throws ServletException, IOException {
-    // TODO Auto-generated method stub
-}
-</code></pre><p>}</p>
-<p><a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a> 新建一个订阅者Servlet <a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a></p>
-<p>package pubSub;</p>
-<p>import java.io.IOException;<br>import java.io.PrintWriter;</p>
-<p>import javax.jms.Session;<br>import javax.jms.TextMessage;<br>import javax.jms.Topic;<br>import javax.jms.TopicConnection;<br>import javax.jms.TopicConnectionFactory;<br>import javax.jms.TopicSession;<br>import javax.jms.TopicSubscriber;<br>import javax.naming.InitialContext;<br>import javax.servlet.ServletException;<br>import javax.servlet.annotation.WebServlet;<br>import javax.servlet.http.HttpServlet;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;</p>
-<p>/**<br> * Servlet implementation class Receive<br> */<br>@WebServlet(“/Subscribe”)<br>public class Subscriber extends HttpServlet {<br>    private static final long serialVersionUID = 1L;</p>
-<pre><code>/\*\*
- \* @see HttpServlet#HttpServlet()
- */
-public Subscriber() {
-    super();
-    // TODO Auto-generated constructor stub
-}
-
-/\*\*
- \* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
- \*      response)
- */
-protected void doGet(HttpServletRequest request,
-        HttpServletResponse response) throws ServletException, IOException {
-    PrintWriter out = response.getWriter();
-
-    try {
-        // get the initial context
-        InitialContext ctx = new InitialContext();
-
-        // lookup the topic object
-        Topic topic = (Topic) ctx.lookup(&quot;java:comp/env/topic/topic0&quot;);
-
-        // lookup the topic connection factory
-        TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx
-                .lookup(&quot;java:comp/env/topic/connectionFactory&quot;);
-
-        // create a topic connection
-        TopicConnection topicConn = connFactory.createTopicConnection();
-
-        // create a topic session
-        TopicSession topicSession = topicConn.createTopicSession(false,
-                Session.AUTO_ACKNOWLEDGE);
-
-        // create a topic subscriber
-        TopicSubscriber topicSubscriber = topicSession
-                .createSubscriber(topic);
-
-        // start the connection
-        topicConn.start();
-
-        // receive the message
-        TextMessage message = (TextMessage) topicSubscriber.receive();
-
-        // print the message
-        out.write(&quot;Message received: &quot; + message.getText());
-
-        // close the topic connection
-        topicConn.close();
-    } catch (Exception e) {
-        // TODO Auto-generated catch block
-        e.printStackTrace();
-    }
-}
-
-/\*\*
- \* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
- \*      response)
- */
-protected void doPost(HttpServletRequest request,
-        HttpServletResponse response) throws ServletException, IOException {
-    // TODO Auto-generated method stub
-}
-</code></pre><p>}</p>
-<p><a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a> 运行Web工程，分别打开多个标签访问订阅servlet，然后访问发布servlet，结果如下： <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/48b9eb826fea9ca588ab3a0b3adfdf4a.jpg" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/48b9eb826fea9ca588ab3a0b3adfdf4a.jpg" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/c7dfa2cd42d923c755639abe24e2fa11.jpg" alt=""> 在订阅者订阅消息的时候，一开始没接收到消息，一旦发布者发布消息后，订阅者马上收到消息。 </p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://howtodoinjava.com/jms/jms-publish-subscribe-message-example/" target="_blank" rel="noopener">http://howtodoinjava.com/jms/jms-publish-subscribe-message-example/</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -3396,7 +3244,7 @@ protected void doPost(HttpServletRequest request,
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">182</span>
+                    <span class="site-state-item-count">183</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

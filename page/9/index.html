@@ -355,6 +355,330 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/02/jms-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-81-e4-be-8b-e5-ad-90/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/08/02/jms-e5-8f-91-e5-b8-83-e8-ae-a2-e9-98-85-e6-b6-88-e6-81-af-e4-bc-a0-e9-80-81-e4-be-8b-e5-ad-90/" class="post-title-link" itemprop="https://www.cobsun.com/page/9/index.html">JMS发布/订阅消息传送例子</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-08-02 05:14:04" itemprop="dateCreated datePublished" datetime="2017-08-02T05:14:04+08:00">2017-08-02</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:19:37" itemprop="dateModified" datetime="2018-12-12T17:19:37+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="在Tomcat中配置JNDI"><a href="#在Tomcat中配置JNDI" class="headerlink" title="在Tomcat中配置JNDI"></a>在Tomcat中配置JNDI</h1><p>配置连接工厂和话题 <a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a></p>
+<pre><code>&lt;Resource name=&quot;topic/connectionFactory&quot; auth=&quot;Container&quot;
+    type=&quot;org.apache.activemq.ActiveMQConnectionFactory&quot; description=&quot;JMS Connection Factory&quot;
+    factory=&quot;org.apache.activemq.jndi.JNDIReferenceFactory&quot;
+    brokerURL=&quot;failover:(tcp://localhost:61616)?initialReconnectDelay=100&amp;amp;maxReconnectAttempts=5&quot;
+    brokerName=&quot;LocalActiveMQBroker&quot; useEmbeddedBroker=&quot;false&quot; /&gt;
+
+&lt;Resource name=&quot;topic/topic0&quot; 
+    auth=&quot;Container&quot;
+    type=&quot;org.apache.activemq.command.ActiveMQTopic&quot; description=&quot;My Topic&quot; factory=&quot;org.apache.activemq.jndi.JNDIReferenceFactory&quot;
+    physicalName=&quot;TestTopic&quot; /&gt;
+</code></pre><h1 id="在Web工厂中编写代码"><a href="#在Web工厂中编写代码" class="headerlink" title="在Web工厂中编写代码"></a>在Web工厂中编写代码</h1><p>新建一个发布者Servlet</p>
+<p>package pubSub;</p>
+<p>import java.io.IOException;<br>import java.io.PrintWriter;</p>
+<p>import javax.naming.InitialContext;<br>import javax.servlet.ServletException;<br>import javax.servlet.annotation.WebServlet;<br>import javax.servlet.http.HttpServlet;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;<br>import javax.jms.Topic;<br>import javax.jms.Session;<br>import javax.jms.TextMessage;<br>import javax.jms.TopicPublisher;<br>import javax.jms.DeliveryMode;<br>import javax.jms.TopicSession;<br>import javax.jms.TopicConnection;<br>import javax.jms.TopicConnectionFactory;</p>
+<p>/**<br> * Servlet implementation class JMSTest<br> */<br>@WebServlet(“/Publish”)<br>public class Publisher extends HttpServlet {<br>    private static final long serialVersionUID = 1L;</p>
+<pre><code>/\*\*
+ \* @see HttpServlet#HttpServlet()
+ */
+public Publisher() {
+    super();
+    // TODO Auto-generated constructor stub
+}
+
+/\*\*
+ \* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+ \*      response)
+ */
+protected void doGet(HttpServletRequest request,
+        HttpServletResponse response) throws ServletException, IOException {
+    PrintWriter out = response.getWriter();
+
+    try {
+        // get the initial context
+        InitialContext ctx = new InitialContext();
+
+        // lookup the topic object
+        Topic topic = (Topic) ctx.lookup(&quot;java:comp/env/topic/topic0&quot;);
+
+        // lookup the topic connection factory
+        TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx
+                .lookup(&quot;java:comp/env/topic/connectionFactory&quot;);
+
+        // create a topic connection
+        TopicConnection topicConn = connFactory.createTopicConnection();
+
+        // create a topic session
+        TopicSession topicSession = topicConn.createTopicSession(false,
+                Session.AUTO_ACKNOWLEDGE);
+
+        // create a topic publisher
+        TopicPublisher topicPublisher = topicSession.createPublisher(topic);
+        topicPublisher.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+
+        // create the &quot;Hello World&quot; message
+        TextMessage message = topicSession.createTextMessage();
+        message.setText(&quot;Hello World&quot;);
+
+        // publish the messages
+        topicPublisher.publish(message);
+
+        // print what we did
+        out.write(&quot;Message published: &quot; + message.getText());
+
+        // close the topic connection
+        topicConn.close();
+    } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+
+}
+
+/\*\*
+ \* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+ \*      response)
+ */
+protected void doPost(HttpServletRequest request,
+        HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+}
+</code></pre><p>}</p>
+<p><a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a> 新建一个订阅者Servlet <a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a></p>
+<p>package pubSub;</p>
+<p>import java.io.IOException;<br>import java.io.PrintWriter;</p>
+<p>import javax.jms.Session;<br>import javax.jms.TextMessage;<br>import javax.jms.Topic;<br>import javax.jms.TopicConnection;<br>import javax.jms.TopicConnectionFactory;<br>import javax.jms.TopicSession;<br>import javax.jms.TopicSubscriber;<br>import javax.naming.InitialContext;<br>import javax.servlet.ServletException;<br>import javax.servlet.annotation.WebServlet;<br>import javax.servlet.http.HttpServlet;<br>import javax.servlet.http.HttpServletRequest;<br>import javax.servlet.http.HttpServletResponse;</p>
+<p>/**<br> * Servlet implementation class Receive<br> */<br>@WebServlet(“/Subscribe”)<br>public class Subscriber extends HttpServlet {<br>    private static final long serialVersionUID = 1L;</p>
+<pre><code>/\*\*
+ \* @see HttpServlet#HttpServlet()
+ */
+public Subscriber() {
+    super();
+    // TODO Auto-generated constructor stub
+}
+
+/\*\*
+ \* @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+ \*      response)
+ */
+protected void doGet(HttpServletRequest request,
+        HttpServletResponse response) throws ServletException, IOException {
+    PrintWriter out = response.getWriter();
+
+    try {
+        // get the initial context
+        InitialContext ctx = new InitialContext();
+
+        // lookup the topic object
+        Topic topic = (Topic) ctx.lookup(&quot;java:comp/env/topic/topic0&quot;);
+
+        // lookup the topic connection factory
+        TopicConnectionFactory connFactory = (TopicConnectionFactory) ctx
+                .lookup(&quot;java:comp/env/topic/connectionFactory&quot;);
+
+        // create a topic connection
+        TopicConnection topicConn = connFactory.createTopicConnection();
+
+        // create a topic session
+        TopicSession topicSession = topicConn.createTopicSession(false,
+                Session.AUTO_ACKNOWLEDGE);
+
+        // create a topic subscriber
+        TopicSubscriber topicSubscriber = topicSession
+                .createSubscriber(topic);
+
+        // start the connection
+        topicConn.start();
+
+        // receive the message
+        TextMessage message = (TextMessage) topicSubscriber.receive();
+
+        // print the message
+        out.write(&quot;Message received: &quot; + message.getText());
+
+        // close the topic connection
+        topicConn.close();
+    } catch (Exception e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+}
+
+/\*\*
+ \* @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+ \*      response)
+ */
+protected void doPost(HttpServletRequest request,
+        HttpServletResponse response) throws ServletException, IOException {
+    // TODO Auto-generated method stub
+}
+</code></pre><p>}</p>
+<p><a href="#" title="复制代码"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/51e409b11aa51c150090697429a953ed.gif" alt=""></a> 运行Web工程，分别打开多个标签访问订阅servlet，然后访问发布servlet，结果如下： <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/48b9eb826fea9ca588ab3a0b3adfdf4a.jpg" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/48b9eb826fea9ca588ab3a0b3adfdf4a.jpg" alt=""> <img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/c7dfa2cd42d923c755639abe24e2fa11.jpg" alt=""> 在订阅者订阅消息的时候，一开始没接收到消息，一旦发布者发布消息后，订阅者马上收到消息。 </p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://howtodoinjava.com/jms/jms-publish-subscribe-message-example/" target="_blank" rel="noopener">http://howtodoinjava.com/jms/jms-publish-subscribe-message-example/</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/01/fastdfs-e4-bb-a5-e5-ad-97-e8-8a-82-e6-96-b9-e5-bc-8f-e4-b8-8a-e4-bc-a0-e6-96-87-e4-bb-b6/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2223,178 +2547,6 @@ where a.name like concat(&#39;%&#39;,?,&#39;%&#39;)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/07/10/e8-a7-a3-e5-86-b3lxde-e6-a1-8c-e9-9d-a2-e7-8e-af-e5-a2-83-e4-b8-8bgoogle-chrome-e4-b8-8d-e5-9c-a8-e8-8f-9c-e5-8d-95-e4-b8-ad-e6-98-be-e7-a4-ba-e7-9a-84-e9-97-ae-e9-a2-98/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/07/10/e8-a7-a3-e5-86-b3lxde-e6-a1-8c-e9-9d-a2-e7-8e-af-e5-a2-83-e4-b8-8bgoogle-chrome-e4-b8-8d-e5-9c-a8-e8-8f-9c-e5-8d-95-e4-b8-ad-e6-98-be-e7-a4-ba-e7-9a-84-e9-97-ae-e9-a2-98/" class="post-title-link" itemprop="https://www.cobsun.com/page/9/index.html">解决lxde桌面环境下Google-Chrome不在菜单中显示的问题</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-07-10 15:09:18" itemprop="dateCreated datePublished" datetime="2017-07-10T15:09:18+08:00">2017-07-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-12 17:13:19" itemprop="dateModified" datetime="2018-12-12T17:13:19+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>用的是 Debian8.x LXDE 环境， 装好了Google Chrome，重启。然后发现菜单中并没有出现熟悉的 “Chrome 应用”，并且在“网络/互联网”选项中也没有Google的身影 解决办法： 先看看当前登录用户的目录下有没有chrome的menu文件， 比如，我下面的截图显示的 是 mslagee 这个用户的目录中存在的 chrome 的配置 <img src="https://tech.msla.top/wp-content/uploads/2018/04/5963266dc828f.png" alt="$USERHOME/.config/menu/ 下面的配置文件" title="$USERHOME/.config/menu/ 下面的配置文件"> <strong> 然后将 <code>user-chrome-apps.menu</code> 配置文件拷贝至 <code>/etc/xdg/menus</code> 目录 </strong> 不用，系统菜单立刻就能看到 <img src="https://tech.msla.top/wp-content/uploads/2018/04/596327ac488f3.png" alt="$USERHOME/.config/menu/ 下面的文件拷贝至 /etc/xdg/menus" title="$USERHOME/.config/menu/ 下面的文件拷贝至 /etc/xdg/menus"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2442,7 +2594,7 @@ where a.name like concat(&#39;%&#39;,?,&#39;%&#39;)
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">182</span>
+                    <span class="site-state-item-count">183</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
