@@ -242,6 +242,40 @@
         
         
           
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-archives">
 
     
@@ -253,6 +287,23 @@
     
 
     <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
 
   </li>
 
@@ -288,6 +339,195 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/04/17/e4-bd-bf-e7-94-a8-xdebug-e8-b0-83-e8-af-95php-e7-9a-84-e6-8a-80-e5-b7-a7/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/04/17/e4-bd-bf-e7-94-a8-xdebug-e8-b0-83-e8-af-95php-e7-9a-84-e6-8a-80-e5-b7-a7/" class="post-title-link" itemprop="https://www.cobsun.com/page/12/index.html">使用 xdebug调试PHP的技巧</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-04-17 20:40:28" itemprop="dateCreated datePublished" datetime="2017-04-17T20:40:28+08:00">2017-04-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:05:36" itemprop="dateModified" datetime="2018-12-12T17:05:36+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>作者：许胜斌 链接：<a href="https://www.zhihu.com/question/20348619/answer/101893104" target="_blank" rel="noopener">https://www.zhihu.com/question/20348619/answer/101893104</a> 来源：知乎 著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。</p>
+<p>我目前遇到的最让我称赞的debug方式是：<strong>xdebug</strong>的</p>
+<pre><code>xdebug_start_trace();
+/* 业务代码     */
+xdebug_stop_trace();
+</code></pre><p>他解决了我长久以来一个代码调试问题：比如有以下几个场景： 1、一个有几百行的函数，里面有很多return，现在函数异常返回了，但是我不知道是从哪一行返回的，这时候呢，我一般的做法都是每一行echo();die();太费事了。 2、接触一个新的框架，代码执行出现异常，怎么办呢，肯定也是一行一行的echo();die(); 3、想学习一个新框架，想知道代码的执行轨迹：执行了哪些类、调用了哪些类的方法，等等。 现在呢，xdebug的代码跟踪，能帮我们轻松解决上面的问题。 <strong>xdebug的安装</strong> （网上我看到了很多的都是在说xdebug、phpstorm、chrome咋配合起来远程调试，搞得大家好像觉得xdebug用起来那么费事，那么高级，其实没必要）： 1、安装php xdebug扩展（不再细说） 2、配置：这里只讲代码跟踪相关的配置：</p>
+<pre><code>cat /etc/php.d/xdebug.ini
+extension=/usr/lib64/php/modules/xdebug.so 
+;代码跟踪日志文件位置,注意要先新建这个traces目录，并设置777
+xdebug.trace_output_dir = /tmp/traces
+;代码跟踪日志文件格式 
+xdebug.trace_output_name = trace.%c.%p
+;trace中显示函数的参数值，这个很有用，待会细说
+xdebug.collect_params = 4
+xdebug.collect_includes = On
+xdebug.collect_return = On
+xdebug.show_mem_delta = On
+</code></pre><p>  安装好之后，代码执行明细(trace)，就存放在/tmp/traces目录下了:   <img src="https://tech.msla.top/wp-content/uploads/2018/04/d2006b7fc37cc5a97e300655c797e90b_b.png" alt=""> 我截取一段trace日志，大家看下，就能感知到这个用法的方便了： 1、显示了参数的值：就这一点，我想就会节省我们phper很多的调试时间（默认不显示参数值，只显示调用的函数。需要添加xdebug.collect_params这个配置） <img src="https://tech.msla.top/wp-content/uploads/2018/04/972289d2659f965081cc0ac2e8a8de02_b.png" alt=""> 1、显示了参数的值：就这一点，我想就会节省我们phper很多的调试时间（默认不显示参数值，只显示调用的函数。需要添加xdebug.collect_params这个配置） 2、显示了代码的执行轨迹。类似于c语言的单步调试吧。 就这些了，反正用了xdebug，我是觉得debug的时候节省了大量时间，分享给大家，希望对你们也有帮助。 ps：如果大家都xdebug的安装有困惑，可以参考<a href="https://link.zhihu.com/?target=http%3A//www.ibm.com/developerworks/cn/opensource/os-php-xdebug/index.html" target="_blank" rel="noopener">http://www.ibm.com/developerworks/cn/opensource/os-php-xdebug/index.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -2097,184 +2337,6 @@ public static function checkPort($ip,$port) {
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/03/16/centos7-e5-ae-89-e8-a3-85-fastdfs/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/03/16/centos7-e5-ae-89-e8-a3-85-fastdfs/" class="post-title-link" itemprop="https://www.cobsun.com/page/12/index.html">centos7 安装 fastdfs</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-03-16 15:17:58" itemprop="dateCreated datePublished" datetime="2017-03-16T15:17:58+08:00">2017-03-16</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-12 16:59:08" itemprop="dateModified" datetime="2018-12-12T16:59:08+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><strong>安装编译环境</strong>  yum -y install gcc gcc-c++  <strong>其他依赖库（是否必须尚未验证）</strong>  yum -y groupinstall ‘Development Tools’ yum -y install wget</p>
-<p><strong>公共依赖，不执行会在编译</strong> <strong>FASTDFS</strong> <strong>时提示找不到</strong> <strong>logger.h</strong>  wget <a href="https://github.com/happyfish100/libfastcommon/archive/master.zip" target="_blank" rel="noopener">https://github.com/happyfish100/libfastcommon/archive/master.zip</a> unzip master.zip cd libfastcommon-master ./make.sh ./make.sh install</p>
-<p><strong>安装主体程序</strong>  wget <a href="https://github.com/happyfish100/fastdfs/archive/V5.05.tar.gz" target="_blank" rel="noopener">https://github.com/happyfish100/fastdfs/archive/V5.05.tar.gz</a> tar -zxvf V5.05.tar.gz cd fastdfs-5.05/ ./make.sh ./make.sh install</p>
-<p><strong>关闭**</strong>firewall<strong>**：</strong>  systemctl stop firewalld.service #停止firewall systemctl disable firewalld.service #禁止firewall开机启动</p>
-<p><strong>测试</strong></p>
-<p><strong>连接**</strong>/<strong>**调用</strong></p>
-<p>Java 客户端： <a href="https://github.com/happyfish100/fastdfs-client-java" target="_blank" rel="noopener">https://github.com/happyfish100/fastdfs-client-java</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2322,7 +2384,7 @@ public static function checkPort($ip,$port) {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">181</span>
+                    <span class="site-state-item-count">182</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
