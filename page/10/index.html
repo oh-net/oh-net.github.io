@@ -168,620 +168,6 @@ var themeMenus = {};
         
           <section id="main">
   
-    <article id="post-linux-e4-b8-8b-e9-9d-a2-e9-85-8d-e7-bd-ae-oracle-jdk" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/07/07/linux-e4-b8-8b-e9-9d-a2-e9-85-8d-e7-bd-ae-oracle-jdk/">Linux 下面配置 Oracle JDK</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/07/07/linux-e4-b8-8b-e9-9d-a2-e9-85-8d-e7-bd-ae-oracle-jdk/" class="article-date">
-	  <time datetime="2017-07-07T02:55:34.000Z" itemprop="datePublished">七月 7, 2017</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>关于这个我好像已经写了无数次了。。。。 假设你已经下载到 Oracle 的JDK 安装包了：</p>
-<pre><code>mv jdk-8u131-linux-x64.tar.gz /usr/lib/jvm/
-cd /usr/lib/jvm/
-tar xzf jdk-8u131-linux-x64.tar.gz 
-ln -s jdk1.8.0_131/ java-8
-vi /etc/profile 
-</code></pre><p># 这里注意， 按 G 到文件最后，然后按 a 进入 Insert 模式，把下面的配置粘贴进去， （Shift+Insert 或者 Ctrl+Shift + v）</p>
-<pre><code>export JAVA_HOME=/usr/lib/jvm/java-8  
-export JRE_HOME=${JAVA_HOME}/jre  
-export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib  
-export PATH=${JAVA_HOME}/bin:$PATH
-</code></pre><p>接下来，配置默认JDK版本</p>
-<pre><code>update-alternatives --install /usr/bin/java java /usr/lib/jvm/java-8/bin/java 300
-update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/java-8/bin/javac 300
-update-alternatives --config java
-</code></pre><p>根据你想要的版本选择序号，然后回车就好，通常是最后一个（如果系统中已有open JDK的话）</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>, <a class="article-category-link" href="/categories/技术分类/操作系统/">操作系统</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jdk/">jdk</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
-    <article id="post-owncloud-e9-85-8d-e7-bd-ae-e5-b0-8f-e8-ae-b0" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/07/06/owncloud-e9-85-8d-e7-bd-ae-e5-b0-8f-e8-ae-b0/">owncloud 配置小记</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/07/06/owncloud-e9-85-8d-e7-bd-ae-e5-b0-8f-e8-ae-b0/" class="article-date">
-	  <time datetime="2017-07-06T03:47:58.000Z" itemprop="datePublished">七月 6, 2017</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文记录了自用 owncloud 的配置情况， 目前我用的是 10.0.2，界面比原来漂亮很多，用起来似乎也更舒服了 官方文档其实非常全，英文好的还是仔细读读原文吧， 这里是我个人的服务器配置： <strong>PHP 环境变量：</strong> 除了<a href="http://www.conf" target="_blank" rel="noopener">www.conf</a> 中的owner-user/owner-group、listen 之外，还要配置环境变量 我的： <code>vim /etc/php/7.0/fpm/pool.d/www.conf</code> 搜索 <code>HOSTNAME</code> 可以找到类似下面的段落：</p>
-<pre><code>;env[HOSTNAME] = $HOSTNAME
-;env[PATH] = /usr/local/bin:/usr/bin:/bin
-;env[TMP] = /tmp
-;env[TMPDIR] = /tmp
-;env[TEMP] = /tmp
-</code></pre><p>把前面的注释（;）去掉，然后 <code>systemctl restart php7.0-fpm.service</code> 重启 PHP-FPM <strong>nginx 的配置：</strong></p>
-<pre><code># /etc/nginx/nginx.conf 没改动任何配置项
-# vim /etc/nginx/site-enabled/default :
-upstream php-handler {
-    server unix:/run/php/php7.0-fpm.sock; # 本机 php-fpm handler 路径
-}
-# ==== SSL 证书的配置 ====
-# ......
-# ==== end SSL 证书的配置 end ====
-    # Add headers to serve security related headers
-    # Before enabling Strict-Transport-Security headers please read into this topic first.
-    #add_header Strict-Transport-Security &quot;max-age=15552000; includeSubDomains&quot;;
-    add_header X-Content-Type-Options nosniff;
-    add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
-    add_header X-XSS-Protection &quot;1; mode=block&quot;;
-    add_header X-Robots-Tag none;
-    add_header X-Download-Options noopen;
-    add_header X-Permitted-Cross-Domain-Policies none;
-
-    # Path to the root of your installation
-    root /var/www/html/owncloud/;
-
-    location = /robots.txt {
-        allow all;
-        log_not_found off;
-        access_log off;
-    }
-
-    # The following 2 rules are only needed for the user_webfinger app.
-    # Uncomment it if you&apos;re planning to use this app.
-    #rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
-    #rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json last;
-
-    location = /.well-known/carddav {
-        return 301 $scheme://$host/remote.php/dav;
-    }
-    location = /.well-known/caldav {
-        return 301 $scheme://$host/remote.php/dav;
-    }
-
-    location ^~ /.well-known/acme-challenge { }
-
-    # set max upload size
-    client_max_body_size 512M;
-    fastcgi_buffers 64 4K;
-
-    # Disable gzip to avoid the removal of the ETag header
-    gzip off;
- # Uncomment if your server is build with the ngx_pagespeed module
-    # This module is currently not supported.
-    #pagespeed off;
-
-    error_page 403 /core/templates/403.php;
-    error_page 404 /core/templates/404.php;
-
-    location / {
-        rewrite ^ /index.php$uri;
-    }
-
-    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
-        return 404;
-    }
-    location ~ ^/(?:.|autotest|occ|issue|indie|db_|console) {
-        return 404;
-    }
-
-    location ~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+|core/templates/40[34]).php(?:$|/) {
-        fastcgi_split_path_info ^(.+.php)(/.*)$;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
-        # fastcgi_param HTTPS on;
-        fastcgi_param modHeadersAvailable true; #Avoid sending the security headers twice
-        fastcgi_param front_controller_active true;
-        fastcgi_pass php-handler;
-        fastcgi_intercept_errors on;
-        fastcgi_request_buffering off; #Available since NGINX 1.7.11
-    }
-
-    location ~ ^/(?:updater|ocs-provider)(?:$|/) {
-        try_files $uri $uri/ =404;
-        index index.php;
-    }
-# Adding the cache control header for js and css files
-    # Make sure it is BELOW the PHP block
-    location ~* .(?:css|js)$ {
-        try_files $uri /index.php$uri$is_args$args;
-        add_header Cache-Control &quot;max-age=15778463&quot;;
-        # Add headers to serve security related headers (It is intended to have those duplicated to the ones above)
-        # Before enabling Strict-Transport-Security headers please read into this topic first.
-        #add_header Strict-Transport-Security &quot;max-age=15552000; includeSubDomains&quot;;
-        add_header X-Content-Type-Options nosniff;
-        add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
-        add_header X-XSS-Protection &quot;1; mode=block&quot;;
-        add_header X-Robots-Tag none;
-        add_header X-Download-Options noopen;
-        add_header X-Permitted-Cross-Domain-Policies none;
-        # Optional: Don&apos;t log access to assets
-        access_log off;
-    }
-
-    location ~* .(?:svg|gif|png|html|ttf|woff|ico|jpg|jpeg)$ {
-        try_files $uri /index.php$uri$is_args$args;
-        # Optional: Don&apos;t log access to other assets
-        access_log off;
-    }
-}
-</code></pre><p><strong>SSL 证书的配置块：</strong></p>
-<pre><code>server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-
-    # certs sent to the client in SERVER HELLO are concatenated in ssl_certificate
-    ssl_certificate /path/to/signed_cert_plus_intermediates; # crt 文件的路径，该文件权限最好设置成 400
-    ssl_certificate_key /path/to/private_key; # key 文件的路径，该文件权限最好设置成 400
-    ssl_session_timeout 1d;
-    ssl_session_cache shared:SSL:50m;
-    ssl_session_tickets off;
-
-    # Diffie-Hellman parameter for DHE ciphersuites, recommended 2048 bits
-    ssl_dhparam /path/to/dhparam.pem; # 没有，注释掉。。。
-
-    # intermediate configuration. tweak to your needs.
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers &apos;ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS&apos;;
-    ssl_prefer_server_ciphers on;
-
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security max-age=15768000;
-
-    # OCSP Stapling ---
-    # fetch OCSP records from URL in ssl_certificate and cache them
-    ssl_stapling on;
-    ssl_stapling_verify on;
-
-    ## verify chain of trust of OCSP response using Root CA and Intermediate certs
-    ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates; # 没有，注释掉。。。
-
-    resolver ; # 这里写域名的dns地址，比如我这个域名的 dns31.hichina.com dns32.hichina.com
-
-    ....
-}
-</code></pre>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/https/">https</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/owncloud/">owncloud</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ssl/">ssl</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
-    <article id="post-php-e6-95-b0-e7-bb-84-e8-bd-ac-e6-8d-a2-e4-b8-bajavascript-e6-95-b0-e7-bb-84-e7-9a-84-e6-96-b9-e6-b3-95" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/07/04/php-e6-95-b0-e7-bb-84-e8-bd-ac-e6-8d-a2-e4-b8-bajavascript-e6-95-b0-e7-bb-84-e7-9a-84-e6-96-b9-e6-b3-95/">PHP数组转换为javascript 数组的方法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/07/04/php-e6-95-b0-e7-bb-84-e8-bd-ac-e6-8d-a2-e4-b8-bajavascript-e6-95-b0-e7-bb-84-e7-9a-84-e6-96-b9-e6-b3-95/" class="article-date">
-	  <time datetime="2017-07-04T10:28:40.000Z" itemprop="datePublished">七月 4, 2017</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>需要从PHP 后台读取一些数据到前台的js中，然后使用图表显示，。 下面是转换 PHP 数组到 js 数组 的方法（之一）：  </p>
-<pre><code>var js_array = JSON.parse(&apos;&apos;);
-</code></pre><p>需要注意的几点： 1. JSON.parse 方法内的数组需要用引号，并且是单引号包起来 2. 别忘记了 <code>echo</code> 3. 直接 <code>echo json_encode($arr_php);</code> 是没用的，我就这么妄想过。。。</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数组/">数组</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转换/">转换</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
-    <article id="post-yaf-e9-85-8d-e7-bd-ae-e9-a1-b9-e8-af-b4-e6-98-8e" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/07/04/yaf-e9-85-8d-e7-bd-ae-e9-a1-b9-e8-af-b4-e6-98-8e/">Yaf配置项说明</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/07/04/yaf-e9-85-8d-e7-bd-ae-e9-a1-b9-e8-af-b4-e6-98-8e/" class="article-date">
-	  <time datetime="2017-07-04T07:17:12.000Z" itemprop="datePublished">七月 4, 2017</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <ul>
-<li>php.ini 配置项</li>
-</ul>
-<p>选项名称</p>
-<p>默认值</p>
-<p>说明</p>
-<p>yaf.environ</p>
-<p>product</p>
-<p>环境名称, 当用INI作为Yaf的配置文件时, 这个指明了Yaf将要在INI配置中读取的节的名字</p>
-<p>yaf.library</p>
-<p>NULL</p>
-<p>全局类库的目录路径</p>
-<p>yaf.cache_config</p>
-<p>0</p>
-<p>是否缓存配置文件(只针对INI配置文件生效), 打开此选项可在复杂配置的情况下提高性能</p>
-<p>yaf.name_suffix</p>
-<p>1</p>
-<p>在处理Controller, Action, Plugin, Model的时候, 类名中关键信息是否是后缀式, 比如UserModel, 而在前缀模式下则是ModelUser</p>
-<p>yaf.name_separator</p>
-<p>“”</p>
-<p>在处理Controller, Action, Plugin, Model的时候, 前缀和名字之间的分隔符, 默认为空, 也就是UserPlugin, 加入设置为”_”, 则判断的依据就会变成:”User_Plugin”, 这个主要是为了兼容ST已有的命名规范</p>
-<p>yaf.forward_limit</p>
-<p>5</p>
-<p>forward最大嵌套深度</p>
-<p>yaf.use_namespace</p>
-<p>0</p>
-<p>开启的情况下, Yaf将会使用命名空间方式注册自己的类, 比如Yaf_Application将会变成YafApplication</p>
-<p>yaf.use_spl_autoload</p>
-<p>0</p>
-<p>开启的情况下, Yaf在加载不成功的情况下, 会继续让PHP的自动加载函数加载, 从性能考虑, 除非特殊情况, 否则保持这个选项关闭</p>
-<pre><code>//php.ini
-[Yaf]
-yaf.library = &quot;c:/huan&quot;
-yaf.name_suffix = 0
-yaf.name_separator = &quot;_&quot;
-yaf.environ = &quot;product&quot;
-</code></pre><ul>
-<li>application.ini 配置项</li>
-</ul>
-<p>选项名称</p>
-<p>默认值</p>
-<p>说明</p>
-<p>application.ext</p>
-<p>php</p>
-<p>PHP脚本的扩展名</p>
-<p>application.bootstrap</p>
-<p>Bootstrapplication.php</p>
-<p>Bootstrap路径(绝对路径)</p>
-<p>application.library</p>
-<p>application.directory + “/library”</p>
-<p>本地(自身)类库的绝对目录地址</p>
-<p>application.baseUri</p>
-<p>NULL</p>
-<p>在路由中, 需要忽略的路径前缀, 一般不需要设置, Yaf会自动判断.</p>
-<p>application.dispatcher.defaultModule</p>
-<p>index</p>
-<p>默认的模块</p>
-<p>application.dispatcher.throwException</p>
-<p>True</p>
-<p>在出错的时候, 是否抛出异常</p>
-<p>application.dispatcher.catchException</p>
-<p>False</p>
-<p>是否使用默认的异常捕获Controller, 如果开启, 在有未捕获的异常的时候, 控制权会交给ErrorController的errorAction方法, 可以通过$request-&gt;getException()获得此异常对象</p>
-<p>application.dispatcher.defaultController</p>
-<p>index</p>
-<p>默认的控制器</p>
-<p>application.dispatcher.defaultAction</p>
-<p>index</p>
-<p>默认的动作</p>
-<p>application.view.ext</p>
-<p>phtml</p>
-<p>视图模板扩展名</p>
-<p>application.modules</p>
-<p>modules</p>
-<p>声明存在的模块名, 请注意, 如果你要定义这个值, 一定要定义Index Module</p>
-<pre><code>//application.ini
-[mysql]
-mysql.master.user_name = word
-mysql.master.pass_word = 1234
-mysql.slave.user_name = word
-mysql.slave.pass_word = 1234
-
-[database : mysql]
-database.master.host = 127.0.0.1
-database.slave.host  = 127.0.0.2,127.0.0.3
-
-[product : database]
-yaf.directory = APP_PATH &quot;/app/&quot; 
-yaf.libray = APP_PATH &quot;/libray/
-</code></pre><p>可以看到在application.ini配置文件里面除了配置框架本身的配置项，还可以添加一些我们自定义的配置项，同时支持继承配置功能，在框架启动的时候会根据yaf.environ设定的节点名字去读取.</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/application-ini/">application.ini</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/php-ini/">php.ini</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yaf/">yaf</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/配置文件/">配置文件</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
-    <article id="post-745" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/07/04/745/">在 Debian 下安装 WordPress</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/07/04/745/" class="article-date">
-	  <time datetime="2017-07-04T06:44:42.000Z" itemprop="datePublished">七月 4, 2017</time>
-	</a>
-
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="Basic-Installation-guide-for-Wheezy"><a href="#Basic-Installation-guide-for-Wheezy" class="headerlink" title="Basic Installation guide for Wheezy"></a>Basic Installation guide for Wheezy</h2><p># apt-get install wordpress curl apache2 mysql-server</p>
-<p>Set the mysql admin root user password when prompted</p>
-<h3 id="Create-a-site"><a href="#Create-a-site" class="headerlink" title="Create a site"></a>Create a site</h3><p># nano /etc/apache2/sites-available/wp.conf</p>
-<p>Add this content:</p>
-<pre><code> Alias /wp/wp-content /var/lib/wordpress/wp-content
-Alias /wp /usr/share/wordpress
-&lt;Directory /usr/share/wordpress&gt;
-    Options FollowSymLinks
-    AllowOverride Limit Options FileInfo
-    DirectoryIndex index.php
-    Order allow,deny
-     Allow from all
-&lt;/Directory&gt;
-&lt;Directory /var/lib/wordpress/wp-content&gt;
-    Options FollowSymLinks
-    Order allow,deny
-    Allow from all
-&lt;/Directory&gt;
-</code></pre><p>For Apache 2.4 (Jessie) you’ll need a slightly different site configuration:</p>
-<p># nano /etc/apache2/sites-available/wp.conf</p>
-<p>add this content:</p>
-<pre><code>Alias /wp/wp-content /var/lib/wordpress/wp-content
-Alias /wp /usr/share/wordpress
-&lt;Directory /usr/share/wordpress&gt;
-    Options FollowSymLinks
-    AllowOverride Limit Options FileInfo
-    DirectoryIndex index.php
-    Require all granted
-&lt;/Directory&gt;
-&lt;Directory /var/lib/wordpress/wp-content&gt;
-    Options FollowSymLinks
-    Require all granted
-&lt;/Directory&gt;
-</code></pre><h3 id="Enable-the-site"><a href="#Enable-the-site" class="headerlink" title="Enable the site"></a>Enable the site</h3><p># a2ensite wp</p>
-<p>Restart the webserver  </p>
-<p># service apache2 reload</p>
-<p>Create /etc/wordpress/config-$DM.php. $DM is the domain name e.g. if the fully qualified domain name is <a href="http://www.debianwordpress.dev" target="_blank" rel="noopener">www.debianwordpress.dev</a>, create one of the following files:</p>
-<ul>
-<li>/etc/wordpress/config-<a href="http://www.debianwordpress.dev.php" target="_blank" rel="noopener">www.debianwordpress.dev.php</a> (this is the default, use it if you are unsure)</li>
-<li>/etc/wordpress/config-debianwordpress.dev.php (this is used for multisite with subdomains)</li>
-<li>/etc/wordpress/config-default.php (this is used as a fallback if no other file matches your domain name)</li>
-</ul>
-<p>WordPress searches in the above order and uses the first configuration file it can find. The domain name is taken from the HTTP-Request of your browser. That way you may be able to define different configuration files for different domains you are hosting.</p>
-<p># nano /etc/wordpress/config-<a href="http://www.debianwordpress.dev.php" target="_blank" rel="noopener">www.debianwordpress.dev.php</a></p>
-<p>Add this content:-</p>
-<p> &lt;?php<br> define(‘DB_NAME’, ‘wordpress’);<br> define(‘DB_USER’, ‘wordpress’);<br> define(‘DB_PASSWORD’, ‘password’);<br> define(‘DB_HOST’, ‘localhost’);<br> define(‘WP_CONTENT_DIR’, ‘/var/lib/wordpress/wp-content’);<br> ?&gt;</p>
-<p><img src="https://wiki.debian.org/htdocs/debwiki/img/attention.png" alt="&lt;!&gt;" title="&lt;!&gt;"> replace password with a suitably secure password Create a file to hold the database creation instructions</p>
-<p># nano ~/wp.sql</p>
-<p>Add this content:-</p>
-<p>CREATE DATABASE wordpress;<br>GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER<br>ON wordpress.*<br>TO wordpress@localhost<br>IDENTIFIED BY ‘password’;<br>FLUSH PRIVILEGES;</p>
-<p><img src="https://wiki.debian.org/htdocs/debwiki/img/attention.png" alt="&lt;!&gt;" title="&lt;!&gt;"> replace password with your “suitably secure password” Create the database:-</p>
-<p># cat ~/wp.sql | mysql –defaults-extra-file=/etc/mysql/debian.cnf</p>
-<p>Navigate to the wordpress directory in browser e.g.:- <a href="http://debianwordpress.dev/wp" target="_blank" rel="noopener">http://debianwordpress.dev/wp</a> which redirects to <a href="http://debianwordpress.dev/wp/wp-admin/install.php" target="_blank" rel="noopener">http://debianwordpress.dev/wp/wp-admin/install.php</a> where you’ll see the “classic” wordpress 5 minute install page (actually a 5 second install thanks to the Debian packaging) <img src="https://wiki.debian.org/htdocs/debwiki/img/attention.png" alt="&lt;!&gt;" title="&lt;!&gt;"> replace debianwordpress.dev with your domain name (or localhost if running on the same box as your browser). At time of writing this provides WordPress v3.6.1. WordPress v3.7.1 is available in Testing and Unstable. I haven’t tested it but it should install fine on Wheezy.</p>
-<h2 id="Upgrading-the-installed-WordPress-version"><a href="#Upgrading-the-installed-WordPress-version" class="headerlink" title="Upgrading the installed WordPress version"></a>Upgrading the installed WordPress version</h2><p>For keep your WordPress up to date and receive security fixes use Debian package manager:</p>
-<p># apt-get update &amp;&amp; apt-get upgrade</p>
-<p>If you would like to use a more recent version of WordPress, consider using Backports or Debian testing.</p>
-<h2 id="An-alternate-installation-method"><a href="#An-alternate-installation-method" class="headerlink" title="An alternate installation method"></a>An alternate installation method</h2><p>I believe this method conforms more with how the maintainer recommends it should be done. Various sources are drawn upon using this method, and it is also affected by a few bugs as at this writing. It is basically centric around a “kind of” multisite install, but I recommend this method even for a single blog, otherwise when you decide down the track to have more than one and share the packages’ codebase, you’ll have a fair bit of work on your hands. The key useful script here is /usr/share/doc/wordpress/examples/setup-mysql. This gem does a few things:</p>
-<ul>
-<li>Creates a WordPress config file under /etc/wordpress</li>
-<li>Creates the WordPress database and user</li>
-<li>Sets up a wp-content structure under /srv/www/wp-content/DOMAIN (this is key for a non-WordPress multisite install, which is covered more below)</li>
-</ul>
-<h3 id="Install-required-packages"><a href="#Install-required-packages" class="headerlink" title="Install required packages"></a>Install required packages</h3><p># apt-get install wordpress apache2 mysql-server</p>
-<h3 id="Run-the-helper-script"><a href="#Run-the-helper-script" class="headerlink" title="Run the helper script"></a>Run the helper script</h3><p>Now run /usr/share/doc/wordpress/examples/setup-mysql, passing an argument of your site name; eg. myblog.com. You will most probably need other arguments too – just try an initial -h to get help. At this point, as per above, you should have a database created for you, and the /etc/wordpress/config-myblog.com.php config file. Peruse that and sanity check it.</p>
-<h3 id="Create-the-Apache-site"><a href="#Create-the-Apache-site" class="headerlink" title="Create the Apache site"></a>Create the Apache site</h3><p>Quoting /usr/share/doc/wordpress/examples/apache.conf: There are several ways to setup Wordpress &amp; Apache in Debian. However the maintainer’s recommended way with the helper script setup-mysql uses:</p>
-<p>## Virtual host VirtualDocumentRoot</p>
-<pre><code>NameVirtualHost *:80
-
-&lt;VirtualHost *:80&gt;
-UseCanonicalName Off
-VirtualDocumentRoot /usr/share/wordpress
-Options All
-
-# wp-content in /srv/www/wp-content/$0
-RewriteEngine On
-RewriteRule ^/wp-content/(.*)$ /srv/www/wp-content/%{HTTP_HOST}/$1
-&lt;/VirtualHost&gt;
-</code></pre><p>For this configuration to work you’ll also need to have mod_rewrite and mod_vhost_alias loaded and working in Apache. To enable these modules run</p>
-<p># a2enmod rewrite &amp;&amp; a2enmod vhost_alias &amp;&amp; service apache2 restart</p>
-<p>Place this config into something like /etc/apache2/sites-available/myblog.com and modify according to your needs (IP-based virtual host, name-based, logging, etc.) If you’re using any Wordpress functionality that requires URL rewriting (such as permalinks), then you will also need something like this in your Apache config:</p>
-<pre><code>RewriteRule ^index.php$ - \[L\]
-RewriteCond /usr/share/wordpress%{REQUEST_URI} !-f
-RewriteCond /usr/share/wordpress%{REQUEST_URI} !-d
-RewriteRule . /usr/share/wordpress/index.php \[L\]
-# Also needed if using PHP-FPM / Fast-CGI
-RewriteCond %{REQUEST_URI} !^/php5-fcgi/*
-</code></pre><p>The above rewrite conditions rely on Apache finding the required files in /usr/share/wordpress for non-permalinks (such as wp-admin). This may require the following line to ensure it finds the index file when requesting /wp-admin/</p>
-<pre><code>DirectoryIndex index.php
-</code></pre><h3 id="Final-reading-before-actual-configuration"><a href="#Final-reading-before-actual-configuration" class="headerlink" title="Final reading before actual configuration"></a>Final reading before actual configuration</h3><p>Now would be a great time to read /usr/share/doc/wordpress/README.Debian if you haven’t already. All the rest of the pieces should fall into place once you do. Amongst other things, it explains the great way that the Debian WordPress package utilises the WordPress wp-config.php framework, and more importantly, how to handle the infamous “themes” and “plugins” directories in a WordPress install. The key point is that by symlinking under /var/lib/wordpress, users better abide by the <a href="https://wiki.debian.org/FilesystemHierarchyStandard" target="_blank" rel="noopener">FilesystemHierarchyStandard</a>, and can use the in-app upgrade mechanisms of WordPress to upgrade plugins and themes, without clobbering the package, and risking server security. It also discusses the two choices regarding multisite installs, of which this here describes the non-WordPress version.</p>
-<h3 id="Enable-the-Apache-site"><a href="#Enable-the-Apache-site" class="headerlink" title="Enable the Apache site"></a>Enable the Apache site</h3><p>Now we enable the Apache site config made earlier using a2ensite, which basically just creates a symlink in /etc/apache2/sites-enabled from sites-available, then reload Apache:</p>
-<p># a2ensite myblog.com<br># service apache2 reload</p>
-<h3 id="Configure-WordPress"><a href="#Configure-WordPress" class="headerlink" title="Configure WordPress"></a>Configure WordPress</h3><p>Now, browse to your new domain, and follow the normal WP configuration process, and you should be done.</p>
-<h3 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h3><p>Sadly at this point, there are some issues with symlinking, and messing around generally with WP_CONTENT_DIR. The main bug is being tracked at <a href="http://core.trac.wordpress.org/ticket/16953" target="_blank" rel="noopener">http://core.trac.wordpress.org/ticket/16953</a>. At this point, basically a fair few things break, especially if plugin or theme authors don’t do things right when determining correct filesystem and URI paths to use. There seems no easy fix right now, other than not using symlinks or non-standard (but configurable!) paths.</p>
-<h2 id="See-also"><a href="#See-also" class="headerlink" title="See also"></a>See also</h2><ul>
-<li>Sample configurations can be found in /usr/share/doc/wordpress/examples/</li>
-<li>Debian specific instructions are /usr/share/doc/wordpress/README.Debian</li>
-<li><a href="https://wiki.debian.org/LaMp" target="_blank" rel="noopener">LAMP</a></li>
-</ul>
-<h2 id="External-links"><a href="#External-links" class="headerlink" title="External links"></a>External links</h2><ul>
-<li><a href="http://wordpress.org/" target="_blank" rel="noopener">Home Page</a></li>
-<li><a href="http://codex.wordpress.org/" target="_blank" rel="noopener">WordPress Online Documentation</a></li>
-<li><a href="http://codex.wordpress.org/Updating_WordPress#Manual_Update" target="_blank" rel="noopener">WordPress Manual Update Guide</a></li>
-</ul>
-<p>WordPress (<a href="https://wiki.debian.org/WordPress?action=info" target="_blank" rel="noopener">最后修改时间 2017-06-10 18:26:06</a>)</p>
-
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/debian/">debian</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/wordpress/">wordpress</a></li></ul>
-
-      
-            
-      
-    </footer>
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-    
-
-  
     <article id="post-php-e4-bd-bf-e7-94-a8-phpmailer-e5-8f-91-e9-80-81-e9-82-ae-e4-bb-b6" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -860,7 +246,7 @@ $mail-&gt;Send();
     
 
   
-    <article id="post-e9-98-bf-e9-87-8c-e4-ba-91-e9-82-ae-e7-ae-b1smtp-e5-9c-b0-e5-9d-80" class="article article-type-post" itemscope="" itemprop="blogPost">
+    <article id="post-smtp-setting-on-alimail-and-qqmail" class="article article-type-post" itemscope="" itemprop="blogPost">
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -868,7 +254,7 @@ $mail-&gt;Send();
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/2017/06/30/e9-98-bf-e9-87-8c-e4-ba-91-e9-82-ae-e7-ae-b1smtp-e5-9c-b0-e5-9d-80/">阿里邮箱和QQ邮箱配置参数</a>
+      <a class="article-title" href="/2017/06/30/smtp-setting-on-alimail-and-qqmail/">阿里邮箱和QQ邮箱配置参数</a>
     </h1>
   
 
@@ -876,7 +262,7 @@ $mail-&gt;Send();
     
     <div class="article-meta">
       
-	Posted on <a href="/2017/06/30/e9-98-bf-e9-87-8c-e4-ba-91-e9-82-ae-e7-ae-b1smtp-e5-9c-b0-e5-9d-80/" class="article-date">
+	Posted on <a href="/2017/06/30/smtp-setting-on-alimail-and-qqmail/" class="article-date">
 	  <time datetime="2017-06-30T02:52:15.000Z" itemprop="datePublished">六月 30, 2017</time>
 	</a>
 
@@ -885,22 +271,7 @@ $mail-&gt;Send();
     <div class="article-entry" itemprop="articleBody">
       
         <h3 id="阿里邮箱："><a href="#阿里邮箱：" class="headerlink" title="阿里邮箱："></a>阿里邮箱：</h3><p>阿里的邮件响应速度很快 我用手机端，邮件发送来之后基本都是秒级提醒，很方便。 记录下 SMTP 的地址和端口，方便查找：</p>
-<p>服务器名称</p>
-<p>服务器地址</p>
-<p>服务器端口号（非加密）</p>
-<p>服务器端口号（SSL加密）</p>
-<p>POP3</p>
-<p>pop3.aliyun.com</p>
-<p>110</p>
-<p>995</p>
-<p>SMTP</p>
-<p>smtp.aliyun.com</p>
-<p>25</p>
-<p>465</p>
-<p>IMAP</p>
-<p>imap.aliyun.com</p>
-<p>143</p>
-<p>993</p>
+<p>|服务器名称| 服务器地址| 服务器端口号（非加密）| 服务器端口号（SSL加密）|<br>| POP3 |pop3.aliyun.com |110 |995|<br>|SMTP |smtp.aliyun.com |25 |465|<br>|IMAP |imap.aliyun.com |143 |993|</p>
 <p>  如果服务器没有启用 https，smtp 端口使用 25,否则提示 timeout</p>
 <hr>
 <p>###企业邮箱的POP3、SMTP、IMAP地址是什么？</p>
@@ -951,7 +322,7 @@ $mail-&gt;Send();
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SMTP/">SMTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/aliyun/">aliyun</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邮箱/">邮箱</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/阿里/">阿里</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/SMTP/">SMTP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/邮箱/">邮箱</a></li></ul>
 
       
             
@@ -1136,11 +507,588 @@ $mail-&gt;Send();
     
 
   
+    <article id="post-php-e8-8e-b7-e5-8f-96-e5-ae-a2-e6-88-b7-e7-ab-afip" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/06/16/php-e8-8e-b7-e5-8f-96-e5-ae-a2-e6-88-b7-e7-ab-afip/">PHP 获取客户端IP</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/06/16/php-e8-8e-b7-e5-8f-96-e5-ae-a2-e6-88-b7-e7-ab-afip/" class="article-date">
+	  <time datetime="2017-06-16T10:11:44.000Z" itemprop="datePublished">六月 16, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>stackoverflow 上搜到的，<strong>获取客户端IP</strong> （using PHP） <a href="https://stackoverflow.com/questions/15699101/get-the-client-ip-address-using-php" target="_blank" rel="noopener">https://stackoverflow.com/questions/15699101/get-the-client-ip-address-using-php</a></p>
+<pre><code>// Function to get the client IP address
+function get_client_ip() {
+    $ipaddress = &apos;&apos;;
+    if (isset($_SERVER[&apos;HTTP_CLIENT_IP&apos;]))
+        $ipaddress = $_SERVER[&apos;HTTP_CLIENT_IP&apos;];
+    else if(isset($_SERVER[&apos;HTTP_X_FORWARDED_FOR&apos;]))
+        $ipaddress = $_SERVER[&apos;HTTP_X_FORWARDED_FOR&apos;];
+    else if(isset($_SERVER[&apos;HTTP_X_FORWARDED&apos;]))
+        $ipaddress = $_SERVER[&apos;HTTP_X_FORWARDED&apos;];
+    else if(isset($_SERVER[&apos;HTTP_FORWARDED_FOR&apos;]))
+        $ipaddress = $_SERVER[&apos;HTTP_FORWARDED_FOR&apos;];
+    else if(isset($_SERVER[&apos;HTTP_FORWARDED&apos;]))
+        $ipaddress = $_SERVER[&apos;HTTP_FORWARDED&apos;];
+    else if(isset($_SERVER[&apos;REMOTE_ADDR&apos;]))
+        $ipaddress = $_SERVER[&apos;REMOTE_ADDR&apos;];
+    else
+        $ipaddress = &apos;UNKNOWN&apos;;
+
+    return $ipaddress;
+}
+</code></pre>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ip/">ip</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
+    <article id="post-codeigniter-e9-a1-b9-e7-9b-ae-e7-8e-af-e5-a2-83-e9-85-8d-e7-bd-ae" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/06/02/codeigniter-e9-a1-b9-e7-9b-ae-e7-8e-af-e5-a2-83-e9-85-8d-e7-bd-ae/">CodeIgniter项目 环境配置</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/06/02/codeigniter-e9-a1-b9-e7-9b-ae-e7-8e-af-e5-a2-83-e9-85-8d-e7-bd-ae/" class="article-date">
+	  <time datetime="2017-06-02T02:23:46.000Z" itemprop="datePublished">六月 2, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>CodeIgniter项目 环境配置</strong> 先来看一个实际的例子，项目中存在这样一个配置文件：</p>
+<pre><code>$STATUS = &apos;normal&apos;; //测试为test,正式为normal
+$KEY_INFO = array(
+    &apos;a_test&apos; =&gt; array(
+        &apos;key&apos; =&gt; &apos;a_test_key&apos;,
+        &apos;value&apos; =&gt; &apos;a_test_value&apos;
+    ),
+    &apos;a_normal&apos; =&gt; array(
+        &apos;key&apos; =&gt; &apos;a_normal_key&apos;,
+        &apos;value&apos; =&gt; &apos;a_normal_value&apos;
+    ),
+    &apos;b_test&apos; =&gt; array(
+        &apos;key&apos; =&gt; &apos;b_test_key&apos;,
+        &apos;value&apos; =&gt; &apos;b_test_value&apos;
+    ),
+    &apos;b_normal&apos; =&gt; array(
+        &apos;key&apos; =&gt; &apos;b_normal_key&apos;,
+        &apos;value&apos; =&gt; &apos;b_normal_value&apos;
+    ),
+);
+</code></pre><p>生产环境和测试环境的开关通过<strong>$STATUS</strong> 变量来控制，而<strong>$STATUS</strong>定义和配置文件在同一个文件中，这意味着每次发布的时候都需要把这个值改成<strong>normal</strong>，测试的时候在调整回来，这样就无缘无故增加了发布的难度和错误产生的几率，每次提交的时候都得小心翼翼。产生该问题的主要原因就是把环境和配置没有分离开，环境和配置耦合在一个文件里了。很多时候我们写一个类的时候也会有类似的做法，将类需要配置的信息直接写死在属性中，不方便调整。 所以多环境的配置是十分有必要的，而Codeigniter框架是支持多环境配置的，环境的配置在<strong>index.php</strong>入口文件的第 21 行</p>
+<pre><code>/*
+ *---------------------------------------------------------------
+ * APPLICATION ENVIRONMENT
+ *---------------------------------------------------------------
+ *
+ * You can load different configurations depending on your
+ * current environment. Setting the environment also influences
+ * things like logging and error reporting.
+ *
+ * This can be set to anything, but default usage is:
+ *
+ *     development
+ *     testing
+ *     production
+ *
+ * NOTE: If you change these, also change the error_reporting() code below
+ *
+ */
+    define(&apos;ENVIRONMENT&apos;, &apos;development&apos;);
+</code></pre><p>即CI开篇就定义了环境配置，那不同的环境配置会影响到哪些方面？</p>
+<p>1、 报错机制。不同的环境设置的报错级别不同，如开发环境（development）会显示所有错误信息，而生成环境（production）则会屏蔽所有错误信息。</p>
+<p>2、 加载的配置文件不同，从而实现多套环境配置。</p>
+<p>在开发过程中会将数据库配置设置为测试服或本机，而生成环境下会修改为正式服。那这么多环境该如何设置？</p>
+<p>先看看application目录下的config目录，该目录主要为系统的配置目录，如数据库配置、路由配置等。以数据库配置为例，当连接DB时，会读取 <strong>config/database.php</strong> 的配置文件，但这种情况是在没有自定义配置时。当我们定义ENVIRONMENT为development是，并创建<strong>config/development/database.php</strong> 时，系统会从此环境来读取数据库配置，而非 <strong>config/database.php</strong></p>
+<p>所以针对开发环境我们可以创建development目录，并将开发的配置文件放置于此目录下，创建production目录，用于发布时生产环境的配置，如下图所示：</p>
+<p><img src="https://tech.msla.top/wp-content/uploads/2018/04/215255ujs6ou737e3z5eui.png" alt=""></p>
+<p><strong>注意:</strong> 对于个人定义的配置文件，若通过$this-&gt;load-&gt;config的方式加载，也适用多套环境，若是通过include加载则不行。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CodeIginter/">CodeIginter</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ci/">ci</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开发环境/">开发环境</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/环境配置/">环境配置</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
+    <article id="post-php-e5-a4-9a-e7-bb-b4-e6-95-b0-e7-bb-84-e6-8e-92-e5-ba-8f-e6-96-b9-e6-b3-95" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/31/php-e5-a4-9a-e7-bb-b4-e6-95-b0-e7-bb-84-e6-8e-92-e5-ba-8f-e6-96-b9-e6-b3-95/">PHP 多维数组排序方法</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/05/31/php-e5-a4-9a-e7-bb-b4-e6-95-b0-e7-bb-84-e6-8e-92-e5-ba-8f-e6-96-b9-e6-b3-95/" class="article-date">
+	  <time datetime="2017-05-31T07:59:42.000Z" itemprop="datePublished">五月 31, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接口需要，要对一些数组进行排序， 从数据库方面操作起来很麻烦， 只能放到程序里面去做， 发现默认的<strong>sort</strong>排序很奇怪，不知道为什么把一些以数字开头的key的item不放在第一位。。。 Google之，发现可以使用 <strong>usort()</strong> 这个方法： <a href="http://php.net/manual/zh/function.usort.php" target="_blank" rel="noopener">http://php.net/manual/zh/function.usort.php</a> 先来看原始数组是什么样子的：</p>
+<pre><code>Array
+(
+    [0] =&gt; Array
+        (
+            [brand_id] =&gt; -10
+            [brand_name] =&gt; 天猫 面膜
+            [status] =&gt; 3
+            [favourite] =&gt; 0
+        )
+
+    [1] =&gt; Array
+        (
+            [brand_id] =&gt; 20032
+            [brand_name] =&gt; A. by bom
+            [status] =&gt; 1
+            [favourite] =&gt; 1
+        )
+
+    [2] =&gt; Array
+        (
+            [brand_id] =&gt; 20063
+            [brand_name] =&gt; 妆色
+            [status] =&gt; 1
+            [favourite] =&gt; 1
+        )
+
+    [3] =&gt; Array
+        (
+            [brand_id] =&gt; 20161
+            [brand_name] =&gt; 安米娜
+            [status] =&gt; 1
+            [favourite] =&gt; 1
+        )
+
+    [4] =&gt; Array
+        (
+            [brand_id] =&gt; 20823
+            [brand_name] =&gt; 瑰柏翠
+            [status] =&gt; 1
+            [favourite] =&gt; 1
+        )
+
+    [5] =&gt; Array
+        (
+            [brand_id] =&gt; 21325
+            [brand_name] =&gt; 芙丽诗贝
+            [status] =&gt; 1
+            [favourite] =&gt; 1
+        )
+
+    [6] =&gt; Array
+        (
+            [brand_id] =&gt; 21443
+            [brand_name] =&gt; gram
+            [status] =&gt; 1
+            [favourite] =&gt; 1
+        )
+
+    [7] =&gt; Array
+        (
+            [brand_id] =&gt; 22115
+            [brand_name] =&gt; 蕾舒翠
+            [status] =&gt; 1
+            [favourite] =&gt; 1
+        )
+
+    [8] =&gt; Array
+        (
+            [brand_id] =&gt; 23356
+            [brand_name] =&gt; 台盐
+            [status] =&gt; 1
+            [favourite] =&gt; 1
+        )
+
+    [9] =&gt; Array
+        (
+            [brand_id] =&gt; 23029
+            [brand_name] =&gt; SASA
+            [status] =&gt; 0
+            [favourite] =&gt; 1
+        )
+
+    [10] =&gt; Array
+        (
+            [brand_id] =&gt; 23444
+            [brand_name] =&gt; 魔法森林
+            [status] =&gt; 0
+            [favourite] =&gt; 1
+        )
+
+    [11] =&gt; Array
+        (
+            [brand_id] =&gt; 25589
+            [brand_name] =&gt; 纯即
+            [status] =&gt; 0
+            [favourite] =&gt; 1
+        )
+
+    [12] =&gt; Array
+        (
+            [brand_id] =&gt; 24293
+            [brand_name] =&gt; 同仁堂
+            [status] =&gt; 0
+            [favourite] =&gt; 1
+        )
+
+    [13] =&gt; Array
+        (
+            [brand_id] =&gt; 20003
+            [brand_name] =&gt; 10度
+            [status] =&gt; 0
+            [favourite] =&gt; 0
+        )
+
+    [14] =&gt; Array
+        (
+            [brand_id] =&gt; 20014
+            [brand_name] =&gt; 3 CONCEPT EYES
+            [status] =&gt; 0
+            [favourite] =&gt; 0
+        )
+
+    [15] =&gt; Array
+        (
+            [brand_id] =&gt; 20033
+            [brand_name] =&gt; 珂泊亚
+            [status] =&gt; 0
+            [favourite] =&gt; 0
+        )
+)
+</code></pre><p>要求是，不要按照brand_id排，而是按照 brand_name，这个 brand_name 来头不小——不是一成不变的，而是会根据用户语言自行变化，比如英文环境下 A.H.C 这个品牌，到中文中会显示成 柯泊亚， 解决方法：</p>
+<pre><code>//声明
+    private function custom_sort($key){
+        return function ($a, $b) use ($key) {
+            return strnatcmp($a[$key], $b[$key]);
+        };
+    }
+
+/*
+....
+....
+....
+*/
+
+//调用
+usort($arr_brands,$this-&gt;custom_sort(&apos;brand_name&apos;));
+</code></pre><p>排序结果： <img src="https://tech.msla.top/wp-content/uploads/2018/04/592e77bee75a5.png" alt="20170531_001_0079.png" title="20170531_001_0079.png"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/usort/">usort</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/排序/">排序</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/数组/">数组</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
+    <article id="post-yaf-e5-9c-a8-nginx-e4-b8-ad-e7-9a-84-e9-85-8d-e7-bd-ae-e4-b8-80-e4-be-8b" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/24/yaf-e5-9c-a8-nginx-e4-b8-ad-e7-9a-84-e9-85-8d-e7-bd-ae-e4-b8-80-e4-be-8b/">yaf 在 nginx 中的配置一例</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/05/24/yaf-e5-9c-a8-nginx-e4-b8-ad-e7-9a-84-e9-85-8d-e7-bd-ae-e4-b8-80-e4-be-8b/" class="article-date">
+	  <time datetime="2017-05-24T07:43:35.000Z" itemprop="datePublished">五月 24, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <pre><code>server {
+     listen       80 default_server;
+     listen       [::]:80 default_server;
+     server_name  _;
+     index           index.php index.html;
+     root         /usr/share/nginx/html/yaf_prj;
+
+     include /etc/nginx/default.d/*.conf;
+
+     location / {
+         try_files $uri $uri/ @rewrite;
+             expires max;
+     }
+     location ~ .php$ {
+         try_files $uri =404;
+         fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
+         fastcgi_index index.php;
+         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+         include fastcgi_params;
+     }
+     location @rewrite{
+             rewrite ^/(.*)$ /index.php?q=$1;
+     }
+
+     error_page 404 /404.html;
+         location = /40x.html {
+     }
+
+     error_page 500 502 503 504 /50x.html;
+         location = /50x.html {
+     }
+ }
+</code></pre>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/大前端！/">大前端！</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/yaf/">yaf</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
+    <article id="post-sqlite-e6-af-94bdb-e6-9b-b4-e5-bf-ab-ef-bc-9f" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/2017/05/05/sqlite-e6-af-94bdb-e6-9b-b4-e5-bf-ab-ef-bc-9f/">Sqlite比BDB更快？</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2017/05/05/sqlite-e6-af-94bdb-e6-9b-b4-e5-bf-ab-ef-bc-9f/" class="article-date">
+	  <time datetime="2017-05-05T03:34:46.000Z" itemprop="datePublished">五月 5, 2017</time>
+	</a>
+
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简单的-Sqlite-DB-和-Berkeley-DB-性能对比"><a href="#简单的-Sqlite-DB-和-Berkeley-DB-性能对比" class="headerlink" title="简单的 Sqlite DB 和 Berkeley DB 性能对比"></a>简单的 Sqlite DB 和 Berkeley DB 性能对比</h1><p>最近在找一些 简单、快速存取、方便移植的数据库 首先发现了BerkeleyDB，测试下来 ，觉得速度还可以，尝试过插入1亿条记录，在我本地虚拟机里大概耗时700秒左右（6.1G 内存, i5 4590 CPU, SSD 40G） 正准备生产用一下，突然发现了一个文章，原文在这里 <a href="http://blog.csdn.net/mynicedream/article/details/2252398" target="_blank" rel="noopener">http://blog.csdn.net/mynicedream/article/details/2252398</a> 。 文中提到 Sqlite 速度高于 BDB 不少，有点疑惑， 遂自己测试了一下，就拿简单的Insert，也没做任何优化，没有用大批量Insert 的方法（这也许更接近实际应用环境） 测试环境：</p>
+<p>内存: 8G<br>CPU: Intel® Core i3-4130 CPU @ 3.40GHz × 4<br>磁盘： 500GB 普通台式机机械盘<br>系统： Ubuntu 16.04.2</p>
+<h3 id="先来BerkeleyDB的插入性能测试"><a href="#先来BerkeleyDB的插入性能测试" class="headerlink" title="先来BerkeleyDB的插入性能测试"></a>先来BerkeleyDB的插入性能测试</h3><p><strong>代码：</strong></p>
+<pre><code>#coding:utf8
+
+import time
+import bsddb3
+import hashlib
+
+test_num = 100
+
+def md5(s):
+    return hashlib.md5(s).hexdigest()
+
+def insert_md5(db):
+    t0 = time.time()
+    for i in xrange(1,test_num+1):
+        if i%10000 == 0:
+            print i
+
+        if not db.has_key(i):
+            str_md5 = md5(str(i))
+            db[i] = str_md5
+
+    print time.time() - t0
+
+def main():
+    t0 = time.time()
+    db = bsddb3.rnopen(&apos;md5_digest.db&apos;, &apos;c&apos;)
+    #insert_md5(db)
+    print db.get(23152346)
+    print str(time.time()-t0)
+
+if __name__ == &apos;__main__&apos;:
+    main()
+</code></pre><p>—- <strong>测试结果</strong> 1千万条数据大概12秒左右</p>
+<pre><code>1. 10000000 120.37905097 
+2. 10000000 126.873742104
+3. 10000000 102.667818069
+4. 10000000 106.770079136
+</code></pre><p>---</p>
+<h3 id="Sqlite-的测试"><a href="#Sqlite-的测试" class="headerlink" title="Sqlite 的测试"></a>Sqlite 的测试</h3><h3 id="源码"><a href="#源码" class="headerlink" title="源码"></a><strong>源码</strong></h3><p>事先准备好空的 sqlitedb 数据库文件，包含一张表 test_1，有 md5 varchar(36) 和 numb integer 两个字段</p>
+<pre><code>#coding=utf8
+
+import time
+import sqlite3
+import hashlib
+
+test_num = 10000000
+
+def md5(s):
+    return hashlib.md5(s).hexdigest()
+
+def insert_md5():
+    t0 = time.time()
+    conn = sqlite3.connect(&apos;test_sqlite.db&apos;)
+    cursor = conn.cursor()
+    for i in xrange(1,test_num+1):
+        if i%10000 == 0:
+            t_1 = time.time()
+            print i
+            print &quot;----&gt; Being Last: &quot; + str(t_1-t0) + &quot; avg: &quot; + str((time.time()-t0)/float(i)) + &quot; seconds/10,000&quot;
+
+        cursor.execute(&apos;insert into test_1 (md5, numb) values (&apos;&apos;+md5(str(i))+&apos;&apos;, &apos;&apos;+str(i)+&apos;&apos;)&apos;)
+
+    print time.time() - t0
+    cursor.close()
+    conn.commit()
+    conn.close()
+
+def main():
+    t0 = time.time()
+    insert_md5()
+    print str(time.time()-t0)
+
+if __name__ == &apos;__main__&apos;:
+    main()
+</code></pre><p><strong>测试结果</strong></p>
+<pre><code>1. 10000000 275.150636196
+2. 10000000 250.863370895
+3. 10000000 256.767675877
+</code></pre><p>---</p>
+<h3 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h3><p>也许Sqlite 方面有什么优化吧，我不知道，但是这结果相差很明显，我生产环境的情况基本和这个一样，不愿意去折腾了 我还是相信我自己最初判断 <em> BDB之所以比Sqlite商用份额多， </em> 博客园有网友测试结果BDB比Redis还快（<a href="http://www.cnblogs.com/me115/p/3395396.html），" target="_blank" rel="noopener">http://www.cnblogs.com/me115/p/3395396.html），</a> * cdn缓存用BDB而不是Sqlite 等等，都能从侧面说明问题 ps: 还从Google上发现了百度文库里面也有人传了个关于BDB和Sqlite的性能对比，结果就是把文章头和尾重新写了一堆废话，然后把上面CSDN上面的那个测试结果贴在中间 。。。。 无语了，鄙视这样的人。。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/数据库/">数据库</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/berkeleydb/">berkeleydb</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/dbd/">dbd</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/sqlite/">sqlite</a></li></ul>
+
+      
+            
+      
+    </footer>
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+    
+
+  
 
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/9/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="extend next" rel="next" href="/page/11/">Next</a>
+    <a class="extend prev" rel="prev" href="/page/9/">Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span><a class="page-number" href="/page/11/">11</a><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/11/">Next</a>
   </nav>
 
 </section>
@@ -1339,7 +1287,7 @@ $mail-&gt;Send();
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/">互联网</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/操作系统/">操作系统</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a><span class="category-list-count">127</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/操作系统/">操作系统</a><span class="category-list-count">13</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/数据库/">数据库</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">13</span></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/">互联网</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/互联网/操作系统/">操作系统</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/">大前端！</a><span class="category-list-count">12</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/大前端！/技术分类/">技术分类</a><span class="category-list-count">9</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/">技术分类</a><span class="category-list-count">120</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/操作系统/">操作系统</a><span class="category-list-count">11</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/技术分类/数据库/">数据库</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/categories/操作系统/">操作系统</a><span class="category-list-count">21</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/数据库/">数据库</a><span class="category-list-count">13</span></li></ul>
     </div>
   </div>
 
@@ -1349,7 +1297,7 @@ $mail-&gt;Send();
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AES/">AES</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgniter/">CodeIgniter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GlusterFS/">GlusterFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Google云/">Google云</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/">Mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAT/">NAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SMTP/">SMTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentry/">Sentry</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-factor-authentication/">Two-factor authentication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T型累加/">T型累加</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/">VMware</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/aliyun/">aliyun</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/application-ini/">application.ini</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/">backup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/berkeleydb/">berkeleydb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitcoin/">bitcoin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte/">byte</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/combobox/">combobox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datagrid/">datagrid</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbd/">dbd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dhcp/">dhcp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drupal/">drupal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic/">dynamic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easyui/">easyui</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ef/">ef</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/">email</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity-framework/">entity framework</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/excel/">excel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exception/">exception</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/final/">final</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fonts/">fonts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/">get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get-result/">get_result</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getclass/">getclass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gmail/">gmail</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google/">google</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gridview/">gridview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/inputstream/">inputstream</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">14</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jms/">jms</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel-version/">kernel version</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j/">log4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/">lvm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lxde/">lxde</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mailer/">mailer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/menu/">menu</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microtime/">microtime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monaco/">monaco</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql-load-data/">mysql load data</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysqldump/">mysqldump</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netbeans/">netbeans</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ocserv/">ocserv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/office/">office</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openoffice/">openoffice</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openvpn/">openvpn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/php-ini/">php.ini</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/phpinfo/">phpinfo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/program/">program</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redmine/">redmine</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/">root</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/">sed</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/slackware/">slackware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sleep/">sleep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sprintboot/">sprintboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/static/">static</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/symfony/">symfony</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tar/">tar</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/">terminal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tls-ssl/">tls/ssl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usort/">usort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virutal-box/">virutal box</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn868错误/">vpn868错误</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xfce/">xfce</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaf/">yaf</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yotube/">yotube</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/两步验证/">两步验证</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/云计算/">云计算</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/保存/">保存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改密码/">修改密码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/内网对外/">内网对外</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/写文件/">写文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/函数/">函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分级/">分级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分页/">分页</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/创建用户/">创建用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除/">删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷新/">刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态类型/">动态类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卡夫卡/">卡夫卡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化/">参数化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化查询/">参数化查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台/">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行/">命令行</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备份/">备份</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/子部门/">子部门</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字体/">字体</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字节流/">字节流</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/宏/">宏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对称加密/">对称加密</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工厂模式/">工厂模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/循环/">循环</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微软雅黑/">微软雅黑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/德兰修女/">德兰修女</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思科/">思科</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手机/">手机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/执行时间/">执行时间</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/挖矿/">挖矿</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/提交/">提交</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敏捷/">敏捷</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据备份/">数据备份</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件/">文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件名/">文件名</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件存储/">文件存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/替换/">替换</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构/">架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构师/">架构师</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派/">树莓派</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/比特币/">比特币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毫秒/">毫秒</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据/">海量数据</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据导入/">海量数据导入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/用户/">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/目录/">目录</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箴言/">箴言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/累加/">累加</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组/">组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/终端/">终端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓冲区/">缓冲区</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义函数/">自定义函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/菜单/">菜单</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解压/">解压</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解锁/">解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/说明书/">说明书</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/路径/">路径</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/输入法/">输入法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/远程访问/">远程访问</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/追加/">追加</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向工程/">逆向工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮件/">邮件</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮箱/">邮箱</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置/">配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/配置文件/">配置文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复数据/">重复数据</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复记录/">重复记录</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里/">阿里</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/默认路径/">默认路径</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/龙角散/">龙角散</a><span class="tag-list-count">1</span></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/AES/">AES</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ActiveMQ/">ActiveMQ</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIginter/">CodeIginter</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/CodeIgniter/">CodeIgniter</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/GlusterFS/">GlusterFS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mongodb/">Mongodb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/NAT/">NAT</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/PHP/">PHP</a><span class="tag-list-count">31</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/SMTP/">SMTP</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Sentry/">Sentry</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Two-factor-authentication/">Two-factor authentication</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/T型累加/">T型累加</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/VMware/">VMware</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/anyconnect/">anyconnect</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/asp-net/">asp.net</a><span class="tag-list-count">6</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/backup/">backup</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/berkeleydb/">berkeleydb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/bitcoin/">bitcoin</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/byte/">byte</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/c/">c#</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/centos/">centos</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/checkbox/">checkbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/chrome/">chrome</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ci/">ci</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/cisco/">cisco</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/combobox/">combobox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/datagrid/">datagrid</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/date/">date</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dbd/">dbd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debian/">debian</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/debug/">debug</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/desktop/">desktop</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dhcp/">dhcp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dropbox/">dropbox</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/drupal/">drupal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/dynamic/">dynamic</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/easyui/">easyui</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/eclipse/">eclipse</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ef/">ef</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/emacs/">emacs</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/email/">email</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/entity-framework/">entity framework</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/excel/">excel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/exception/">exception</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fastdfs/">fastdfs</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/final/">final</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/fonts/">fonts</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/freebsd/">freebsd</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get/">get</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/get-result/">get_result</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/getclass/">getclass</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gmail/">gmail</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/google/">google</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/grep/">grep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/gridview/">gridview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/http/">http</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/https/">https</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/inputstream/">inputstream</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ip/">ip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iptables/">iptables</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/java/">java</a><span class="tag-list-count">13</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jdk/">jdk</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jms/">jms</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/jquery/">jquery</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/json/">json</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kafka/">kafka</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/kernel-version/">kernel version</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/laravel/">laravel</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/linux/">linux</a><span class="tag-list-count">27</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/listview/">listview</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/log4j/">log4j</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lvm/">lvm</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/lxde/">lxde</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mailer/">mailer</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mariadb/">mariadb</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/message/">message</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/microtime/">microtime</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/monaco/">monaco</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql/">mysql</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysql-load-data/">mysql load data</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/mysqldump/">mysqldump</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/netbeans/">netbeans</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nginx/">nginx</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ocserv/">ocserv</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openssl/">openssl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/openvpn/">openvpn</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/oss/">oss</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/owncloud/">owncloud</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/phpinfo/">phpinfo</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/pip/">pip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/post/">post</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/program/">program</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/proxy/">proxy</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python/">python</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/python-pip/">python-pip</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redis/">redis</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/redmine/">redmine</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/root/">root</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/screen/">screen</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sed/">sed</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shadowsocks/">shadowsocks</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/shell/">shell</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/slackware/">slackware</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sleep/">sleep</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/socket/">socket</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sprintboot/">sprintboot</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sql/">sql</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/sqlite/">sqlite</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssh/">ssh</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ssl/">ssl</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/static/">static</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/symfony/">symfony</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tar/">tar</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/terminal/">terminal</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/time/">time</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/timestamp/">timestamp</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/ubuntu/">ubuntu</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/usort/">usort</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vim/">vim</a><span class="tag-list-count">7</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/virutal-box/">virutal box</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn/">vpn</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/vpn868错误/">vpn868错误</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wifi/">wifi</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/wordpress/">wordpress</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/xfce/">xfce</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yaf/">yaf</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/yotube/">yotube</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/上古卷轴5/">上古卷轴5</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/两步验证/">两步验证</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/中科大/">中科大</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/代理/">代理</a><span class="tag-list-count">5</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/优化/">优化</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/依赖注入/">依赖注入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/保存/">保存</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/修改密码/">修改密码</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/关闭/">关闭</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/写文件/">写文件</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分级/">分级</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/分页/">分页</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/创建用户/">创建用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/删除/">删除</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/刷新/">刷新</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/动态类型/">动态类型</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/华为/">华为</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/卡夫卡/">卡夫卡</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化/">参数化</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/参数化查询/">参数化查询</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/后台/">后台</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令/">命令</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/命令行/">命令行</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/备份/">备份</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/复选框/">复选框</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/子部门/">子部门</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字符串/">字符串</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/字节流/">字节流</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/宏/">宏</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/对称加密/">对称加密</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/工厂模式/">工厂模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/开发环境/">开发环境</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/异常/">异常</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微信/">微信</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/微软雅黑/">微软雅黑</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/德兰修女/">德兰修女</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/思科/">思科</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/性能/">性能</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/手机/">手机</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/执行时间/">执行时间</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/挖矿/">挖矿</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/排序/">排序</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/提交/">提交</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/敏捷/">敏捷</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据备份/">数据备份</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数据库/">数据库</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/数组/">数组</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件存储/">文件存储</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/文件操作/">文件操作</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日志/">日志</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/日期时间/">日期时间</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间/">时间</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/时间戳/">时间戳</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/替换/">替换</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/枚举/">枚举</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构/">架构</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/架构师/">架构师</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派/">树莓派</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/框架/">框架</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/比特币/">比特币</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/毫秒/">毫秒</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/浏览器/">浏览器</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据/">海量数据</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/海量数据导入/">海量数据导入</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息/">消息</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/消息队列/">消息队列</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/环境配置/">环境配置</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/用户/">用户</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/箴言/">箴言</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/索引/">索引</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/累加/">累加</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/组/">组</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/终端/">终端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/缓冲区/">缓冲区</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/网络/">网络</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/自定义函数/">自定义函数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/虚拟机/">虚拟机</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/解锁/">解锁</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/设计模式/">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/调试/">调试</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转换/">转换</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/输入法/">输入法</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/追加/">追加</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/逆向工程/">逆向工程</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮件/">邮件</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/邮箱/">邮箱</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复数据/">重复数据</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/重复记录/">重复记录</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/防火墙/">防火墙</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/阿里云/">阿里云</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随机数/">随机数</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/默认路径/">默认路径</a><span class="tag-list-count">1</span></li></ul>
     </div>
   </div>
 
@@ -1359,7 +1307,7 @@ $mail-&gt;Send();
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/AES/" style="font-size: 10px;">AES</a> <a href="/tags/ActiveMQ/" style="font-size: 10.91px;">ActiveMQ</a> <a href="/tags/CodeIginter/" style="font-size: 11.82px;">CodeIginter</a> <a href="/tags/CodeIgniter/" style="font-size: 10px;">CodeIgniter</a> <a href="/tags/GlusterFS/" style="font-size: 10px;">GlusterFS</a> <a href="/tags/Google云/" style="font-size: 10px;">Google云</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/NAT/" style="font-size: 10px;">NAT</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/SMTP/" style="font-size: 10px;">SMTP</a> <a href="/tags/Sentry/" style="font-size: 10px;">Sentry</a> <a href="/tags/Two-factor-authentication/" style="font-size: 10px;">Two-factor authentication</a> <a href="/tags/T型累加/" style="font-size: 10px;">T型累加</a> <a href="/tags/VMware/" style="font-size: 10.91px;">VMware</a> <a href="/tags/aliyun/" style="font-size: 10px;">aliyun</a> <a href="/tags/anyconnect/" style="font-size: 12.73px;">anyconnect</a> <a href="/tags/application-ini/" style="font-size: 10px;">application.ini</a> <a href="/tags/asp-net/" style="font-size: 14.55px;">asp.net</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/berkeleydb/" style="font-size: 10px;">berkeleydb</a> <a href="/tags/bitcoin/" style="font-size: 10px;">bitcoin</a> <a href="/tags/byte/" style="font-size: 10px;">byte</a> <a href="/tags/c/" style="font-size: 12.73px;">c#</a> <a href="/tags/centos/" style="font-size: 16.36px;">centos</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/ci/" style="font-size: 10.91px;">ci</a> <a href="/tags/cisco/" style="font-size: 11.82px;">cisco</a> <a href="/tags/combobox/" style="font-size: 10px;">combobox</a> <a href="/tags/datagrid/" style="font-size: 11.82px;">datagrid</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/dbd/" style="font-size: 10px;">dbd</a> <a href="/tags/debian/" style="font-size: 11.82px;">debian</a> <a href="/tags/debug/" style="font-size: 10.91px;">debug</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dhcp/" style="font-size: 10px;">dhcp</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/drupal/" style="font-size: 10px;">drupal</a> <a href="/tags/dynamic/" style="font-size: 10px;">dynamic</a> <a href="/tags/easyui/" style="font-size: 15.45px;">easyui</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/ef/" style="font-size: 10px;">ef</a> <a href="/tags/emacs/" style="font-size: 15.45px;">emacs</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/entity-framework/" style="font-size: 10px;">entity framework</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/exception/" style="font-size: 10.91px;">exception</a> <a href="/tags/fastdfs/" style="font-size: 13.64px;">fastdfs</a> <a href="/tags/final/" style="font-size: 10px;">final</a> <a href="/tags/fonts/" style="font-size: 10px;">fonts</a> <a href="/tags/freebsd/" style="font-size: 10px;">freebsd</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/get-result/" style="font-size: 10px;">get_result</a> <a href="/tags/getclass/" style="font-size: 10px;">getclass</a> <a href="/tags/gmail/" style="font-size: 10px;">gmail</a> <a href="/tags/google/" style="font-size: 10.91px;">google</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/gridview/" style="font-size: 10px;">gridview</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 11.82px;">https</a> <a href="/tags/inputstream/" style="font-size: 10px;">inputstream</a> <a href="/tags/ip/" style="font-size: 10.91px;">ip</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 18.18px;">java</a> <a href="/tags/javascript/" style="font-size: 13.64px;">javascript</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jquery/" style="font-size: 12.73px;">jquery</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/kernel-version/" style="font-size: 10px;">kernel version</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/linux/" style="font-size: 19.09px;">linux</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lxde/" style="font-size: 10px;">lxde</a> <a href="/tags/mailer/" style="font-size: 10px;">mailer</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/menu/" style="font-size: 10px;">menu</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/microtime/" style="font-size: 10px;">microtime</a> <a href="/tags/monaco/" style="font-size: 10px;">monaco</a> <a href="/tags/mysql/" style="font-size: 17.27px;">mysql</a> <a href="/tags/mysql-load-data/" style="font-size: 10px;">mysql load data</a> <a href="/tags/mysqldump/" style="font-size: 10px;">mysqldump</a> <a href="/tags/netbeans/" style="font-size: 10px;">netbeans</a> <a href="/tags/nginx/" style="font-size: 16.36px;">nginx</a> <a href="/tags/ocserv/" style="font-size: 10px;">ocserv</a> <a href="/tags/office/" style="font-size: 10px;">office</a> <a href="/tags/openoffice/" style="font-size: 10px;">openoffice</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/openvpn/" style="font-size: 10px;">openvpn</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 11.82px;">owncloud</a> <a href="/tags/php-ini/" style="font-size: 10px;">php.ini</a> <a href="/tags/phpinfo/" style="font-size: 10px;">phpinfo</a> <a href="/tags/pip/" style="font-size: 10.91px;">pip</a> <a href="/tags/post/" style="font-size: 10.91px;">post</a> <a href="/tags/program/" style="font-size: 10px;">program</a> <a href="/tags/proxy/" style="font-size: 11.82px;">proxy</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/python-pip/" style="font-size: 10.91px;">python-pip</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/redmine/" style="font-size: 10.91px;">redmine</a> <a href="/tags/root/" style="font-size: 10px;">root</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shadowsocks/" style="font-size: 11.82px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/slackware/" style="font-size: 10px;">slackware</a> <a href="/tags/sleep/" style="font-size: 10px;">sleep</a> <a href="/tags/socket/" style="font-size: 13.64px;">socket</a> <a href="/tags/sprintboot/" style="font-size: 10px;">sprintboot</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/ssh/" style="font-size: 10.91px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10.91px;">ssl</a> <a href="/tags/static/" style="font-size: 10px;">static</a> <a href="/tags/symfony/" style="font-size: 10.91px;">symfony</a> <a href="/tags/tar/" style="font-size: 10.91px;">tar</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/time/" style="font-size: 10.91px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/tls-ssl/" style="font-size: 10px;">tls/ssl</a> <a href="/tags/ubuntu/" style="font-size: 12.73px;">ubuntu</a> <a href="/tags/usort/" style="font-size: 10px;">usort</a> <a href="/tags/vim/" style="font-size: 16.36px;">vim</a> <a href="/tags/virutal-box/" style="font-size: 10px;">virutal box</a> <a href="/tags/vpn/" style="font-size: 10.91px;">vpn</a> <a href="/tags/vpn868错误/" style="font-size: 10px;">vpn868错误</a> <a href="/tags/wifi/" style="font-size: 10.91px;">wifi</a> <a href="/tags/wordpress/" style="font-size: 10.91px;">wordpress</a> <a href="/tags/xfce/" style="font-size: 10px;">xfce</a> <a href="/tags/yaf/" style="font-size: 11.82px;">yaf</a> <a href="/tags/yotube/" style="font-size: 10px;">yotube</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/两步验证/" style="font-size: 10px;">两步验证</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/云计算/" style="font-size: 10px;">云计算</a> <a href="/tags/代理/" style="font-size: 13.64px;">代理</a> <a href="/tags/优化/" style="font-size: 10px;">优化</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/保存/" style="font-size: 10px;">保存</a> <a href="/tags/修改密码/" style="font-size: 10px;">修改密码</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/内网对外/" style="font-size: 10px;">内网对外</a> <a href="/tags/写文件/" style="font-size: 10px;">写文件</a> <a href="/tags/函数/" style="font-size: 10px;">函数</a> <a href="/tags/分级/" style="font-size: 10px;">分级</a> <a href="/tags/分页/" style="font-size: 10px;">分页</a> <a href="/tags/创建用户/" style="font-size: 10px;">创建用户</a> <a href="/tags/删除/" style="font-size: 10px;">删除</a> <a href="/tags/刷新/" style="font-size: 10px;">刷新</a> <a href="/tags/动态类型/" style="font-size: 10px;">动态类型</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/卡夫卡/" style="font-size: 10px;">卡夫卡</a> <a href="/tags/参数化/" style="font-size: 10.91px;">参数化</a> <a href="/tags/参数化查询/" style="font-size: 10px;">参数化查询</a> <a href="/tags/后台/" style="font-size: 10px;">后台</a> <a href="/tags/命令/" style="font-size: 10.91px;">命令</a> <a href="/tags/命令行/" style="font-size: 10.91px;">命令行</a> <a href="/tags/备份/" style="font-size: 10px;">备份</a> <a href="/tags/复选框/" style="font-size: 10px;">复选框</a> <a href="/tags/子部门/" style="font-size: 10px;">子部门</a> <a href="/tags/字体/" style="font-size: 10px;">字体</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/字节流/" style="font-size: 10.91px;">字节流</a> <a href="/tags/宏/" style="font-size: 10px;">宏</a> <a href="/tags/对称加密/" style="font-size: 10px;">对称加密</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/异常/" style="font-size: 11.82px;">异常</a> <a href="/tags/循环/" style="font-size: 10px;">循环</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/微软雅黑/" style="font-size: 10px;">微软雅黑</a> <a href="/tags/德兰修女/" style="font-size: 10px;">德兰修女</a> <a href="/tags/思科/" style="font-size: 10px;">思科</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/手机/" style="font-size: 10px;">手机</a> <a href="/tags/执行时间/" style="font-size: 10px;">执行时间</a> <a href="/tags/挖矿/" style="font-size: 10px;">挖矿</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/提交/" style="font-size: 10px;">提交</a> <a href="/tags/敏捷/" style="font-size: 10px;">敏捷</a> <a href="/tags/数据备份/" style="font-size: 10px;">数据备份</a> <a href="/tags/数据库/" style="font-size: 11.82px;">数据库</a> <a href="/tags/数组/" style="font-size: 10.91px;">数组</a> <a href="/tags/文件/" style="font-size: 10px;">文件</a> <a href="/tags/文件名/" style="font-size: 10px;">文件名</a> <a href="/tags/文件存储/" style="font-size: 10px;">文件存储</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/替换/" style="font-size: 11.82px;">替换</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/架构师/" style="font-size: 10px;">架构师</a> <a href="/tags/树莓派/" style="font-size: 10.91px;">树莓派</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a> <a href="/tags/毫秒/" style="font-size: 10px;">毫秒</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/海量数据/" style="font-size: 10px;">海量数据</a> <a href="/tags/海量数据导入/" style="font-size: 10px;">海量数据导入</a> <a href="/tags/消息/" style="font-size: 10.91px;">消息</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/目录/" style="font-size: 10px;">目录</a> <a href="/tags/箴言/" style="font-size: 10px;">箴言</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/累加/" style="font-size: 10px;">累加</a> <a href="/tags/组/" style="font-size: 10px;">组</a> <a href="/tags/终端/" style="font-size: 11.82px;">终端</a> <a href="/tags/缓冲区/" style="font-size: 10px;">缓冲区</a> <a href="/tags/网络/" style="font-size: 10.91px;">网络</a> <a href="/tags/自定义函数/" style="font-size: 10px;">自定义函数</a> <a href="/tags/菜单/" style="font-size: 10px;">菜单</a> <a href="/tags/虚拟机/" style="font-size: 10.91px;">虚拟机</a> <a href="/tags/解压/" style="font-size: 10px;">解压</a> <a href="/tags/解锁/" style="font-size: 10px;">解锁</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/说明书/" style="font-size: 10px;">说明书</a> <a href="/tags/调试/" style="font-size: 10.91px;">调试</a> <a href="/tags/路径/" style="font-size: 10px;">路径</a> <a href="/tags/转换/" style="font-size: 10.91px;">转换</a> <a href="/tags/输入法/" style="font-size: 10px;">输入法</a> <a href="/tags/远程访问/" style="font-size: 10px;">远程访问</a> <a href="/tags/追加/" style="font-size: 10px;">追加</a> <a href="/tags/逆向工程/" style="font-size: 10px;">逆向工程</a> <a href="/tags/邮件/" style="font-size: 11.82px;">邮件</a> <a href="/tags/邮箱/" style="font-size: 10.91px;">邮箱</a> <a href="/tags/配置/" style="font-size: 10px;">配置</a> <a href="/tags/配置文件/" style="font-size: 10px;">配置文件</a> <a href="/tags/重复数据/" style="font-size: 10px;">重复数据</a> <a href="/tags/重复记录/" style="font-size: 10px;">重复记录</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里/" style="font-size: 10px;">阿里</a> <a href="/tags/阿里云/" style="font-size: 10.91px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a> <a href="/tags/默认路径/" style="font-size: 10px;">默认路径</a> <a href="/tags/龙角散/" style="font-size: 10px;">龙角散</a>
+      <a href="/tags/AES/" style="font-size: 10px;">AES</a> <a href="/tags/ActiveMQ/" style="font-size: 10.91px;">ActiveMQ</a> <a href="/tags/CodeIginter/" style="font-size: 11.82px;">CodeIginter</a> <a href="/tags/CodeIgniter/" style="font-size: 10px;">CodeIgniter</a> <a href="/tags/GlusterFS/" style="font-size: 10px;">GlusterFS</a> <a href="/tags/Mongodb/" style="font-size: 10px;">Mongodb</a> <a href="/tags/NAT/" style="font-size: 10px;">NAT</a> <a href="/tags/PHP/" style="font-size: 20px;">PHP</a> <a href="/tags/SMTP/" style="font-size: 10px;">SMTP</a> <a href="/tags/Sentry/" style="font-size: 10px;">Sentry</a> <a href="/tags/Two-factor-authentication/" style="font-size: 10px;">Two-factor authentication</a> <a href="/tags/T型累加/" style="font-size: 10px;">T型累加</a> <a href="/tags/VMware/" style="font-size: 10.91px;">VMware</a> <a href="/tags/anyconnect/" style="font-size: 12.73px;">anyconnect</a> <a href="/tags/asp-net/" style="font-size: 14.55px;">asp.net</a> <a href="/tags/backup/" style="font-size: 10px;">backup</a> <a href="/tags/berkeleydb/" style="font-size: 10px;">berkeleydb</a> <a href="/tags/bitcoin/" style="font-size: 10px;">bitcoin</a> <a href="/tags/byte/" style="font-size: 10px;">byte</a> <a href="/tags/c/" style="font-size: 12.73px;">c#</a> <a href="/tags/centos/" style="font-size: 16.36px;">centos</a> <a href="/tags/checkbox/" style="font-size: 10px;">checkbox</a> <a href="/tags/chrome/" style="font-size: 10px;">chrome</a> <a href="/tags/ci/" style="font-size: 10.91px;">ci</a> <a href="/tags/cisco/" style="font-size: 11.82px;">cisco</a> <a href="/tags/combobox/" style="font-size: 10px;">combobox</a> <a href="/tags/datagrid/" style="font-size: 11.82px;">datagrid</a> <a href="/tags/date/" style="font-size: 10px;">date</a> <a href="/tags/dbd/" style="font-size: 10px;">dbd</a> <a href="/tags/debian/" style="font-size: 10.91px;">debian</a> <a href="/tags/debug/" style="font-size: 10.91px;">debug</a> <a href="/tags/desktop/" style="font-size: 10px;">desktop</a> <a href="/tags/dhcp/" style="font-size: 10px;">dhcp</a> <a href="/tags/dropbox/" style="font-size: 10px;">dropbox</a> <a href="/tags/drupal/" style="font-size: 10px;">drupal</a> <a href="/tags/dynamic/" style="font-size: 10px;">dynamic</a> <a href="/tags/easyui/" style="font-size: 15.45px;">easyui</a> <a href="/tags/eclipse/" style="font-size: 10px;">eclipse</a> <a href="/tags/ef/" style="font-size: 10px;">ef</a> <a href="/tags/emacs/" style="font-size: 15.45px;">emacs</a> <a href="/tags/email/" style="font-size: 10px;">email</a> <a href="/tags/entity-framework/" style="font-size: 10px;">entity framework</a> <a href="/tags/excel/" style="font-size: 10px;">excel</a> <a href="/tags/exception/" style="font-size: 10.91px;">exception</a> <a href="/tags/fastdfs/" style="font-size: 13.64px;">fastdfs</a> <a href="/tags/final/" style="font-size: 10px;">final</a> <a href="/tags/fonts/" style="font-size: 10px;">fonts</a> <a href="/tags/freebsd/" style="font-size: 10px;">freebsd</a> <a href="/tags/get/" style="font-size: 10px;">get</a> <a href="/tags/get-result/" style="font-size: 10px;">get_result</a> <a href="/tags/getclass/" style="font-size: 10px;">getclass</a> <a href="/tags/gmail/" style="font-size: 10px;">gmail</a> <a href="/tags/google/" style="font-size: 10.91px;">google</a> <a href="/tags/grep/" style="font-size: 10px;">grep</a> <a href="/tags/gridview/" style="font-size: 10px;">gridview</a> <a href="/tags/http/" style="font-size: 10px;">http</a> <a href="/tags/https/" style="font-size: 10.91px;">https</a> <a href="/tags/inputstream/" style="font-size: 10px;">inputstream</a> <a href="/tags/ip/" style="font-size: 10.91px;">ip</a> <a href="/tags/iptables/" style="font-size: 10px;">iptables</a> <a href="/tags/java/" style="font-size: 18.18px;">java</a> <a href="/tags/javascript/" style="font-size: 13.64px;">javascript</a> <a href="/tags/jdk/" style="font-size: 10px;">jdk</a> <a href="/tags/jms/" style="font-size: 10px;">jms</a> <a href="/tags/jquery/" style="font-size: 12.73px;">jquery</a> <a href="/tags/json/" style="font-size: 10px;">json</a> <a href="/tags/kafka/" style="font-size: 10px;">kafka</a> <a href="/tags/kernel-version/" style="font-size: 10px;">kernel version</a> <a href="/tags/laravel/" style="font-size: 10px;">laravel</a> <a href="/tags/linux/" style="font-size: 19.09px;">linux</a> <a href="/tags/listview/" style="font-size: 10px;">listview</a> <a href="/tags/log4j/" style="font-size: 10px;">log4j</a> <a href="/tags/lvm/" style="font-size: 10px;">lvm</a> <a href="/tags/lxde/" style="font-size: 10px;">lxde</a> <a href="/tags/mailer/" style="font-size: 10px;">mailer</a> <a href="/tags/mariadb/" style="font-size: 10px;">mariadb</a> <a href="/tags/message/" style="font-size: 10px;">message</a> <a href="/tags/microtime/" style="font-size: 10px;">microtime</a> <a href="/tags/monaco/" style="font-size: 10px;">monaco</a> <a href="/tags/mysql/" style="font-size: 17.27px;">mysql</a> <a href="/tags/mysql-load-data/" style="font-size: 10px;">mysql load data</a> <a href="/tags/mysqldump/" style="font-size: 10px;">mysqldump</a> <a href="/tags/netbeans/" style="font-size: 10px;">netbeans</a> <a href="/tags/nginx/" style="font-size: 16.36px;">nginx</a> <a href="/tags/ocserv/" style="font-size: 10px;">ocserv</a> <a href="/tags/openssl/" style="font-size: 10px;">openssl</a> <a href="/tags/openvpn/" style="font-size: 10px;">openvpn</a> <a href="/tags/oss/" style="font-size: 10px;">oss</a> <a href="/tags/owncloud/" style="font-size: 11.82px;">owncloud</a> <a href="/tags/phpinfo/" style="font-size: 10px;">phpinfo</a> <a href="/tags/pip/" style="font-size: 10.91px;">pip</a> <a href="/tags/post/" style="font-size: 10.91px;">post</a> <a href="/tags/program/" style="font-size: 10px;">program</a> <a href="/tags/proxy/" style="font-size: 11.82px;">proxy</a> <a href="/tags/python/" style="font-size: 11.82px;">python</a> <a href="/tags/python-pip/" style="font-size: 10.91px;">python-pip</a> <a href="/tags/redis/" style="font-size: 10px;">redis</a> <a href="/tags/redmine/" style="font-size: 10.91px;">redmine</a> <a href="/tags/root/" style="font-size: 10px;">root</a> <a href="/tags/screen/" style="font-size: 10px;">screen</a> <a href="/tags/sed/" style="font-size: 10px;">sed</a> <a href="/tags/shadowsocks/" style="font-size: 11.82px;">shadowsocks</a> <a href="/tags/shell/" style="font-size: 10px;">shell</a> <a href="/tags/slackware/" style="font-size: 10px;">slackware</a> <a href="/tags/sleep/" style="font-size: 10px;">sleep</a> <a href="/tags/socket/" style="font-size: 13.64px;">socket</a> <a href="/tags/sprintboot/" style="font-size: 10px;">sprintboot</a> <a href="/tags/sql/" style="font-size: 10px;">sql</a> <a href="/tags/sqlite/" style="font-size: 10px;">sqlite</a> <a href="/tags/ssh/" style="font-size: 10px;">ssh</a> <a href="/tags/ssl/" style="font-size: 10px;">ssl</a> <a href="/tags/static/" style="font-size: 10px;">static</a> <a href="/tags/symfony/" style="font-size: 10.91px;">symfony</a> <a href="/tags/tar/" style="font-size: 10px;">tar</a> <a href="/tags/terminal/" style="font-size: 10px;">terminal</a> <a href="/tags/time/" style="font-size: 10.91px;">time</a> <a href="/tags/timestamp/" style="font-size: 10px;">timestamp</a> <a href="/tags/ubuntu/" style="font-size: 11.82px;">ubuntu</a> <a href="/tags/usort/" style="font-size: 10px;">usort</a> <a href="/tags/vim/" style="font-size: 15.45px;">vim</a> <a href="/tags/virutal-box/" style="font-size: 10px;">virutal box</a> <a href="/tags/vpn/" style="font-size: 10.91px;">vpn</a> <a href="/tags/vpn868错误/" style="font-size: 10px;">vpn868错误</a> <a href="/tags/wifi/" style="font-size: 10.91px;">wifi</a> <a href="/tags/wordpress/" style="font-size: 10.91px;">wordpress</a> <a href="/tags/xfce/" style="font-size: 10px;">xfce</a> <a href="/tags/yaf/" style="font-size: 10.91px;">yaf</a> <a href="/tags/yotube/" style="font-size: 10px;">yotube</a> <a href="/tags/上古卷轴5/" style="font-size: 10px;">上古卷轴5</a> <a href="/tags/两步验证/" style="font-size: 10px;">两步验证</a> <a href="/tags/中科大/" style="font-size: 10px;">中科大</a> <a href="/tags/代理/" style="font-size: 13.64px;">代理</a> <a href="/tags/优化/" style="font-size: 10px;">优化</a> <a href="/tags/依赖注入/" style="font-size: 10px;">依赖注入</a> <a href="/tags/保存/" style="font-size: 10px;">保存</a> <a href="/tags/修改密码/" style="font-size: 10px;">修改密码</a> <a href="/tags/关闭/" style="font-size: 10px;">关闭</a> <a href="/tags/写文件/" style="font-size: 10px;">写文件</a> <a href="/tags/分级/" style="font-size: 10px;">分级</a> <a href="/tags/分页/" style="font-size: 10px;">分页</a> <a href="/tags/创建用户/" style="font-size: 10px;">创建用户</a> <a href="/tags/删除/" style="font-size: 10px;">删除</a> <a href="/tags/刷新/" style="font-size: 10px;">刷新</a> <a href="/tags/动态类型/" style="font-size: 10px;">动态类型</a> <a href="/tags/华为/" style="font-size: 10px;">华为</a> <a href="/tags/卡夫卡/" style="font-size: 10px;">卡夫卡</a> <a href="/tags/参数化/" style="font-size: 10.91px;">参数化</a> <a href="/tags/参数化查询/" style="font-size: 10px;">参数化查询</a> <a href="/tags/后台/" style="font-size: 10px;">后台</a> <a href="/tags/命令/" style="font-size: 10.91px;">命令</a> <a href="/tags/命令行/" style="font-size: 10.91px;">命令行</a> <a href="/tags/备份/" style="font-size: 10px;">备份</a> <a href="/tags/复选框/" style="font-size: 10px;">复选框</a> <a href="/tags/子部门/" style="font-size: 10px;">子部门</a> <a href="/tags/字符串/" style="font-size: 10px;">字符串</a> <a href="/tags/字节流/" style="font-size: 10.91px;">字节流</a> <a href="/tags/宏/" style="font-size: 10px;">宏</a> <a href="/tags/对称加密/" style="font-size: 10px;">对称加密</a> <a href="/tags/工厂模式/" style="font-size: 10px;">工厂模式</a> <a href="/tags/开发环境/" style="font-size: 10px;">开发环境</a> <a href="/tags/异常/" style="font-size: 11.82px;">异常</a> <a href="/tags/微信/" style="font-size: 10px;">微信</a> <a href="/tags/微软雅黑/" style="font-size: 10px;">微软雅黑</a> <a href="/tags/德兰修女/" style="font-size: 10px;">德兰修女</a> <a href="/tags/思科/" style="font-size: 10px;">思科</a> <a href="/tags/性能/" style="font-size: 10px;">性能</a> <a href="/tags/手机/" style="font-size: 10px;">手机</a> <a href="/tags/执行时间/" style="font-size: 10px;">执行时间</a> <a href="/tags/挖矿/" style="font-size: 10px;">挖矿</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/提交/" style="font-size: 10px;">提交</a> <a href="/tags/敏捷/" style="font-size: 10px;">敏捷</a> <a href="/tags/数据备份/" style="font-size: 10px;">数据备份</a> <a href="/tags/数据库/" style="font-size: 11.82px;">数据库</a> <a href="/tags/数组/" style="font-size: 10.91px;">数组</a> <a href="/tags/文件存储/" style="font-size: 10px;">文件存储</a> <a href="/tags/文件操作/" style="font-size: 10px;">文件操作</a> <a href="/tags/日志/" style="font-size: 10px;">日志</a> <a href="/tags/日期时间/" style="font-size: 10px;">日期时间</a> <a href="/tags/时间/" style="font-size: 10px;">时间</a> <a href="/tags/时间戳/" style="font-size: 10px;">时间戳</a> <a href="/tags/替换/" style="font-size: 11.82px;">替换</a> <a href="/tags/枚举/" style="font-size: 10px;">枚举</a> <a href="/tags/架构/" style="font-size: 10px;">架构</a> <a href="/tags/架构师/" style="font-size: 10px;">架构师</a> <a href="/tags/树莓派/" style="font-size: 10.91px;">树莓派</a> <a href="/tags/框架/" style="font-size: 10px;">框架</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a> <a href="/tags/毫秒/" style="font-size: 10px;">毫秒</a> <a href="/tags/浏览器/" style="font-size: 10px;">浏览器</a> <a href="/tags/海量数据/" style="font-size: 10px;">海量数据</a> <a href="/tags/海量数据导入/" style="font-size: 10px;">海量数据导入</a> <a href="/tags/消息/" style="font-size: 10.91px;">消息</a> <a href="/tags/消息队列/" style="font-size: 10px;">消息队列</a> <a href="/tags/环境配置/" style="font-size: 10px;">环境配置</a> <a href="/tags/用户/" style="font-size: 10px;">用户</a> <a href="/tags/箴言/" style="font-size: 10px;">箴言</a> <a href="/tags/索引/" style="font-size: 10px;">索引</a> <a href="/tags/累加/" style="font-size: 10px;">累加</a> <a href="/tags/组/" style="font-size: 10px;">组</a> <a href="/tags/终端/" style="font-size: 11.82px;">终端</a> <a href="/tags/缓冲区/" style="font-size: 10px;">缓冲区</a> <a href="/tags/网络/" style="font-size: 10.91px;">网络</a> <a href="/tags/自定义函数/" style="font-size: 10px;">自定义函数</a> <a href="/tags/虚拟机/" style="font-size: 10.91px;">虚拟机</a> <a href="/tags/解锁/" style="font-size: 10px;">解锁</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/调试/" style="font-size: 10.91px;">调试</a> <a href="/tags/转换/" style="font-size: 10.91px;">转换</a> <a href="/tags/输入法/" style="font-size: 10px;">输入法</a> <a href="/tags/追加/" style="font-size: 10px;">追加</a> <a href="/tags/逆向工程/" style="font-size: 10px;">逆向工程</a> <a href="/tags/邮件/" style="font-size: 11.82px;">邮件</a> <a href="/tags/邮箱/" style="font-size: 10.91px;">邮箱</a> <a href="/tags/重复数据/" style="font-size: 10px;">重复数据</a> <a href="/tags/重复记录/" style="font-size: 10px;">重复记录</a> <a href="/tags/防火墙/" style="font-size: 10px;">防火墙</a> <a href="/tags/阿里云/" style="font-size: 10.91px;">阿里云</a> <a href="/tags/随机数/" style="font-size: 10px;">随机数</a> <a href="/tags/默认路径/" style="font-size: 10px;">默认路径</a>
     </div>
   </div>
 
@@ -1369,7 +1317,7 @@ $mail-&gt;Send();
     <h3 class="widget-title">Archives</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">19</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">21</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">14</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">1</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/12/">十二月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/07/">七月 2018</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/06/">六月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/05/">五月 2018</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/03/">三月 2018</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">一月 2018</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/12/">十二月 2017</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">十一月 2017</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/10/">十月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a><span class="archive-list-count">17</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a><span class="archive-list-count">20</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">七月 2017</a><span class="archive-list-count">13</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/06/">六月 2017</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/04/">四月 2016</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/03/">三月 2016</a><span class="archive-list-count">10</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/02/">二月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/01/">一月 2016</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/12/">十二月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/10/">十月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/09/">九月 2015</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/08/">八月 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/07/">七月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">六月 2015</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">五月 2015</a><span class="archive-list-count">7</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">2</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/03/">三月 2015</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/12/">十二月 2014</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2014/11/">十一月 2014</a><span class="archive-list-count">1</span></li></ul>
     </div>
   </div>
 

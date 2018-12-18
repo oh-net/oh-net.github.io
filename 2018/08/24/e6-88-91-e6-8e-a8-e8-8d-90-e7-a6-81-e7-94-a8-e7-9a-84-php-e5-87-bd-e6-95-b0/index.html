@@ -16,23 +16,23 @@
   <title>我推荐禁用的 php 函数 | Technician</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="PHP函数">
+  <meta name="keywords" content="PHP">
   
   
   
   
-  <meta name="description" content="dl,exec,popen,system,phpinfo,passthru,shell_exec,proc_open,proc_close,show_source,escapeshellarg,escapeshellcmd 禁用函数的方法：修改 php.ini，首先找出你服务器的该文件在哪。 一般主机源码安装的默认地址是：/usr/local/lib/php.ini DirectAdmin 的 C">
-<meta name="keywords" content="PHP,函数">
+  <meta name="description" content="推荐禁用的函数1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001">
+<meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我推荐禁用的 PHP 函数">
 <meta property="og:url" content="https://www.cobsun.com/2018/08/24/e6-88-91-e6-8e-a8-e8-8d-90-e7-a6-81-e7-94-a8-e7-9a-84-php-e5-87-bd-e6-95-b0/index.html">
 <meta property="og:site_name" content="Technician">
-<meta property="og:description" content="dl,exec,popen,system,phpinfo,passthru,shell_exec,proc_open,proc_close,show_source,escapeshellarg,escapeshellcmd 禁用函数的方法：修改 php.ini，首先找出你服务器的该文件在哪。 一般主机源码安装的默认地址是：/usr/local/lib/php.ini DirectAdmin 的 C">
+<meta property="og:description" content="推荐禁用的函数1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-12-12T09:11:08.932Z">
+<meta property="og:updated_time" content="2018-12-18T09:12:39.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我推荐禁用的 PHP 函数">
-<meta name="twitter:description" content="dl,exec,popen,system,phpinfo,passthru,shell_exec,proc_open,proc_close,show_source,escapeshellarg,escapeshellcmd 禁用函数的方法：修改 php.ini，首先找出你服务器的该文件在哪。 一般主机源码安装的默认地址是：/usr/local/lib/php.ini DirectAdmin 的 C">
+<meta name="twitter:description" content="推荐禁用的函数1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798991001">
   
     <link rel="alternate" href="/atom.xml" title="Technician" type="application/atom+xml">
   
@@ -198,13 +198,12 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <pre><code>dl,exec,popen,system,phpinfo,passthru,shell_exec,proc_open,proc_close,show_source,escapeshellarg,escapeshellcmd
-</code></pre><h2 id="禁用函数的方法："><a href="#禁用函数的方法：" class="headerlink" title="禁用函数的方法："></a>禁用函数的方法：</h2><h3 id="修改-php-ini，首先找出你服务器的该文件在哪。"><a href="#修改-php-ini，首先找出你服务器的该文件在哪。" class="headerlink" title="修改 php.ini，首先找出你服务器的该文件在哪。"></a>修改 php.ini，首先找出你服务器的该文件在哪。</h3><blockquote>
-<p>一般主机源码安装的默认地址是：<code>/usr/local/lib/php.ini</code> DirectAdmin 的 CGI 模式下，地址是：<code>/usr/local/etc/php5/cgi/php.ini</code></p>
-</blockquote>
-<h3 id="在该文件中找出-disable-functions-，如果有注释就去掉、然后在等号后面加入禁用的函数"><a href="#在该文件中找出-disable-functions-，如果有注释就去掉、然后在等号后面加入禁用的函数" class="headerlink" title="在该文件中找出 disable_functions = ，如果有注释就去掉、然后在等号后面加入禁用的函数"></a>在该文件中找出 <code>disable_functions =</code> ，如果有注释就去掉、然后在等号后面加入禁用的函数</h3><pre><code>disable_functions = dl,exec,popen,system,phpinfo,passthru,shell_exec,proc_open,proc_close,show_source,escapeshellarg,escapeshellcmd
-</code></pre><p>如上是例子，具体用什么编辑器、怎么修改就是你的事儿了 。。太基础我就不发图了。</p>
-<h2 id="然后重启-apache-或-nginx-即可"><a href="#然后重启-apache-或-nginx-即可" class="headerlink" title="然后重启 apache 或 nginx 即可~"></a>然后重启 apache 或 nginx 即可~</h2><p><strong>来源</strong>:\<br><a href="http://www.zntec.cn/archives/disable_functions.html" target="_blank" rel="noopener">http://www.zntec.cn/archives/disable_functions.html</a></p>
+        <h2 id="推荐禁用的函数"><a href="#推荐禁用的函数" class="headerlink" title="推荐禁用的函数"></a>推荐禁用的函数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br></pre></td><td class="code"><pre><span class="line">phpinfo,eval,passthru,exec,system,chroot,scandir,chgrp,chown,shell_exec,proc_open,proc_get_status,ini_alter,ini_alter,ini_restore,dl,pfsockopen,openlog,syslog,readlink,symlink,popepassthru,stream_socket_server,fsocket,fsockopen</span><br><span class="line">``` </span><br><span class="line">### 函数名称和功能列表</span><br><span class="line">险等级：高</span><br><span class="line">nfo()**_</span><br><span class="line">  能描述：输出 PHP 环境信息以及相关的模块、WEB 环境等信息。 </span><br><span class="line">  险等级：中</span><br><span class="line"></span><br><span class="line">- _**passthru()**_</span><br><span class="line">  能描述：允许执行一个外部程序并回显输出，类似于 exec()。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**exec()**_</span><br><span class="line">  能描述：允许执行一个外部程序（如 UNIX Shell 或 CMD 命令等）。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**system()**_</span><br><span class="line">  能描述：允许执行一个外部程序并回显输出，类似于 passthru()。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**chroot()**_</span><br><span class="line">  能描述：可改变当前 PHP 进程的工作根目录，仅当系统支持 CLI 模式 </span><br><span class="line">  HP 时才能工作，且该函数不适用于 Windows 系统。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**scandir()**_</span><br><span class="line">  能描述：列出指定路径中的文件和目录。 </span><br><span class="line">  险等级：中</span><br><span class="line"></span><br><span class="line">- _**chgrp()**_</span><br><span class="line">  能描述：改变文件或目录所属的用户组。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**chown()**_</span><br><span class="line">  能描述：改变文件或目录的所有者。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**shell_exec()**_</span><br><span class="line">  能描述：通过 Shell 执行命令，并将执行结果作为字符串返回。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**proc_open()**_</span><br><span class="line">  能描述：执行一个命令并打开文件指针用于读取以及写入。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**proc_get_status()**_</span><br><span class="line">  能描述：获取使用 proc_open() 所打开进程的信息。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**error_log()**_</span><br><span class="line">  能描述：将错误信息发送到指定位置（文件）。 </span><br><span class="line">  全备注：在某些版本的 PHP 中，可使用 error_log() 绕过 PHP safe mode， </span><br><span class="line">  行任意命令。 </span><br><span class="line">  险等级：低</span><br><span class="line"></span><br><span class="line">- _**ini_alter()**_</span><br><span class="line">  能描述：是 ini_set() 函数的一个别名函数，功能与 ini_set() 相同。 </span><br><span class="line">  体参见 ini_set()。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**ini_set()**_</span><br><span class="line">  能描述：可用于修改、设置 PHP 环境配置参数。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**ini_restore()**_</span><br><span class="line">  能描述：可用于恢复 PHP 环境配置参数到其初始值。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**dl()**_</span><br><span class="line">  能描述：在 PHP 进行运行过程当中（而非启动时）加载一个 PHP 外部模块。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**pfsockopen()**_</span><br><span class="line">  能描述：建立一个 Internet 或 UNIX 域的 socket 持久连接。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**syslog()**_</span><br><span class="line">  能描述：可调用 UNIX 系统的系统层 syslog() 函数。 </span><br><span class="line">  险等级：中</span><br><span class="line"></span><br><span class="line">- _**readlink()**_</span><br><span class="line">  能描述：返回符号连接指向的目标文件内容。 </span><br><span class="line">  险等级：中</span><br><span class="line"></span><br><span class="line">- _**symlink()**_</span><br><span class="line">  能描述：在 UNIX 系统中建立一个符号链接。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**popen()**_</span><br><span class="line">  能描述：可通过 popen() 的参数传递一条命令，并对 popen() 所打开的文件进行执行。 </span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">- _**stream_socket_server()**_</span><br><span class="line">  能描述：建立一个 Internet 或 UNIX 服务器连接。 </span><br><span class="line">  险等级：中</span><br><span class="line"></span><br><span class="line">- _**putenv()**_</span><br><span class="line">  能描述：用于在 PHP 运行时改变系统字符集环境。在低于 5.2.6 版本的 PHP 中，可利用该函数 </span><br><span class="line">  改系统字符集环境后，利用 sendmail 指令发送特殊参数执行系统 SHELL 命令。 </span><br><span class="line">  险等级：高</span><br><span class="line">  险等级：高</span><br><span class="line"></span><br><span class="line">## 禁用函数的方法：</span><br><span class="line"></span><br><span class="line">### 修改 php.ini，首先找出你服务器的该文件在哪。</span><br><span class="line"></span><br><span class="line">&gt; 一般主机源码安装的默认地址是：`/usr/local/lib/php.ini` DirectAdmin 的 CGI 模式下，地址是：`/usr/local/etc/php5/cgi/php.ini`</span><br><span class="line"></span><br><span class="line">### 在该文件中找出 `disable_functions =` ，如果有注释就去掉、然后在等号后面加入禁用的函数</span><br></pre></td></tr></table></figure>
+<pre><code>disable_functions = dl,exec,popen,system,phpinfo,passthru,shell_exec,proc_open,proc_close,show_source,escapeshellarg,escapeshellcmd
+</code></pre><p><code>`</code> </p>
+<p>如上是例子，具体用什么编辑器、怎么修改就是你的事儿了 。。太基础我就不发图了。</p>
+<h3 id="然后重启-apache-或-nginx"><a href="#然后重启-apache-或-nginx" class="headerlink" title="然后重启 apache 或 nginx"></a>然后重启 apache 或 nginx</h3><hr>
+<p><strong>来源</strong>:\<br><a href="http://www.zntec.cn/archives/disable_functions.html" target="_blank" rel="noopener">http://www.zntec.cn/archives/disable_functions.html</a></p>
 
       
     </div>
@@ -215,7 +214,7 @@ var themeMenus = {};
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/函数/">函数</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li></ul>
 
       
         <div id="donation_div"></div>
@@ -232,6 +231,30 @@ var a = new Donate({
 </script>
       
             
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
       
     </footer>
   </div>
@@ -265,7 +288,7 @@ var a = new Donate({
     <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
     <strong class="toc-title">Contents</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用函数的方法："><span class="nav-number">1.</span> <span class="nav-text">禁用函数的方法：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#修改-php-ini，首先找出你服务器的该文件在哪。"><span class="nav-number">1.1.</span> <span class="nav-text">修改 php.ini，首先找出你服务器的该文件在哪。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在该文件中找出-disable-functions-，如果有注释就去掉、然后在等号后面加入禁用的函数"><span class="nav-number">1.2.</span> <span class="nav-text">在该文件中找出 disable_functions = ，如果有注释就去掉、然后在等号后面加入禁用的函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#然后重启-apache-或-nginx-即可"><span class="nav-number">2.</span> <span class="nav-text">然后重启 apache 或 nginx 即可~</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐禁用的函数"><span class="nav-number">1.</span> <span class="nav-text">推荐禁用的函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#然后重启-apache-或-nginx"><span class="nav-number">1.1.</span> <span class="nav-text">然后重启 apache 或 nginx</span></a></li></ol></li></ol>
     
     </div>
   </aside>
