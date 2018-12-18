@@ -6,7 +6,7 @@
   <!-- PACE Progress Bar START -->
   
     <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
-    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+    <link rel="stylesheet" href="/themes/hiero/source/css/pace-theme-flash.css">
   
   
 
@@ -16,23 +16,23 @@
   <title>mysql 中删除重复数据 | Technician</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="keywords" content="mysql重复数据重复记录">
+  <meta name="keywords" content="mysql">
   
   
   
   
-  <meta name="description" content="下面这条记录可以删除account表中的Email重复的数据 保留 user_id 最小的那条记录DELETE FROM     account WHERE     email IN (         SELECT             email         FROM             (                 SELECT                     ema">
-<meta name="keywords" content="mysql,重复数据,重复记录">
+  <meta name="description" content="下面这条记录可以删除 account 表中的 Email 重复的数据, 保留 user_id 最小的那条记录">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mysql 中删除重复数据">
 <meta property="og:url" content="https://www.cobsun.com/2018/08/09/mysql-e4-b8-ad-e5-88-a0-e9-99-a4-e9-87-8d-e5-a4-8d-e6-95-b0-e6-8d-ae/index.html">
 <meta property="og:site_name" content="Technician">
-<meta property="og:description" content="下面这条记录可以删除account表中的Email重复的数据 保留 user_id 最小的那条记录DELETE FROM     account WHERE     email IN (         SELECT             email         FROM             (                 SELECT                     ema">
+<meta property="og:description" content="下面这条记录可以删除 account 表中的 Email 重复的数据, 保留 user_id 最小的那条记录">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-12-12T09:20:50.357Z">
+<meta property="og:updated_time" content="2018-12-18T10:49:18.930Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mysql 中删除重复数据">
-<meta name="twitter:description" content="下面这条记录可以删除account表中的Email重复的数据 保留 user_id 最小的那条记录DELETE FROM     account WHERE     email IN (         SELECT             email         FROM             (                 SELECT                     ema">
+<meta name="twitter:description" content="下面这条记录可以删除 account 表中的 Email 重复的数据, 保留 user_id 最小的那条记录">
   
     <link rel="alternate" href="/atom.xml" title="Technician" type="application/atom+xml">
   
@@ -69,7 +69,7 @@
   <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
   <script>
       (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "ca-pub-0123456789ABCDEF",
+          google_ad_client: "",
           enable_page_level_ads: true
       });
   </script>
@@ -198,8 +198,8 @@ var themeMenus = {};
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <p>下面这条记录可以删除account表中的Email重复的数据 保留 user_id 最小的那条记录<code>DELETE
-FROM
+        <p>下面这条记录可以删除 <code>account</code> 表中的 <code>Email</code> 重复的数据, 保留 <code>user_id</code> 最小的那条记录<br><a id="more"></a></p>
+<pre><code>DELETE FROM
     account
 WHERE
     email IN (
@@ -231,7 +231,9 @@ AND user_id NOT IN (
             HAVING
                 count(email) &gt; 1
         ) b
-)</code> 参考来源: <a href="https://www.cnblogs.com/youxin/p/6380234.html" target="_blank" rel="noopener">https://www.cnblogs.com/youxin/p/6380234.html</a></p>
+)
+
+</code></pre><p>参考来源: <a href="https://www.cnblogs.com/youxin/p/6380234.html" target="_blank" rel="noopener">https://www.cnblogs.com/youxin/p/6380234.html</a></p>
 
       
     </div>
@@ -242,7 +244,7 @@ AND user_id NOT IN (
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重复数据/">重复数据</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/重复记录/">重复记录</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/mysql/">mysql</a></li></ul>
 
       
         <div id="donation_div"></div>
@@ -253,12 +255,36 @@ var a = new Donate({
   title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
   btnText: 'Donate', // 可选参数，打赏按钮文字
   el: document.getElementById('donation_div'),
-  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
-  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+  wechatImage: '',
+  alipayImage: 'https://i.v2ex.co/v4dDksUbl.jpeg'
 });
 </script>
       
             
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyM4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
       
     </footer>
   </div>
@@ -390,11 +416,6 @@ var a = new Donate({
 
 
 
-
-
-  <div style="display: none;">
-    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
-  </div>
 
 
 
