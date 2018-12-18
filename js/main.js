@@ -1,79 +1,71 @@
-var alphaDust = function () {
+(function(){
 
-    var _menuOn = false;
+	// Highlight current nav item
+	var hasCurrent = false;
 
-    function initPostHeader() {
-        $('.main .post').each(function () {
-            var $post = $(this);
-            var $header = $post.find('.post-header.index');
-            var $title = $post.find('h1.title');
-            var $readMoreLink = $post.find('a.read-more');
+	//把相对路径解析成绝对路径
+	function absolute(href) {
+	    var link = document.createElement("a");
+	    link.href = href;
+	    return (link.protocol+"//"+link.host+link.pathname+link.search+link.hash);
+	}
 
-            var toggleHoverClass = function () {
-                $header.toggleClass('hover');
-            };
+	//移出所有的菜单的选中样式
+	$('#main-nav > li').each(function(){
+		$(this).removeClass('current-menu-item current_page_item');
+	});
+	var links = $('#main-nav > li > a');
+	var urls = window.location.href;
+	//为什么要从后面往前面遍历？因为首页极有可能是https://xxxxx/,
+	//这样的话肯定能够匹配所有的项
+	for (var i = links.length; i >= 0; i--) {
+		if(urls.indexOf(absolute(links[i])) != -1){
+			$(links[i]).parent().addClass('current-menu-item current_page_item');
+			//为什么还要设置hasCurrent？因为不排除首页是
+			//https://xxxx/index.html格式的
+			hasCurrent = true;
+			break;
+		}		
+	}
 
-            $title.hover(toggleHoverClass, toggleHoverClass);
-            $readMoreLink.hover(toggleHoverClass, toggleHoverClass);
-        });
+
+	if (!hasCurrent) {
+		$('#main-nav > li:first').addClass('current-menu-item current_page_item');
+	}
+})();
+
+
+
+// article toc
+var toc = document.getElementById('toc')
+
+if (toc != null) {
+	window.addEventListener("scroll", scrollcatelogHandler);
+	var tocPosition = 194+25;
+
+	function scrollcatelogHandler(e) {
+		 var event = e || window.event,
+		     target = event.target || event.srcElement;
+		 var scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+		 if (scrollTop > tocPosition) {
+		     toc.classList.add("toc-fixed");
+		 } else {
+		     toc.classList.remove("toc-fixed");
+		 }
+	}
+}
+
+
+$('#main-navigation').on('click', function(){
+    if ($('#main-navigation').hasClass('main-navigation-open')){
+      $('#main-navigation').removeClass('main-navigation-open');
+    } else {
+      $('#main-navigation').addClass('main-navigation-open');
     }
+  });
 
-    function _menuShow () {
-        $('nav a').addClass('menu-active');
-        $('.menu-bg').show();
-        $('.menu-item').css({opacity: 0});
-        TweenLite.to('.menu-container', 1, {padding: '0 40px'});
-        TweenLite.to('.menu-bg', 1, {opacity: '0.92'});
-        TweenMax.staggerTo('.menu-item', 0.5, {opacity: 1}, 0.3);
-        _menuOn = true;
-
-        $('.menu-bg').hover(function () {
-            $('nav a').toggleClass('menu-close-hover');
-        });
+$('#content').on('click', function(){
+    if ($('#main-navigation').hasClass('main-navigation-open')){
+      $('#main-navigation').removeClass('main-navigation-open');
     }
-
-    function _menuHide() {
-        $('nav a').removeClass('menu-active');
-        TweenLite.to('.menu-bg', 0.5, {opacity: '0', onComplete: function () {
-            $('.menu-bg').hide();
-        }});
-        TweenLite.to('.menu-container', 0.5, {padding: '0 100px'});
-        $('.menu-item').css({opacity: 0});
-        _menuOn = false;
-    }
-
-    function initMenu() {
-
-        $('nav a').click(function () {
-            if(_menuOn) {
-                _menuHide();
-            } else {
-                _menuShow();
-            }
-        });
-
-        $('.menu-bg').click(function (e) {
-            if(_menuOn && e.target === this) {
-                _menuHide();
-            }
-        });
-    }
-
-    function displayArchives() {
-        $('.archive-post').css({opacity: 0});
-        TweenMax.staggerTo('.archive-post', 0.4, {opacity: 1}, 0.15);
-    }
-
-    return {
-        initPostHeader: initPostHeader,
-        initMenu: initMenu,
-        displayArchives: displayArchives
-    };
-}();
-
-
-$(document).ready(function () {
-    alphaDust.initPostHeader();
-    alphaDust.initMenu();
-    alphaDust.displayArchives();
-});
+  });

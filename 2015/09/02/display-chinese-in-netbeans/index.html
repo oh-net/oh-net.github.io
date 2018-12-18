@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="utf-8">
+
+  <!-- PACE Progress Bar START -->
+  
+    <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
+    <link rel="stylesheet" href="https://github.com/HubSpot/pace/raw/master/themes/orange/pace-theme-flash.css">
+  
+  
+
+  <!-- PACE Progress Bar START -->
+
+  
+  <title>netbeans 中如何正常顯示中文 | Technician</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="javanetbeans">
+  
+  
+  
+  
+  <meta name="description" content="NetBeans IDE 7.0.1 前一陣子出了，順手也一併升級。 前幾天，把舊版7.0移除。沒想到，居然把設定檔也給移除了。 由6.x一直升級到7.0，我都是這樣做，都沒問題。 這次怎會這樣？難道和這個農曆月份有關？ XD">
+<meta name="keywords" content="java,netbeans">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NetBeans 中如何正常顯示中文">
+<meta property="og:url" content="https://www.cobsun.com/2015/09/02/display-chinese-in-netbeans/index.html">
+<meta property="og:site_name" content="Technician">
+<meta property="og:description" content="NetBeans IDE 7.0.1 前一陣子出了，順手也一併升級。 前幾天，把舊版7.0移除。沒想到，居然把設定檔也給移除了。 由6.x一直升級到7.0，我都是這樣做，都沒問題。 這次怎會這樣？難道和這個農曆月份有關？ XD">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2018-12-18T05:02:57.064Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NetBeans 中如何正常顯示中文">
+<meta name="twitter:description" content="NetBeans IDE 7.0.1 前一陣子出了，順手也一併升級。 前幾天，把舊版7.0移除。沒想到，居然把設定檔也給移除了。 由6.x一直升級到7.0，我都是這樣做，都沒問題。 這次怎會這樣？難道和這個農曆月份有關？ XD">
+  
+    <link rel="alternate" href="/atom.xml" title="Technician" type="application/atom+xml">
+  
+  <link rel="icon" href="/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/css/style.css">
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/css/hiero.css">
+  <link rel="stylesheet" href="/css/glyphs.css">
+  
+    <link rel="stylesheet" href="/css/vdonate.css">
+  
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/my.css">
+  <!-- Google Adsense -->
+  
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+          google_ad_client: "ca-pub-0123456789ABCDEF",
+          enable_page_level_ads: true
+      });
+  </script>
+  
+</head>
+</html>
+<script>
+var themeMenus = {};
+
+  themeMenus["/"] = "Home"; 
+
+  themeMenus["/archives"] = "Archives"; 
+
+  themeMenus["/categories"] = "Categories"; 
+
+  themeMenus["/tags"] = "Tags"; 
+
+  themeMenus["/about"] = "About"; 
+
+</script>
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  <header id="allheader" class="site-header" role="banner">
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/" title="Technician" rel="home"> Technician </a>
+            
+          </h1>
+
+          
+            <div class="site-description">$$ Welcome $$</div>
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+            <div class="clearfix sf-menu">
+
+              <ul id="main-nav" class="nmenu sf-js-enabled">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Categories</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="originBgDiv" style="background: #fff; width: 100%;">
+
+      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
+        <img id="originBg" width="100%" alt="" src="">
+      </div>
+
+  </div>
+
+  <script>
+  function setAboutIMG(){
+      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
+      var random = Math.floor((Math.random() * imgUrls.length ));
+      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+        document.getElementById("originBg").src=imgUrls[random];
+      } else {
+        document.getElementById("originBg").src='/' + imgUrls[random];
+      }
+  }
+  bgDiv=document.getElementById("originBgDiv");
+  if(location.pathname.match('about')){
+    setAboutIMG();
+    bgDiv.style.display='block';
+  }else{
+    bgDiv.style.display='none';
+  }
+  </script>
+
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-display-chinese-in-netbeans" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      NetBeans 中如何正常顯示中文
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	Posted on <a href="/2015/09/02/display-chinese-in-netbeans/" class="article-date">
+	  <time datetime="2015-09-02T07:26:09.000Z" itemprop="datePublished">九月 2, 2015</time>
+	</a>
+
+      
+	<span id="busuanzi_container_page_pv">
+	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+	</span>
+
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans IDE 7.0.1</a> 前一陣子出了，順手也一併升級。</p>
+<p>前幾天，把舊版7.0移除。沒想到，居然把設定檔也給移除了。</p>
+<p>由6.x一直升級到7.0，我都是這樣做，都沒問題。</p>
+<p>這次怎會這樣？難道和這個農曆月份有關？ XD  </p>
+<a id="more"></a>
+<p>於是，只好重新設定。順便解決[NetBeans]使用 <code>Consolas</code> 字型時，無法顯示中文的問題。  </p>
+<p>其實，[NetBeans] 可以選擇程式碼顯示的字型。</p>
+<p>但是，只有選擇某些英文字型時才能正常顯示中文，例如dialoginput這個字型。</p>
+<p>但，選擇適合用於顯示程式碼的字型 - <code>Consolas</code> 時，中文卻變成小方塊般的亂碼，無法正常顯示中文。  </p>
+<p>為何說微軟的Consolas這字型，適合用於顯示程式碼呢？有興趣的人可以參考下面網頁，就不難瞭解…  </p>
+<p>在同事的協助下，我們倆終於搞定了</p>
+<p>讓[NetBeans]可以顯示 <code>Consolas</code> 字型。</p>
+<p>可以比較舒服的觀看code了～  </p>
+<h2 id="一般的显示配置"><a href="#一般的显示配置" class="headerlink" title="一般的显示配置"></a>一般的显示配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim /usr/local/netbeans-7.3/etc/netbeans.conf</span><br></pre></td></tr></table></figure>
+<p>根据需要修改：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"># 字体启用平滑：</span><br><span class="line">-J-Dswing.aatext=true -J-Dawt.useSystemAAFontSettings=lcd</span><br><span class="line"></span><br><span class="line"># 字体大小：</span><br><span class="line">--fontsize 18</span><br></pre></td></tr></table></figure>
+<p>##完整設定步驟如下…  </p>
+<h3 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h3><p>先察看[NetBeans] 是使用的JAVA存放於那個目錄，請打開的設定檔</p>
+<blockquote>
+<p>Ubuntu下面的路径：<code>/usr/local/netbeans-7.3.1/etc/netbeans.conf</code></p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:Program FilesNetBeans 7**.**0.1etcNetBeans.conf</span><br></pre></td></tr></table></figure>
+<p>註：目錄請換成您自己[NetBeans] 所在目錄</p>
+<p>因我安裝的是[NetBeans IDE 7.0.1]，所以是上述的目錄  </p>
+<p>找出如下的設定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\# Default location of JDK, can be overridden by using --jdkhome &lt;dir&gt;:  </span><br><span class="line">NetBeans _jdkhome=&quot;C:Program FilesJavajre6&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h3><p>到 [NetBeans]所使用的java目錄，開啟 <code>fontconfig.properties</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">C:Program FilesJavajre6libfontconfig.properties</span><br></pre></td></tr></table></figure>
+<p>註：如果目錄下沒有 <code>fontconfig.properties</code> 檔案，請複製該目錄下<br><code>fontconfig.properties.src</code>，並改名為 <code>fontconfig.properties</code>  </p>
+<h3 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h3><p>在檔案 <code>fontconfig.properties</code> 的最後，增加下面設定，設定Consolas的實體字型檔</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">filename.Consolas=CONSOLA.TTF  </span><br><span class="line">filename.Consolas_Bold=CONSOLAB.TTF  </span><br><span class="line">filename.Consolas_Italic=CONSOLAI.TTF  </span><br><span class="line">filename.Consolas\_Bold\_Italic=CONSOLAZ.TTF</span><br></pre></td></tr></table></figure>
+<p>修改 <code>Search Sequences</code> 內的設定，將順序作如下的調整</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#sequence.monospaced**.**x-windows-950=chinese-ms950,alphabetic,dingbats,symbol,chinese-ms950-extb  </span><br><span class="line">sequence.monospaced**.**x-windows-950=alphabetic,chinese-ms950,dingbats,symbol,chinese-ms950-extb</span><br></pre></td></tr></table></figure>
+<p>註：我是正體中文，其他中文語系，請改用您自己的中文語系  </p>
+<p>修改monospaced的相關設定</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#monospaced.plain.alphabetic=Courier New  </span><br><span class="line">monospaced.plain.alphabetic=Consolas  </span><br><span class="line">monospaced.plain.chinese-ms950=MingLiU  </span><br><span class="line">monospaced.plain.chinese-ms950-extb=MingLiU-ExtB  </span><br><span class="line">monospaced.plain.hebrew=David  </span><br><span class="line">monospaced.plain.japanese=MS Gothic  </span><br><span class="line">monospaced.plain.korean=GulimChe  </span><br><span class="line">  </span><br><span class="line">#monospaced.bold.alphabetic=Courier New Bold  </span><br><span class="line">monospaced.bold.alphabetic=Consolas Bold  </span><br><span class="line">monospaced.bold.chinese-ms950=PMingLiU  </span><br><span class="line">monospaced.bold.chinese-ms950-extb=PMingLiU-ExtB  </span><br><span class="line">monospaced.bold.hebrew=David Bold  </span><br><span class="line">monospaced.bold.japanese=MS Gothic  </span><br><span class="line">monospaced.bold.korean=GulimChe  </span><br><span class="line">  </span><br><span class="line">#monospaced.bolditalic.alphabetic=Courier New Italic  </span><br><span class="line">monospaced.italic.alphabetic=Consolas Italic  </span><br><span class="line">monospaced.italic.alphabetic=Consolas Italic  </span><br><span class="line">monospaced.italic.chinese-ms950=PMingLiU  </span><br><span class="line">monospaced.italic.chinese-ms950-extb=PMingLiU-ExtB  </span><br><span class="line">monospaced.italic.hebrew=David  </span><br><span class="line">monospaced.italic.japanese=MS Gothic  </span><br><span class="line">monospaced.italic.korean=GulimChe  </span><br><span class="line">  </span><br><span class="line">#monospaced.bolditalic.alphabetic=Courier New Bold Italic  </span><br><span class="line">monospaced.bolditalic.alphabetic=Consolas Bold Italic  </span><br><span class="line">monospaced.bolditalic.chinese-ms950=PMingLiU  </span><br><span class="line">monospaced.bolditalic.chinese-ms950-extb=PMingLiU-ExtB  </span><br><span class="line">monospaced.bolditalic.hebrew=David Bold  </span><br><span class="line">monospaced.bolditalic.japanese=MS Gothic  </span><br><span class="line">monospaced.bolditalic.korean=GulimChe</span><br></pre></td></tr></table></figure>
+<h3 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h3><p>最後一步驟，可以說是最重要的…</p>
+<p>在<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 中的字型，<strong>請選擇monospaced</strong> </p>
+<p>之前參考的文章，不是沒提到這點，不然就說選擇Consolas……… :(  </p>
+<p>設定完之後，也就瞭解…為何選擇dialoginput這個字型時，<a href="http://netbeans.org/" target="_blank" rel="noopener">NetBeans</a> 可以正常顯示～</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/java/">java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/netbeans/">netbeans</a></li></ul>
+
+      
+        <div id="donation_div"></div>
+
+<script src="/js/vdonate.js"></script>
+<script>
+var a = new Donate({
+  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
+  btnText: 'Donate', // 可选参数，打赏按钮文字
+  el: document.getElementById('donation_div'),
+  wechatImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/WeChanQR.png',
+  alipayImage: 'https://raw.githubusercontent.com/iTimeTraveler/iTimeTraveler.github.io/site/source/about/donate/images/AliPayQR.jpg'
+});
+</script>
+      
+            
+      
+        
+	<div id="comment">
+		<!-- 来必力City版安装代码 -->
+		<div id="lv-container" data-id="city" data-uid="MTAyMC8yOTQ4MS82MDQ5">
+		<script type="text/javascript">
+		   (function(d, s) {
+		       var j, e = d.getElementsByTagName(s)[0];
+
+		       if (typeof LivereTower === 'function') { return; }
+
+		       j = d.createElement(s);
+		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+		       j.async = true;
+
+		       e.parentNode.insertBefore(j, e);
+		   })(document, 'script');
+		</script>
+		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
+		</div>
+		<!-- City版安装代码已完成 -->
+	</div>
+
+
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/07/slackware-14-1-e5-ae-89-e8-a3-85-e5-ae-8c-e5-85-a8-e6-8c-87-e5-8d-97/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Slackware 14.1 安装完全指南
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/13/linux-grep-e5-91-bd-e4-bb-a4-e8-af-a6-e8-a7-a3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">linux grep命令详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
+    <strong class="toc-title">Contents</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一般的显示配置"><span class="nav-number">1.</span> <span class="nav-text">一般的显示配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步"><span class="nav-number">1.1.</span> <span class="nav-text">第一步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步"><span class="nav-number">1.2.</span> <span class="nav-text">第二步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步"><span class="nav-number">1.3.</span> <span class="nav-text">第三步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四步"><span class="nav-number">1.4.</span> <span class="nav-text">第四步</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+      <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2018 Technician All Rights Reserved.
+          
+            <span id="busuanzi_container_site_uv">
+              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
+              本站总访问量<span id="busuanzi_value_site_pv"></span>次
+            </span>
+          
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var contentdiv = document.getElementById("content");
+
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+</script>
+
+<!-- Custome JS -->
+<script src="/js/my.js"></script>
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/categories" class="mobile-nav-link">Categories</a>
+  
+    <a href="/tags" class="mobile-nav-link">Tags</a>
+  
+    <a href="/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
+
+
+<script src="/js/scripts.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="https://s95.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+  </div>
+
+
+
+	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
+	</script>
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
