@@ -1,26 +1,111 @@
 <!DOCTYPE html>
-<html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="zh-cn">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
 
-  <!-- PACE Progress Bar START -->
-  
-    <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
-    <link rel="stylesheet" href="/themes/hiero/source/css/pace-theme-flash.css">
-  
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
   
 
-  <!-- PACE Progress Bar START -->
 
-  
-  <title>八年phper的高级工程师面试之路 | Technician</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="keywords" content="linuxPHP架构师">
-  
-  
-  
-  
+
+
   <meta name="description" content="八年phper的高级工程师面试之路这是一篇反面教材，希望也能引起部分程序员的警惕。 最近半个月时间，经过几次面试，差不多已经对自己有了定位————距离腾讯T3岗位还是有一点距离。 因为在一家小公司呆的习惯了（6年），公司没有人在技术层面超过我，作为技术核心，感觉自己很牛，活在一个小圈子里面，几乎不会主动去了解新技术，甚至对php以及js本身都不能算精通。 所以变故出现的时候，我才发现自己的技术脱节">
 <meta name="keywords" content="linux,PHP,架构师">
 <meta property="og:type" content="article">
@@ -33,368 +118,1283 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="八年phper的高级工程师面试之路">
 <meta name="twitter:description" content="八年phper的高级工程师面试之路这是一篇反面教材，希望也能引起部分程序员的警惕。 最近半个月时间，经过几次面试，差不多已经对自己有了定位————距离腾讯T3岗位还是有一点距离。 因为在一家小公司呆的习惯了（6年），公司没有人在技术层面超过我，作为技术核心，感觉自己很牛，活在一个小圈子里面，几乎不会主动去了解新技术，甚至对php以及js本身都不能算精通。 所以变故出现的时候，我才发现自己的技术脱节">
-  
-    <link rel="alternate" href="/atom.xml" title="Technician" type="application/atom+xml">
-  
-  <link rel="icon" href="/css/images/favicon.ico">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
-    
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="/css/style.css">
 
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/hiero.css">
-  <link rel="stylesheet" href="/css/glyphs.css">
-  
-    <link rel="stylesheet" href="/css/vdonate.css">
-  
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/css/my.css">
-  <!-- Google Adsense -->
-  
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "",
-          enable_page_level_ads: true
-      });
-  </script>
-  
-</head>
-</html>
-<script>
-var themeMenus = {};
 
-  themeMenus["/"] = "Home"; 
 
-  themeMenus["/archives"] = "Archives"; 
 
-  themeMenus["/categories"] = "Categories"; 
+  <link rel="canonical" href="https://www.cobsun.com/2018/01/16/e5-85-ab-e5-b9-b4phper-e7-9a-84-e9-ab-98-e7-ba-a7-e5-b7-a5-e7-a8-8b-e5-b8-88-e9-9d-a2-e8-af-95-e4-b9-8b-e8-b7-af/">
 
-  themeMenus["/tags"] = "Tags"; 
 
-  themeMenus["/about"] = "About"; 
 
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
 </script>
 
+  <title>八年phper的高级工程师面试之路 | Technician</title>
+  
 
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
-  <header id="allheader" class="site-header" role="banner">
-  <div class="clearfix container">
-      <div class="site-branding">
 
-          <h1 class="site-title">
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Technician</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Yet another note</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
             
-              <a href="/" title="Technician" rel="home"> Technician </a>
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/01/16/e5-85-ab-e5-b9-b4phper-e7-9a-84-e9-ab-98-e7-ba-a7-e5-b7-a5-e7-a8-8b-e5-b8-88-e9-9d-a2-e8-af-95-e4-b9-8b-e8-b7-af/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">八年phper的高级工程师面试之路
+              
             
           </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-01-16 12:14:16" itemprop="dateCreated datePublished" datetime="2018-01-16T12:14:16+08:00">2018-01-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:08:58" itemprop="dateModified" datetime="2018-12-12T17:08:58+08:00">2018-12-12</time>
+              
+            
+          </span>
 
           
-            <div class="site-description">$$ Welcome $$</div>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
           
             
-          <nav id="main-navigation" class="main-navigation" role="navigation">
-            <a class="nav-open">Menu</a>
-            <a class="nav-close">Close</a>
-            <div class="clearfix sf-menu">
+          
 
-              <ul id="main-nav" class="nmenu sf-js-enabled">
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Categories</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
-                    
-              </ul>
-            </div>
-          </nav>
+          
+          
 
+          
 
-      </div>
-  </div>
-</header>
+          
 
+          
 
-  <div id="originBgDiv" style="background: #fff; width: 100%;">
-
-      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
-        <img id="originBg" width="100%" alt="" src="">
-      </div>
-
-  </div>
-
-  <script>
-  function setAboutIMG(){
-      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
-      var random = Math.floor((Math.random() * imgUrls.length ));
-      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
-        document.getElementById("originBg").src=imgUrls[random];
-      } else {
-        document.getElementById("originBg").src='/' + imgUrls[random];
-      }
-  }
-  bgDiv=document.getElementById("originBgDiv");
-  if(location.pathname.match('about')){
-    setAboutIMG();
-    bgDiv.style.display='block';
-  }else{
-    bgDiv.style.display='none';
-  }
-  </script>
-
-
-
-  <div id="container">
-    <div id="wrap">
-            
-      <div id="content" class="outer">
-        
-          <section id="main" style="float:none;"><article id="post-e5-85-ab-e5-b9-b4phper-e7-9a-84-e9-ab-98-e7-ba-a7-e5-b7-a5-e7-a8-8b-e5-b8-88-e9-9d-a2-e8-af-95-e4-b9-8b-e8-b7-af" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      八年phper的高级工程师面试之路
-    </h1>
-  
-
+        </div>
       </header>
     
-    <div class="article-meta">
-      
-	Posted on <a href="/2018/01/16/e5-85-ab-e5-b9-b4phper-e7-9a-84-e9-ab-98-e7-ba-a7-e5-b7-a5-e7-a8-8b-e5-b8-88-e9-9d-a2-e8-af-95-e4-b9-8b-e8-b7-af/" class="article-date">
-	  <time datetime="2018-01-16T04:14:16.000Z" itemprop="datePublished">一月 16, 2018</time>
-	</a>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
+      
 
-    </div>
-    <div class="article-entry" itemprop="articleBody">
       
         <h1 id="八年phper的高级工程师面试之路"><a href="#八年phper的高级工程师面试之路" class="headerlink" title="八年phper的高级工程师面试之路"></a>八年phper的高级工程师面试之路</h1><p>这是一篇反面教材，希望也能引起部分程序员的警惕。 最近半个月时间，经过几次面试，差不多已经对自己有了定位————距离腾讯T3岗位还是有一点距离。 因为在一家小公司呆的习惯了（6年），公司没有人在技术层面超过我，作为技术核心，感觉自己很牛，活在一个小圈子里面，几乎不会主动去了解新技术，甚至对php以及js本身都不能算精通。 所以变故出现的时候，我才发现自己的技术脱节有多厉害，虽然之前的面试并没有做专门的准备，但是与6年前找工作的情形相比，差距非常的大。 下面是我整理的一部分遇到的面试题，我尽量用我所知道的知识来进行陈述，肯定会有很多误解以及遗漏，希望大家能够指正。 公司1： <strong>1、mysql_real_escape_string mysql_escape_string有什么本质的区别，有什么用处，为什么被弃用？</strong> 答：mysql_real_escape_string需要预先连接数据库，并可在第二个参数传入数据库连接（不填则使用上一个连接） 两者都是对数据库插入数据进行转义，但是mysql_real_escape_string转义时，会考虑数据库连接的字符集。 它们的用处都是用来能让数据正常插入到数据库中，并防止sql注入，但是并不能做到100%防止sql注入。 再问：为什么不能100%防止？ 答；因为客户端编码以及服务器端编码不同，可能产生注入问题，但是其实这种场景不多见。 继续答：被弃用的原因是官方不再建议使用mysql_xx的数据库操作方式，建议使用pdo和mysqli，因为不管从性能跟安全来看，mysqli都比mysql要好。 衍生出来的问题是mysqli的连接复用（持久化）问题，这一块我并没有答好。 <strong>2、什么是内存泄漏，js内存泄漏是怎么产生的？</strong> 答：内存泄漏是因为一块被分配内存既不能被使用，也不能被回收，直到浏览器进程结束。 产生泄漏的原因是闭包维持函数内局部变量，不能被释放，尤其是使用闭包并存在外部引用还setInterval的时候危害很大。 备注：我觉得这块回答并不好，因为肯定不是闭包的原因。 我查了一下资料，从比较浅的方位来再回答一下这个问题： 产生泄漏的原因有好几种： (1) 页面元素被删除，但是绑定在该元素上的事件未被删除； (2) 闭包维持函数内局部变量（外部不可控），使其得不到释放； (3) 意外的全局变量； (4) 引用被删除，但是引用内的引用，还存在内存中。 从上述原因上看，内存泄漏产生的根本原因是引用无法正确回收，值类型并不能引发内存泄漏。 对于每个引用，都有自己的引用计数，当引用计数归零或被标记清除时，js垃圾回收器会认为该引用可以回收了。 <strong>3、什么是闭包，跟原型链、作用域链有什么关联</strong> 答：闭包是指存在于一个作用域链分支的函数域内的函数，该函数可以向上逐级访问作用域链上的变量，直到找到为止。当闭包存在外部引用时，js会维持闭包自身以及所在函数作用域链的内存状态。 备注：这个是我自己瞎说的。 继续答：跟原型链没有什么关联，函数的原型（prototype）主要用于实现继承，原型链可用于追溯继承关系，与作用域链类似，都是向上逐级访问属性，直到被找到，原型链的顶层是null，可以理解为所有的object都继承至null，所以null的类型是object。 继续答：作用域链可以看作是一个树形结构，由根节点window向下扩散，下层节点可以访问上层节点，但是上层节点无法访问下层节点，产生闭包的函数作用域属于节点中的一个，向下扩散后闭包函数产生叶子节点，叶子节点之间可以互相访问，当访问的变量在叶子节点中无法找到时，向上层节点查找，直到被找到为止，这个概念有点类似原型链上的属性查找。 <strong>4、一台电脑配置无限好，可以同时打开多少个网页</strong> 答：65535-1000 = 64535（端口数） // 1024 <strong>5、ip地址能被伪造吗？</strong> 答：http头部可以被篡改，但是只能修改X_FORWARDED_FOR，真实ip地址（REMOTE_ADDR）很难修改（除非是路由器去修改），因为真实ip是底层会话ip地址，而且因为TCP 3次握手的存在，连接无法建立，伪造的意义不大，至于UDP的话，一般是内网才使用UDP通信。 <strong>6、有100万个奖品，每个人可以中奖3次，先到先得，怎么控制并发，不能发超，并保证完全的先到先得模式</strong> 答：百万奖品在打乱后预先insert到数据库，所有中奖操作，均只能update，不能insert。进来抽奖的用户使用memcahe原子加锁，实现抽奖次数自增，当抽奖次数到达3时，返回不中奖。 再问：预先插入需要很多资源，如果奖品数量上了1亿怎么办？ 答：使用redis队列存储请求，跑守护进程异步发奖，产生的问题是用户无法实时看到中奖情况。 再问：这样肯定不行。 再答：使用全局内存加锁确保抽奖过程是单进程在跑，但是会面临大并发阻塞问题。 再问：内存比较宝贵，在不用内存加锁的情况下怎么办，并且如果碰到1亿奖池的情况，预先插入数据库肯定不好，怎么办？ 答：设置奖品概率，分三张表，都使用innodb引擎，一张存中奖记录（预先插入一行），一张存奖品发放概况，一张存用户抽奖情况（uin唯一索引），大并发情况下，利用mysql的排他锁进行并发控制。流程如下： begin 查询用户抽奖次数，加排他锁 对用户抽奖次数的更新/插入 锁行查询发放情况 获得抽奖结果（某些奖品发完之后，动态变更概率） 更新发放表 插入中奖记录 commit 再问：遇到脏读怎么办？ 答：这方面不是很了解 再问：innodb的master线程在什么情况下fork其他子线程？ 答：不知道 <strong>7、数据链路层的数据是怎么校验的，有哪些校验方式？</strong> 答：crc32，别的校验可能是取模校验奇偶数吧。 备注：答个crc校验就行了。 <strong>8、b+树的查询时间复杂度是多少，哈希表是多少，为什么数据库索引用b+树存储，而不是哈希表，数据库索引存储还有其他数据结构吗？</strong> 答：O(log(n))，O(1) 因为哈希表是散列的，在遇到`key`&gt;’12’这种查找条件时，不起作用，并且空间复杂度较高。 备注：b+数根据层数决定时间复杂度，数据量多的情况下一般4-5层，然后用二分法查找页中的数据，时间复杂度远小于log(n)。 <strong>9、apache是怎么跟php通讯的，sapi是什么</strong> 答：使用sapi通讯，sapi是php封装的对外数据传递接口，通常有cgi/fastcgi/cli/apache2handler四种运行模式。 <strong>10、php的垃圾回收机制？</strong> 答：垃圾回收是指当php运行状态结束时，比如遇到了exit/die/致命错误/脚本运行结束时，php需要回收运行过程中创建的变量、资源的内存。 ZEND引擎维护了一个栈zval，每个创建的变量和资源都会压入这个栈中，每个压入的数组结构都类似：[refcount =&gt; int, is_ref =&gt; 0|1, value =&gt; union, type =&gt; string]，变量被unset时，ref_count如果变成0，则被回收。 当遇到变量循环引用自身时，使用同步回收算法回收。 备注：PHP7已经重写了zal的结构体。 <strong>11、jquery的sizzle引擎工作原理</strong> 答：除了直到是DOM元素查找引擎之外，一无所知。 <strong>12、seajs的工作原理，如何解决重复加载库的问题，如何进行资源的同步加载</strong> 答：建立映射关系并缓存起来；资源并不能真正同步加载，只是返回一个回调。 <strong>13、memcache跟redis的区别</strong> 答：可存储数据结构不同；redis支持持久化存储。 <strong>14、md5逆向原理</strong> 答：先用字典查找，再尝试暴力破解。 再问：没有更好的方法了吗？ 答：没有了。 备注：嗯，事实上也确实没有特别好的办法，只能使用TB级的海量特征库用数据库存起来，然再分片查找。 <strong>15、父类方法是protected，子类重构为private，会发生什么？</strong> 答：会发生fatal错误，因为继承的方法或属性只能维持或放大权限，不能缩小，比如protected重载为public是可行的。 <strong>16、一个网页从输入地址回车，到完整展示网页内容这段时间里，做了哪些工作，越详细越好。</strong> 答： 0、浏览器本地缓存匹配； 1、本地hosts映射对比; 2、本地dns缓存解析； 3、远程dns解析获得服务器ip地址； 4、浏览器发送tcp连接请求包(syn)； 5、请求包经过传输层、网络层、数据链路层封装通过网卡到达路由器； 6、路由器转发数据包到所属运营商服务器； 7、运营商服务器通过寻址最短路径通过中继节点到达指定ip地址； 8、服务器端可能存在反向代理或者负载均衡，都是直接转发请求至上游服务器，当然也可以制定安全防御规则直接丢弃请求包； 9、上游服务器收到连接请求，在自身可用的情况下，返回(syn+ack)； 10、浏览器校验ack，再次发送(syn+ack)； 11、服务器校验ack切换连接状态至established，然后根据请求传输数据包； 12、当transform-encoding为chunked时，浏览器开始渲染页面； 13、四次挥手，连接关闭； 14、渲染数据完成。 备注：还有很多东西不懂，一些东西完全是自己瞎蒙的，因为时间原因，以后有时间详细画一下。 <strong>17、keep-alive的概念</strong> 答：长连接机制，表示keep-alive-timeout时间内，如果连接没有closed，再次传输数据不再需要三次握手了。 备注：这里也有很多疑问，需要好好捋一捋。 <strong>18、linux文件压缩操作命令，shell脚本等</strong> 备注：因为平时开发都是在windows环境，对linux了解不足，这一块几乎是0分。 公司2： 这个是被鄙视最惨的一家了，首先会有笔试，相对来说并不复杂，但是有些坑，很多已经忘记了。 印象深刻的是我说自己熟悉常用设计模式，然后让我画UML类图，我就懵逼了，所以在写简历的时候，最好是写自己非常熟悉的，如果只是一知半解，并没有必要放到简历中。 公司3： 这里仅列举几个问到的问题： 1、设计一个中继服务器，转发客户A-&gt;客户B的请求； 2、myisam跟innodb有什么区别； 3、php进程死锁产生的原因是什么？怎么自动排查与自动恢复？ 4、有class A { public function b($a, $b, $c){//ssss}}; 怎么使用[‘b’ =&gt; 2, ‘a’ =&gt; 1, ‘c’ =&gt; 3]，对进行A::b进行调用，并顺利赋值？ 5、php5.2-&gt;php7.1的各版本演进历史，新增特性等？ 6、画一个tcp三次握手图 目前还在找工作中，在我看来8年的程序员怎么也不应该是这样子的，温水煮青蛙的教训非常惨痛，好在现在认识到问题还不晚，等到了35岁这个年纪，可能就真的晚了。 <a href="https://www.zhihu.com/topic/19552910" target="_blank" rel="noopener">PHP</a> 高级php架构师   觉得他们的面试题出的未必是好 题主已说面岗是架构师 虽然我不是架构师 但是我接触到的架构师应该具备的能力模型我觉得有几点比较重要 技术选型（知识面要广，不仅要考虑到公司的团队效率还要考虑到所选技术遇到问题解决所需的时间成本）、技术难点攻克（算法和并发模型或者存储方案的搭配），学习能力（不论年龄 这是必须 因为技术本是日新月异），管理能力（这个包括但不限于 人员管理、定期的技术沉淀、项目控制等），业务分析到技术实现的能力（其实架构师很大一部分壁垒是对业务理解非常深刻 一些具体实现未必要事必躬亲 因为本来你的时间成本就是应该发挥其最大价值 就是带领并指导团队快速开发产品的），解决问题的能力（bug出现时你一定要出现在一线指导或者亲自快速解决）其他的想到的再说吧 补充一些：鉴于技术人员的天生不服的性格 所以一般架构师技术不过硬是服不了人的 所以像一些底层的东西还是需要深入了解的 网络 协议 存储db 设计模式 算法 数据结构 未必细节要全部记住 但是要做到已知所以然 知其然只需要稍看文档即可 最后回归下腾讯的面试题吧 他们的考察点太单一了 毕竟是一个已然涉及管理岗的职位 但是题目还是较多在技术的细节点上 像是一个普通程序员岗的面试题 当然有一些可能是在其他几面中高管会面谈测探 我没面过腾讯所以有下错误定论的可能 只是希望给所有技术人员一点职业发展中应该平衡一下自己的重点 这样才不至于被淘汰</p>
 
       
     </div>
-    <footer class="entry-meta entry-footer">
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.v2ex.co/v4dDksUbl.jpeg" alt="John Doe Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
       
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/技术分类/">技术分类</a>
+        <div class="post-tags">
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+            <a href="/tags/架构师/" rel="tag"># 架构师</a>
+          
+        </div>
+      
 
       
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/PHP/">PHP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/linux/">linux</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/架构师/">架构师</a></li></ul>
+      
+      
 
       
-        <div id="donation_div"></div>
-
-<script src="/js/vdonate.js"></script>
-<script>
-var a = new Donate({
-  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
-  btnText: 'Donate', // 可选参数，打赏按钮文字
-  el: document.getElementById('donation_div'),
-  wechatImage: '',
-  alipayImage: 'https://i.v2ex.co/v4dDksUbl.jpeg'
-});
-</script>
-      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/01/12/something-about-get-browsers-info/" rel="next" title="关于获取浏览器语言的一些调查">
+                <i class="fa fa-chevron-left"></i> 关于获取浏览器语言的一些调查
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/23/e9-80-9a-e8-bf-87sql-e7-b4-af-e5-8a-a0-e6-95-b0-e6-8d-ae/" rel="prev" title="通过SQL累加数据">
+                通过SQL累加数据 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        
-	<div id="comment">
-		<!-- 来必力City版安装代码 -->
-		<div id="lv-container" data-id="city" data-uid="MTAyM4MS82MDQ5">
-		<script type="text/javascript">
-		   (function(d, s) {
-		       var j, e = d.getElementsByTagName(s)[0];
 
-		       if (typeof LivereTower === 'function') { return; }
-
-		       j = d.createElement(s);
-		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-		       j.async = true;
-
-		       e.parentNode.insertBefore(j, e);
-		   })(document, 'script');
-		</script>
-		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-		</div>
-		<!-- City版安装代码已完成 -->
-	</div>
-
-
+      
       
     </footer>
   </div>
   
-    
-<nav id="article-nav">
   
-    <a href="/2018/01/23/e9-80-9a-e8-bf-87sql-e7-b4-af-e5-8a-a0-e6-95-b0-e6-8d-ae/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
         
-          通过SQL累加数据
-        
-      </div>
-    </a>
+          
   
-  
-    <a href="/2018/01/12/something-about-get-browsers-info/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">关于获取浏览器语言的一些调查</div>
-    </a>
-  
-</nav>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
 
-  
-</article>
-
-<!-- Table of Contents -->
-
-  <aside id="sidebar">
-    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
-    <strong class="toc-title">Contents</strong>
+  <aside id="sidebar" class="sidebar">
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#八年phper的高级工程师面试之路"><span class="nav-number">1.</span> <span class="nav-text">八年phper的高级工程师面试之路</span></a></li></ol>
-    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description">$$ Welcome $$</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">219</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#八年phper的高级工程师面试之路"><span class="nav-number">1.</span> <span class="nav-text">八年phper的高级工程师面试之路</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
     </div>
   </aside>
-</section>
+
+
         
       </div>
-      <footer id="footer" class="site-footer">
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
   
 
-  <div class="clearfix container">
-      <div class="site-info">
-	      &copy; 2018 Technician All Rights Reserved.
-          
-            <span id="busuanzi_container_site_uv">
-              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
       </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
       </div>
-  </div>
-</footer>
-
-
-<!-- min height -->
-
-<script>
-    var contentdiv = document.getElementById("content");
-
-    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-</script>
-
-<!-- Custome JS -->
-<script src="/js/my.js"></script>
-    </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/categories" class="mobile-nav-link">Categories</a>
-  
-    <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav> -->
     
 
-<!-- mathjax config similar to math.stackexchange -->
+    
+	
+    
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-
-
-<script src="/js/scripts.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="/js/main.js"></script>
-
-
-
-
-
-
-
-
-	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
-	</script>
-
-
-
-
-
-
+    
   </div>
 
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="69" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('Copied')
+          else $(this).text('Copy failed')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('Copy')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
 </body>
 </html>

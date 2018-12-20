@@ -1,26 +1,111 @@
 <!DOCTYPE html>
-<html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="zh-cn">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="utf-8">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
 
-  <!-- PACE Progress Bar START -->
-  
-    <script src="https://raw.githubusercontent.com/HubSpot/pace/v1.0.2/pace.min.js"></script>
-    <link rel="stylesheet" href="/themes/hiero/source/css/pace-theme-flash.css">
-  
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
   
 
-  <!-- PACE Progress Bar START -->
 
-  
-  <title>a freebsd 11 desktop how-to | Technician</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  
-  <meta name="keywords" content="nginxfastdfs消息desktop">
-  
-  
-  
-  
+
+
   <meta name="description" content="A FreeBSD 11 Desktop How-toFreeBSD is a fast, secure, modern Unix-like operating system with a fantastic community, great documentation, and powerful technologies like ZFS and LLVM. It’s my operating">
 <meta name="keywords" content="nginx,fastdfs,消息,desktop">
 <meta property="og:type" content="article">
@@ -51,170 +136,351 @@
 <meta name="twitter:title" content="A FreeBSD 11 Desktop How-to">
 <meta name="twitter:description" content="A FreeBSD 11 Desktop How-toFreeBSD is a fast, secure, modern Unix-like operating system with a fantastic community, great documentation, and powerful technologies like ZFS and LLVM. It’s my operating">
 <meta name="twitter:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/08/02bde3cb8e687908cbebb2c3d58bf5b7.png">
-  
-    <link rel="alternate" href="/atom.xml" title="Technician" type="application/atom+xml">
-  
-  <link rel="icon" href="/css/images/favicon.ico">
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
-  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
-  <link href="https://cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
-  <style type="text/css">
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
-    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
-    
-  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
-  <link rel="stylesheet" href="/css/style.css">
 
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
-  <!-- Bootstrap core CSS -->
-  <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/css/hiero.css">
-  <link rel="stylesheet" href="/css/glyphs.css">
-  
-    <link rel="stylesheet" href="/css/vdonate.css">
-  
 
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="/css/my.css">
-  <!-- Google Adsense -->
-  
-  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-  <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-          google_ad_client: "",
-          enable_page_level_ads: true
-      });
-  </script>
-  
-</head>
-</html>
-<script>
-var themeMenus = {};
 
-  themeMenus["/"] = "Home"; 
 
-  themeMenus["/archives"] = "Archives"; 
 
-  themeMenus["/categories"] = "Categories"; 
+  <link rel="canonical" href="https://www.cobsun.com/2017/08/07/a-freebsd-11-desktop-how-to/">
 
-  themeMenus["/tags"] = "Tags"; 
 
-  themeMenus["/about"] = "About"; 
 
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
 </script>
 
+  <title>A FreeBSD 11 Desktop How-to | Technician</title>
+  
 
-  <body data-spy="scroll" data-target="#toc" data-offset="50">
 
 
-  <header id="allheader" class="site-header" role="banner">
-  <div class="clearfix container">
-      <div class="site-branding">
 
-          <h1 class="site-title">
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Technician</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Yet another note</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
             
-              <a href="/" title="Technician" rel="home"> Technician </a>
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/07/a-freebsd-11-desktop-how-to/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">A FreeBSD 11 Desktop How-to
+              
             
           </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-08-07 05:36:04" itemprop="dateCreated datePublished" datetime="2017-08-07T05:36:04+08:00">2017-08-07</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 16:58:16" itemprop="dateModified" datetime="2018-12-12T16:58:16+08:00">2018-12-12</time>
+              
+            
+          </span>
 
           
-            <div class="site-description">$$ Welcome $$</div>
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
           
             
-          <nav id="main-navigation" class="main-navigation" role="navigation">
-            <a class="nav-open">Menu</a>
-            <a class="nav-close">Close</a>
-            <div class="clearfix sf-menu">
+          
 
-              <ul id="main-nav" class="nmenu sf-js-enabled">
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/">Home</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/archives">Archives</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/categories">Categories</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/tags">Tags</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/about">About</a> </li>
-                    
-              </ul>
-            </div>
-          </nav>
+          
+          
 
+          
 
-      </div>
-  </div>
-</header>
+          
 
+          
 
-  <div id="originBgDiv" style="background: #fff; width: 100%;">
-
-      <div style="max-height:600px; overflow: hidden;  display: flex; display: -webkit-flex; align-items: center;">
-        <img id="originBg" width="100%" alt="" src="">
-      </div>
-
-  </div>
-
-  <script>
-  function setAboutIMG(){
-      var imgUrls = "css/images/pose.jpg,https://source.unsplash.com/collection/954550/1920x1080".split(",");
-      var random = Math.floor((Math.random() * imgUrls.length ));
-      if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
-        document.getElementById("originBg").src=imgUrls[random];
-      } else {
-        document.getElementById("originBg").src='/' + imgUrls[random];
-      }
-  }
-  bgDiv=document.getElementById("originBgDiv");
-  if(location.pathname.match('about')){
-    setAboutIMG();
-    bgDiv.style.display='block';
-  }else{
-    bgDiv.style.display='none';
-  }
-  </script>
-
-
-
-  <div id="container">
-    <div id="wrap">
-            
-      <div id="content" class="outer">
-        
-          <section id="main" style="float:none;"><article id="post-a-freebsd-11-desktop-how-to" style="width: 66%; float:left;" class="article article-type-post" itemscope="" itemprop="blogPost">
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      A FreeBSD 11 Desktop How-to
-    </h1>
-  
-
+        </div>
       </header>
     
-    <div class="article-meta">
-      
-	Posted on <a href="/2017/08/07/a-freebsd-11-desktop-how-to/" class="article-date">
-	  <time datetime="2017-08-06T21:36:04.000Z" itemprop="datePublished">八月 7, 2017</time>
-	</a>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
+      
 
-    </div>
-    <div class="article-entry" itemprop="articleBody">
       
         <h1 id="A-FreeBSD-11-Desktop-How-to"><a href="#A-FreeBSD-11-Desktop-How-to" class="headerlink" title="A FreeBSD 11 Desktop How-to"></a>A FreeBSD 11 Desktop How-to</h1><p>FreeBSD is a fast, secure, modern <a href="https://en.wikipedia.org/wiki/Unix-like" target="_blank" rel="noopener">Unix-like</a> operating system with a fantastic community, great documentation, and powerful technologies like ZFS and LLVM. It’s my operating system of choice for everything from my i7-2600k desktop to my home router to my ARM plug computer jukebox. Though famed for its uptime in the datacenter the same OS is just as suited to desktop or laptop computing with a little work. Why use FreeBSD? Maybe I’m just getting old, but it’s nice to use an operating system that didn’t spawn a billion-dollar anti-malware industry through frequent security failings, where you can choose the interface you like and reasonably expect it to stay that way instead of being forced into the <a href="https://en.wikipedia.org/wiki/Windows_Aero" target="_blank" rel="noopener">design</a> <a href="https://en.wikipedia.org/wiki/Metro_%28design_language%29" target="_blank" rel="noopener">fad</a> <a href="https://en.wikipedia.org/wiki/Aqua_%28user_interface%29" target="_blank" rel="noopener">du</a> <a href="https://en.wikipedia.org/wiki/Brushed_Metal_%28interface%29" target="_blank" rel="noopener">jour</a>, where you don’t have to argue about the init system being replaced <a href="https://en.wikipedia.org/wiki/Upstart" target="_blank" rel="noopener">two</a> <a href="https://en.wikipedia.org/wiki/Systemd" target="_blank" rel="noopener">times</a> in the same decade, and whose key organizations don’t collectively <a href="https://lwn.net/Articles/500231/" target="_blank" rel="noopener">kowtow to Microsoft</a> when convenient. I’ve used many operating systems and have yet to find one more consistent and cohesive yet as well-supported as the BSD family, and FreeBSD is the one with the biggest community and most available drivers for things like graphics cards. “FreeBSD on the server, Linux on the desktop” is an oft-seen sentiment among some FreeBSD enthusiasts, and it’s sort of understandable considering the conservative out-of-the-box FreeBSD installation. Despite that, FreeBSD is just a few settings away from being an easy, powerful Desktop OS rivaling Linux, complete with the same software ecosystem available through the Ports collection. Unlike Linux where everything including the kernel is a package, FreeBSD is developed in a single source tree and released on a set schedule – twice a year – as a complete operating system on top of which you can install third-party software. The <a href="http://www.freebsd.org/releng/" target="_blank" rel="noopener">Release Engineering</a> page tracks the release history and schedule. Two major branches see releases in parallel, and major branches tend to live for two years (four minor versions) after their x.0 release. FreeBSD 11.x is currently the newest release branch with 10.x in maintenance mode and major development happening on 12.x. This guide attempts to show users with various hardware configurations the best way to configure a usable modern workstation running FreeBSD based on my own experience with Emi, my FreeBSD workstation. There are projects such as TrueOS and GhostBSD that can give you a good out-of-the-box desktop FreeBSD experience, but I find them disconnected from the underlying operating systems because they dump you into KDE or XFCE and attempt to hide as much of FreeBSD as possible behind graphical configuration. That’s not a bad thing, and I’m glad those projects exist, but this guide gets there in the other direction. You will install FreeBSD, learn how it works, and configure it into a great desktop. Compare this guide to something like <a href="http://www.linuxfromscratch.org/lfs/read.html" target="_blank" rel="noopener">Linux From Scratch</a> or a <a href="https://www.gentoo.org/doc/en/handbook/handbook-amd64.xml" target="_blank" rel="noopener">Gentoo installation</a> and you’ll see what a breeze this really is. Let’s do it!</p>
 <h2 id="New-Installations"><a href="#New-Installations" class="headerlink" title="New Installations"></a>New Installations</h2><p>The <a href="http://www.freebsd.org/where.html" target="_blank" rel="noopener">Getting FreeBSD</a> page has links to ISOs for the six <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/articles/committers-guide/archs.html#idp67604144" target="_blank" rel="noopener">tier 1</a> architectures. This guide focuses on amd64/i386 PCs though is broadly applicable to them all. The ISOs are available in <code>bootonly</code>, CD, DVD, and <code>memstick</code>. I usually grab the nearest &gt;1GB USB drive and <a href="http://www.freebsd.org/cgi/man.cgi?query=dd&amp;ektion=&amp;manpath=" title="man dd" target="_blank" rel="noopener">dd</a> the newest <code>memstick</code> image to it. The larger DVD images are available complete with Ports distribution files for those doing fully-offline installations. Boot the chosen installation media via whatever means your computer can (EFI boot menu, BIOS setting, fallback) and get ready to install. FreeBSD will boot to <a href="http://www.freebsd.org/doc/en_US.ISO8859-1/books/handbook/using-bsdinstall.html" target="_blank" rel="noopener">bsdinstall</a> and offer to Install, load an interactive rescue shell, or just boot normally off the installation disk. Choose <code>Install</code>, choose the keyboard mapping appropriate for your computer, and enter a hostname for your machine. When asked to choose system components I recommend selecting all of them. <code>doc</code> is useful to have locally if your Internet connection isn’t working, and system <code>src</code> is needed for some Ports to build and install.</p>
@@ -787,199 +1053,935 @@ cap_mkdb /etc/login.conf
 
       
     </div>
-    <footer class="entry-meta entry-footer">
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.v2ex.co/v4dDksUbl.jpeg" alt="John Doe Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
       
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/categories/操作系统/">操作系统</a>
+        <div class="post-tags">
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+            <a href="/tags/fastdfs/" rel="tag"># fastdfs</a>
+          
+            <a href="/tags/消息/" rel="tag"># 消息</a>
+          
+            <a href="/tags/desktop/" rel="tag"># desktop</a>
+          
+        </div>
+      
 
       
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/desktop/">desktop</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/fastdfs/">fastdfs</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nginx/">nginx</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/消息/">消息</a></li></ul>
+      
+      
 
       
-        <div id="donation_div"></div>
-
-<script src="/js/vdonate.js"></script>
-<script>
-var a = new Donate({
-  title: '如果觉得我的文章对您有用，请随意打赏。您的支持将鼓励我继续创作!', // 可选参数，打赏标题
-  btnText: 'Donate', // 可选参数，打赏按钮文字
-  el: document.getElementById('donation_div'),
-  wechatImage: '',
-  alipayImage: 'https://i.v2ex.co/v4dDksUbl.jpeg'
-});
-</script>
-      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/08/06/e8-bd-ac-e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3-e5-8f-8c-e5-9b-a0-e5-ad-90-e8-ae-a4-e8-af-81/" rel="next" title="[转]深入理解双因子认证">
+                <i class="fa fa-chevron-left"></i> [转]深入理解双因子认证
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/07/sentry-e5-bc-82-e5-b8-b8-e6-8d-95-e8-8e-b7/" rel="prev" title="Sentry异常捕获">
+                Sentry异常捕获 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        
-	<div id="comment">
-		<!-- 来必力City版安装代码 -->
-		<div id="lv-container" data-id="city" data-uid="MTAyM4MS82MDQ5">
-		<script type="text/javascript">
-		   (function(d, s) {
-		       var j, e = d.getElementsByTagName(s)[0];
 
-		       if (typeof LivereTower === 'function') { return; }
-
-		       j = d.createElement(s);
-		       j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
-		       j.async = true;
-
-		       e.parentNode.insertBefore(j, e);
-		   })(document, 'script');
-		</script>
-		<noscript>为正常使用来必力评论功能请激活JavaScript</noscript>
-		</div>
-		<!-- City版安装代码已完成 -->
-	</div>
-
-
+      
       
     </footer>
   </div>
   
-    
-<nav id="article-nav">
   
-    <a href="/2017/08/07/sentry-e5-bc-82-e5-b8-b8-e6-8d-95-e8-8e-b7/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
         
-          Sentry异常捕获
-        
-      </div>
-    </a>
+          
   
-  
-    <a href="/2017/08/06/e8-bd-ac-e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3-e5-8f-8c-e5-9b-a0-e5-ad-90-e8-ae-a4-e8-af-81/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">[转]深入理解双因子认证</div>
-    </a>
-  
-</nav>
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
 
-  
-</article>
-
-<!-- Table of Contents -->
-
-  <aside id="sidebar">
-    <div id="toc" class="toc-article" style="overflow-y: scroll; max-width: 28%;">
-    <strong class="toc-title">Contents</strong>
+  <aside id="sidebar" class="sidebar">
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-FreeBSD-11-Desktop-How-to"><span class="nav-number">1.</span> <span class="nav-text">A FreeBSD 11 Desktop How-to</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Installations"><span class="nav-number">1.1.</span> <span class="nav-text">New Installations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Disks"><span class="nav-number">1.1.1.</span> <span class="nav-text">Disks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finish"><span class="nav-number">1.1.2.</span> <span class="nav-text">Finish</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upgrading"><span class="nav-number">1.2.</span> <span class="nav-text">Upgrading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#First-Boot"><span class="nav-number">1.3.</span> <span class="nav-text">First Boot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-8"><span class="nav-number">1.3.1.</span> <span class="nav-text">UTF-8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tuning-and-drivers"><span class="nav-number">1.3.2.</span> <span class="nav-text">Tuning and drivers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mounts"><span class="nav-number">1.3.3.</span> <span class="nav-text">Mounts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Device-Permissions"><span class="nav-number">1.3.4.</span> <span class="nav-text">Device Permissions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sound"><span class="nav-number">1.3.5.</span> <span class="nav-text">Sound</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Networking"><span class="nav-number">1.4.</span> <span class="nav-text">Networking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wired"><span class="nav-number">1.4.1.</span> <span class="nav-text">Wired</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wireless"><span class="nav-number">1.4.2.</span> <span class="nav-text">Wireless</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv6"><span class="nav-number">1.4.3.</span> <span class="nav-text">IPv6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Firewall"><span class="nav-number">1.4.4.</span> <span class="nav-text">Firewall</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installing-Software"><span class="nav-number">1.5.</span> <span class="nav-text">Installing Software</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-Settings"><span class="nav-number">1.5.1.</span> <span class="nav-text">Build Settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Staying-Up-To-Date"><span class="nav-number">1.5.2.</span> <span class="nav-text">Staying Up To Date</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Going-Graphical"><span class="nav-number">1.6.</span> <span class="nav-text">Going Graphical</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-fonts"><span class="nav-number">1.6.1.</span> <span class="nav-text">Install fonts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Starting-X"><span class="nav-number">1.6.2.</span> <span class="nav-text">Starting X</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Automatic-configuration"><span class="nav-number">1.6.3.</span> <span class="nav-text">Automatic configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manual-configuration"><span class="nav-number">1.6.4.</span> <span class="nav-text">Manual configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manual-Configuration-with-NVIDIA"><span class="nav-number">1.6.5.</span> <span class="nav-text">Manual Configuration with NVIDIA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Desktop-Environments"><span class="nav-number">1.7.</span> <span class="nav-text">Desktop Environments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KDE-4"><span class="nav-number">1.7.1.</span> <span class="nav-text">KDE 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MATE-nee-GNOME-2"><span class="nav-number">1.7.2.</span> <span class="nav-text">MATE née GNOME 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Window-Maker"><span class="nav-number">1.7.3.</span> <span class="nav-text">Window Maker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enlightenment"><span class="nav-number">1.7.4.</span> <span class="nav-text">Enlightenment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XFCE"><span class="nav-number">1.7.5.</span> <span class="nav-text">XFCE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cinnamon"><span class="nav-number">1.7.6.</span> <span class="nav-text">Cinnamon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GNOME-3"><span class="nav-number">1.7.7.</span> <span class="nav-text">GNOME 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Theming"><span class="nav-number">1.7.8.</span> <span class="nav-text">Theming</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extras-and-Miscellany"><span class="nav-number">1.8.</span> <span class="nav-text">Extras and Miscellany</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Printing"><span class="nav-number">1.8.1.</span> <span class="nav-text">Printing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S-M-R-T"><span class="nav-number">1.8.2.</span> <span class="nav-text">S.M.R.T.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">1.8.3.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Webcams-and-DVB"><span class="nav-number">1.8.4.</span> <span class="nav-text">Webcams and DVB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IBus"><span class="nav-number">1.8.5.</span> <span class="nav-text">IBus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linuxulator"><span class="nav-number">1.8.6.</span> <span class="nav-text">Linuxulator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wine"><span class="nav-number">1.8.7.</span> <span class="nav-text">Wine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Browser-Plugins"><span class="nav-number">1.8.8.</span> <span class="nav-text">Browser Plugins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Virtualization"><span class="nav-number">1.8.9.</span> <span class="nav-text">Virtualization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Skype"><span class="nav-number">1.8.10.</span> <span class="nav-text">Skype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ISO-8601-and-other-locales"><span class="nav-number">1.8.11.</span> <span class="nav-text">ISO-8601 and other locales</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upgrade-Notes"><span class="nav-number">1.9.</span> <span class="nav-text">Upgrade Notes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-x-to-10-0"><span class="nav-number">1.9.1.</span> <span class="nav-text">9.x to 10.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-0-to-10-1"><span class="nav-number">1.9.2.</span> <span class="nav-text">10.0 to 10.1</span></a></li></ol></li></ol></li></ol>
-    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description">$$ Welcome $$</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">219</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#A-FreeBSD-11-Desktop-How-to"><span class="nav-number">1.</span> <span class="nav-text">A FreeBSD 11 Desktop How-to</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#New-Installations"><span class="nav-number">1.1.</span> <span class="nav-text">New Installations</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Disks"><span class="nav-number">1.1.1.</span> <span class="nav-text">Disks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Finish"><span class="nav-number">1.1.2.</span> <span class="nav-text">Finish</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upgrading"><span class="nav-number">1.2.</span> <span class="nav-text">Upgrading</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#First-Boot"><span class="nav-number">1.3.</span> <span class="nav-text">First Boot</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-8"><span class="nav-number">1.3.1.</span> <span class="nav-text">UTF-8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tuning-and-drivers"><span class="nav-number">1.3.2.</span> <span class="nav-text">Tuning and drivers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Mounts"><span class="nav-number">1.3.3.</span> <span class="nav-text">Mounts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Device-Permissions"><span class="nav-number">1.3.4.</span> <span class="nav-text">Device Permissions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sound"><span class="nav-number">1.3.5.</span> <span class="nav-text">Sound</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Networking"><span class="nav-number">1.4.</span> <span class="nav-text">Networking</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Wired"><span class="nav-number">1.4.1.</span> <span class="nav-text">Wired</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wireless"><span class="nav-number">1.4.2.</span> <span class="nav-text">Wireless</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPv6"><span class="nav-number">1.4.3.</span> <span class="nav-text">IPv6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Firewall"><span class="nav-number">1.4.4.</span> <span class="nav-text">Firewall</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Installing-Software"><span class="nav-number">1.5.</span> <span class="nav-text">Installing Software</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-Settings"><span class="nav-number">1.5.1.</span> <span class="nav-text">Build Settings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Staying-Up-To-Date"><span class="nav-number">1.5.2.</span> <span class="nav-text">Staying Up To Date</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Going-Graphical"><span class="nav-number">1.6.</span> <span class="nav-text">Going Graphical</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Install-fonts"><span class="nav-number">1.6.1.</span> <span class="nav-text">Install fonts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Starting-X"><span class="nav-number">1.6.2.</span> <span class="nav-text">Starting X</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Automatic-configuration"><span class="nav-number">1.6.3.</span> <span class="nav-text">Automatic configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manual-configuration"><span class="nav-number">1.6.4.</span> <span class="nav-text">Manual configuration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Manual-Configuration-with-NVIDIA"><span class="nav-number">1.6.5.</span> <span class="nav-text">Manual Configuration with NVIDIA</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Desktop-Environments"><span class="nav-number">1.7.</span> <span class="nav-text">Desktop Environments</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#KDE-4"><span class="nav-number">1.7.1.</span> <span class="nav-text">KDE 4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MATE-nee-GNOME-2"><span class="nav-number">1.7.2.</span> <span class="nav-text">MATE née GNOME 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Window-Maker"><span class="nav-number">1.7.3.</span> <span class="nav-text">Window Maker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Enlightenment"><span class="nav-number">1.7.4.</span> <span class="nav-text">Enlightenment</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#XFCE"><span class="nav-number">1.7.5.</span> <span class="nav-text">XFCE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Cinnamon"><span class="nav-number">1.7.6.</span> <span class="nav-text">Cinnamon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GNOME-3"><span class="nav-number">1.7.7.</span> <span class="nav-text">GNOME 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Theming"><span class="nav-number">1.7.8.</span> <span class="nav-text">Theming</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Extras-and-Miscellany"><span class="nav-number">1.8.</span> <span class="nav-text">Extras and Miscellany</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Printing"><span class="nav-number">1.8.1.</span> <span class="nav-text">Printing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#S-M-R-T"><span class="nav-number">1.8.2.</span> <span class="nav-text">S.M.R.T.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Java"><span class="nav-number">1.8.3.</span> <span class="nav-text">Java</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Webcams-and-DVB"><span class="nav-number">1.8.4.</span> <span class="nav-text">Webcams and DVB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IBus"><span class="nav-number">1.8.5.</span> <span class="nav-text">IBus</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Linuxulator"><span class="nav-number">1.8.6.</span> <span class="nav-text">Linuxulator</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Wine"><span class="nav-number">1.8.7.</span> <span class="nav-text">Wine</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Browser-Plugins"><span class="nav-number">1.8.8.</span> <span class="nav-text">Browser Plugins</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Virtualization"><span class="nav-number">1.8.9.</span> <span class="nav-text">Virtualization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Skype"><span class="nav-number">1.8.10.</span> <span class="nav-text">Skype</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ISO-8601-and-other-locales"><span class="nav-number">1.8.11.</span> <span class="nav-text">ISO-8601 and other locales</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Upgrade-Notes"><span class="nav-number">1.9.</span> <span class="nav-text">Upgrade Notes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#9-x-to-10-0"><span class="nav-number">1.9.1.</span> <span class="nav-text">9.x to 10.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-0-to-10-1"><span class="nav-number">1.9.2.</span> <span class="nav-text">10.0 to 10.1</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
     </div>
   </aside>
-</section>
+
+
         
       </div>
-      <footer id="footer" class="site-footer">
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
   
 
-  <div class="clearfix container">
-      <div class="site-info">
-	      &copy; 2018 Technician All Rights Reserved.
-          
-            <span id="busuanzi_container_site_uv">
-              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
       </div>
-      <div class="site-credit">
-        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hiero" target="_blank">hiero</a>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
       </div>
-  </div>
-</footer>
-
-
-<!-- min height -->
-
-<script>
-    var contentdiv = document.getElementById("content");
-
-    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
-</script>
-
-<!-- Custome JS -->
-<script src="/js/my.js"></script>
-    </div>
-    <!-- <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-    <a href="/categories" class="mobile-nav-link">Categories</a>
-  
-    <a href="/tags" class="mobile-nav-link">Tags</a>
-  
-    <a href="/about" class="mobile-nav-link">About</a>
-  
-</nav> -->
     
 
-<!-- mathjax config similar to math.stackexchange -->
+    
+	
+    
 
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-      processEscapes: true
-    }
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-      tex2jax: {
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-      }
-    });
-</script>
-
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for(i=0; i < all.length; i += 1) {
-            all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-    });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.js"></script>
-
-
-<script src="/js/scripts.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<script src="/js/main.js"></script>
-
-
-
-
-
-
-
-
-	<script async src="https://dnqof95d40fo6.cloudfront.net/atw7f8.js">
-	</script>
-
-
-
-
-
-
+    
   </div>
 
-  <a id="rocket" href="#top" class=""></a>
-  <script type="text/javascript" src="/js/totop.js" async=""></script>
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="69" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('Copied')
+          else $(this).text('Copy failed')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('Copy')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
 </body>
 </html>
