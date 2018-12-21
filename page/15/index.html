@@ -307,40 +307,11 @@
 
       
       
-        <li class="menu-item menu-item-search">
-          
-            <a href="javascript:;" class="popup-trigger">
-          
-            
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
-        </li>
-      
     </ul>
   
 
   
 
-  
-    <div class="site-search">
-      
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
-    <span class="popup-btn-close">
-      <i class="fa fa-times-circle"></i>
-    </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
-    </div>
-  </div>
-  <div id="local-search-result"></div>
-</div>
-
-
-
-    </div>
   
 </nav>
 
@@ -366,6 +337,1124 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2016/01/28/easyui-e4-bb-8e-e5-90-8e-e5-8f-b0-e5-8f-96-e5-be-97-e6-95-b0-e6-8d-ae-e5-b9-b6-e7-bb-91-e5-ae-9a-e5-88-b0datagrid/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/01/28/easyui-e4-bb-8e-e5-90-8e-e5-8f-b0-e5-8f-96-e5-be-97-e6-95-b0-e6-8d-ae-e5-b9-b6-e7-bb-91-e5-ae-9a-e5-88-b0datagrid/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/15/index.html">easyui 从后台取得数据并绑定到datagrid</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-01-28 11:14:13" itemprop="dateCreated datePublished" datetime="2016-01-28T11:14:13+08:00">2016-01-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 17:19:14" itemprop="dateModified" datetime="2018-12-12T17:19:14+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/大前端！/" itemprop="url" rel="index"><span itemprop="name">大前端！</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/大前端！/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>项目需要，前台页面输入查询参数（比如邮箱地址）使用ajax发送到后台，然后数据库返回查询结果，并对其格式化，转成json格式，再绑定到前台页面的datagrid上。 期间遇到了几个问题，记录下（文章部分代码来自网络）。  </p>
+<ul>
+<li><h3 id="1-，SqlHelper"><a href="#1-，SqlHelper" class="headerlink" title="1 ，SqlHelper"></a><strong>1 ，SqlHelper</strong></h3></li>
+<li><h3 id="2，DataTable转换成JSON字符串"><a href="#2，DataTable转换成JSON字符串" class="headerlink" title="2，DataTable转换成JSON字符串"></a><strong>2，DataTable转换成JSON字符串</strong></h3></li>
+<li><h3 id="3，后台字符串绑定到datagrid"><a href="#3，后台字符串绑定到datagrid" class="headerlink" title="3，后台字符串绑定到datagrid"></a><strong>3，后台字符串绑定到datagrid</strong></h3></li>
+</ul>
+<p>页面上DataGrid的属性、要显示的字段先设定好：</p>
+<table id="tt" class="easyui-datagrid" style="width:700px;height:300px" title="DataGrid - VirtualScrollView" data-options="view:scrollview,rownumbers:true,singleSelect:true,
+            url:'datagrid27_getdata.php',autoRowHeight:false,pageSize:50"><br>    <thead><br>        <tr><br>            <th field="inv" width="80">Inv No</th><br>            <th field="date" width="100">Date</th><br>            <th field="name" width="80">Name</th><br>            <th field="amount" width="80" align="right">Amount</th><br>            <th field="price" width="80" align="right">Price</th><br>            <th field="cost" width="100" align="right">Cost</th><br>            <th field="note" width="110">Note</th><br>        </tr><br>    </thead><br></table>
+
+<p>1，SqlHelper操作类（来自博客园）：</p>
+<p>/// <summary><br>/// SqlHelper操作类<br>/// </summary><br>public sealed partial class SqlHelper<br>{<br>    /// <summary><br>    /// 批量操作每批次记录数<br>    /// </summary><br>    public static int BatchSize = 2000;</p>
+<pre><code>/// &lt;summary&gt;
+/// 超时时间
+/// &lt;/summary&gt;
+public static int CommandTimeOut = 600;
+
+/// &lt;summary&gt;
+///初始化SqlHelper实例
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+public SqlHelper(string connectionString)
+{
+    this.ConnectionString = connectionString;
+}
+
+/// &lt;summary&gt;
+/// 数据库连接字符串
+/// &lt;/summary&gt;
+public string ConnectionString { get; set; }
+
+#region 实例方法
+
+#region ExecuteNonQuery
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回影响的行数
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回影响的行数&lt;/returns&gt;
+public int ExecuteNonQuery(string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteNonQuery(ConnectionString, CommandType.Text, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回影响的行数
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回影响的行数&lt;/returns&gt;
+public int ExecuteNonQuery(CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteNonQuery(ConnectionString, commandType, commandText, parms);
+}
+
+#endregion ExecuteNonQuery
+
+#region ExecuteScalar
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行第一列
+/// &lt;/summary&gt;
+/// &lt;typeparam name=&quot;T&quot;&gt;返回对象类型&lt;/typeparam&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行第一列&lt;/returns&gt;
+public T ExecuteScalar&lt;T&gt;(string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteScalar&lt;T&gt;(ConnectionString, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行第一列
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行第一列&lt;/returns&gt;
+public object ExecuteScalar(string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteScalar(ConnectionString, CommandType.Text, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行第一列
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行第一列&lt;/returns&gt;
+public object ExecuteScalar(CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteScalar(ConnectionString, commandType, commandText, parms);
+}
+
+#endregion ExecuteScalar
+
+#region ExecuteDataReader
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回只读数据集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回只读数据集&lt;/returns&gt;
+private SqlDataReader ExecuteDataReader(string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataReader(ConnectionString, CommandType.Text, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回只读数据集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回只读数据集&lt;/returns&gt;
+private SqlDataReader ExecuteDataReader(CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataReader(ConnectionString, commandType, commandText, parms);
+}
+#endregion
+
+#region ExecuteDataRow
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行&lt;/returns&gt;
+public DataRow ExecuteDataRow(string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataRow(ConnectionString, CommandType.Text, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行&lt;/returns&gt;
+public DataRow ExecuteDataRow(CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataRow(ConnectionString, commandType, commandText, parms);
+}
+
+#endregion ExecuteDataRow
+
+#region ExecuteDataTable
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一个数据表
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一个数据表&lt;/returns&gt;
+public DataTable ExecuteDataTable(string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataTable(ConnectionString, CommandType.Text, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一个数据表
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一个数据表&lt;/returns&gt;
+public DataTable ExecuteDataTable(CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataSet(ConnectionString, commandType, commandText, parms).Tables\[0\];
+}
+
+/// &lt;summary&gt;
+///  执行SQL语句,返回结果集中的第一个数据表
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;sql&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;order&quot;&gt;排序SQL,如&quot;ORDER BY ID DESC&quot;&lt;/param&gt;
+/// &lt;param name=&quot;pageSize&quot;&gt;每页记录数&lt;/param&gt;
+/// &lt;param name=&quot;pageIndex&quot;&gt;页索引&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;param name=&quot;query&quot;&gt;查询SQL&lt;/param&gt;
+/// &lt;returns&gt;&lt;/returns&gt;
+public DataTable ExecutePageDataTable(string sql, string order, int pageSize, int pageIndex, SqlParameter\[\] parms = null, string query = null, string cte = null)
+{
+    return ExecutePageDataTable(sql, order, pageSize, pageIndex, parms, query, cte);
+}
+#endregion ExecuteDataTable
+
+#region ExecuteDataSet
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集&lt;/returns&gt;
+public DataSet ExecuteDataSet(string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataSet(ConnectionString, CommandType.Text, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集&lt;/returns&gt;
+public DataSet ExecuteDataSet(CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataSet(ConnectionString, commandType, commandText, parms);
+}
+
+#endregion ExecuteDataSet
+
+#region 批量操作
+
+/// &lt;summary&gt;
+/// 大批量数据插入
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;table&quot;&gt;数据表&lt;/param&gt;
+public void BulkInsert(DataTable table)
+{
+    BulkInsert(ConnectionString, table);
+}
+
+/// &lt;summary&gt;
+/// 使用MySqlDataAdapter批量更新数据
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;table&quot;&gt;数据表&lt;/param&gt;
+public void BatchUpdate(DataTable table)
+{
+    BatchUpdate(ConnectionString, table);
+}
+
+/// &lt;summary&gt;
+/// 分批次批量删除数据
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;sql&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;batchSize&quot;&gt;每批次删除记录行数&lt;/param&gt;
+/// &lt;param name=&quot;interval&quot;&gt;批次执行间隔(秒)&lt;/param&gt;
+public void BatchDelete(string sql, int batchSize = 1000, int interval = 1)
+{
+    BatchDelete(ConnectionString, sql, batchSize, interval);
+}
+
+/// &lt;summary&gt;
+/// 分批次批量更新数据
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;sql&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;batchSize&quot;&gt;每批次更新记录行数&lt;/param&gt;
+/// &lt;param name=&quot;interval&quot;&gt;批次执行间隔(秒)&lt;/param&gt;
+public void BatchUpdate(string sql, int batchSize = 1000, int interval = 1)
+{
+    BatchUpdate(ConnectionString, sql, batchSize, interval);
+}
+
+#endregion 批量操作
+
+#endregion 实例方法
+
+#region 静态方法
+
+private static void PrepareCommand(SqlCommand command, SqlConnection connection, SqlTransaction transaction, CommandType commandType, string commandText, SqlParameter\[\] parms)
+{
+    if (connection.State != ConnectionState.Open) connection.Open();
+
+    command.Connection = connection;
+    command.CommandTimeout = CommandTimeOut;
+    // 设置命令文本(存储过程名或SQL语句)
+    command.CommandText = commandText;
+    // 分配事务
+    if (transaction != null)
+    {
+        command.Transaction = transaction;
+    }
+    // 设置命令类型.
+    command.CommandType = commandType;
+    if (parms != null &amp;&amp; parms.Length &gt; 0)
+    {
+        //预处理SqlParameter参数数组，将为NULL的参数赋值为DBNull.Value;
+        foreach (SqlParameter parameter in parms)
+        {
+            if ((parameter.Direction == ParameterDirection.InputOutput || parameter.Direction == ParameterDirection.Input) &amp;&amp; (parameter.Value == null))
+            {
+                parameter.Value = DBNull.Value;
+            }
+        }
+        command.Parameters.AddRange(parms);
+    }
+}
+
+#region ExecuteNonQuery
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回影响的行数
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回影响的行数&lt;/returns&gt;
+public static int ExecuteNonQuery(string connectionString, string commandText, params SqlParameter\[\] parms)
+{
+    using (SqlConnection connection = new SqlConnection(connectionString))
+    {
+        return ExecuteNonQuery(connection, CommandType.Text, commandText, parms);
+    }
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回影响的行数
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回影响的行数&lt;/returns&gt;
+public static int ExecuteNonQuery(string connectionString, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    using (SqlConnection connection = new SqlConnection(connectionString))
+    {
+        return ExecuteNonQuery(connection, commandType, commandText, parms);
+    }
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回影响的行数
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回影响的行数&lt;/returns&gt;
+public static int ExecuteNonQuery(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteNonQuery(connection, null, commandType, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回影响的行数
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;transaction&quot;&gt;事务&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回影响的行数&lt;/returns&gt;
+public static int ExecuteNonQuery(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteNonQuery(transaction.Connection, transaction, commandType, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回影响的行数
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;transaction&quot;&gt;事务&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回影响的行数&lt;/returns&gt;
+private static int ExecuteNonQuery(SqlConnection connection, SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    SqlCommand command = new SqlCommand();
+    PrepareCommand(command, connection, transaction, commandType, commandText, parms);
+    int retval = command.ExecuteNonQuery();
+    command.Parameters.Clear();
+    return retval;
+}
+
+#endregion ExecuteNonQuery
+
+#region ExecuteScalar
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行第一列
+/// &lt;/summary&gt;
+/// &lt;typeparam name=&quot;T&quot;&gt;返回对象类型&lt;/typeparam&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行第一列&lt;/returns&gt;
+public static T ExecuteScalar&lt;T&gt;(string connectionString, string commandText, params SqlParameter\[\] parms)
+{
+    object result = ExecuteScalar(connectionString, commandText, parms);
+    if (result != null)
+    {
+        return (T)Convert.ChangeType(result, typeof(T)); ;
+    }
+    return default(T);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行第一列
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行第一列&lt;/returns&gt;
+public static object ExecuteScalar(string connectionString, string commandText, params SqlParameter\[\] parms)
+{
+    using (SqlConnection connection = new SqlConnection(connectionString))
+    {
+        return ExecuteScalar(connection, CommandType.Text, commandText, parms);
+    }
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行第一列
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行第一列&lt;/returns&gt;
+public static object ExecuteScalar(string connectionString, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    using (SqlConnection connection = new SqlConnection(connectionString))
+    {
+        return ExecuteScalar(connection, commandType, commandText, parms);
+    }
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行第一列
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行第一列&lt;/returns&gt;
+public static object ExecuteScalar(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteScalar(connection, null, commandType, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行第一列
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;transaction&quot;&gt;事务&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行第一列&lt;/returns&gt;
+public static object ExecuteScalar(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteScalar(transaction.Connection, transaction, commandType, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行第一列
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;transaction&quot;&gt;事务&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一行第一列&lt;/returns&gt;
+private static object ExecuteScalar(SqlConnection connection, SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    SqlCommand command = new SqlCommand();
+    PrepareCommand(command, connection, transaction, commandType, commandText, parms);
+    object retval = command.ExecuteScalar();
+    command.Parameters.Clear();
+    return retval;
+}
+
+#endregion ExecuteScalar
+
+#region ExecuteDataReader
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回只读数据集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回只读数据集&lt;/returns&gt;
+private static SqlDataReader ExecuteDataReader(string connectionString, string commandText, params SqlParameter\[\] parms)
+{
+    SqlConnection connection = new SqlConnection(connectionString);
+    return ExecuteDataReader(connection, null, CommandType.Text, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回只读数据集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回只读数据集&lt;/returns&gt;
+private static SqlDataReader ExecuteDataReader(string connectionString, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    SqlConnection connection = new SqlConnection(connectionString);
+    return ExecuteDataReader(connection, null, commandType, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回只读数据集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回只读数据集&lt;/returns&gt;
+private static SqlDataReader ExecuteDataReader(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataReader(connection, null, commandType, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回只读数据集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;transaction&quot;&gt;事务&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回只读数据集&lt;/returns&gt;
+private static SqlDataReader ExecuteDataReader(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataReader(transaction.Connection, transaction, commandType, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回只读数据集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;transaction&quot;&gt;事务&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回只读数据集&lt;/returns&gt;
+private static SqlDataReader ExecuteDataReader(SqlConnection connection, SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    SqlCommand command = new SqlCommand();
+    PrepareCommand(command, connection, transaction, commandType, commandText, parms);
+    return command.ExecuteReader(CommandBehavior.CloseConnection);
+}
+
+#endregion
+
+#region ExecuteDataRow
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;,返回结果集中的第一行&lt;/returns&gt;
+public static DataRow ExecuteDataRow(string connectionString, string commandText, params SqlParameter\[\] parms)
+{
+    DataTable dt = ExecuteDataTable(connectionString, CommandType.Text, commandText, parms);
+    return dt.Rows.Count &gt; 0 ? dt.Rows\[0\] : null;
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;,返回结果集中的第一行&lt;/returns&gt;
+public static DataRow ExecuteDataRow(string connectionString, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    DataTable dt = ExecuteDataTable(connectionString, commandType, commandText, parms);
+    return dt.Rows.Count &gt; 0 ? dt.Rows\[0\] : null;
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;,返回结果集中的第一行&lt;/returns&gt;
+public static DataRow ExecuteDataRow(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    DataTable dt = ExecuteDataTable(connection, commandType, commandText, parms);
+    return dt.Rows.Count &gt; 0 ? dt.Rows\[0\] : null;
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一行
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;transaction&quot;&gt;事务&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;,返回结果集中的第一行&lt;/returns&gt;
+public static DataRow ExecuteDataRow(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    DataTable dt = ExecuteDataTable(transaction, commandType, commandText, parms);
+    return dt.Rows.Count &gt; 0 ? dt.Rows\[0\] : null;
+}
+
+#endregion ExecuteDataRow
+
+#region ExecuteDataTable
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一个数据表
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一个数据表&lt;/returns&gt;
+public static DataTable ExecuteDataTable(string connectionString, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataSet(connectionString, CommandType.Text, commandText, parms).Tables\[0\];
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一个数据表
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一个数据表&lt;/returns&gt;
+public static DataTable ExecuteDataTable(string connectionString, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataSet(connectionString, commandType, commandText, parms).Tables\[0\];
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一个数据表
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一个数据表&lt;/returns&gt;
+public static DataTable ExecuteDataTable(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataSet(connection, commandType, commandText, parms).Tables\[0\];
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集中的第一个数据表
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;transaction&quot;&gt;事务&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一个数据表&lt;/returns&gt;
+public static DataTable ExecuteDataTable(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataSet(transaction, commandType, commandText, parms).Tables\[0\];
+}
+
+/// &lt;summary&gt;
+/// 获取空表结构
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;tableName&quot;&gt;数据表名称&lt;/param&gt;
+/// &lt;returns&gt;返回结果集中的第一个数据表&lt;/returns&gt;
+public static DataTable ExecuteEmptyDataTable(string connectionString, string tableName)
+{
+    return ExecuteDataSet(connectionString, CommandType.Text, string.Format(&quot;select * from {0} where 1=-1&quot;, tableName)).Tables\[0\];
+}
+
+/// &lt;summary&gt;
+///  执行SQL语句,返回结果集中的第一个数据表
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;sql&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;order&quot;&gt;排序SQL,如&quot;ORDER BY ID DESC&quot;&lt;/param&gt;
+/// &lt;param name=&quot;pageSize&quot;&gt;每页记录数&lt;/param&gt;
+/// &lt;param name=&quot;pageIndex&quot;&gt;页索引&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;param name=&quot;query&quot;&gt;查询SQL&lt;/param&gt;
+/// &lt;param name=&quot;cte&quot;&gt;CTE表达式&lt;/param&gt;
+/// &lt;returns&gt;&lt;/returns&gt;
+public static DataTable ExecutePageDataTable(string connectionString, string sql, string order, int pageSize, int pageIndex, SqlParameter\[\] parms = null, string query = null, string cte = null)
+{
+    string psql = string.Format(@&quot;
+                                {3}
+                                SELECT  *
+                                FROM    (
+                                         SELECT ROW_NUMBER() OVER (ORDER BY {1}) RowNumber,*
+                                         FROM   (
+                                                 {0}
+                                                ) t
+                                         WHERE  1 = 1 {2}
+                                        ) t
+                                WHERE   RowNumber BETWEEN @RowNumber_Begin
+                                                  AND     @RowNumber_End&quot;, sql, order, query, cte);
+
+    List&lt;SqlParameter&gt; paramlist = new List&lt;SqlParameter&gt;()
+    {
+        new SqlParameter(&quot;@RowNumber_Begin&quot;, SqlDbType.Int){ Value = (pageIndex - 1) * pageSize + 1 },
+        new SqlParameter(&quot;@RowNumber_End&quot;, SqlDbType.Int){ Value = pageIndex * pageSize }
+    };
+    if (parms != null) paramlist.AddRange(parms);
+    return ExecuteDataTable(connectionString, psql, paramlist.ToArray());
+}
+
+#endregion ExecuteDataTable
+
+#region ExecuteDataSet
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集&lt;/returns&gt;
+public static DataSet ExecuteDataSet(string connectionString, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataSet(connectionString, CommandType.Text, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集&lt;/returns&gt;
+public static DataSet ExecuteDataSet(string connectionString, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    using (SqlConnection connection = new SqlConnection(connectionString))
+    {
+        return ExecuteDataSet(connection, commandType, commandText, parms);
+    }
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集&lt;/returns&gt;
+public static DataSet ExecuteDataSet(SqlConnection connection, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataSet(connection, null, commandType, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;transaction&quot;&gt;事务&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集&lt;/returns&gt;
+public static DataSet ExecuteDataSet(SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    return ExecuteDataSet(transaction.Connection, transaction, commandType, commandText, parms);
+}
+
+/// &lt;summary&gt;
+/// 执行SQL语句,返回结果集
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connection&quot;&gt;数据库连接&lt;/param&gt;
+/// &lt;param name=&quot;transaction&quot;&gt;事务&lt;/param&gt;
+/// &lt;param name=&quot;commandType&quot;&gt;命令类型(存储过程,命令文本, 其它.)&lt;/param&gt;
+/// &lt;param name=&quot;commandText&quot;&gt;SQL语句或存储过程名称&lt;/param&gt;
+/// &lt;param name=&quot;parms&quot;&gt;查询参数&lt;/param&gt;
+/// &lt;returns&gt;返回结果集&lt;/returns&gt;
+private static DataSet ExecuteDataSet(SqlConnection connection, SqlTransaction transaction, CommandType commandType, string commandText, params SqlParameter\[\] parms)
+{
+    SqlCommand command = new SqlCommand();
+
+    PrepareCommand(command, connection, transaction, commandType, commandText, parms);
+    SqlDataAdapter adapter = new SqlDataAdapter(command);
+
+    DataSet ds = new DataSet();
+    adapter.Fill(ds);
+    if (commandText.IndexOf(&quot;@&quot;) &gt; 0)
+    {
+        commandText = commandText.ToLower();
+        int index = commandText.IndexOf(&quot;where &quot;);
+        if (index &lt; 0)
+        {
+            index = commandText.IndexOf(&quot;nwhere&quot;);
+        }
+        if (index &gt; 0)
+        {
+            ds.ExtendedProperties.Add(&quot;SQL&quot;, commandText.Substring(0, index - 1));  //将获取的语句保存在表的一个附属数组里，方便更新时生成CommandBuilder
+        }
+        else
+        {
+            ds.ExtendedProperties.Add(&quot;SQL&quot;, commandText);  //将获取的语句保存在表的一个附属数组里，方便更新时生成CommandBuilder
+        }
+    }
+    else
+    {
+        ds.ExtendedProperties.Add(&quot;SQL&quot;, commandText);  //将获取的语句保存在表的一个附属数组里，方便更新时生成CommandBuilder
+    }
+
+    foreach (DataTable dt in ds.Tables)
+    {
+        dt.ExtendedProperties.Add(&quot;SQL&quot;, ds.ExtendedProperties\[&quot;SQL&quot;\]);
+    }
+
+    command.Parameters.Clear();
+    return ds;
+}
+
+#endregion ExecuteDataSet
+
+#region 批量操作
+
+/// &lt;summary&gt;
+/// 大批量数据插入
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;table&quot;&gt;数据表&lt;/param&gt;
+public static void BulkInsert(string connectionString, DataTable table)
+{
+    if (string.IsNullOrEmpty(table.TableName)) throw new Exception(&quot;DataTable.TableName属性不能为空&quot;);
+    using (SqlBulkCopy bulk = new SqlBulkCopy(connectionString))
+    {
+        bulk.BatchSize = BatchSize;
+        bulk.BulkCopyTimeout = CommandTimeOut;
+        bulk.DestinationTableName = table.TableName;
+        foreach (DataColumn col in table.Columns)
+        {
+            bulk.ColumnMappings.Add(col.ColumnName, col.ColumnName);
+        }
+        bulk.WriteToServer(table);
+        bulk.Close();
+    }
+}
+
+/// &lt;summary&gt;
+/// 使用MySqlDataAdapter批量更新数据
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;table&quot;&gt;数据表&lt;/param&gt;
+public static void BatchUpdate(string connectionString, DataTable table)
+{
+    SqlConnection connection = new SqlConnection(connectionString);
+
+    SqlCommand command = connection.CreateCommand();
+    command.CommandTimeout = CommandTimeOut;
+    command.CommandType = CommandType.Text;
+    SqlDataAdapter adapter = new SqlDataAdapter(command);
+    SqlCommandBuilder commandBulider = new SqlCommandBuilder(adapter);
+    commandBulider.ConflictOption = ConflictOption.OverwriteChanges;
+
+    SqlTransaction transaction = null;
+    try
+    {
+        connection.Open();
+        transaction = connection.BeginTransaction();
+        //设置批量更新的每次处理条数
+        adapter.UpdateBatchSize = BatchSize;
+        //设置事物
+        adapter.SelectCommand.Transaction = transaction;
+
+        if (table.ExtendedProperties\[&quot;SQL&quot;\] != null)
+        {
+            adapter.SelectCommand.CommandText = table.ExtendedProperties\[&quot;SQL&quot;\].ToString();
+        }
+        adapter.Update(table);
+        transaction.Commit();/////提交事务
+    }
+    catch (SqlException ex)
+    {
+        if (transaction != null) transaction.Rollback();
+        throw ex;
+    }
+    finally
+    {
+        connection.Close();
+        connection.Dispose();
+    }
+}
+
+/// &lt;summary&gt;
+/// 分批次批量删除数据
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;sql&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;batchSize&quot;&gt;每批次更新记录行数&lt;/param&gt;
+/// &lt;param name=&quot;interval&quot;&gt;批次执行间隔(秒)&lt;/param&gt;
+public static void BatchDelete(string connectionString, string sql, int batchSize = 1000, int interval = 1)
+{
+    sql = sql.ToLower();
+
+    if (batchSize &lt; 1000) batchSize = 1000;
+    if (interval &lt; 1) interval = 1;
+    while (ExecuteScalar(connectionString, sql.Replace(&quot;delete&quot;, &quot;select top 1 1&quot;)) != null)
+    {
+        ExecuteNonQuery(connectionString, CommandType.Text, sql.Replace(&quot;delete&quot;, string.Format(&quot;delete top ({0})&quot;, batchSize)));
+        System.Threading.Thread.Sleep(interval * 1000);
+    }
+}
+
+/// &lt;summary&gt;
+/// 分批次批量更新数据
+/// &lt;/summary&gt;
+/// &lt;param name=&quot;connectionString&quot;&gt;数据库连接字符串&lt;/param&gt;
+/// &lt;param name=&quot;sql&quot;&gt;SQL语句&lt;/param&gt;
+/// &lt;param name=&quot;batchSize&quot;&gt;每批次更新记录行数&lt;/param&gt;
+/// &lt;param name=&quot;interval&quot;&gt;批次执行间隔(秒)&lt;/param&gt;
+public static void BatchUpdate(string connectionString, string sql, int batchSize = 1000, int interval = 1)
+{
+    if (batchSize &lt; 1000) batchSize = 1000;
+    if (interval &lt; 1) interval = 1;
+    string existsSql = Regex.Replace(sql, @&quot;\[ws.=,&apos;\]*from&quot;, &quot;select top 1 1 from&quot;, RegexOptions.IgnoreCase);
+    existsSql = Regex.Replace(existsSql, @&quot;set\[ws.=,&apos;\]* where&quot;, &quot;where&quot;, RegexOptions.IgnoreCase);
+    existsSql = Regex.Replace(existsSql, @&quot;update&quot;, &quot;select top 1 1 from&quot;, RegexOptions.IgnoreCase);
+    while (ExecuteScalar&lt;int&gt;(connectionString, existsSql) != 0)
+    {
+        ExecuteNonQuery(connectionString, CommandType.Text, Regex.Replace(sql, &quot;update&quot;, string.Format(&quot;update top ({0})&quot;, batchSize), RegexOptions.IgnoreCase));
+        System.Threading.Thread.Sleep(interval * 1000);
+    }
+}
+
+#endregion 批量操作
+
+#endregion 静态方法
+</code></pre><p>}</p>
+<p>2，DATATABLE转换成JSON字符串（来自开源中国）  </p>
+<p>#region DataTable 转换为Json 字符串<br>/// <summary><br>/// DataTable 对象 转换为Json 字符串<br>/// </summary><br>/// <param name="dt"><br>/// <returns></returns><br>public static string ToJson(this DataTable dt)<br>{<br>    JavaScriptSerializer javaScriptSerializer = new JavaScriptSerializer();<br>    javaScriptSerializer.MaxJsonLength = Int32.MaxValue; //取得最大数值<br>    ArrayList arrayList = new ArrayList();<br>    foreach (DataRow dataRow in dt.Rows)<br>    {<br>        Dictionary&lt;string, object&gt; dictionary = new Dictionary&lt;string, object&gt;();  //实例化一个参数集合<br>        foreach (DataColumn dataColumn in dt.Columns)<br>        {<br>            dictionary.Add(dataColumn.ColumnName, dataRow[dataColumn.ColumnName].ToStr());<br>        }<br>        arrayList.Add(dictionary); //ArrayList集合中添加键值<br>    }</p>
+<pre><code>return javaScriptSerializer.Serialize(arrayList);  //返回一个json字符串
+</code></pre><p>}</p>
+<p>#endregion</p>
+<p>#region 转换为string字符串类型<br>/// <summary><br>///  转换为string字符串类型<br>/// </summary><br>/// <param name="s">获取需要转换的值<br>/// <param name="format">需要格式化的位数<br>/// <returns>返回一个新的字符串</returns><br>public static string ToStr(this object s, string format = “”)<br>{<br>    string result = “”;<br>    try<br>    {<br>        if (format == “”)<br>        {<br>            result = s.ToString();<br>        }<br>        else<br>        {<br>            result = string.Format(“{0:” + format + “}”, s);<br>        }<br>    }<br>    catch<br>    {<br>    }<br>    return result;<br>}</p>
+<p>#endregion</p>
+<p>实际开发过程中发现通过后台查询再转换生成的<strong>JSON格式</strong>的字符串并不能直接用于easyui的 DataGrid 否则会报一个</p>
+<p>Uncaught TypeError: Cannot read property ‘length’ of undefined</p>
+<p>的错误。 后来经google发现<a href="https://www.datatables.net/forums/discussion/7949/getting-cannot-read-property-length-of-undefined-in-chrome-error" target="_blank" rel="noopener">有网友提到，生成的<strong>JSON字符串</strong>不能等同于<strong>JSON对象</strong></a>。所以需要再转换一次。 这里转换的方式就多了，我找了个最简单的：</p>
+<p>// data 为ajax获取的JSON字符串<br> $(‘#dg’).datagrid(‘loadData’, JSON.parse(data));</p>
+<p>其他方式自行搜索。 当然这里顺便也说下，如果JSON中包含NULL，需要转换为空字符串，否则也可能出现这个问题。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -2056,222 +3145,6 @@ Response.Write(strForm.ToString() + strScript.ToString());
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2015/09/10/php-e4-b8-ad-e4-bd-bf-e7-94-a8-e5-8f-82-e6-95-b0-e5-8c-96-e6-9f-a5-e8-af-a2/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2015/09/10/php-e4-b8-ad-e4-bd-bf-e7-94-a8-e5-8f-82-e6-95-b0-e5-8c-96-e6-9f-a5-e8-af-a2/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/15/index.html">PHP 中使用参数化查询</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2015-09-10 14:24:20" itemprop="dateCreated datePublished" datetime="2015-09-10T14:24:20+08:00">2015-09-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:22:01" itemprop="dateModified" datetime="2018-12-12T17:22:01+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>PHP 中提供了三种访问 MySQL 数据库的扩展，即 mysql，mysqli 和 PDO。它们的区别可以比较如下：</p>
-<p><strong>扩展</strong></p>
-<p><strong>mysql</strong></p>
-<p><strong>mysqli</strong></p>
-<p><strong>PDO</strong></p>
-<p>PHP 版本</p>
-<p>2.0+</p>
-<p>5.0+</p>
-<p>5.1+</p>
-<p>生命周期</p>
-<p>废弃</p>
-<p>活跃</p>
-<p>活跃</p>
-<p>面向对象语法</p>
-<p>否</p>
-<p>是</p>
-<p>是</p>
-<p>过程式语法</p>
-<p>是</p>
-<p>是</p>
-<p>否</p>
-<p>服务器端预处理语句</p>
-<p>否</p>
-<p>是</p>
-<p>是</p>
-<p>客户端预处理语句</p>
-<p>否</p>
-<p>否</p>
-<p>是</p>
-<p>上面所说的预处理语句就是用于参数化查询的。可以看到，除了旧的 mysql 扩展不支持，mysqli 和 PDO 这两个新扩展都支持参数化查询。PDO 扩展相比 mysqli 扩展的好处是，它是与关系数据库类型无关的，因此很方便切换数据库，比如从 MySQL 切换到 PostgreSQL。 首先我们来看看利用 mysqli 扩展如何使用参数化查询。例如：</p>
-<pre><code>$mysqli = new mysqli(&quot;localhost&quot;, &quot;dbusername&quot;, &quot;dbpassword&quot;, &quot;database&quot;);
-</code></pre><p>再看看用 PDO 扩展如何使用参数化查询。例如：  </p>
-<p>$pdo = new PDO(“mysql:host=localhost;dbname=database”, “dbusername”, “dbpassword”);</p>
-<p>$username = “somename”;<br>$password = “someword”;</p>
-<p>$query = “SELECT * FROM users WHERE (name = :username) and (password = :password)”;</p>
-<p>$statement = $pdo-&gt;prepare($query, array(PDO::ATTR_CURSOR =&gt; PDO::CURSOR_FWDONLY));<br>$statement-&gt;bindParam(“:username”, $username, PDO::PARAM_STR, 10);<br>$statement-&gt;bindParam(“:password”, $password, PDO::PARAM_STR, 12);<br>$statement-&gt;execute();</p>
-<p>while ($row = $statement-&gt;fetch(PDO::FETCH_ASSOC)) {<br>  printf (“%s : %dn”, $row[“filename”], $row[“filesize”]);<br>}<br>$statement-&gt;closeCursor();</p>
-<p>$pdo = null;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2319,7 +3192,7 @@ Response.Write(strForm.ToString() + strScript.ToString());
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2903,7 +3776,7 @@ Response.Write(strForm.ToString() + strScript.ToString());
         
       
   
-  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
+  <script type="text/javascript" color="0,0,255" opacity="0.6" zindex="-1" count="99" src="//cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1.0.0/canvas-nest.min.js"></script>
 
 
 
@@ -2985,326 +3858,6 @@ Response.Write(strForm.ToString() + strScript.ToString());
 
   
 
-  <script type="text/javascript">
-    // Popup Window;
-    var isfetched = false;
-    var isXml = true;
-    // Search DB path;
-    var search_path = "";
-    if (search_path.length === 0) {
-      search_path = "search.xml";
-    } else if (/json$/i.test(search_path)) {
-      isXml = false;
-    }
-    var path = "/" + search_path;
-    // monitor main search box;
-
-    var onPopupClose = function (e) {
-      $('.popup').hide();
-      $('#local-search-input').val('');
-      $('.search-result-list').remove();
-      $('#no-result').remove();
-      $(".local-search-pop-overlay").remove();
-      $('body').css('overflow', '');
-    }
-
-    function proceedsearch() {
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
-        .css('overflow', 'hidden');
-      $('.search-popup-overlay').click(onPopupClose);
-      $('.popup').toggle();
-      var $localSearchInput = $('#local-search-input');
-      $localSearchInput.attr("autocapitalize", "none");
-      $localSearchInput.attr("autocorrect", "off");
-      $localSearchInput.focus();
-    }
-
-    // search function;
-    var searchFunc = function(path, search_id, content_id) {
-      'use strict';
-
-      // start loading animation
-      $("body")
-        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
-          '<div id="search-loading-icon">' +
-          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
-          '</div>' +
-          '</div>')
-        .css('overflow', 'hidden');
-      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
-
-      
-
-      $.ajax({
-        url: path,
-        dataType: isXml ? "xml" : "json",
-        async: true,
-        success: function(res) {
-          // get the contents from search data
-          isfetched = true;
-          $('.popup').detach().appendTo('.header-inner');
-          var datas = isXml ? $("entry", res).map(function() {
-            return {
-              title: $("title", this).text(),
-              content: $("content",this).text(),
-              url: $("url" , this).text()
-            };
-          }).get() : res;
-          var input = document.getElementById(search_id);
-          var resultContent = document.getElementById(content_id);
-          var inputEventFunction = function() {
-            var searchText = input.value.trim().toLowerCase();
-            var keywords = searchText.split(/[\s\-]+/);
-            if (keywords.length > 1) {
-              keywords.push(searchText);
-            }
-            var resultItems = [];
-            if (searchText.length > 0) {
-              // perform local searching
-              datas.forEach(function(data) {
-                var isMatch = false;
-                var hitCount = 0;
-                var searchTextCount = 0;
-                var title = data.title.trim();
-                var titleInLowerCase = title.toLowerCase();
-                var content = data.content.trim().replace(/<[^>]+>/g,"");
-                
-                var contentInLowerCase = content.toLowerCase();
-                var articleUrl = decodeURIComponent(data.url);
-                var indexOfTitle = [];
-                var indexOfContent = [];
-                // only match articles with not empty titles
-                if(title != '') {
-                  keywords.forEach(function(keyword) {
-                    function getIndexByWord(word, text, caseSensitive) {
-                      var wordLen = word.length;
-                      if (wordLen === 0) {
-                        return [];
-                      }
-                      var startPosition = 0, position = [], index = [];
-                      if (!caseSensitive) {
-                        text = text.toLowerCase();
-                        word = word.toLowerCase();
-                      }
-                      while ((position = text.indexOf(word, startPosition)) > -1) {
-                        index.push({position: position, word: word});
-                        startPosition = position + wordLen;
-                      }
-                      return index;
-                    }
-
-                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
-                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
-                  });
-                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
-                    isMatch = true;
-                    hitCount = indexOfTitle.length + indexOfContent.length;
-                  }
-                }
-
-                // show search results
-
-                if (isMatch) {
-                  // sort index by position of keyword
-
-                  [indexOfTitle, indexOfContent].forEach(function (index) {
-                    index.sort(function (itemLeft, itemRight) {
-                      if (itemRight.position !== itemLeft.position) {
-                        return itemRight.position - itemLeft.position;
-                      } else {
-                        return itemLeft.word.length - itemRight.word.length;
-                      }
-                    });
-                  });
-
-                  // merge hits into slices
-
-                  function mergeIntoSlice(text, start, end, index) {
-                    var item = index[index.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    var hits = [];
-                    var searchTextCountInSlice = 0;
-                    while (position + word.length <= end && index.length != 0) {
-                      if (word === searchText) {
-                        searchTextCountInSlice++;
-                      }
-                      hits.push({position: position, length: word.length});
-                      var wordEnd = position + word.length;
-
-                      // move to next position of hit
-
-                      index.pop();
-                      while (index.length != 0) {
-                        item = index[index.length - 1];
-                        position = item.position;
-                        word = item.word;
-                        if (wordEnd > position) {
-                          index.pop();
-                        } else {
-                          break;
-                        }
-                      }
-                    }
-                    searchTextCount += searchTextCountInSlice;
-                    return {
-                      hits: hits,
-                      start: start,
-                      end: end,
-                      searchTextCount: searchTextCountInSlice
-                    };
-                  }
-
-                  var slicesOfTitle = [];
-                  if (indexOfTitle.length != 0) {
-                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
-                  }
-
-                  var slicesOfContent = [];
-                  while (indexOfContent.length != 0) {
-                    var item = indexOfContent[indexOfContent.length - 1];
-                    var position = item.position;
-                    var word = item.word;
-                    // cut out 100 characters
-                    var start = position - 20;
-                    var end = position + 80;
-                    if(start < 0){
-                      start = 0;
-                    }
-                    if (end < position + word.length) {
-                      end = position + word.length;
-                    }
-                    if(end > content.length){
-                      end = content.length;
-                    }
-                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
-                  }
-
-                  // sort slices in content by search text's count and hits' count
-
-                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
-                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
-                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
-                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
-                      return sliceRight.hits.length - sliceLeft.hits.length;
-                    } else {
-                      return sliceLeft.start - sliceRight.start;
-                    }
-                  });
-
-                  // select top N slices in content
-
-                  var upperBound = parseInt('1');
-                  if (upperBound >= 0) {
-                    slicesOfContent = slicesOfContent.slice(0, upperBound);
-                  }
-
-                  // highlight title and content
-
-                  function highlightKeyword(text, slice) {
-                    var result = '';
-                    var prevEnd = slice.start;
-                    slice.hits.forEach(function (hit) {
-                      result += text.substring(prevEnd, hit.position);
-                      var end = hit.position + hit.length;
-                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
-                      prevEnd = end;
-                    });
-                    result += text.substring(prevEnd, slice.end);
-                    return result;
-                  }
-
-                  var resultItem = '';
-
-                  if (slicesOfTitle.length != 0) {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
-                  } else {
-                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
-                  }
-
-                  slicesOfContent.forEach(function (slice) {
-                    resultItem += "<a href='" + articleUrl + "'>" +
-                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
-                      "...</p>" + "</a>";
-                  });
-
-                  resultItem += "</li>";
-                  resultItems.push({
-                    item: resultItem,
-                    searchTextCount: searchTextCount,
-                    hitCount: hitCount,
-                    id: resultItems.length
-                  });
-                }
-              })
-            };
-            if (keywords.length === 1 && keywords[0] === "") {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
-            } else if (resultItems.length === 0) {
-              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
-            } else {
-              resultItems.sort(function (resultLeft, resultRight) {
-                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
-                  return resultRight.searchTextCount - resultLeft.searchTextCount;
-                } else if (resultLeft.hitCount !== resultRight.hitCount) {
-                  return resultRight.hitCount - resultLeft.hitCount;
-                } else {
-                  return resultRight.id - resultLeft.id;
-                }
-              });
-              var searchResultList = '<ul class=\"search-result-list\">';
-              resultItems.forEach(function (result) {
-                searchResultList += result.item;
-              })
-              searchResultList += "</ul>";
-              resultContent.innerHTML = searchResultList;
-            }
-          }
-
-          if ('auto' === 'auto') {
-            input.addEventListener('input', inputEventFunction);
-          } else {
-            $('.search-icon').click(inputEventFunction);
-            input.addEventListener('keypress', function (event) {
-              if (event.keyCode === 13) {
-                inputEventFunction();
-              }
-            });
-          }
-
-          // remove loading animation
-          $(".local-search-pop-overlay").remove();
-          $('body').css('overflow', '');
-
-          proceedsearch();
-        }
-      });
-    }
-
-    // handle and trigger popup window;
-    $('.popup-trigger').click(function(e) {
-      e.stopPropagation();
-      if (isfetched === false) {
-        searchFunc(path, 'local-search-input', 'local-search-result');
-      } else {
-        proceedsearch();
-      };
-    });
-
-    $('.popup-btn-close').click(onPopupClose);
-    $('.popup').click(function(e){
-      e.stopPropagation();
-    });
-    $(document).on('keyup', function (event) {
-      var shouldDismissSearchPopup = event.which === 27 &&
-        $('.search-popup').is(':visible');
-      if (shouldDismissSearchPopup) {
-        onPopupClose();
-      }
-    });
-  </script>
-
 
 
 
@@ -3329,15 +3882,6 @@ Response.Write(strForm.ToString() + strScript.ToString());
   
 
   
-  
-  
-  <script src="/lib/bookmark/bookmark.min.js?v=1.0"></script>
-  <script type="text/javascript">
-  
-    bookmark.loadBookmark();
-  
-  </script>
-
 
   
   <style>
