@@ -114,7 +114,7 @@
 <meta property="og:site_name" content="Technician">
 <meta property="og:description" content="配置全站 CDN 可以缓存 HTML 页面和加快页面首次加载所耗时间。本文重点讲述 WordPress 的全站缓存，国内外 CDN 混用的解决方案，以及让页面也在 CDN 上缓存的正确做法。本文主要介绍 CloudFront，同时也对 Cloudflare、又拍云、百度云加速、KeyCDN、Google Cloud CDN 这几家 CDN 进行对比。">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-12-21T04:25:03.080Z">
+<meta property="og:updated_time" content="2018-12-21T04:30:58.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="国内外几家全站-CDN-对比.md">
 <meta name="twitter:description" content="配置全站 CDN 可以缓存 HTML 页面和加快页面首次加载所耗时间。本文重点讲述 WordPress 的全站缓存，国内外 CDN 混用的解决方案，以及让页面也在 CDN 上缓存的正确做法。本文主要介绍 CloudFront，同时也对 Cloudflare、又拍云、百度云加速、KeyCDN、Google Cloud CDN 这几家 CDN 进行对比。">
@@ -396,7 +396,7 @@
                 
               
 
-              <time title="Created: 2018-12-21 12:19:18 / Modified: 12:25:03" itemprop="dateCreated datePublished" datetime="2018-12-21T12:19:18+08:00">2018-12-21</time>
+              <time title="Created: 2018-12-21 12:19:18 / Modified: 12:30:58" itemprop="dateCreated datePublished" datetime="2018-12-21T12:19:18+08:00">2018-12-21</time>
             
 
             
@@ -454,14 +454,13 @@
       
         <p>配置全站 CDN 可以缓存 HTML 页面和加快页面首次加载所耗时间。本文重点讲述 WordPress 的全站缓存，国内外 CDN 混用的解决方案，以及让页面也在 CDN 上缓存的正确做法。本文主要介绍 CloudFront，同时也对 Cloudflare、又拍云、百度云加速、KeyCDN、Google Cloud CDN 这几家 CDN 进行对比。</p>
 <a id="more"></a>
-<p>=== 定义、解释与评分细则 ===</p>
-<ul>
+<h2 id="定义、解释与评分细则"><a href="#定义、解释与评分细则" class="headerlink" title="定义、解释与评分细则"></a>定义、解释与评分细则</h2><ul>
 <li>国内速度：使用 IPIP.NET 上的 Ping 值估算。</li>
 <li>国外速度：使用 CDNPerf 进行测试。如果没有数据则使用 IPIP.NET 上的 Ping 值进行估算。<br>速度星级 - PING：小于等于 25ms 为满分，25~50ms 四分，50~100ms 三分，100~200ms 两分，200~300ms 一分，大于 300ms 零分。若 CDNPerf 上的数据则除 2。</li>
 <li>可定制性：零分起步。支持按照路径多回源加两分，支持调转配置加一分，支持图像压缩加一分，支持自有语言编程加一分，支持任意一种主流语言的编程直接满分。<br>除了列出’’’每月’’’的域名单价、请求价格（较少量的），这里还模拟几种用例的价格。</li>
 <li>用例价格：一个月 100GB 流量（20GB 亚洲、20GB 北美、20GB 欧洲、20GB 大洋洲、20GB 中国）</li>
 </ul>
-<p>== Microsoft CDN（Azure CDN） ==<br>使用了 Anycast 技术。</p>
+<h2 id="Microsoft-CDN（Azure-CDN）"><a href="#Microsoft-CDN（Azure-CDN）" class="headerlink" title="Microsoft CDN（Azure CDN）"></a>Microsoft CDN（Azure CDN）</h2><p>使用了 Anycast 技术。</p>
 <ul>
 <li>国外速度：★★★★★，19 ms</li>
 <li>北美速度：★★★★★，19 ms</li>
@@ -475,7 +474,7 @@
 <li>根域名兼容性：可以直接填写 Anycast IP 实现根域名。</li>
 <li>用例价格：’’’$11.00’’’</li>
 </ul>
-<p>== CloudFront ==<br>CloudFront 有 Amazon 自建的网络，单价较高但是 0 元起步，适合中小客户。本文将重点介绍 CloudFront 和 WordPress 配合实现动静分离，缓存 HTML 页面。之后将对比其他的一些 CDN。</p>
+<h2 id="CloudFront"><a href="#CloudFront" class="headerlink" title="CloudFront"></a>CloudFront</h2><p>CloudFront 有 Amazon 自建的网络，单价较高但是 0 元起步，适合中小客户。本文将重点介绍 CloudFront 和 WordPress 配合实现动静分离，缓存 HTML 页面。之后将对比其他的一些 CDN。</p>
 <ul>
 <li>国外速度：★★★★★，21 ms</li>
 <li>北美速度：★★★★★，21 ms</li>
@@ -490,7 +489,10 @@
 <li>根域名兼容性：需要使用 Route 53 作为 DNS。</li>
 <li>SSL 证书：免费多域名、通配符 SSL 证书，自动续签。可免费使用自有证书。</li>
 <li>证书兼容性：默认仅限支持 SNI 的浏览器，可额外购买服务（$600/月）以兼容所有浏览器。</li>
-<li>用例价格：’’’$10.76’’’<br>== Cloudflare ==<br>有自建的网络，最快的速度、最低廉的价格，主要提供网站安全防护，当然还附带了 CDN。其提供的 NS 服务也是（国外）业界第一的速度。</li>
+<li>用例价格：’’’$10.76’’’</li>
+</ul>
+<h2 id="Cloudflare"><a href="#Cloudflare" class="headerlink" title="Cloudflare"></a>Cloudflare</h2><p>有自建的网络，最快的速度、最低廉的价格，主要提供网站安全防护，当然还附带了 CDN。其提供的 NS 服务也是（国外）业界第一的速度。</p>
+<ul>
 <li>国外速度：★★★★★，20 ms</li>
 <li>北美速度：★★★★★，20 ms</li>
 <li>亚洲速度：★★★★★，20 ms</li>
@@ -504,7 +506,10 @@
 <li>根域名兼容性：NS 接入支持根域名，第三方 DNS 可以直接填写 Anycast IP 实现根域名。</li>
 <li>SSL 证书：共享通配符 SSL 证书，自动续签。可付费升级自定义域的证书。企业版及以上才可使用自有证书。</li>
 <li>证书兼容性：免费版仅限支持 SNI 的浏览器，专业版及以上支持所有浏览器。</li>
-<li>用例价格：’’’免费’’’<br>== UPYUN ==<br>使用自己管理的机房，网络有些受限于中国的环境，单价业界最低。</li>
+<li>用例价格：’’’免费’’’</li>
+</ul>
+<h2 id="UPYUN"><a href="#UPYUN" class="headerlink" title="UPYUN"></a>UPYUN</h2><p>使用自己管理的机房，网络有些受限于中国的环境，单价业界最低。</p>
+<ul>
 <li>国外速度：★★★☆☆，83 ms</li>
 <li>北美速度：★★☆☆☆，126 ms</li>
 <li>亚洲速度：★★★☆☆，55 ms</li>
@@ -519,7 +524,10 @@
 <li>根域名兼容性：不能兼容根域名</li>
 <li>SSL 证书：单域名 Let’s Encrypt 证书，自动续签。可免费使用自有证书。</li>
 <li>证书兼容性：仅限支持 SNI 的浏览器</li>
-<li>用例价格：’’’¥57’’’<br>== Google Cloud CDN ==<br>有全球最密集的网络集群，最快的速度、较低的单价，主要提供负载均衡，SSL 卸载，当然还附带了 CDN。由于缓存命中率低，需要超大型访问量的网站才有效。正是因为这一点，Google 自己只是将用户量极大的搜索服务用上了这个 CDN 系统，其余的很多 CDN 用的是 Cloudflare 和 Fastly 的。Google 的网络和 Cloudflare 和 Fastly 的网络有内网链接。详细介绍看本站的这篇文章</li>
+<li>用例价格：’’’¥57’’’</li>
+</ul>
+<h2 id="Google-Cloud-CDN"><a href="#Google-Cloud-CDN" class="headerlink" title="Google Cloud CDN"></a>Google Cloud CDN</h2><p>有全球最密集的网络集群，最快的速度、较低的单价，主要提供负载均衡，SSL 卸载，当然还附带了 CDN。<br>由于缓存命中率低，需要超大型访问量的网站才有效。<br>正是因为这一点，Google 自己只是将用户量极大的搜索服务用上了这个 CDN 系统，其余的很多 CDN 用的是 Cloudflare 和 Fastly 的。<br>Google 的网络和 Cloudflare 和 Fastly 的网络有内网链接</p>
+<ul>
 <li>国外速度：★★★★★，21 ms</li>
 <li>北美速度：★★★★★，18 ms</li>
 <li>亚洲速度：★★★★☆，34 ms</li>
@@ -533,7 +541,10 @@
 <li>接入方式：IP 绑定，它直接给你分配一个独立的 Anycast IP，只需要 A 记录解析即可。</li>
 <li>证书兼容性：’’’所有’’’浏览器</li>
 <li>不包含免费 SSL，需要自己购买证书。免费安装 SSL。</li>
-<li>用例价格：’’’$34.65’’’<br>== KeyCDN ==<br>他们是租用别人的独立服务器，提供一体化 CDN 服务，单价业界最低。</li>
+<li>用例价格：’’’$34.65’’’</li>
+</ul>
+<h2 id="KeyCDN"><a href="#KeyCDN" class="headerlink" title="KeyCDN"></a>KeyCDN</h2><p>他们是租用别人的独立服务器，提供一体化 CDN 服务，单价业界最低。</p>
+<ul>
 <li>国外速度：★★★★★，26 ms</li>
 <li>北美速度：★★★★★，23 ms</li>
 <li>亚洲速度：★★★★☆，50 ms</li>
@@ -547,8 +558,7 @@
 <li>证书兼容性：仅限支持 SNI 的浏览器</li>
 <li>用例价格：’’’$9.60’’’</li>
 </ul>
-<p>=== 推荐工具 ===</p>
-<ul>
+<h2 id="推荐工具"><a href="#推荐工具" class="headerlink" title="推荐工具"></a>推荐工具</h2><ul>
 <li>[<a href="https://www.cdnperf.com" target="_blank" rel="noopener">https://www.cdnperf.com</a> CDNPerf]：检查 CDN 速度</li>
 </ul>
 
@@ -664,8 +674,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -1189,6 +1208,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#定义、解释与评分细则"><span class="nav-number">1.</span> <span class="nav-text">定义、解释与评分细则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Microsoft-CDN（Azure-CDN）"><span class="nav-number">2.</span> <span class="nav-text">Microsoft CDN（Azure CDN）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CloudFront"><span class="nav-number">3.</span> <span class="nav-text">CloudFront</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Cloudflare"><span class="nav-number">4.</span> <span class="nav-text">Cloudflare</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#UPYUN"><span class="nav-number">5.</span> <span class="nav-text">UPYUN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Google-Cloud-CDN"><span class="nav-number">6.</span> <span class="nav-text">Google Cloud CDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#KeyCDN"><span class="nav-number">7.</span> <span class="nav-text">KeyCDN</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#推荐工具"><span class="nav-number">8.</span> <span class="nav-text">推荐工具</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
