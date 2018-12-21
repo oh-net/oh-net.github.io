@@ -504,7 +504,7 @@ body {
 pre,
 .highlight {
   overflow: auto;
-  margin: 20px 0;
+  margin: 36px 0;
   padding: 0;
   font-size: 14px;
   color: #fff;
@@ -580,7 +580,7 @@ pre code {
   padding-right: 10px;
   color: #7285b7;
   text-align: right;
-  background-color: #000e20;
+/* customer by reg background-color: $highlight-gutter.bg-color */
 }
 .highlight .code pre {
   width: 100%;
@@ -1960,7 +1960,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #c42e04;
+  background: #f0556b;
 }
 .links-of-blogroll {
   font-size: 13px;
