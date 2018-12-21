@@ -353,222 +353,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2015/09/10/php-e4-b8-ad-e4-bd-bf-e7-94-a8-e5-8f-82-e6-95-b0-e5-8c-96-e6-9f-a5-e8-af-a2/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2015/09/10/php-e4-b8-ad-e4-bd-bf-e7-94-a8-e5-8f-82-e6-95-b0-e5-8c-96-e6-9f-a5-e8-af-a2/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/16/index.html">PHP 中使用参数化查询</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2015-09-10 14:24:20" itemprop="dateCreated datePublished" datetime="2015-09-10T14:24:20+08:00">2015-09-10</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-12 17:22:01" itemprop="dateModified" datetime="2018-12-12T17:22:01+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-                  , 
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>PHP 中提供了三种访问 MySQL 数据库的扩展，即 mysql，mysqli 和 PDO。它们的区别可以比较如下：</p>
-<p><strong>扩展</strong></p>
-<p><strong>mysql</strong></p>
-<p><strong>mysqli</strong></p>
-<p><strong>PDO</strong></p>
-<p>PHP 版本</p>
-<p>2.0+</p>
-<p>5.0+</p>
-<p>5.1+</p>
-<p>生命周期</p>
-<p>废弃</p>
-<p>活跃</p>
-<p>活跃</p>
-<p>面向对象语法</p>
-<p>否</p>
-<p>是</p>
-<p>是</p>
-<p>过程式语法</p>
-<p>是</p>
-<p>是</p>
-<p>否</p>
-<p>服务器端预处理语句</p>
-<p>否</p>
-<p>是</p>
-<p>是</p>
-<p>客户端预处理语句</p>
-<p>否</p>
-<p>否</p>
-<p>是</p>
-<p>上面所说的预处理语句就是用于参数化查询的。可以看到，除了旧的 mysql 扩展不支持，mysqli 和 PDO 这两个新扩展都支持参数化查询。PDO 扩展相比 mysqli 扩展的好处是，它是与关系数据库类型无关的，因此很方便切换数据库，比如从 MySQL 切换到 PostgreSQL。 首先我们来看看利用 mysqli 扩展如何使用参数化查询。例如：</p>
-<pre><code>$mysqli = new mysqli(&quot;localhost&quot;, &quot;dbusername&quot;, &quot;dbpassword&quot;, &quot;database&quot;);
-</code></pre><p>再看看用 PDO 扩展如何使用参数化查询。例如：  </p>
-<p>$pdo = new PDO(“mysql:host=localhost;dbname=database”, “dbusername”, “dbpassword”);</p>
-<p>$username = “somename”;<br>$password = “someword”;</p>
-<p>$query = “SELECT * FROM users WHERE (name = :username) and (password = :password)”;</p>
-<p>$statement = $pdo-&gt;prepare($query, array(PDO::ATTR_CURSOR =&gt; PDO::CURSOR_FWDONLY));<br>$statement-&gt;bindParam(“:username”, $username, PDO::PARAM_STR, 10);<br>$statement-&gt;bindParam(“:password”, $password, PDO::PARAM_STR, 12);<br>$statement-&gt;execute();</p>
-<p>while ($row = $statement-&gt;fetch(PDO::FETCH_ASSOC)) {<br>  printf (“%s : %dn”, $row[“filename”], $row[“filesize”]);<br>}<br>$statement-&gt;closeCursor();</p>
-<p>$pdo = null;</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2015/09/10/emacs-e5-bf-ab-e9-80-9f-e5-88-a0-e9-99-a4/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2290,6 +2074,287 @@ private int DateTimeToStamp(System.DateTime time)
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2015/05/17/easyui-e5-88-86-e9-a1-b5/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2015/05/17/easyui-e5-88-86-e9-a1-b5/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/16/index.html">EasyUI分页</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2015-05-17 17:53:41" itemprop="dateCreated datePublished" datetime="2015-05-17T17:53:41+08:00">2015-05-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:19:14" itemprop="dateModified" datetime="2018-12-12T17:19:14+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>前端代码（ASPX） 开发时的代码，拿来即用主义有福～～～</p>
+<table id="tt" class="easyui-datagrid" style="width: 600px; height: 250px" title="Load Data" iconcls="icon-save" rownumbers="true" pagination="true"><br>        <thead><br>            <tr><br>                <th field="id" width="80"><br>                    id<br>                </th><br>                <th field="Code" width="180"><br>                    Product Code<br>                </th><br>                <th field="StorageName" width="180" align="right"><br>                    List StorageName<br>                </th><br>                <th field="MaxCap" width="80" align="right"><br>                    Unit Cost<br>                </th><br>            </tr><br>        </thead><br>    </table>
+
+<pre><code>前端JS：
+</code></pre><script type="text/javascript">
+        $(function () {
+            $('#tt').datagrid({
+                pageNumber: 1,
+                url: "listData.ashx",
+                columns: \[\[
+             { field: 'id', title: 'id', width: 100 },
+             { field: 'StorageName', title: 'name', width: 100 },
+             { field: 'MaxCap', title: 'maxcap', width: 100 },
+             { field: 'Code', title: 'code', width: 100 },
+            \]\],
+                pagination: true,
+                rownumbers: true,
+
+                pageList: \[10, 20, 30, 50\]
+            });
+            var p = $('#tt').datagrid('getPager');
+            (p).pagination({
+                beforePageText: '第', //页数文本框前显示的汉字
+                afterPageText: '页    共 {pages} 页',
+                displayMsg: '共{total}条数据'
+            });
+        });
+    </script>
+
+<p>后台处理程序（ASHX）：</p>
+<p>public void ProcessRequest(HttpContext context)<br>        {<br>            context.Response.ContentType = “application/json”;<br>            context.Response.Charset = “utf-8”;<br>            //总条数<br>            int count = 1;<br>            // 页码数<br>            string pageNumber = context.Request[“page”] ?? “1”;<br>            // 页尺寸<br>            string pageSize = context.Request[“rows”] ?? “10”;<br>            // 库位编号<br>            string code = context.Request[“code”] ?? “”;<br>            // 仓库编号<br>            string whid = context.Request[“WHID”] ?? “”;<br>            // 库位名称<br>            string sName = context.Request[“sName”] ?? “”;<br>            // 渠道<br>            string channel = context.Request[“Channal”] ?? “”;</p>
+<pre><code>    string strSql = &quot;select top &quot; + pageSize + &quot; * from Base\_Storage bs inner join Base\_Warehouse bw on bs.WHID=bw.ID where 1=1 &quot;;
+    string pageStr = &quot;&quot;;
+    string strWhere = &quot;&quot;;
+
+    if (pageNumber == &quot;1&quot;) {
+        pageStr += &quot;&quot;;
+    } else {
+        pageStr += &quot; and bs.ID not in (SELECT TOP (&quot; + int.Parse(pageSize) * (int.Parse(pageNumber) - 1) + &quot;) ID FROM Base_Storage ORDER BY ID) &quot;;
+    }
+
+    if (code.Length &gt; 0) {
+        strWhere += &quot;and bs.Code like &apos;%&quot; + code + &quot;%&apos; &quot;;
+    }
+    if (whid.Length &gt; 0) {
+        strWhere += &quot;and bs.WHID in (&quot; + whid + &quot;) &quot;;
+    }
+    if (sName.Length &gt; 0) {
+        strWhere += &quot;and bs.StorageName like &apos;&quot; + sName + &quot;%&apos; &quot;;
+    }
+    if (channel.Length &gt; 0) {
+        strWhere += &quot;and bs.Channel=&apos;&quot; + channel + &quot;&apos; &quot;;
+    }
+    strSql = strSql + pageStr;
+
+    string json = string.Empty;
+    DataTable dt = DBHelper.getDataTable(strSql);
+
+    // 获取总页数
+    DataTable dtPage = DBHelper.getDataTable(&quot;select * from Base\_Storage bs inner join Base\_Warehouse bw on bs.WHID=bw.ID where 1=1 &quot; + strWhere);
+    if (dtPage != null &amp;&amp; dtPage.Rows.Count &gt; 0) {
+        count = dtPage.Rows.Count;
+    }
+
+    // 校验是否有数据，并生成 Json格式
+    if (dt.Rows.Count &gt; 0) {
+        json = getJson(dt, count,int.Parse(pageSize),int.Parse(pageNumber),strSql);
+    }
+
+    context.Response.Write(json);
+    context.Response.End();
+}
+/// &lt;summary&gt;
+/// 节点树的组合
+/// &lt;/summary&gt;
+/// &lt;paramname=&quot;dt&quot;&gt;参数为DataTable&lt;/param&gt;
+/// &lt;returns&gt;&lt;/returns&gt;
+public string getJson(DataTable dt, int count, int pageSize, int pageNumber,string strsql)
+{
+    StringBuilder json = new StringBuilder();
+
+    json.Append(&quot;{&quot;);
+    if (dt != null &amp;&amp; dt.Rows.Count &gt; 0) {
+        json.Append(&quot;&quot;rows&quot;:\[&quot;);
+        // 循环出所有一级地理位置
+        foreach (DataRow dr in dt.Rows) {
+            json.Append(&quot;{&quot;id&quot;:&quot; + dr\[&quot;ID&quot;\].ToString());
+            json.Append(&quot;,&quot;Code&quot;:&quot;&quot; + dr\[&quot;Code&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;StorageName&quot;:&quot;&quot; + dr\[&quot;StorageName&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;MaxCap&quot;:&quot;&quot; + dr\[&quot;MaxCap&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;WHID&quot;:&quot;&quot; + dr\[&quot;WHID&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;WarehouseName&quot;:&quot;&quot; + dr\[&quot;WarehouseName&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;Channel&quot;:&quot;&quot; + dr\[&quot;Channal&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;ChannelK3Code&quot;:&quot;&quot; + dr\[&quot;ChannalK3Code&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;Type&quot;:&quot;&quot; + dr\[&quot;Type&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;TypeK3Code&quot;:&quot;&quot; + dr\[&quot;TypeK3Code&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;Category&quot;:&quot;&quot; + dr\[&quot;Category&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;CategoryK3Code&quot;:&quot;&quot; + dr\[&quot;CategoryK3Code&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;CustomerID&quot;:&quot;&quot; + dr\[&quot;CustomerID&quot;\].ToString() + &quot;&quot;&quot;);
+            json.Append(&quot;,&quot;Disableds&quot;:&quot;&quot; + dr\[&quot;Disableds&quot;\].ToString() + &quot;&quot;&quot;);
+
+            json.Append(&quot;},&quot;);
+        }
+        json.Remove(json.Length - 1, 1); // 去掉 trail 逗号（,）
+        json.Append(&quot;\],&quot;total&quot;:&quot; + count);
+        json.Append(&quot;,&quot;pageSize&quot;:&quot; + pageSize);
+        json.Append(&quot;,&quot;pageNumber&quot;:&quot; + pageNumber);
+    }
+    //json.Remove(json.Length - 1, 1); // 去掉 trail 逗号（,）
+    json.Append(&quot;}&quot;);
+    return json.ToString();
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2337,7 +2402,7 @@ private int DateTimeToStamp(System.DateTime time)
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2809,19 +2874,7 @@ private int DateTimeToStamp(System.DateTime time)
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">218</span>
+                    <span class="site-state-item-count">214</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

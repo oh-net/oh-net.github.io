@@ -1681,6 +1681,183 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2018/08/03/records-execution-time-of-php-script/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/08/03/records-execution-time-of-php-script/" class="post-title-link" itemprop="https://hero.triple.net.cn/index.html">PHP 记录脚本或方法执行时间</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-08-03 11:08:52" itemprop="dateCreated datePublished" datetime="2018-08-03T11:08:52+08:00">2018-08-03</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-21 12:53:41" itemprop="dateModified" datetime="2018-12-21T12:53:41+08:00">2018-12-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>我再也不想每次用 <em>PHP 记录脚步或方法执行时间</em> 时, 都要漫天搜索一遍, )即使搜索很容易 &amp; 代码也很简单 但这个不应该打扰我, 我要立即可用的 最好不要有警告, 不要让我再考虑如何转换成 “人话” !<br>代码来源: <strong>csdn:</strong> <a href="https://blog.csdn.net/zhu\_lizhen/article/details/76018386" target="_blank" rel="noopener">https://blog.csdn.net/zhu\_lizhen/article/details/76018386</a> </p>
+<p>执行结果示例: [caption id=”attachment_1783” align=”alignnone” width=”300”]</p>
+<p><img src="https://tech.msla.top/wp-content/uploads/php_prcoess_time_during-300x181.png" alt="PHP记录代码执行时间"> PHP记录代码执行时间[/caption]</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PHP"><figure class="iseeu highlight /php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//程序运行开始时间</span></span><br><span class="line">$startTime = explode(<span class="string">' '</span>, microtime());</span><br><span class="line"></span><br><span class="line"><span class="comment">/*········以下是代码区·········*/</span></span><br><span class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; <span class="number">1000000</span>; $i++)&#123;</span><br><span class="line">    $i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*········以上是代码区·········*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//程序运行结束时间</span></span><br><span class="line">$endTime = explode(<span class="string">' '</span>, microtime());</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $startTime[<span class="number">0</span>] + $startTime[<span class="number">1</span>] . <span class="string">''</span>;</span><br><span class="line"><span class="keyword">echo</span> $endTime[<span class="number">0</span>] + $endTime[<span class="number">1</span>] . <span class="string">''</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'执行耗时：'</span> . round($endTime[<span class="number">0</span>] + $endTime[<span class="number">1</span>] - ($startTime[<span class="number">0</span>] + $startTime[<span class="number">1</span>]), <span class="number">4</span>) . <span class="string">' 秒。'</span>;</span><br></pre></td></tr></table></figure></div>
+<h3 id="另外一种方法取得程序执行时间"><a href="#另外一种方法取得程序执行时间" class="headerlink" title="另外一种方法取得程序执行时间"></a>另外一种方法取得程序执行时间</h3><p>来源： <a href="http://php.net/manual/zh/function.microtime.php" target="_blank" rel="noopener">http://php.net/manual/zh/function.microtime.php</a></p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PHP"><figure class="iseeu highlight /php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$time = -microtime(<span class="keyword">true</span>); </span><br><span class="line">$hash = <span class="number">0</span>; </span><br><span class="line"><span class="keyword">for</span> ($i=<span class="number">0</span>; $i &lt; rand(<span class="number">1000</span>,<span class="number">4000</span>); ++$i) &#123; </span><br><span class="line">    $hash ^= md5(substr(str_shuffle(<span class="string">"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>), <span class="number">0</span>, rand(<span class="number">1</span>,<span class="number">10</span>))); </span><br><span class="line">&#125; </span><br><span class="line">$time += microtime(<span class="keyword">true</span>); </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Hash: $hash iterations:$i time: "</span>,sprintf(<span class="string">'%f'</span>, $time),PHP_EOL;</span><br></pre></td></tr></table></figure></div>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2018/07/25/config-wifi-on-raspberry-3b-plus/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1850,185 +2027,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2018/07/25/e5-b0-86-phpinfo-e7-9a-84-e4-bf-9d-e5-ad-98-e5-88-b0-e6-96-87-e4-bb-b6-e7-9a-84-e6-96-b9-e6-b3-95/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/07/25/e5-b0-86-phpinfo-e7-9a-84-e4-bf-9d-e5-ad-98-e5-88-b0-e6-96-87-e4-bb-b6-e7-9a-84-e6-96-b9-e6-b3-95/" class="post-title-link" itemprop="https://hero.triple.net.cn/index.html">将 phpinfo 的保存到文件的方法</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-07-25 11:05:38" itemprop="dateCreated datePublished" datetime="2018-07-25T11:05:38+08:00">2018-07-25</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-12 17:08:58" itemprop="dateModified" datetime="2018-12-12T17:08:58+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>将 <code>phpinfo()</code> 的数据保存到文件的方法. 示例如下: 将本地 <code>phpinfo()</code> 打印的 server, env, model 等信息(去掉了贡献人, License 的信息)保存到当前目录, 文件以当前时间命名:</p>
-<pre><code>function PHPInfo2File($target_file){
-    ob_start();
-    phpinfo(61);
-    $info = ob_get_contents();
-    ob_end_clean();
-
-    file_put_contents(date(&apos;Y-m-d_His&apos;) . &apos;.txt&apos;, $info);
-}
-</code></pre><p>关于 <code>phpinfo()</code> 的参数可以参考: <a href="http://php.net/manual/zh/function.phpinfo.php" target="_blank" rel="noopener">http://php.net/manual/zh/function.phpinfo.php</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2076,7 +2074,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -2548,19 +2546,7 @@
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">218</span>
+                    <span class="site-state-item-count">214</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
