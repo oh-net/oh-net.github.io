@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html class="theme-next gemini" lang="zh-cn">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=6.6.0" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.6.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.6.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.6.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '6.6.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="打算在公司 IDC 机房部署一套VPN环境，经过考虑，最终决定采用 Cisco 下的开源技术 AnyConnect AnyConnect的优势： 长连接，待机不会断开；  速度快，稳定性好；  安全性好，全程加密；另外，支持freeradius认证功能；  能够下发路由表给客户端，这个功能是最激动人心的。因为如果长期连接，那么肯定是某些服务走 VPN，而国内的网站可以走自己的网络体验最好。  耗电">
+<meta name="keywords" content="anyconnect,Linux,Ubuntu,VPN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu 系统下安装 Cisco AnyConnect VPN">
+<meta property="og:url" content="https://hero.triple.net.cn/2017/09/13/Ubuntu-系统下安装-Cisco-AnyConnect-VPN/index.html">
+<meta property="og:site_name" content="Technician">
+<meta property="og:description" content="打算在公司 IDC 机房部署一套VPN环境，经过考虑，最终决定采用 Cisco 下的开源技术 AnyConnect AnyConnect的优势： 长连接，待机不会断开；  速度快，稳定性好；  安全性好，全程加密；另外，支持freeradius认证功能；  能够下发路由表给客户端，这个功能是最激动人心的。因为如果长期连接，那么肯定是某些服务走 VPN，而国内的网站可以走自己的网络体验最好。  耗电">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a26388ee6cd7543a441f03edfb0d1454.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8638813ae7cd533784f070c2113249fb.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6162e98f48bd305fd81fd7e78a46afc4.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a90aa6f5b8ee0cbf40f3130baddae971.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8c9c80914eeaa4033c9af81d03cd532f.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/2e53c05420a89e2417b18ddc5749db32.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/0f32d9d55cfedeb73def0423c0900cd5.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/3ce3726273262ff0c7a00b07cf509336.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/f06c61ba3551f4ed7ac504eda1e7ffab.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/829399aa040efd621f99e680802a34b5.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6171c0def4996e64b205e9c41da1c2ac.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/e31e31ee178c20764f146089769d5266.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/ad390816c9873e0fe8fdcb5b22cf5ed8.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/7a5f957b028968e12c92dd3dd67d6289.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/5f5821d5681456079d8c7c79c58e7323.png">
+<meta property="og:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/97d3b030c5ff75d0192c91df5f34c2fd.png">
+<meta property="og:updated_time" content="2018-12-21T07:53:15.639Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu 系统下安装 Cisco AnyConnect VPN">
+<meta name="twitter:description" content="打算在公司 IDC 机房部署一套VPN环境，经过考虑，最终决定采用 Cisco 下的开源技术 AnyConnect AnyConnect的优势： 长连接，待机不会断开；  速度快，稳定性好；  安全性好，全程加密；另外，支持freeradius认证功能；  能够下发路由表给客户端，这个功能是最激动人心的。因为如果长期连接，那么肯定是某些服务走 VPN，而国内的网站可以走自己的网络体验最好。  耗电">
+<meta name="twitter:image" content="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a26388ee6cd7543a441f03edfb0d1454.png">
+
+
+
+
+
+
+  <link rel="canonical" href="https://hero.triple.net.cn/2017/09/13/Ubuntu-系统下安装-Cisco-AnyConnect-VPN/">
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Ubuntu 系统下安装 Cisco AnyConnect VPN | Technician</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-cn">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Technician</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Yet another note</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-sitemap">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/sitemap.xml" rel="section"><i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br>Sitemap</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/13/Ubuntu-系统下安装-Cisco-AnyConnect-VPN/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Ubuntu 系统下安装 Cisco AnyConnect VPN
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-09-13 12:54:48" itemprop="dateCreated datePublished" datetime="2017-09-13T12:54:48+08:00">2017-09-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-21 15:53:15" itemprop="dateModified" datetime="2018-12-21T15:53:15+08:00">2018-12-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>打算在公司 IDC 机房部署一套VPN环境，经过考虑，最终决定采用 <code>Cisco</code> 下的开源技术 <code>AnyConnect</code></p>
+<h2 id="AnyConnect的优势："><a href="#AnyConnect的优势：" class="headerlink" title="AnyConnect的优势："></a>AnyConnect的优势：</h2><ol>
+<li>长连接，待机不会断开； </li>
+<li>速度快，稳定性好； </li>
+<li>安全性好，全程加密；<br>另外，支持freeradius认证功能； </li>
+<li>能够下发路由表给客户端，这个功能是最激动人心的。<br>因为如果长期连接，那么肯定是某些服务走 VPN，而国内的网站可以走自己的网络体验最好。 </li>
+<li>耗电量较低； </li>
+</ol>
+<p><code>AnyConnect</code> 是思科的安全远程接入解决方案，部署 Anyconnect 需要安装 <code>ocserv(OpenConnect server)</code>， 它是一个OpenConnect SSL协议服务端，0.3.0版后兼容使用AnyConnect SSL 协议的终端。<br>ocserv（OpenConnect Server）是由 GnuTLS 的作者 Nikos Mavrogiannopoulos 开发的一个能够兼容 Cisco Anyconnect 的开源服务端（ SSL VPN），支持*nix/BSD 平台，最早是作为 OpenConnect（Linux下的兼容Cisco ASA的开源客户端）对应的服务端，在后续版本（ 0.3.0 开始）中加入了对 Cisco Anyconnect 客户端的支持。<br>下面介绍在ubuntu系统下安装Anyconnect的操作记录： </p>
+<h2 id="安装过程如下（采用一键安装方式）"><a href="#安装过程如下（采用一键安装方式）" class="headerlink" title="安装过程如下（采用一键安装方式）"></a>安装过程如下（采用一键安装方式）</h2><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># apt-get update &amp;&amp; apt-get upgrade -y root@localhost:~# apt-get install wget root@localhost:~# wget http://git.io/p9r8 --no-check-certificate -O ocservauto.sh</span></span><br></pre></td></tr></table></figure></div>
+<p>//下载地址:<a href="https://pan.baidu.com/s/1i59e2hB%20" target="_blank" rel="noopener">https://pan.baidu.com/s/1i59e2hB</a> （提取密码:bp4w）</p>
+<p>如果以前使用了该脚本进行安装，只需要输入下面命令更新（只更新相关脚本，服务器不会更新）</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># wget http://git.io/ocservauto -O- --no-check-certificate|bash</span></span><br><span class="line"></span><br><span class="line">root@localhost:~<span class="comment"># bash ocservauto.sh</span></span><br></pre></td></tr></table></figure></div>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a26388ee6cd7543a441f03edfb0d1454.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8638813ae7cd533784f070c2113249fb.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6162e98f48bd305fd81fd7e78a46afc4.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a90aa6f5b8ee0cbf40f3130baddae971.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8c9c80914eeaa4033c9af81d03cd532f.png" alt=""> </p>
+<p>接着会进行一段时间的安装，如果顺利的话，出现下面信息则说明安装成功了！<br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/2e53c05420a89e2417b18ddc5749db32.png" alt=""> </p>
+<p>如果安装失败可以查阅安装日志文件ocinstall.log，日志文件在脚本所在文件夹下，可以使用下面命令逐步阅读一般情况下安装成功之后，服务器就在启动状态了。<br>我的部署机器由于是虚拟机(没有外网ip)，采用 <code>squid</code> 代理方式对外访问，导致脚本中定义的 <code>ftp</code> 方式对 <code>freeradius-client-1.1.7.tar.gz</code> 和 <code>ocserv-0.10.8.tar.xz</code> 安装包下载失败。</p>
+<p>解决办法：将上面这两个包单独下载下来，放在和ocservauto.sh脚本同一目录路径下，然后再重新执行脚本进行安装</p>
+<p>这里可以简单使用本地浏览器查看服务器信息，在本地浏览器输入 <em><code>https://IP 或域名:（英文冒号）端口</code></em> </p>
+<p>ocserv的默认安装目录是 <code>/etc/ocserv</code>，相关文件都在这个路径下，如配置文件 <code>ocserv.conf</code> 等</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~``<span class="comment"># cd /etc/ocserv/</span></span><br><span class="line">root@localhost:``/etc/ocserv``<span class="comment"># ls</span></span><br><span class="line">ca-cert.pem  </span><br><span class="line">config-per-group  </span><br><span class="line">dh.pem    </span><br><span class="line">ocserv.conf     </span><br><span class="line">ocserv-up.sh  </span><br><span class="line">server-cert.pem</span><br><span class="line">CAforOC      </span><br><span class="line">defaults          </span><br><span class="line">ocpasswd  </span><br><span class="line">ocserv-down.sh  </span><br><span class="line">profile.xml   </span><br><span class="line">server-key.pem</span><br></pre></td></tr></table></figure></div>
+<p>ocserv服务在安装后默认就启动了，安装中选择证书登陆方式，即https方式，所以tcp端口选择的是443</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># ps -ef|grep ocserv</span></span><br><span class="line">root       726     1  0 01:22 ?        00:00:00 ocserv-main</span><br><span class="line">root       728   726  0 01:22 ?        00:00:00 ocserv-secm</span><br><span class="line">root       865   849  0 01:26 pts/1    00:00:00 grep &lt;code--&lt;color=auto ocserv</span><br><span class="line">root@localhost:~<span class="comment"># lsof -i:443</span></span><br><span class="line">COMMAND   PID USER   FD   TYPE   DEVICE SIZE/OFF NODE NAME</span><br><span class="line">ocserv-ma 726 root    4u  IPv4 10406026      0t0  TCP *:https (LISTEN)</span><br><span class="line">ocserv-ma 726 root    5u  IPv6 10406027      0t0  TCP *:https (LISTEN)</span><br></pre></td></tr></table></figure></div>
+<h3 id="ocserv服务启动命令："><a href="#ocserv服务启动命令：" class="headerlink" title="ocserv服务启动命令："></a>ocserv服务启动命令：</h3><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/ocserv   </span><br><span class="line">start/stop/restart/status</span><br></pre></td></tr></table></figure></div>
+<h3 id="ocserv服务启动过程中若是出现下面两个小报错："><a href="#ocserv服务启动过程中若是出现下面两个小报错：" class="headerlink" title="ocserv服务启动过程中若是出现下面两个小报错：**"></a>ocserv服务启动过程中若是出现下面两个小报错：**</h3><ol>
+<li>/usr/sbin/ocserv: error while loading shared libraries: libtspi.so.1: cannot open shared object file:No such file or directory</li>
+</ol>
+<p>解决办法：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># apt-get install libtspi-dev</span></span><br></pre></td></tr></table></figure></div>
+<p>2）/usr/sbin/ocserv: error while loading shared libraries: libgnutls.so.28: cannot open shared objectfile: No such file or directory</p>
+<p>解决办法：</p>
+<p>安装 <code>libgnutls</code> 下载地址：<br><a href="https://pan.baidu.com/s/1skJxpI9" target="_blank" rel="noopener">https://pan.baidu.com/s/1skJxpI9</a>提取密码：ic3y</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># dpkg -i gnutls\_3.3.8-13\_amd64.deb</span></span><br><span class="line">root@localhost:~<span class="comment"># find / -name libgnutls.so.28/usr/lib64/libgnutls.so.28</span></span><br><span class="line">root@localhost:~<span class="comment"># ln -s /usr/lib64/libgnutls.so.28 /usr/lib/</span></span><br></pre></td></tr></table></figure></div>
+<p>可以在 <code>ocserv.conf</code> 文件里修改 <code>ocserv</code> 服务端口和域名等信息，修改后重启 <code>ocserv</code> 服务即可<br><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># /etc/init.d/ocserv restart</span></span><br><span class="line">[ ok ] Restarting ocserv (via systemctl): ocserv.service.</span><br></pre></td></tr></table></figure></div></p>
+<p><strong><em><code>Anyconnect</code></em></strong> 客户端工具下载地址：<a href="https://pan.baidu.com/s/1eSvDvEi" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSvDvEi</a>提取密码：ckdi</p>
+<p>安装Anyconnect客户端工具，安装后，就可以使用上面安装ocserv过程中定义的信息连接了：<br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/0f32d9d55cfedeb73def0423c0900cd5.png" alt=""> </p>
+<p><strong>特别注意</strong>：<br>由于安装过程中选择的是自签证书，是不受信任的证书，所以客户端连接时需要关掉设置中的“阻止不信任的服务器”，即下面截图中的第四项 <code>Block connection to untrusted servers</code>不要勾选!不管采不采用证书验证，都不要勾选第四项！。<br>然后勾选第三项（第二项勾选与否都不要紧）<br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/3ce3726273262ff0c7a00b07cf509336.png" alt=""> </p>
+<p>点击“connect”，接着点击提示窗口中点击“Connect Anyway”，接着按照提示输入用户名和密码，正常连接就ok了。 </p>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/f06c61ba3551f4ed7ac504eda1e7ffab.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/829399aa040efd621f99e680802a34b5.png" alt=""> </p>
+<p>连接成功后，点击右下角的 <code>Anyconnect</code> 标志图，图上有一把钥匙的状态就说明已经连上了。 </p>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6171c0def4996e64b205e9c41da1c2ac.png" alt=""> </p>
+<h3 id="1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）"><a href="#1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）" class="headerlink" title="1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）"></a>1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）</h3><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># cat /etc/ocserv/ocserv.conf</span></span><br><span class="line">........</span><br><span class="line">auth = plain[passwd=/etc/ocserv/ocpasswd]            //默认用户名和密码验证</span><br><span class="line"><span class="built_in">enable</span>-auth = certificate //用户名和密码验证同时，允许证书验证</span><br><span class="line">auth-timeout = 40</span><br></pre></td></tr></table></figure></div>
+<h4 id="创建用户名和密码命令（或重置用户密码）："><a href="#创建用户名和密码命令（或重置用户密码）：" class="headerlink" title="创建用户名和密码命令（或重置用户密码）："></a>创建用户名和密码命令（或重置用户密码）：</h4><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># ocpasswd -c /etc/ocserv/ocpasswd guohuihui</span></span><br><span class="line">Enter password:</span><br><span class="line">Re-enter password:</span><br><span class="line">root@localhost:~<span class="comment"># ocpasswd -c /etc/ocserv/ocpasswd liumengnan</span></span><br><span class="line">Enter password:</span><br><span class="line">Re-enter password:</span><br><span class="line">root@localhost:~<span class="comment"># cat /etc/ocserv/ocpasswd</span></span><br><span class="line">wangshibo:*:<span class="variable">$5</span>$.GQf1omiKmvGElhU<span class="variable">$q1yNyUxPRAHygEGaG98cwVGfYuJjSarsTkXROinhBX8</span></span><br><span class="line">guohuihui:*:<span class="variable">$5</span><span class="variable">$z</span>.H5ipnHSJCSigFU<span class="variable">$30mseKwk13ZG9MuD3QSeBtYmX6xLOcafVPpioXkulA2</span></span><br><span class="line">liumengnan:*:<span class="variable">$5</span><span class="variable">$mVSHMbBekX9vofxV</span><span class="variable">$n7bc8LkJB9kjXl6OADGWySfTqkIBeyIGJRvk5A</span>/ehHC</span><br></pre></td></tr></table></figure></div>
+<h3 id="证书验证除了用户名和密码验证之外，还可以进行证书验证。"><a href="#证书验证除了用户名和密码验证之外，还可以进行证书验证。" class="headerlink" title="证书验证除了用户名和密码验证之外，还可以进行证书验证。"></a>证书验证除了用户名和密码验证之外，还可以进行证书验证。</h3><p>用户在 <code>AnyConnect</code> 客户端第一次登陆时会提示加载证书。<br>首次登陆加载后，后面再登陆就不会提示加载证书了！<br>所有用户的 p12 证书文件可以在放置脚本的目录下找到，导入证书时需要输入证书创建时设定的密码。</p>
+<h4 id="新建用户证书命令："><a href="#新建用户证书命令：" class="headerlink" title="新建用户证书命令："></a>新建用户证书命令：</h4><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># bash ocservauto.sh gc</span></span><br></pre></td></tr></table></figure></div>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/e31e31ee178c20764f146089769d5266.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/ad390816c9873e0fe8fdcb5b22cf5ed8.png" alt=""><br>用户证书创建后会保存到和脚本同一路径下：<br><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># ls</span></span><br><span class="line">huanqiu.p12 ocinstall.log ocservauto.sh vars_ocservauto</span><br></pre></td></tr></table></figure></div></p>
+<h4 id="吊销客户证书命令"><a href="#吊销客户证书命令" class="headerlink" title="吊销客户证书命令"></a>吊销客户证书命令</h4><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># bash ocservauto.sh rc</span></span><br></pre></td></tr></table></figure></div>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/7a5f957b028968e12c92dd3dd67d6289.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/5f5821d5681456079d8c7c79c58e7323.png" alt=""> </p>
+<h3 id="脚本其他参数说明"><a href="#脚本其他参数说明" class="headerlink" title="脚本其他参数说明"></a>脚本其他参数说明</h3><ol start="0">
+<li>查看帮助</li>
+</ol>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># bash ocservauto.sh help</span></span><br></pre></td></tr></table></figure></div>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/97d3b030c5ff75d0192c91df5f34c2fd.png" alt=""> </p>
+<ol>
+<li><p>平滑升级ocserv（升级后原来的用户数据都会保留）</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~# bash ocservauto.sh ug</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>强制重装ocserv（注意这样会丢失之前的用户数据和配置）root@localhost:~# bash ocservauto.sh ri </p>
+</li>
+<li><p>同时开启证书登录和用户名密码登录（请务必首先选择任意一种登录方式来完成安装，接着再使用下面命令）</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># bash ocservauto.sh pc </span></span><br><span class="line">4. 关于相同客户端证书可以登录多个服务器的方案</span><br><span class="line"></span><br><span class="line">  假定有三台服务器ABC:</span><br><span class="line"></span><br><span class="line">  ```bash</span><br><span class="line">  <span class="comment"># bash ocservauto.sh rc</span></span><br></pre></td></tr></table></figure></div>
+<p>吊销所有想要吊销的证书。<br>由于不支持在线吊销证书列表，所以必须还要把A服务器上的<code>/etc/ocserv/crl</code>.pem文件同时复制到BC服务器相同位置，且修改ocserv的配置文件：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crl = /etc/ocserv/crl.pem</span><br></pre></td></tr></table></figure></div>
+</li>
+</ol>
+<h3 id="登陆方式"><a href="#登陆方式" class="headerlink" title="登陆方式"></a>登陆方式</h3><p>在上面一键安装过程中，选择了自签CA，安装后产生pem文件，如下：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># cd /etc/ocserv/</span></span><br><span class="line">root@localhost:/etc/ocserv``<span class="comment"># ll *.pem</span></span><br><span class="line">-rw-r--r-- 1 root root 1793 Jan 16 23:34 ca-cert.pem</span><br><span class="line">-rw-r--r-- 1 root root 1003 Jan 17 02:46 crl.pem</span><br><span class="line">-rw-r--r-- 1 root root 2406 Jan 16 23:34 dh.pem</span><br><span class="line">-rw-r--r-- 1 root root 3322 Jan 16 23:34 server-cert.pem</span><br><span class="line">-rw-r--r-- 1 root root 1675 Jan 16 23:34 server-key.pem</span><br><span class="line">root@localhost:/etc/ocserv<span class="comment"># cat ocserv.conf |grep pem</span></span><br><span class="line">server-cert = /etc/ocserv/server-cert.pem</span><br><span class="line">server-key = /etc/ocserv/server-key.pem</span><br><span class="line">dh-params = /etc/ocserv/dh.pem</span><br><span class="line">ca-cert = /etc/ocserv/ca-cert.pem</span><br><span class="line">crl = /etc/ocserv/crl.pem</span><br><span class="line"><span class="comment"># http_anchors = FILE:/etc/ocserv-ca.pem</span></span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>用户名密码登录<ol>
+<li>-自签CA（证书授权中心），取得ca-cert.pem（不需要保密，类比公钥）和ca-key.pem（需要保密，类比私钥）。</li>
+<li>-CA签发信任服务器证书，取得server-cert.pem（不需要保密，类比公钥）、server-key.pem（需要保密，类比私钥）。</li>
+<li>-该模式下，密码库是/etc/ocserv/ocpasswd文件。</li>
+<li>-如果想使用购买的服务器证书，请参考Nginx服务器证书配置，只需将对应的crt、key 文件重命名为server-cert.pem、server-key.pem，并覆盖到/etc/ocserv/文件夹下面。 </li>
+</ol>
+</li>
+<li>证书登录<ol>
+<li>-自签CA（证书授权中心），取得ca-cert.pem（不需要保密，类比公钥）和ca-key.pem（需要保密，类比私钥）。</li>
+<li>-CA签发信任服务器证书，取得server-cert.pem（不需要保密，类比公钥）、server-key.pem（需要保密，类比私钥）。</li>
+<li>-CA签发信任客户端证书，最终取得username.p12。</li>
+<li>-这里证书授权中心的ca-cert.pem既当作服务器证书的根证书，也当作客户端证书的验证证书。</li>
+<li>-由于CA证书当作验证证书，签发客户端证书就需要这个ca-key.pem，可以比同为密码库。</li>
+<li>-如果想使用购买的服务器证书，请参考Nginx服务器证书配置（<a href="http://www.cnblogs.com/kevingrace/p/5865501.html" target="_blank" rel="noopener">cnblogs.com</a>），只需将对应的 <code>crt</code>、<code>key</code> 文件重命名为 <code>server-cert.pem</code>、<code>server-key.pem</code>，并覆盖到 <code>/etc/ocserv/</code> 文件夹下面。</li>
+</ol>
+</li>
+<li>改善优化修改的参数都在 <code>/etc/ocserv/ocserv.conf</code> 文件中。<br>a. 对于某些移动宽带、长城带宽等，往往经过了很多重 <code>NAT</code>，容易出现连接成功但是无法打开网页情况，请改小 <code>dpd</code>、<code>mobile-dpd</code> 数值。<br>b. 如果 <code>vps</code> 对于本地延迟甚高，取消注释 <code>output-buffer</code> 项。</li>
+</ol>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="https://i.v2ex.co/v4dDksUbl.jpeg" alt="John Doe Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/anyconnect/" rel="tag"># anyconnect</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+          
+            <a href="/tags/VPN/" rel="tag"># VPN</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/13/e6-96-b0-e9-b2-9c-e5-87-ba-e7-82-89-e4-b8-80-e4-bb-bd-e5-ae-8c-e6-95-b4anyconnect-e6-95-99-e7-a8-8b-ef-bc-81/" rel="next" title="新鲜出炉一份完整AnyConnect教程！">
+                <i class="fa fa-chevron-left"></i> 新鲜出炉一份完整AnyConnect教程！
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/14/kafka-e9-9b-86-e7-be-a4-e6-97-a0-e6-b3-95-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-94-bb-e7-95-a5/" rel="prev" title="Kafka集群无法外网访问问题解决攻略">
+                Kafka集群无法外网访问问题解决攻略 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">John Doe</p>
+              <p class="site-description motion-element" itemprop="description">$$ Welcome $$</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">214</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#AnyConnect的优势："><span class="nav-number">1.</span> <span class="nav-text">AnyConnect的优势：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装过程如下（采用一键安装方式）"><span class="nav-number">2.</span> <span class="nav-text">安装过程如下（采用一键安装方式）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ocserv服务启动命令："><span class="nav-number">2.1.</span> <span class="nav-text">ocserv服务启动命令：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ocserv服务启动过程中若是出现下面两个小报错："><span class="nav-number">2.2.</span> <span class="nav-text">ocserv服务启动过程中若是出现下面两个小报错：**</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）"><span class="nav-number">2.3.</span> <span class="nav-text">1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建用户名和密码命令（或重置用户密码）："><span class="nav-number">2.3.1.</span> <span class="nav-text">创建用户名和密码命令（或重置用户密码）：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#证书验证除了用户名和密码验证之外，还可以进行证书验证。"><span class="nav-number">2.4.</span> <span class="nav-text">证书验证除了用户名和密码验证之外，还可以进行证书验证。</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建用户证书命令："><span class="nav-number">2.4.1.</span> <span class="nav-text">新建用户证书命令：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#吊销客户证书命令"><span class="nav-number">2.4.2.</span> <span class="nav-text">吊销客户证书命令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#脚本其他参数说明"><span class="nav-number">2.5.</span> <span class="nav-text">脚本其他参数说明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#登陆方式"><span class="nav-number">2.6.</span> <span class="nav-text">登陆方式</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+    
+      
+  
+  <script type="text/javascript" color="0,0,255" opacity="0.5" zindex="-1" count="69" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.6.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.6.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.6.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.6.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.6.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.6.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('Copy').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+          if(result)$(this).text('Copied')
+          else $(this).text('Copy failed')
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('Copy')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
+
+  
+
+</body>
+</html>

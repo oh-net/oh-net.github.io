@@ -1743,7 +1743,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-12-21 12:53:41" itemprop="dateModified" datetime="2018-12-21T12:53:41+08:00">2018-12-21</time>
+                <time title="Modified: 2018-12-21 14:24:10" itemprop="dateModified" datetime="2018-12-21T14:24:10+08:00">2018-12-21</time>
               
             
           </span>
@@ -1795,15 +1795,16 @@
 
       
         
+          <p>我再也不想每次用 <em>PHP 记录脚步或方法执行时间</em> 时, 都要漫天搜索一遍, )即使搜索很容易 &amp; 代码也很简单 但这个不应该打扰我, 我要立即可用的 最好不要有警告, 不要让我再考虑如何转换成 “人话” !<br>代码来源: <strong>csdn:</strong> <a href="https://blog.csdn.net/zhu\_lizhen/article/details/76018386" target="_blank" rel="noopener">https://blog.csdn.net/zhu\_lizhen/article/details/76018386</a> </p>
+          <!--noindex-->
           
-            <p>我再也不想每次用 <em>PHP 记录脚步或方法执行时间</em> 时, 都要漫天搜索一遍, )即使搜索很容易 &amp; 代码也很简单 但这个不应该打扰我, 我要立即可用的 最好不要有警告, 不要让我再考虑如何转换成 “人话” !<br>代码来源: <strong>csdn:</strong> <a href="https://blog.csdn.net/zhu\_lizhen/article/details/76018386" target="_blank" rel="noopener">https://blog.csdn.net/zhu\_lizhen/article/details/76018386</a> </p>
-<p>执行结果示例: [caption id=”attachment_1783” align=”alignnone” width=”300”]</p>
-<p><img src="https://tech.msla.top/wp-content/uploads/php_prcoess_time_during-300x181.png" alt="PHP记录代码执行时间"> PHP记录代码执行时间[/caption]</p>
-<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PHP"><figure class="iseeu highlight /php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//程序运行开始时间</span></span><br><span class="line">$startTime = explode(<span class="string">' '</span>, microtime());</span><br><span class="line"></span><br><span class="line"><span class="comment">/*········以下是代码区·········*/</span></span><br><span class="line"><span class="keyword">for</span>($i = <span class="number">0</span>; $i &lt; <span class="number">1000000</span>; $i++)&#123;</span><br><span class="line">    $i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*········以上是代码区·········*/</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//程序运行结束时间</span></span><br><span class="line">$endTime = explode(<span class="string">' '</span>, microtime());</span><br><span class="line"></span><br><span class="line"><span class="keyword">echo</span> $startTime[<span class="number">0</span>] + $startTime[<span class="number">1</span>] . <span class="string">''</span>;</span><br><span class="line"><span class="keyword">echo</span> $endTime[<span class="number">0</span>] + $endTime[<span class="number">1</span>] . <span class="string">''</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">'执行耗时：'</span> . round($endTime[<span class="number">0</span>] + $endTime[<span class="number">1</span>] - ($startTime[<span class="number">0</span>] + $startTime[<span class="number">1</span>]), <span class="number">4</span>) . <span class="string">' 秒。'</span>;</span><br></pre></td></tr></table></figure></div>
-<h3 id="另外一种方法取得程序执行时间"><a href="#另外一种方法取得程序执行时间" class="headerlink" title="另外一种方法取得程序执行时间"></a>另外一种方法取得程序执行时间</h3><p>来源： <a href="http://php.net/manual/zh/function.microtime.php" target="_blank" rel="noopener">http://php.net/manual/zh/function.microtime.php</a></p>
-<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PHP"><figure class="iseeu highlight /php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$time = -microtime(<span class="keyword">true</span>); </span><br><span class="line">$hash = <span class="number">0</span>; </span><br><span class="line"><span class="keyword">for</span> ($i=<span class="number">0</span>; $i &lt; rand(<span class="number">1000</span>,<span class="number">4000</span>); ++$i) &#123; </span><br><span class="line">    $hash ^= md5(substr(str_shuffle(<span class="string">"0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>), <span class="number">0</span>, rand(<span class="number">1</span>,<span class="number">10</span>))); </span><br><span class="line">&#125; </span><br><span class="line">$time += microtime(<span class="keyword">true</span>); </span><br><span class="line"><span class="keyword">echo</span> <span class="string">"Hash: $hash iterations:$i time: "</span>,sprintf(<span class="string">'%f'</span>, $time),PHP_EOL;</span><br></pre></td></tr></table></figure></div>
-
-          
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/08/03/records-execution-time-of-php-script/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
         
       
     </div>

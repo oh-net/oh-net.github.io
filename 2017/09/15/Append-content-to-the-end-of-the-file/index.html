@@ -106,25 +106,25 @@
 
 
 
-  <meta name="description" content="mysql有一个高效导入方法，经测可以轻松导入数千万级的数据～ 那就是 load data infile LOAD DATA INFILE 一直被认为是MySQL很强大的一个数据导入工具，因为他速度非常的快。 基本语法：load data  [low_priority] [local] infile &amp;apos;file_name txt&amp;apos; [replace | ignore] into">
-<meta name="keywords" content="mysql load data,海量数据导入">
+  <meta name="description" content="使用 FileOutputStream 或者 FileWriter 时，将方法的第二个参数设置为 true 即可使用追加的方式写文件 下面是示例代码：">
+<meta name="keywords" content="java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="mysql导入 txt,csv文件">
-<meta property="og:url" content="https://hero.triple.net.cn/2017/09/15/mysql-e5-af-bc-e5-85-a5-txtcsv-e6-96-87-e4-bb-b6/index.html">
+<meta property="og:title" content="追加内容到文件末尾的几种常用方法">
+<meta property="og:url" content="https://hero.triple.net.cn/2017/09/15/Append-content-to-the-end-of-the-file/index.html">
 <meta property="og:site_name" content="Technician">
-<meta property="og:description" content="mysql有一个高效导入方法，经测可以轻松导入数千万级的数据～ 那就是 load data infile LOAD DATA INFILE 一直被认为是MySQL很强大的一个数据导入工具，因为他速度非常的快。 基本语法：load data  [low_priority] [local] infile &amp;apos;file_name txt&amp;apos; [replace | ignore] into">
+<meta property="og:description" content="使用 FileOutputStream 或者 FileWriter 时，将方法的第二个参数设置为 true 即可使用追加的方式写文件 下面是示例代码：">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2018-12-12T09:20:50.374Z">
+<meta property="og:updated_time" content="2018-12-21T06:25:47.178Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="mysql导入 txt,csv文件">
-<meta name="twitter:description" content="mysql有一个高效导入方法，经测可以轻松导入数千万级的数据～ 那就是 load data infile LOAD DATA INFILE 一直被认为是MySQL很强大的一个数据导入工具，因为他速度非常的快。 基本语法：load data  [low_priority] [local] infile &amp;apos;file_name txt&amp;apos; [replace | ignore] into">
+<meta name="twitter:title" content="追加内容到文件末尾的几种常用方法">
+<meta name="twitter:description" content="使用 FileOutputStream 或者 FileWriter 时，将方法的第二个参数设置为 true 即可使用追加的方式写文件 下面是示例代码：">
 
 
 
 
 
 
-  <link rel="canonical" href="https://hero.triple.net.cn/2017/09/15/mysql-e5-af-bc-e5-85-a5-txtcsv-e6-96-87-e4-bb-b6/">
+  <link rel="canonical" href="https://hero.triple.net.cn/2017/09/15/Append-content-to-the-end-of-the-file/">
 
 
 
@@ -134,7 +134,7 @@
   };
 </script>
 
-  <title>mysql导入 txt,csv文件 | Technician</title>
+  <title>追加内容到文件末尾的几种常用方法 | Technician</title>
   
 
 
@@ -354,7 +354,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/15/mysql-e5-af-bc-e5-85-a5-txtcsv-e6-96-87-e4-bb-b6/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/15/Append-content-to-the-end-of-the-file/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -371,7 +371,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">mysql导入 txt,csv文件
+          <h1 class="post-title" itemprop="name headline">追加内容到文件末尾的几种常用方法
               
             
           </h1>
@@ -396,7 +396,7 @@
                 
               
 
-              <time title="Created: 2017-09-15 15:56:09" itemprop="dateCreated datePublished" datetime="2017-09-15T15:56:09+08:00">2017-09-15</time>
+              <time title="Created: 2017-09-15 12:26:22" itemprop="dateCreated datePublished" datetime="2017-09-15T12:26:22+08:00">2017-09-15</time>
             
 
             
@@ -413,7 +413,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-12-12 17:20:50" itemprop="dateModified" datetime="2018-12-12T17:20:50+08:00">2018-12-12</time>
+                <time title="Modified: 2018-12-21 14:25:47" itemprop="dateModified" datetime="2018-12-21T14:25:47+08:00">2018-12-21</time>
               
             
           </span>
@@ -430,7 +430,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
 
                 
                 
@@ -464,76 +464,9 @@
       
 
       
-        <p>mysql有一个高效导入方法，经测可以轻松导入数千万级的数据～ 那就是 <em><code>load data infile</code></em> <strong><code>LOAD DATA INFILE</code></strong> 一直被认为是MySQL很强大的一个数据导入工具，因为他速度非常的快。</p>
-<h3 id="基本语法："><a href="#基本语法：" class="headerlink" title="基本语法："></a>基本语法：</h3><pre><code>load data  [low_priority] [local] infile &apos;file_name txt&apos; [replace | ignore]
-into table tbl_name
-[fields
-[terminated by&apos;t&apos;]
-[OPTIONALLY] enclosed by &apos;&apos;]
-[escaped by&apos;&apos; ]]
-[lines terminated by&apos;n&apos;]
-[ignore number lines]
-[(col_name,   )]
-</code></pre><p><strong><code>load data infile</code> 语句从一个文本文件中以很高的速度读入一个表中。</strong> 使用这个命令之前，mysqld进程（服务）必须已经在运行。 为了安全原因，当读取位于服务器上的文本文件时，文件必须处于数据库目录或可被所有人读取。 另外，为了对服务器上文件使用<code>load data infile</code>，在服务器主机上你必须有file的权限。</p>
-<ol>
-<li><p>如果你指定关键词low_priority，那么MySQL将会等到没有其他人读这个表的时候，才把插入数据。可以使用如下的命令：</p>
-<pre><code>load data  low_priority infile &quot;/home/mark/data sql&quot; into table Orders;
-</code></pre></li>
-</ol>
-<ol start="2">
-<li><p>如果指定local关键词，则表明从客户主机读文件。如果local没指定，文件必须位于服务器上。</p>
-</li>
-<li><p>replace和ignore关键词控制对现有的唯一键记录的重复的处理。如果你指定replace，新行将代替有相同的唯一键值的现有行。 如果你指定ignore，跳过有唯一键的现有行的重复行的输入。如果你不指定任何一个选项，当找到重复键时，出现一个错误，并且文本文件的余下部分被忽略。例如：</p>
-<pre><code>load data  low_priority infile &quot;/home/mark/data sql&quot; replace into table Orders;
-</code></pre></li>
-</ol>
-<ol start="4">
-<li><p>分隔符 （1） <code>fields</code>关键字指定了文件记段的分割格式，如果用到这个关键字，MySQL剖析器希望看到至少有下面的一个选项：</p>
-<ul>
-<li><code>terminated by</code> 分隔符：意思是以什么字符作为分隔符</li>
-<li><code>enclosed by</code> ： 字段括起字符</li>
-<li><code>escaped by</code> ： 转义字符</li>
-<li><code>terminated by</code> ： 描述字段的分隔符，默认情况下是tab字符（t）</li>
-<li><code>enclosed by</code> ： 描述的是字段的括起字符。</li>
-<li><p><code>escaped by</code> ： 描述的转义字符。默认的是反斜杠（backslash： ）<br>例如：</p>
-<p>load data infile “/home/mark/Orders txt” replace into table Orders fields terminated by’,’ enclosed by ‘“‘;</p>
-</li>
-</ul>
-</li>
-</ol>
-<pre><code>（2）`lines` 关键字指定了每条记录的分隔符默认为`n`即为换行符 如果两个字段都指定了那 `fields` 必须在 `lines` 之前。如果不指定 `fields` 关键字缺省值与如果你这样写的相同：
-
-    fields terminated by&apos;t&apos; enclosed by ’ &apos;&apos; ‘ escaped by&apos;&apos;
-
-
-如果你不指定一个lines子句，缺省值与如果你这样写的相同： lines terminated by&apos;n&apos; 例如：
-
-    load data infile &quot;/jiaoben/load.txt&quot; replace into table test fields terminated by &apos;,&apos; lines terminated by &apos;/n&apos;;
-</code></pre><ol start="5">
-<li><p>load data infile 可以按指定的列把文件导入到数据库中。 当我们要把数据的一部分内容导入的时候，，需要加入一些栏目（列/字段/field）到MySQL数据库中，<br>以适应一些额外的需要。比方说，我们要从Access数据库升级到MySQL数据库的时候 下面的例子显示了如何向指定的栏目(field)中导入数据：</p>
-<pre><code>load data infile &quot;/home/Order txt&quot; into table Orders(Order_Number, Order_Date, Customer_ID);
-</code></pre></li>
-</ol>
-<ol start="6">
-<li>当在服务器主机上寻找文件时，服务器使用下列规则： （1）如果给出一个绝对路径名，服务器使用该路径名。 （2）如果给出一个有一个或多个前置部件的相对路径名，服务器相对服务器的数据目录搜索文件。<br>（3）如果给出一个没有前置部件的一个文件名，服务器在当前数据库的数据库目录寻找文件。 例如： <code>/myfile txt</code> 给出的文件是从服务器的数据目录读取，而作为 “myfile txt” 给出的一个文件是从当前数据库的数据库目录下读取。</li>
-</ol>
-<p>注意：字段中的空值用N表示</p>
-<h3 id="有几个问题一定要注意"><a href="#有几个问题一定要注意" class="headerlink" title="有几个问题一定要注意"></a>有几个问题一定要注意</h3><p>1、编码。 2、灵活导入导出。 一个例子： 先创建一个表：</p>
-<pre><code>CREATE TABLE Salary(
-Id_P INT,
-Salary INT
-);
-</code></pre><p>然后在D盘根目录下创建了一个data.txt文本文件。 data.txt的内容：</p>
-<pre><code>1,10000
-2,8000
-3,12000
-4,9000
-5,12000
-6,10000
-7,1000
-</code></pre><p>然后执行：</p>
-<pre><code>load data local infile &quot;D:/data.txt&quot; into table salary fields terminated by &apos;,&apos;;
-</code></pre><p>执行之后data.txt中的数据就全部插入到Salary表中了。 注意： terminated by ‘,’制定了data.txt中的数据字段间的分割符为’,’。</p>
+        <p>使用 FileOutputStream 或者 FileWriter 时，将方法的第二个参数设置为 true 即可使用追加的方式写文件 下面是示例代码：</p>
+<a id="more"></a>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="JAVA"><figure class="iseeu highlight /java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedWriter;  </span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;  </span><br><span class="line"><span class="keyword">import</span> java.io.FileWriter;  </span><br><span class="line"><span class="keyword">import</span> java.io.IOException;  </span><br><span class="line"><span class="keyword">import</span> java.io.OutputStreamWriter;  </span><br><span class="line"><span class="keyword">import</span> java.io.RandomAccessFile;  </span><br><span class="line">  </span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment"> * 描述：追加内容到文件末尾 </span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Administrator </span></span><br><span class="line"><span class="comment"> * </span></span><br><span class="line"><span class="comment"> */</span>  </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WriteStreamAppend</span> </span>&#123;  </span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">     * 追加文件：使用FileOutputStream，在构造FileOutputStream时，把第二个参数设为true </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> content </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method1</span><span class="params">(String file, String conent)</span> </span>&#123;  </span><br><span class="line">        BufferedWriter out = <span class="keyword">null</span>;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            out = <span class="keyword">new</span> BufferedWriter(<span class="keyword">new</span> OutputStreamWriter(  </span><br><span class="line">                    <span class="keyword">new</span> FileOutputStream(file, <span class="keyword">true</span>)));  </span><br><span class="line">            out.write(conent);  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125; <span class="keyword">finally</span> &#123;  </span><br><span class="line">            <span class="keyword">try</span> &#123;  </span><br><span class="line">                out.close();  </span><br><span class="line">            &#125; <span class="keyword">catch</span> (IOException e) &#123;  </span><br><span class="line">                e.printStackTrace();  </span><br><span class="line">            &#125;  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">     * 追加文件：使用FileWriter </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> content </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method2</span><span class="params">(String fileName, String content)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            <span class="comment">// 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件  </span></span><br><span class="line">            FileWriter writer = <span class="keyword">new</span> FileWriter(fileName, <span class="keyword">true</span>);  </span><br><span class="line">            writer.write(content);  </span><br><span class="line">            writer.close();  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">/** </span></span><br><span class="line"><span class="comment">     * 追加文件：使用RandomAccessFile </span></span><br><span class="line"><span class="comment">     *  </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> fileName </span></span><br><span class="line"><span class="comment">     *            文件名 </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> content </span></span><br><span class="line"><span class="comment">     *            追加的内容 </span></span><br><span class="line"><span class="comment">     */</span>  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">method3</span><span class="params">(String fileName, String content)</span> </span>&#123;  </span><br><span class="line">        <span class="keyword">try</span> &#123;  </span><br><span class="line">            <span class="comment">// 打开一个随机访问文件流，按读写方式  </span></span><br><span class="line">            RandomAccessFile randomFile = <span class="keyword">new</span> RandomAccessFile(fileName, <span class="string">"rw"</span>);  </span><br><span class="line">            <span class="comment">// 文件长度，字节数  </span></span><br><span class="line">            <span class="keyword">long</span> fileLength = randomFile.length();  </span><br><span class="line">            <span class="comment">// 将写文件指针移到文件尾。  </span></span><br><span class="line">            randomFile.seek(fileLength);  </span><br><span class="line">            randomFile.writeBytes(content);  </span><br><span class="line">            randomFile.close();  </span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException e) &#123;  </span><br><span class="line">            e.printStackTrace();  </span><br><span class="line">        &#125;  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;  </span><br><span class="line">        System.out.println(<span class="string">"start"</span>);  </span><br><span class="line">        method1(<span class="string">"c:/test.txt"</span>, <span class="string">"追加到文件的末尾"</span>);  </span><br><span class="line">        System.out.println(<span class="string">"end"</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
       
     </div>
@@ -581,9 +514,7 @@ Salary INT
       
         <div class="post-tags">
           
-            <a href="/tags/mysql-load-data/" rel="tag"># mysql load data</a>
-          
-            <a href="/tags/海量数据导入/" rel="tag"># 海量数据导入</a>
+            <a href="/tags/java/" rel="tag"># java</a>
           
         </div>
       
@@ -596,8 +527,8 @@ Salary INT
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/15/Append-content-to-the-end-of-the-file/" rel="next" title="追加内容到文件末尾的几种常用方法">
-                <i class="fa fa-chevron-left"></i> 追加内容到文件末尾的几种常用方法
+              <a href="/2017/09/14/kafka-e9-9b-86-e7-be-a4-e6-97-a0-e6-b3-95-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-94-bb-e7-95-a5/" rel="next" title="Kafka集群无法外网访问问题解决攻略">
+                <i class="fa fa-chevron-left"></i> Kafka集群无法外网访问问题解决攻略
               </a>
             
           </div>
@@ -606,8 +537,8 @@ Salary INT
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/09/15/use-reverse-SSH-to-access-intranet-hosts-from-the-external-network/" rel="prev" title="【转】利用反向ssh从外网访问内网主机">
-                【转】利用反向ssh从外网访问内网主机 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/09/15/mysql-e5-af-bc-e5-85-a5-txtcsv-e6-96-87-e4-bb-b6/" rel="prev" title="mysql导入 txt,csv文件">
+                mysql导入 txt,csv文件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -653,17 +584,8 @@ Salary INT
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -1175,22 +1097,6 @@ Salary INT
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本语法："><span class="nav-number">1.</span> <span class="nav-text">基本语法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#有几个问题一定要注意"><span class="nav-number">2.</span> <span class="nav-text">有几个问题一定要注意</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       

@@ -2117,7 +2117,7 @@ Salary INT
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/15/e8-bf-bd-e5-8a-a0-e5-86-85-e5-ae-b9-e5-88-b0-e6-96-87-e4-bb-b6-e6-9c-ab-e5-b0-be-e7-9a-84-e5-87-a0-e7-a7-8d-e5-b8-b8-e7-94-a8-e6-96-b9-e6-b3-95/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/15/Append-content-to-the-end-of-the-file/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -2137,7 +2137,7 @@ Salary INT
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/09/15/e8-bf-bd-e5-8a-a0-e5-86-85-e5-ae-b9-e5-88-b0-e6-96-87-e4-bb-b6-e6-9c-ab-e5-b0-be-e7-9a-84-e5-87-a0-e7-a7-8d-e5-b8-b8-e7-94-a8-e6-96-b9-e6-b3-95/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">追加内容到文件末尾的几种常用方法</a>
+                <a href="/2017/09/15/Append-content-to-the-end-of-the-file/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">追加内容到文件末尾的几种常用方法</a>
               
             
           </h1>
@@ -2179,7 +2179,7 @@ Salary INT
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2018-12-12 17:13:19" itemprop="dateModified" datetime="2018-12-12T17:13:19+08:00">2018-12-12</time>
+                <time title="Modified: 2018-12-21 14:25:47" itemprop="dateModified" datetime="2018-12-21T14:25:47+08:00">2018-12-21</time>
               
             
           </span>
@@ -2231,93 +2231,16 @@ Salary INT
 
       
         
+          <p>使用 FileOutputStream 或者 FileWriter 时，将方法的第二个参数设置为 true 即可使用追加的方式写文件 下面是示例代码：</p>
+          <!--noindex-->
           
-            <p>使用 FileOutputStream 或者 FileWriter 时，将方法的第二个参数设置为 true 即可使用追加的方式写文件 下面是示例代码：</p>
-<pre><code>import java.io.BufferedWriter;  
-import java.io.FileOutputStream;  
-import java.io.FileWriter;  
-import java.io.IOException;  
-import java.io.OutputStreamWriter;  
-import java.io.RandomAccessFile;  
-
-/** 
- * 描述：追加内容到文件末尾 
- * @author Administrator 
- * 
- */  
-public class WriteStreamAppend {  
-    /** 
-     * 追加文件：使用FileOutputStream，在构造FileOutputStream时，把第二个参数设为true 
-     *  
-     * @param fileName 
-     * @param content 
-     */  
-    public static void method1(String file, String conent) {  
-        BufferedWriter out = null;  
-        try {  
-            out = new BufferedWriter(new OutputStreamWriter(  
-                    new FileOutputStream(file, true)));  
-            out.write(conent);  
-        } catch (Exception e) {  
-            e.printStackTrace();  
-        } finally {  
-            try {  
-                out.close();  
-            } catch (IOException e) {  
-                e.printStackTrace();  
-            }  
-        }  
-    }  
-
-    /** 
-     * 追加文件：使用FileWriter 
-     *  
-     * @param fileName 
-     * @param content 
-     */  
-    public static void method2(String fileName, String content) {  
-        try {  
-            // 打开一个写文件器，构造函数中的第二个参数true表示以追加形式写文件  
-            FileWriter writer = new FileWriter(fileName, true);  
-            writer.write(content);  
-            writer.close();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }  
-    }  
-
-    /** 
-     * 追加文件：使用RandomAccessFile 
-     *  
-     * @param fileName 
-     *            文件名 
-     * @param content 
-     *            追加的内容 
-     */  
-    public static void method3(String fileName, String content) {  
-        try {  
-            // 打开一个随机访问文件流，按读写方式  
-            RandomAccessFile randomFile = new RandomAccessFile(fileName, &quot;rw&quot;);  
-            // 文件长度，字节数  
-            long fileLength = randomFile.length();  
-            // 将写文件指针移到文件尾。  
-            randomFile.seek(fileLength);  
-            randomFile.writeBytes(content);  
-            randomFile.close();  
-        } catch (IOException e) {  
-            e.printStackTrace();  
-        }  
-    }  
-
-    public static void main(String[] args) {  
-        System.out.println(&quot;start&quot;);  
-        method1(&quot;c:/test.txt&quot;, &quot;追加到文件的末尾&quot;);  
-        System.out.println(&quot;end&quot;);  
-    }  
-
-}
-</code></pre>
-          
+            <div class="post-button text-center">
+              <a class="btn" href="/2017/09/15/Append-content-to-the-end-of-the-file/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+         
+          <!--/noindex-->
         
       
     </div>
