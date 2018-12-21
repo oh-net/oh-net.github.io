@@ -109,7 +109,7 @@
   <meta name="description" content="$$ Welcome $$">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Technician">
-<meta property="og:url" content="https://www.cobsun.com/page/11/index.html">
+<meta property="og:url" content="https://hero.triple.net.cn/page/11/index.html">
 <meta property="og:site_name" content="Technician">
 <meta property="og:description" content="$$ Welcome $$">
 <meta property="og:locale" content="zh-cn">
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="https://www.cobsun.com/page/11/">
+  <link rel="canonical" href="https://hero.triple.net.cn/page/11/">
 
 
 
@@ -353,7 +353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/05/24/yaf-e5-9c-a8-nginx-e4-b8-ad-e7-9a-84-e9-85-8d-e7-bd-ae-e4-b8-80-e4-be-8b/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/05/05/sqlite-e6-af-94bdb-e6-9b-b4-e5-bf-ab-ef-bc-9f/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -373,210 +373,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/05/24/yaf-e5-9c-a8-nginx-e4-b8-ad-e7-9a-84-e9-85-8d-e7-bd-ae-e4-b8-80-e4-be-8b/" class="post-title-link" itemprop="https://www.cobsun.com/page/11/index.html">yaf 在 nginx 中的配置一例</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-05-24 15:43:35" itemprop="dateCreated datePublished" datetime="2017-05-24T15:43:35+08:00">2017-05-24</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-12 17:24:02" itemprop="dateModified" datetime="2018-12-12T17:24:02+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/大前端！/" itemprop="url" rel="index"><span itemprop="name">大前端！</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <pre><code>server {
-     listen       80 default_server;
-     listen       [::]:80 default_server;
-     server_name  _;
-     index           index.php index.html;
-     root         /usr/share/nginx/html/yaf_prj;
-
-     include /etc/nginx/default.d/*.conf;
-
-     location / {
-         try_files $uri $uri/ @rewrite;
-             expires max;
-     }
-     location ~ .php$ {
-         try_files $uri =404;
-         fastcgi_pass unix:/var/run/php-fpm/php-fpm.sock;
-         fastcgi_index index.php;
-         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-         include fastcgi_params;
-     }
-     location @rewrite{
-             rewrite ^/(.*)$ /index.php?q=$1;
-     }
-
-     error_page 404 /404.html;
-         location = /40x.html {
-     }
-
-     error_page 500 502 503 504 /50x.html;
-         location = /50x.html {
-     }
- }
-</code></pre>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/05/05/sqlite-e6-af-94bdb-e6-9b-b4-e5-bf-ab-ef-bc-9f/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/05/05/sqlite-e6-af-94bdb-e6-9b-b4-e5-bf-ab-ef-bc-9f/" class="post-title-link" itemprop="https://www.cobsun.com/page/11/index.html">Sqlite比BDB更快？</a>
+                <a href="/2017/05/05/sqlite-e6-af-94bdb-e6-9b-b4-e5-bf-ab-ef-bc-9f/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/11/index.html">Sqlite比BDB更快？</a>
               
             
           </h1>
@@ -810,7 +607,7 @@ if __name__ == &apos;__main__&apos;:
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/05/04/nginx-e4-b8-8bcodeiginter-e9-85-8d-e7-bd-ae/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/05/04/nginx-e4-b8-8bcodeiginter-e9-85-8d-e7-bd-ae/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -830,7 +627,7 @@ if __name__ == &apos;__main__&apos;:
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/05/04/nginx-e4-b8-8bcodeiginter-e9-85-8d-e7-bd-ae/" class="post-title-link" itemprop="https://www.cobsun.com/page/11/index.html">Nginx下CodeIginter配置</a>
+                <a href="/2017/05/04/nginx-e4-b8-8bcodeiginter-e9-85-8d-e7-bd-ae/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/11/index.html">Nginx下CodeIginter配置</a>
               
             
           </h1>
@@ -1048,7 +845,7 @@ $pagination_link = $this-&gt;pagination-&gt;create_links();
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/04/28/gets-all-files-in-the-directory-with-php/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/04/28/gets-all-files-in-the-directory-with-php/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1068,7 +865,7 @@ $pagination_link = $this-&gt;pagination-&gt;create_links();
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/04/28/gets-all-files-in-the-directory-with-php/" class="post-title-link" itemprop="https://www.cobsun.com/page/11/index.html">PHP 获取目录下的所有文件</a>
+                <a href="/2017/04/28/gets-all-files-in-the-directory-with-php/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/11/index.html">PHP 获取目录下的所有文件</a>
               
             
           </h1>
@@ -1228,7 +1025,7 @@ foreach ($filens as $value) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/04/27/nginx-e9-85-8d-e7-bd-aelocation-e6-80-bb-e7-bb-93-e5-8f-8arewrite-e8-a7-84-e5-88-99-e5-86-99-e6-b3-95/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/04/27/nginx-e9-85-8d-e7-bd-aelocation-e6-80-bb-e7-bb-93-e5-8f-8arewrite-e8-a7-84-e5-88-99-e5-86-99-e6-b3-95/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1248,7 +1045,7 @@ foreach ($filens as $value) {
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/04/27/nginx-e9-85-8d-e7-bd-aelocation-e6-80-bb-e7-bb-93-e5-8f-8arewrite-e8-a7-84-e5-88-99-e5-86-99-e6-b3-95/" class="post-title-link" itemprop="https://www.cobsun.com/page/11/index.html">nginx配置location总结及rewrite规则写法</a>
+                <a href="/2017/04/27/nginx-e9-85-8d-e7-bd-aelocation-e6-80-bb-e7-bb-93-e5-8f-8arewrite-e8-a7-84-e5-88-99-e5-86-99-e6-b3-95/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/11/index.html">nginx配置location总结及rewrite规则写法</a>
               
             
           </h1>
@@ -1492,7 +1289,7 @@ foreach ($filens as $value) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/04/21/glusterfs-e8-b0-83-e7-a0-94/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/04/21/glusterfs-e8-b0-83-e7-a0-94/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1512,7 +1309,7 @@ foreach ($filens as $value) {
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/04/21/glusterfs-e8-b0-83-e7-a0-94/" class="post-title-link" itemprop="https://www.cobsun.com/page/11/index.html">GlusterFS 调研</a>
+                <a href="/2017/04/21/glusterfs-e8-b0-83-e7-a0-94/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/11/index.html">GlusterFS 调研</a>
               
             
           </h1>
@@ -1674,7 +1471,7 @@ foreach ($filens as $value) {
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/04/19/yaf-e4-bd-bf-e7-94-a8-e6-b3-a8-e6-84-8f-e4-ba-8b-e9-a1-b9/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/04/19/yaf-e4-bd-bf-e7-94-a8-e6-b3-a8-e6-84-8f-e4-ba-8b-e9-a1-b9/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1694,7 +1491,7 @@ foreach ($filens as $value) {
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/04/19/yaf-e4-bd-bf-e7-94-a8-e6-b3-a8-e6-84-8f-e4-ba-8b-e9-a1-b9/" class="post-title-link" itemprop="https://www.cobsun.com/page/11/index.html">Yaf 使用注意事项</a>
+                <a href="/2017/04/19/yaf-e4-bd-bf-e7-94-a8-e6-b3-a8-e6-84-8f-e4-ba-8b-e9-a1-b9/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/11/index.html">Yaf 使用注意事项</a>
               
             
           </h1>
@@ -2058,7 +1855,7 @@ configure_struct
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/04/17/e4-bd-bf-e7-94-a8-xdebug-e8-b0-83-e8-af-95php-e7-9a-84-e6-8a-80-e5-b7-a7/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/04/17/e4-bd-bf-e7-94-a8-xdebug-e8-b0-83-e8-af-95php-e7-9a-84-e6-8a-80-e5-b7-a7/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -2078,7 +1875,7 @@ configure_struct
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/04/17/e4-bd-bf-e7-94-a8-xdebug-e8-b0-83-e8-af-95php-e7-9a-84-e6-8a-80-e5-b7-a7/" class="post-title-link" itemprop="https://www.cobsun.com/page/11/index.html">使用 xdebug调试PHP的技巧</a>
+                <a href="/2017/04/17/e4-bd-bf-e7-94-a8-xdebug-e8-b0-83-e8-af-95php-e7-9a-84-e6-8a-80-e5-b7-a7/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/11/index.html">使用 xdebug调试PHP的技巧</a>
               
             
           </h1>
@@ -2247,7 +2044,7 @@ xdebug.show_mem_delta = On
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/04/17/e5-a6-82-e4-bd-95-e4-bc-98-e9-9b-85-e7-9a-84-e8-be-93-e5-87-baphp-e8-b0-83-e8-af-95-e4-bf-a1-e6-81-af/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/04/17/e5-a6-82-e4-bd-95-e4-bc-98-e9-9b-85-e7-9a-84-e8-be-93-e5-87-baphp-e8-b0-83-e8-af-95-e4-bf-a1-e6-81-af/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -2267,7 +2064,7 @@ xdebug.show_mem_delta = On
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/04/17/e5-a6-82-e4-bd-95-e4-bc-98-e9-9b-85-e7-9a-84-e8-be-93-e5-87-baphp-e8-b0-83-e8-af-95-e4-bf-a1-e6-81-af/" class="post-title-link" itemprop="https://www.cobsun.com/page/11/index.html">如何优雅的输出PHP调试信息</a>
+                <a href="/2017/04/17/e5-a6-82-e4-bd-95-e4-bc-98-e9-9b-85-e7-9a-84-e8-be-93-e5-87-baphp-e8-b0-83-e8-af-95-e4-bf-a1-e6-81-af/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/11/index.html">如何优雅的输出PHP调试信息</a>
               
             
           </h1>
@@ -2430,7 +2227,7 @@ xdebug.show_mem_delta = On
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/04/17/mongodb-e4-ba-bf-e7-ba-a7-e6-95-b0-e6-8d-ae-e9-87-8f-e7-9a-84-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/04/17/mongodb-e4-ba-bf-e7-ba-a7-e6-95-b0-e6-8d-ae-e9-87-8f-e7-9a-84-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -2450,7 +2247,7 @@ xdebug.show_mem_delta = On
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/04/17/mongodb-e4-ba-bf-e7-ba-a7-e6-95-b0-e6-8d-ae-e9-87-8f-e7-9a-84-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95/" class="post-title-link" itemprop="https://www.cobsun.com/page/11/index.html">Mongodb亿级数据量的性能测试</a>
+                <a href="/2017/04/17/mongodb-e4-ba-bf-e7-ba-a7-e6-95-b0-e6-8d-ae-e9-87-8f-e7-9a-84-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/11/index.html">Mongodb亿级数据量的性能测试</a>
               
             
           </h1>
@@ -2665,6 +2462,185 @@ xdebug.show_mem_delta = On
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/04/12/php-tips/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/04/12/php-tips/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/11/index.html">PHP Tips</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-04-12 09:37:05" itemprop="dateCreated datePublished" datetime="2017-04-12T09:37:05+08:00">2017-04-12</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:27:29" itemprop="dateModified" datetime="2018-12-12T17:27:29+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h4 id="php中实现后台执行的方法："><a href="#php中实现后台执行的方法：" class="headerlink" title="php中实现后台执行的方法："></a>php中实现后台执行的方法：</h4><pre><code>ignore_user_abort(true); // 后台运行
+set_time_limit(0); // 取消脚本运行时间的超时上限
+</code></pre><hr>
+<h4 id="PHP-连接-RedisServer-时提示-Message-Redis-connect-connect-failed-Permission-denied"><a href="#PHP-连接-RedisServer-时提示-Message-Redis-connect-connect-failed-Permission-denied" class="headerlink" title="PHP 连接 RedisServer 时提示 Message: Redis::connect(): connect() failed: Permission denied"></a>PHP 连接 RedisServer 时提示 <code>Message: Redis::connect(): connect() failed: Permission denied</code></h4><p>第一次出现是连接远程的 Redis 服务器。之后尝试在本地也安装了一个 redis-server，然后手动启动，并连接——错误依旧 <strong>解决方法：</strong> 首先保证当前服务器已经安装了与当前执行的 PHP 版本对应的 Redis 扩展 然后到命令行执行：</p>
+<pre><code>/usr/sbin/setsebool httpd_can_network_connect=1
+</code></pre><p>参考来源： <a href="http://stackoverflow.com/questions/8765848/troubleshooting-permission-denied-when-attempting-to-connect-to-redis-from-php" target="_blank" rel="noopener">http://stackoverflow.com/questions/8765848/troubleshooting-permission-denied-when-attempting-to-connect-to-redis-from-php</a></p>
+<hr>
+<h4 id="PHP-生成随机不可逆字符"><a href="#PHP-生成随机不可逆字符" class="headerlink" title="PHP 生成随机不可逆字符"></a>PHP 生成随机不可逆字符</h4><p>比如用作抵御csrf攻击的token</p>
+<pre><code>// 命令行执行即可看到结果
+php -r &quot;echo sha1(uniqid(rand(), true));&quot;
+</code></pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2712,7 +2688,7 @@ xdebug.show_mem_delta = On
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">176</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -3196,7 +3172,7 @@ xdebug.show_mem_delta = On
                     
                       
                     
-                    <span class="site-state-item-count">220</span>
+                    <span class="site-state-item-count">218</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>

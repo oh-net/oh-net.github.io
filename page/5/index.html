@@ -109,7 +109,7 @@
   <meta name="description" content="$$ Welcome $$">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Technician">
-<meta property="og:url" content="https://www.cobsun.com/page/5/index.html">
+<meta property="og:url" content="https://hero.triple.net.cn/page/5/index.html">
 <meta property="og:site_name" content="Technician">
 <meta property="og:description" content="$$ Welcome $$">
 <meta property="og:locale" content="zh-cn">
@@ -122,7 +122,7 @@
 
 
 
-  <link rel="canonical" href="https://www.cobsun.com/page/5/">
+  <link rel="canonical" href="https://hero.triple.net.cn/page/5/">
 
 
 
@@ -353,7 +353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/10/26/get-minimum-value-and-grouping-in-mysql/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/10/08/e8-ae-a9-e7-bb-88-e7-ab-af-e8-b5-b0-e4-bb-a3-e7-90-86-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -373,221 +373,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/10/26/get-minimum-value-and-grouping-in-mysql/" class="post-title-link" itemprop="https://www.cobsun.com/page/5/index.html">通过子查询获取最小值然后分组</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2017-10-26 16:23:09" itemprop="dateCreated datePublished" datetime="2017-10-26T16:23:09+08:00">2017-10-26</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2018-12-18 12:38:51" itemprop="dateModified" datetime="2018-12-18T12:38:51+08:00">2018-12-18</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="通过子查询获取最小值然后分组"><a href="#通过子查询获取最小值然后分组" class="headerlink" title="通过子查询获取最小值然后分组"></a>通过子查询获取最小值然后分组</h1><p>实际业务中有这样一个需求: 订单表里有一些订单,<br>现在想要知道每个用户最早下单的时间. 也就是说, 想找到每个用户的第一笔订单及其详情! </p>
-<h2 id="表结构"><a href="#表结构" class="headerlink" title="表结构"></a>表结构</h2><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">    mysql&gt; describe ord;</span><br><span class="line">    +---------+-------------+------+-----+---------+----------------+</span><br><span class="line">    | Field   | Type        | Null | Key | Default | Extra          |</span><br><span class="line">    +---------+-------------+------+-----+---------+----------------+</span><br><span class="line">    | id      | int(11)     | NO   | PRI | NULL    | auto_increment |</span><br><span class="line">    | usr     | varchar(20) | NO   |     |         |                |</span><br><span class="line">    | sid     | varchar(50) | YES  |     |         |                |</span><br><span class="line">    | orddate | datetime    | YES  |     | NULL    |                |</span><br><span class="line">    +---------+-------------+------+-----+---------+----------------+</span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line">## 测试数据</span><br></pre></td></tr></table></figure></div>
-<pre><code>insert into ord (usr,sid,orddate) values 
-(&apos;AAA&apos;,&apos;Ser2007.1.1-001&apos;,&apos;2007-1-1&apos;),
-(&apos;AAA&apos;,&apos;Ser2007.1.2-001&apos;,&apos;2007-1-2&apos;),
-(&apos;AAA&apos;,&apos;Ser2007.10.1-001&apos;,&apos;2007-10-1&apos;),
-(&apos;AAA&apos;,&apos;Ser2007.10.2-001&apos;,&apos;2007-10-2&apos;),
-(&apos;AAA&apos;,&apos;Ser2007.10.3-001&apos;,&apos;2007-10-3&apos;),
-(&apos;BBB&apos;,&apos;Ser2007.1.2-001&apos;,&apos;2007-1-2&apos;),
-(&apos;BBB&apos;,&apos;Ser2008.10.1-001&apos;,&apos;2008-10-1&apos;),
-(&apos;BBB&apos;,&apos;Ser2008.10.2-001&apos;,&apos;2008-10-2&apos;),
-(&apos;CCC&apos;,&apos;Ser2001.1.2-001&apos;,&apos;2001-1-2&apos;),
-(&apos;CCC&apos;,&apos;Ser2017.8.8-001&apos;,&apos;2017-8-8&apos;);
-</code></pre><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 查看数据</span><br></pre></td></tr></table></figure></div>
-<pre><code>mysql&gt; select * from ord;
-+----+-----+------------------+---------------------+
-| id | usr | sid              | orddate             |
-+----+-----+------------------+---------------------+
-|  1 | AAA | Ser2007.1.1-001  | 2007-01-01 00:00:00 |
-|  2 | AAA | Ser2007.1.2-001  | 2007-01-02 00:00:00 |
-|  3 | AAA | Ser2007.10.1-001 | 2007-10-01 00:00:00 |
-|  4 | AAA | Ser2007.10.2-001 | 2007-10-02 00:00:00 |
-|  5 | AAA | Ser2007.10.3-001 | 2007-10-03 00:00:00 |
-|  6 | BBB | Ser2007.1.2-001  | 2007-01-02 00:00:00 |
-|  7 | BBB | Ser2008.10.1-001 | 2008-10-01 00:00:00 |
-|  8 | BBB | Ser2008.10.2-001 | 2008-10-02 00:00:00 |
-|  9 | CCC | Ser2001.1.2-001  | 2001-01-02 00:00:00 |
-| 10 | CCC | Ser2017.8.8-001  | 2017-08-08 00:00:00 |
-+----+-----+------------------+---------------------+
-10 rows in set (0.00 sec)
-</code></pre><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">## 查询语句及结果:</span><br></pre></td></tr></table></figure></div>
-<pre><code>mysql&gt; select a.* from ord a
-    -&gt; inner join (select min(id) id,usr from ord group by usr) b
-    -&gt; on a.id=b.id;
-+----+-----+-----------------+---------------------+
-| id | usr | sid             | orddate             |
-+----+-----+-----------------+---------------------+
-|  1 | AAA | Ser2007.1.1-001 | 2007-01-01 00:00:00 |
-|  6 | BBB | Ser2007.1.2-001 | 2007-01-02 00:00:00 |
-|  9 | CCC | Ser2001.1.2-001 | 2001-01-02 00:00:00 |
-+----+-----+-----------------+---------------------+
-3 rows in set (0.00 sec)
-</code></pre><p><code>`</code></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/10/08/e8-ae-a9-e7-bb-88-e7-ab-af-e8-b5-b0-e4-bb-a3-e7-90-86-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/10/08/e8-ae-a9-e7-bb-88-e7-ab-af-e8-b5-b0-e4-bb-a3-e7-90-86-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/" class="post-title-link" itemprop="https://www.cobsun.com/page/5/index.html">让终端走代理的几种方法</a>
+                <a href="/2017/10/08/e8-ae-a9-e7-bb-88-e7-ab-af-e8-b5-b0-e4-bb-a3-e7-90-86-e7-9a-84-e5-87-a0-e7-a7-8d-e6-96-b9-e6-b3-95/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">让终端走代理的几种方法</a>
               
             
           </h1>
@@ -761,7 +547,7 @@ alias ip=&quot;curl -i http://ip.cn&quot;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/10/07/php-e7-9a-84-e5-b7-a5-e5-8e-82-e6-a8-a1-e5-bc-8f/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/10/07/php-e7-9a-84-e5-b7-a5-e5-8e-82-e6-a8-a1-e5-bc-8f/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -781,7 +567,7 @@ alias ip=&quot;curl -i http://ip.cn&quot;
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/10/07/php-e7-9a-84-e5-b7-a5-e5-8e-82-e6-a8-a1-e5-bc-8f/" class="post-title-link" itemprop="https://www.cobsun.com/page/5/index.html">PHP 的工厂模式</a>
+                <a href="/2017/10/07/php-e7-9a-84-e5-b7-a5-e5-8e-82-e6-a8-a1-e5-bc-8f/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">PHP 的工厂模式</a>
               
             
           </h1>
@@ -966,7 +752,7 @@ echo &apos;No.2 : &apos;, $uf2-&gt;getName(), &quot;&lt;br /&gt;&quot;;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/27/ubuntu-server-setting-openvpn/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/27/ubuntu-server-setting-openvpn/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -986,7 +772,7 @@ echo &apos;No.2 : &apos;, $uf2-&gt;getName(), &quot;&lt;br /&gt;&quot;;
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/09/27/ubuntu-server-setting-openvpn/" class="post-title-link" itemprop="https://www.cobsun.com/page/5/index.html">Ubuntu Server 14.04搭建OpenVPN服务器保护你的隐私生活</a>
+                <a href="/2017/09/27/ubuntu-server-setting-openvpn/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">Ubuntu Server 14.04搭建OpenVPN服务器保护你的隐私生活</a>
               
             
           </h1>
@@ -1265,7 +1051,7 @@ echo &apos;No.2 : &apos;, $uf2-&gt;getName(), &quot;&lt;br /&gt;&quot;;
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/27/ubuntu-ocserv-e6-90-ad-e5-bb-ba/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/27/ubuntu-ocserv-e6-90-ad-e5-bb-ba/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1285,7 +1071,7 @@ echo &apos;No.2 : &apos;, $uf2-&gt;getName(), &quot;&lt;br /&gt;&quot;;
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/09/27/ubuntu-ocserv-e6-90-ad-e5-bb-ba/" class="post-title-link" itemprop="https://www.cobsun.com/page/5/index.html">Ubuntu ocserv搭建</a>
+                <a href="/2017/09/27/ubuntu-ocserv-e6-90-ad-e5-bb-ba/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">Ubuntu ocserv搭建</a>
               
             
           </h1>
@@ -1500,7 +1286,7 @@ iptables -t nat -A POSTROUTING  -j MASQUERADE
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1520,7 +1306,7 @@ iptables -t nat -A POSTROUTING  -j MASQUERADE
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/" class="post-title-link" itemprop="https://www.cobsun.com/page/5/index.html">centos7 mysql数据库安装和配置</a>
+                <a href="/2017/09/26/centos7-mysql-e6-95-b0-e6-8d-ae-e5-ba-93-e5-ae-89-e8-a3-85-e5-92-8c-e9-85-8d-e7-bd-ae/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">centos7 mysql数据库安装和配置</a>
               
             
           </h1>
@@ -1726,7 +1512,7 @@ iptables -t nat -A POSTROUTING  -j MASQUERADE
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/25/kernel-headers-for-versions-not-found-e8-a7-a3-e5-86-b3/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/25/kernel-headers-for-versions-not-found-e8-a7-a3-e5-86-b3/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1746,7 +1532,7 @@ iptables -t nat -A POSTROUTING  -j MASQUERADE
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/09/25/kernel-headers-for-versions-not-found-e8-a7-a3-e5-86-b3/" class="post-title-link" itemprop="https://www.cobsun.com/page/5/index.html">kernel headers for versions not found 解决</a>
+                <a href="/2017/09/25/kernel-headers-for-versions-not-found-e8-a7-a3-e5-86-b3/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">kernel headers for versions not found 解决</a>
               
             
           </h1>
@@ -1901,7 +1687,7 @@ iptables -t nat -A POSTROUTING  -j MASQUERADE
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/15/use-reverse-SSH-to-access-intranet-hosts-from-the-external-network/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/15/use-reverse-SSH-to-access-intranet-hosts-from-the-external-network/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1921,7 +1707,7 @@ iptables -t nat -A POSTROUTING  -j MASQUERADE
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/09/15/use-reverse-SSH-to-access-intranet-hosts-from-the-external-network/" class="post-title-link" itemprop="https://www.cobsun.com/page/5/index.html">【转】利用反向ssh从外网访问内网主机</a>
+                <a href="/2017/09/15/use-reverse-SSH-to-access-intranet-hosts-from-the-external-network/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">【转】利用反向ssh从外网访问内网主机</a>
               
             
           </h1>
@@ -2090,7 +1876,7 @@ iptables -t nat -A POSTROUTING  -j MASQUERADE
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/15/mysql-e5-af-bc-e5-85-a5-txtcsv-e6-96-87-e4-bb-b6/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/15/mysql-e5-af-bc-e5-85-a5-txtcsv-e6-96-87-e4-bb-b6/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -2110,7 +1896,7 @@ iptables -t nat -A POSTROUTING  -j MASQUERADE
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/09/15/mysql-e5-af-bc-e5-85-a5-txtcsv-e6-96-87-e4-bb-b6/" class="post-title-link" itemprop="https://www.cobsun.com/page/5/index.html">mysql导入 txt,csv文件</a>
+                <a href="/2017/09/15/mysql-e5-af-bc-e5-85-a5-txtcsv-e6-96-87-e4-bb-b6/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">mysql导入 txt,csv文件</a>
               
             
           </h1>
@@ -2331,7 +2117,7 @@ Salary INT
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/15/e8-bf-bd-e5-8a-a0-e5-86-85-e5-ae-b9-e5-88-b0-e6-96-87-e4-bb-b6-e6-9c-ab-e5-b0-be-e7-9a-84-e5-87-a0-e7-a7-8d-e5-b8-b8-e7-94-a8-e6-96-b9-e6-b3-95/">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/15/e8-bf-bd-e5-8a-a0-e5-86-85-e5-ae-b9-e5-88-b0-e6-96-87-e4-bb-b6-e6-9c-ab-e5-b0-be-e7-9a-84-e5-87-a0-e7-a7-8d-e5-b8-b8-e7-94-a8-e6-96-b9-e6-b3-95/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -2351,7 +2137,7 @@ Salary INT
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/09/15/e8-bf-bd-e5-8a-a0-e5-86-85-e5-ae-b9-e5-88-b0-e6-96-87-e4-bb-b6-e6-9c-ab-e5-b0-be-e7-9a-84-e5-87-a0-e7-a7-8d-e5-b8-b8-e7-94-a8-e6-96-b9-e6-b3-95/" class="post-title-link" itemprop="https://www.cobsun.com/page/5/index.html">追加内容到文件末尾的几种常用方法</a>
+                <a href="/2017/09/15/e8-bf-bd-e5-8a-a0-e5-86-85-e5-ae-b9-e5-88-b0-e6-96-87-e4-bb-b6-e6-9c-ab-e5-b0-be-e7-9a-84-e5-87-a0-e7-a7-8d-e5-b8-b8-e7-94-a8-e6-96-b9-e6-b3-95/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">追加内容到文件末尾的几种常用方法</a>
               
             
           </h1>
@@ -2571,6 +2357,178 @@ public class WriteStreamAppend {
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/09/14/kafka-e9-9b-86-e7-be-a4-e6-97-a0-e6-b3-95-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-94-bb-e7-95-a5/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/09/14/kafka-e9-9b-86-e7-be-a4-e6-97-a0-e6-b3-95-e5-a4-96-e7-bd-91-e8-ae-bf-e9-97-ae-e9-97-ae-e9-a2-98-e8-a7-a3-e5-86-b3-e6-94-bb-e7-95-a5/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/5/index.html">Kafka集群无法外网访问问题解决攻略</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2017-09-14 13:18:57" itemprop="dateCreated datePublished" datetime="2017-09-14T13:18:57+08:00">2017-09-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2018-12-12 17:19:37" itemprop="dateModified" datetime="2018-12-12T17:19:37+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="http://blog.csdn.net/luoww1/article/details/71514776" target="_blank" rel="noopener">http://blog.csdn.net/luoww1/article/details/71514776</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -2618,7 +2576,7 @@ public class WriteStreamAppend {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">176</span>
+                    <span class="site-state-item-count">175</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -3102,7 +3060,7 @@ public class WriteStreamAppend {
                     
                       
                     
-                    <span class="site-state-item-count">220</span>
+                    <span class="site-state-item-count">218</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
