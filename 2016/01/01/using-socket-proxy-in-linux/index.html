@@ -467,7 +467,7 @@
         <p>Linux CL下要用socks代理，可以使用 <code>tsocks</code> 这个软件。<a href="http://tsocks.sourceforge.net/" target="_blank" rel="noopener">官网在这里</a> 不过已经很有一段时间没有更新了。</p>
 <p>一般发行版的软件源里面相信都有，直接安装即可。 </p>
 <p>安装完成后，编辑 <code>/etc/tsocks.conf</code> 文件，注意修改下面4行： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">local = 192.168.1.0/255.255.255.0 //本地不使用代理 </span><br><span class="line">server = 192.168.1.1 //代理ip </span><br><span class="line">server_port = 1080 //端口 </span><br><span class="line">server_type = 5 //socks 4 or 5</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">local = 192.168.1.0/255.255.255.0 //本地不使用代理 </span><br><span class="line">server = 192.168.1.1 //代理ip </span><br><span class="line">server_port = 1080 //端口 </span><br><span class="line">server_type = 5 //socks 4 or 5</span><br></pre></td></tr></table></figure></div>
 <p>保存之后，用 <code>tsocks</code> 打头，如： <code>tsocks apt-get update</code></p>
 
       

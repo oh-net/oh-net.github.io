@@ -471,7 +471,7 @@
 <p>按照web后台程序员习惯的方法，是在数据库或者session里存一个值，相应请求到达后端的时候就去检查这个值是否还匹配。</p>
 <p>但是只是存放一个值并不能关联到时间，所有就要设计相应的机制去 <code>poll/update</code> 这个值。如果这样搞，开销会很大</p>
 <p>Nonce的基本原理就是一个算式：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    ceil(time() / ( life / 2 ))</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">你有兴趣可以打开浏览器控制台用Javascript来试试，比如一分钟内有效期的Nonce</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    ceil(time() / ( life / 2 ))</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">你有兴趣可以打开浏览器控制台用Javascript来试试，比如一分钟内有效期的Nonce</span><br></pre></td></tr></table></figure></div>
 <pre><code>Math.ceil(Math.ceil(new Date().getTime() / 1000) / (60 / 2))
 </code></pre><p><code>`</code> </p>
 <p>用这个值来给请求签名，服务器端只需要计算一个同周期的Nonce，看看两者是否相等就可以判断请求是否仍然有效。 </p>
