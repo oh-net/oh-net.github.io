@@ -353,6 +353,217 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/08/01/fastdfs-e5-9c-a8-centos-e4-b8-8b-e9-85-8d-e7-bd-ae-e5-ae-89-e8-a3-85-e9-83-a8-e7-bd-b2/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/08/01/fastdfs-e5-9c-a8-centos-e4-b8-8b-e9-85-8d-e7-bd-ae-e5-ae-89-e8-a3-85-e9-83-a8-e7-bd-b2/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/9/index.html">FastDFS 在 CentOS 下配置安装部署</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-08-01 02:20:55" itemprop="dateCreated datePublished" datetime="2017-08-01T02:20:55+08:00">2017-08-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 17:19:14" itemprop="dateModified" datetime="2018-12-12T17:19:14+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>centos安装fastdfs</p>
+<h1 id="少啰嗦，直接装"><a href="#少啰嗦，直接装" class="headerlink" title="少啰嗦，直接装"></a>少啰嗦，直接装</h1><p>看过上一篇<a href="http://blog.mayongfa.cn/191.html" target="_blank" rel="noopener">分布式文件系统 - FastDFS 简单了解一下</a>的朋友应该知道，本次安装是使用目前余庆老师开源的最新 V5.05 版本，是余庆老师放在 <a href="https://github.com/happyfish100/fastdfs" target="_blank" rel="noopener">Github</a> 上的，和目前你能在网络上搜索到的 Google Code 的 V4.06 或更低版本不一样，而且按照他们的步骤坑很多，我反正被坑了很久。 你只需要记住，这也许是目前 FastDFS 最新最稳定最简单坑最少的一个配置安装部署教程了。期间我也会把我踩的坑都放出来，我保证大家照着做就几乎不会有坑。哈哈…</p>
+<h1 id="安装-libfastcommon-和-FastDFS"><a href="#安装-libfastcommon-和-FastDFS" class="headerlink" title="安装 libfastcommon 和 FastDFS"></a>安装 libfastcommon 和 FastDFS</h1><p>1.<strong>下载安装 libfastcommon</strong> ，这里是通过<code>wget</code>下载（我喜欢这种方式）。 <code>wget https://github.com/happyfish100/libfastcommon/archive/V1.0.7.tar.gz</code> 压 libfastcommon，命令： <code>tar -zxvf V1.0.7.tar.gz</code> 编译，进入<code>libfastcommon-1.0.7</code>目录，命令： <code>cd libfastcommon-1.0.7./make.sh</code> 安装，命令： <code>./make.sh install</code> 2.<strong>下载安装 FastDFS</strong>，这里也是通过<code>wget</code>下载。 <code>wget https://github.com/happyfish100/fastdfs/archive/V5.05.tar.gz</code> 解压 FastDFS ，命令： <code>tar -zxvf V5.05.tar.gz</code> 编译，进入<code>fastfds-5.05</code>目录，命令： <code>cd fastdfs-5.05./make.sh</code> 安装，命令： <code>./make.sh install</code>   <strong>配置 Tracker 服务</strong> 上述安装成功后，在<code>/etc/</code>目录下会有一个<code>fdfs</code>的目录，进入它。会看到三个<code>.sample</code>后缀的文件，这是作者给我们的示例文件，我们需要把其中的<code>tracker.conf.sample</code>文件改为<code>tracker.conf</code>配置文件并修改它。看命令：</p>
+<pre><code>cp tracker.conf.sample tracker.conf
+vim tracker.conf
+</code></pre><p>打开<code>tracker.conf</code>文件，只需要找到你只需要该这两个参数就可以了。</p>
+<pre><code># the base path to store data and log files
+base_path=/data/fastdfs
+
+# HTTP port on this tracker server
+http.server_port=80
+</code></pre><p>当然前提是你要有或先创建了<code>/data/fastdfs</code>目录。<code>port=22122</code>这个端口参数不建议修改，除非你已经占用它了。 修改完成保存并退出 vim ，这时候我们可以使用<code>/usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf start</code>来启动 Tracker服务，但是这个命令不够优雅，怎么做呢？使用<code>ln -s</code> 建立软链接：</p>
+<pre><code>ln -s /usr/bin/fdfs_trackerd /usr/local/bin
+ln -s /usr/bin/stop.sh /usr/local/bin
+ln -s /usr/bin/restart.sh /usr/local/bin
+</code></pre><p>这时候我们就可以使用<code>service fdfs_trackerd start</code>来优雅地启动 Tracker服务了，是不是比刚才带目录的命令好记太多了（懒是社会生产力）。你也可以启动过服务看一下端口是否在监听，命令：</p>
+<pre><code>启动服务：service fdfs_trackerd start
+查看监听：netstat -unltp|grep fdfs
+</code></pre><p>看到<code>22122端口</code>正常被监听后，这时候就算 Tracker服务安装成功啦！</p>
+<h1 id="配置-Storage-服务"><a href="#配置-Storage-服务" class="headerlink" title="配置 Storage 服务"></a>配置 Storage 服务</h1><p>现在开始配置 Storage 服务，由于我这是单机器测试，你把 Storage 服务放在多台服务器也是可以的，它有 <code>Group(组)</code>的概念，同一组内服务器互备同步，这里不再演示。直接开始配置，依然是进入<code>/etc/fdfs</code>的目录操作，首先进入它。会看到三个<code>.sample</code>后缀的文件，我们需要把其中的<code>storage.conf.sample</code>文件改为<code>storage.conf</code>配置文件并修改它。还看命令：</p>
+<pre><code>cp storage.conf.sample storage.conf
+vim storage.conf
+</code></pre><p>打开<code>storage.conf</code>文件后，找到这两个参数进行修改：</p>
+<pre><code># the base path to store data and log files
+base_path=/data/fastdfs/storage
+
+# store_path#, based 0, if store_path0 not exists, it&apos;s value is base_path
+# the paths must be exist
+store_path0=/data/fastdfs/storage
+#store_path1=/home/yuqing/fastdfs2
+
+# tracker_server can ocur more than once, and tracker_server format is
+#  &quot;host:port&quot;, host can be hostname or ip address
+tracker_server=192.168.198.129:22122
+</code></pre><p>当然你的<code>/data/fastdfs</code>目录下要有<code>storage</code>文件夹，没有就创建一个，不然会报错的，日志以及文件都会在这个下面，启动时候会自动生成许多文件夹。stroage的<code>port=23000</code>这个端口参数也不建议修改，默认就好，除非你已经占用它了。 修改完成保存并退出 vim ，这时候我们依然想优雅地启动 Storage服务，带目录的命令不够优雅，这里还是使用<code>ln -s</code> 建立软链接：</p>
+<pre><code>ln -s /usr/bin/fdfs_storaged /usr/local/bin
+</code></pre><p>执行命令启动服务：</p>
+<pre><code>service fdfs_storaged start
+</code></pre><p><code>netstat -unltp|grep fdfs</code> 很好，<code>22122 和 23000</code>端口都在监听了，这个时候你去<code>/data/fastdfs/storage</code>文件夹下看的话，会出现一大堆文件夹，而且进去还有一大堆，哈哈，这就是存放文件的啦！下一篇会讲它们的作用和怎么存储的。</p>
+<h1 id="这就完成了？"><a href="#这就完成了？" class="headerlink" title="这就完成了？"></a>这就完成了？</h1><p>应该是完成了。我们安装配置并启动了 Tracker 和 Storage 服务，也没有报错了。那他俩是不是在通信呢？我们可以监视一下： <code>/usr/bin/fdfs_monitor /etc/fdfs/storage.conf</code> 这个时候你就可以进行上传测试 这篇文章只是进行了 FastDFS 的安装与配置，没有任何难度可言，只要按照步骤一步步走下去就可以搞定。可能中间过程中我们会由于不细心经历各种错误，只要仔细看日志信息都能解决掉的，你解决掉一个个错误的时候难道没有披荆斩棘战士般的感觉么？反正我没遇到错… 由于余老师在 V4.05 以后的版本就把内置 HTTP服务去掉了，推荐大家结合 Nginx 使用 fastdfs-nginx-module 模块，所以，就算这篇你测试上传成功了，你也访问不了，哈哈哈… 下一篇<a href="http://blog.mayongfa.cn/193.html" target="_blank" rel="noopener">分布式文件系统 - FastDFS 配置 Nginx 模块及上传测试</a> 中会进行配合 Nginx 完成全部FastDFS的安装测试上传下载等等全部工作。等着吧…</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/07/31/java-e5-b7-b2-e7-9f-a5inputstream-e9-95-bf-e5-ba-a6-ef-bc-8c-e5-b0-86-e5-85-b6-e8-bd-ac-e6-8d-a2-e4-b8-babyte/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2117,333 +2328,6 @@ update-alternatives --config java
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/07/06/owncloud-e9-85-8d-e7-bd-ae-e5-b0-8f-e8-ae-b0/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/07/06/owncloud-e9-85-8d-e7-bd-ae-e5-b0-8f-e8-ae-b0/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/9/index.html">owncloud 配置小记</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-07-06 11:47:58" itemprop="dateCreated datePublished" datetime="2017-07-06T11:47:58+08:00">2017-07-06</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:21:19" itemprop="dateModified" datetime="2018-12-12T17:21:19+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>本文记录了自用 owncloud 的配置情况， 目前我用的是 10.0.2，界面比原来漂亮很多，用起来似乎也更舒服了 官方文档其实非常全，英文好的还是仔细读读原文吧， 这里是我个人的服务器配置： <strong>PHP 环境变量：</strong> 除了<a href="http://www.conf" target="_blank" rel="noopener">www.conf</a> 中的owner-user/owner-group、listen 之外，还要配置环境变量 我的： <code>vim /etc/php/7.0/fpm/pool.d/www.conf</code> 搜索 <code>HOSTNAME</code> 可以找到类似下面的段落：</p>
-<pre><code>;env[HOSTNAME] = $HOSTNAME
-;env[PATH] = /usr/local/bin:/usr/bin:/bin
-;env[TMP] = /tmp
-;env[TMPDIR] = /tmp
-;env[TEMP] = /tmp
-</code></pre><p>把前面的注释（;）去掉，然后 <code>systemctl restart php7.0-fpm.service</code> 重启 PHP-FPM <strong>nginx 的配置：</strong></p>
-<pre><code># /etc/nginx/nginx.conf 没改动任何配置项
-# vim /etc/nginx/site-enabled/default :
-upstream php-handler {
-    server unix:/run/php/php7.0-fpm.sock; # 本机 php-fpm handler 路径
-}
-# ==== SSL 证书的配置 ====
-# ......
-# ==== end SSL 证书的配置 end ====
-    # Add headers to serve security related headers
-    # Before enabling Strict-Transport-Security headers please read into this topic first.
-    #add_header Strict-Transport-Security &quot;max-age=15552000; includeSubDomains&quot;;
-    add_header X-Content-Type-Options nosniff;
-    add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
-    add_header X-XSS-Protection &quot;1; mode=block&quot;;
-    add_header X-Robots-Tag none;
-    add_header X-Download-Options noopen;
-    add_header X-Permitted-Cross-Domain-Policies none;
-
-    # Path to the root of your installation
-    root /var/www/html/owncloud/;
-
-    location = /robots.txt {
-        allow all;
-        log_not_found off;
-        access_log off;
-    }
-
-    # The following 2 rules are only needed for the user_webfinger app.
-    # Uncomment it if you&apos;re planning to use this app.
-    #rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
-    #rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json last;
-
-    location = /.well-known/carddav {
-        return 301 $scheme://$host/remote.php/dav;
-    }
-    location = /.well-known/caldav {
-        return 301 $scheme://$host/remote.php/dav;
-    }
-
-    location ^~ /.well-known/acme-challenge { }
-
-    # set max upload size
-    client_max_body_size 512M;
-    fastcgi_buffers 64 4K;
-
-    # Disable gzip to avoid the removal of the ETag header
-    gzip off;
- # Uncomment if your server is build with the ngx_pagespeed module
-    # This module is currently not supported.
-    #pagespeed off;
-
-    error_page 403 /core/templates/403.php;
-    error_page 404 /core/templates/404.php;
-
-    location / {
-        rewrite ^ /index.php$uri;
-    }
-
-    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
-        return 404;
-    }
-    location ~ ^/(?:.|autotest|occ|issue|indie|db_|console) {
-        return 404;
-    }
-
-    location ~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+|core/templates/40[34]).php(?:$|/) {
-        fastcgi_split_path_info ^(.+.php)(/.*)$;
-        include fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
-        # fastcgi_param HTTPS on;
-        fastcgi_param modHeadersAvailable true; #Avoid sending the security headers twice
-        fastcgi_param front_controller_active true;
-        fastcgi_pass php-handler;
-        fastcgi_intercept_errors on;
-        fastcgi_request_buffering off; #Available since NGINX 1.7.11
-    }
-
-    location ~ ^/(?:updater|ocs-provider)(?:$|/) {
-        try_files $uri $uri/ =404;
-        index index.php;
-    }
-# Adding the cache control header for js and css files
-    # Make sure it is BELOW the PHP block
-    location ~* .(?:css|js)$ {
-        try_files $uri /index.php$uri$is_args$args;
-        add_header Cache-Control &quot;max-age=15778463&quot;;
-        # Add headers to serve security related headers (It is intended to have those duplicated to the ones above)
-        # Before enabling Strict-Transport-Security headers please read into this topic first.
-        #add_header Strict-Transport-Security &quot;max-age=15552000; includeSubDomains&quot;;
-        add_header X-Content-Type-Options nosniff;
-        add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
-        add_header X-XSS-Protection &quot;1; mode=block&quot;;
-        add_header X-Robots-Tag none;
-        add_header X-Download-Options noopen;
-        add_header X-Permitted-Cross-Domain-Policies none;
-        # Optional: Don&apos;t log access to assets
-        access_log off;
-    }
-
-    location ~* .(?:svg|gif|png|html|ttf|woff|ico|jpg|jpeg)$ {
-        try_files $uri /index.php$uri$is_args$args;
-        # Optional: Don&apos;t log access to other assets
-        access_log off;
-    }
-}
-</code></pre><p><strong>SSL 证书的配置块：</strong></p>
-<pre><code>server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-
-    # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
-    return 301 https://$host$request_uri;
-}
-
-server {
-    listen 443 ssl http2;
-    listen [::]:443 ssl http2;
-
-    # certs sent to the client in SERVER HELLO are concatenated in ssl_certificate
-    ssl_certificate /path/to/signed_cert_plus_intermediates; # crt 文件的路径，该文件权限最好设置成 400
-    ssl_certificate_key /path/to/private_key; # key 文件的路径，该文件权限最好设置成 400
-    ssl_session_timeout 1d;
-    ssl_session_cache shared:SSL:50m;
-    ssl_session_tickets off;
-
-    # Diffie-Hellman parameter for DHE ciphersuites, recommended 2048 bits
-    ssl_dhparam /path/to/dhparam.pem; # 没有，注释掉。。。
-
-    # intermediate configuration. tweak to your needs.
-    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
-    ssl_ciphers &apos;ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS&apos;;
-    ssl_prefer_server_ciphers on;
-
-    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
-    add_header Strict-Transport-Security max-age=15768000;
-
-    # OCSP Stapling ---
-    # fetch OCSP records from URL in ssl_certificate and cache them
-    ssl_stapling on;
-    ssl_stapling_verify on;
-
-    ## verify chain of trust of OCSP response using Root CA and Intermediate certs
-    ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates; # 没有，注释掉。。。
-
-    resolver ; # 这里写域名的dns地址，比如我这个域名的 dns31.hichina.com dns32.hichina.com
-
-    ....
-}
-</code></pre>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2491,7 +2375,7 @@ server {
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2963,7 +2847,11 @@ server {
                     
                       
                     
-                    <span class="site-state-item-count">214</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">215</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>

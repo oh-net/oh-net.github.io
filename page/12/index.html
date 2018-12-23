@@ -353,6 +353,256 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/04/17/mongodb-e4-ba-bf-e7-ba-a7-e6-95-b0-e6-8d-ae-e9-87-8f-e7-9a-84-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/04/17/mongodb-e4-ba-bf-e7-ba-a7-e6-95-b0-e6-8d-ae-e9-87-8f-e7-9a-84-e6-80-a7-e8-83-bd-e6-b5-8b-e8-af-95/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/12/index.html">Mongodb亿级数据量的性能测试</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-04-17 13:41:34" itemprop="dateCreated datePublished" datetime="2017-04-17T13:41:34+08:00">2017-04-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 17:20:50" itemprop="dateModified" datetime="2018-12-12T17:20:50+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>进行了一下Mongodb亿级数据量的性能测试，分别测试如下几个项目：</p>
+<p> （所有插入都是单线程进行，所有读取都是多线程进行）</p>
+<p>1） 普通插入性能 （插入的数据每条大约在1KB左右） 2） 批量插入性能 （使用的是官方C#客户端的InsertBatch），这个测的是批量插入性能能有多少提高 3） 安全插入功能 （确保插入成功，使用的是SafeMode.True开关），这个测的是安全插入性能会差多少 4） 查询一个索引后的数字列，返回10条记录（也就是10KB）的性能，这个测的是索引查询的性能 5） 查询两个索引后的数字列，返回10条记录（每条记录只返回20字节左右的2个小字段）的性能，这个测的是返回小数据量以及多一个查询条件对性能的影响 6） 查询一个索引后的数字列，按照另一个索引的日期字段排序（索引建立的时候是倒序，排序也是倒序），并且Skip100条记录后返回10条记录的性能，这个测的是Skip和Order对性能的影响 7） 查询100条记录（也就是100KB）的性能（没有排序，没有条件），这个测的是大数据量的查询结果对性能的影响 8） 统计随着测试的进行，总磁盘占用，索引磁盘占用以及数据磁盘占用的数量 并且每一种测试都使用单进程的Mongodb和同一台服务器开三个Mongodb进程作为Sharding（每一个进程大概只能用7GB左右的内存）两种方案 其实对于Sharding，虽然是一台机器放3个进程，但是在查询的时候每一个并行进程查询部分数据，再有运行于另外一个机器的mongos来汇总数据，理论上来说在某些情况下性能会有点提高 基于以上的种种假设，猜测某些情况性能会下降，某些情况性能会提高，那么来看一下最后的测试结果怎么样？ 备注：测试的存储服务器是 E5620  @ 2.40GHz，24GB内存，CentOs操作系统，打压机器是E5504 @ 2.0GHz，4GB内存，Windows Server 2003操作系统，两者千兆网卡直连。 <img src="https://tech.msla.top/wp-content/uploads/2018/04/mongodb_erformance-462x1024.png" alt="" title="mongodb_erformance"> 从这个测试可以看出，对于单进程的方式： 1） Mongodb的非安全插入方式，在一开始插入性能是非常高的，但是在达到了两千万条数据之后性能骤减，这个时候恰巧是服务器24G内存基本占满的时候（随着测试的进行mongodb不断占据内存，一直到操作系统的内存全部占满），也就是说Mongodb的内存映射方式，使得数据全部在内存中的时候速度飞快，当部分数据需要换出到磁盘上之后，性能下降很厉害。（这个性能其实也不算太差，因为我们对三个列的数据做了索引，即使在内存满了之后每秒也能插入2MB的数据，在一开始更是每秒插入25MB数据）。Foursquare其实也是把Mongodb当作带持久化的内存数据库使用的，只是在查不到达到内存瓶颈的时候Sharding没处理好。 2） 对于批量插入功能，其实是一次提交一批数据，但是相比一次一条插入性能并没有提高多少，一来是因为网络带宽已经成为了瓶颈，二来我想写锁也会是一个原因。 3） 对于安全插入功能，相对来说比较稳定，不会波动很大，我想可能是因为安全插入是确保数据直接持久化到磁盘的，而不是插入内存就完事。 4） 对于一列条件的查询，性能一直比较稳定，别小看，每秒能有8000-9000的查询次数，每次返回10KB，相当于每秒查询80MB数据，而且数据库记录是2亿之后还能维持这个水平，性能惊人。 5） 对于二列条件返回小数据的查询，总体上性能会比4）好一点，可能返回的数据量小对性能提高比较大，但是相对来说性能波动也厉害一点，可能多了一个条件就多了一个从磁盘换页的机会。 6） 对于一列数据外加Sort和Skip的查询，在数据量大了之后性能明显就变差了（此时是索引数据量超过内存大小的时候，不知道是否有联系），我猜想是Skip比较消耗性能，不过和4）相比性能也不是差距特别大。 7） 对于返回大数据的查询，一秒瓶颈也有800次左右，也就是80M数据，这就进一步说明了在有索引的情况下，顺序查询和按条件搜索性能是相差无几的，这个时候是IO和网络的瓶颈。 8） 在整个过程中索引占的数据量已经占到了总数据量的相当大比例，在达到1亿4千万数据量的时候，光索引就可以占据整个内存，此时查询性能还是非常高，插入性能也不算太差，mongodb的性能确实很牛。 那么在来看看Sharding模式有什么亮点： 1） 非安全插入和单进程的配置一样，在内存满了之后性能急剧下降。安全插入性能和单进程相比慢不少，但是非常稳定。 2） 对于一个条件和两个条件的查询，性能都比较稳定，但条件查询性能相当于单进程的一半，但是在多条件下有的时候甚至会比单进程高一点。我想这可能是某些时候数据块位于两个Sharding，这样Mongos会并行在两个Sharding查询，然后在把数据进行合并汇总，由于查询返回的数据量小，网络不太可能成为瓶颈了，使得Sharding才有出头的机会。 3） 对于Order和Skip的查询，Sharding方式的差距就出来了，我想主要性能损失可能在Order，因为我们并没有按照排序字段作为Sharding的Key，使用的是_id作为Key，这样排序就比较难进行。 4） 对于返回大数据量的查询，Sharding方式其实和单进程差距不是很大，我想数据的转发可能是一个性能损耗的原因（虽然mongos位于打压机本机，但是数据始终是转手了一次）。 5） 对于磁盘空间的占用，两者其实是差不多的，其中的一些差距可能是因为多个进程都会多分配一点空间，加起来有的时候会比单进程多占用点磁盘（而那些占用比单进程少的地方其实是开始的编码错误，把实际数据大小和磁盘文件占用大小搞错了）。 测试最后的各个Sharding分布情况如下：</p>
+<pre><code>{
+    &quot;sharded&quot;:true,
+    &quot;ns&quot;:&quot;testdb.test&quot;,
+    &quot;count&quot;:209766143,
+    &quot;size&quot;:214800530672,
+    &quot;avgObjSize&quot;:1024.0000011441311,
+    &quot;storageSize&quot;:222462757776,
+    &quot;nindexes&quot;:4,
+    &quot;nchunks&quot;:823,
+    &quot;shards&quot;:{
+        &quot;shard0000&quot;:{
+            &quot;ns&quot;:&quot;testdb.test&quot;,
+            &quot;count&quot;:69474248,
+            &quot;size&quot;:71141630032,
+            &quot;avgObjSize&quot;:1024.0000011515058,
+            &quot;storageSize&quot;:74154252592,
+            &quot;numExtents&quot;:65,
+            &quot;nindexes&quot;:4,
+            &quot;lastExtentSize&quot;:2146426864,
+            &quot;paddingFactor&quot;:1,
+            &quot;flags&quot;:1,
+            &quot;totalIndexSize&quot;:11294125824,
+            &quot;indexSizes&quot;:{
+                &quot;_id_&quot;:2928157632,
+                &quot;Number_1&quot;:2832745408,
+                &quot;Number1_1&quot;:2833974208,
+                &quot;Date_-1&quot;:2699248576
+            },
+            &quot;ok&quot;:1
+        },
+        &quot;shard0001&quot;:{
+            &quot;ns&quot;:&quot;testdb.test&quot;,
+            &quot;count&quot;:70446092,
+            &quot;size&quot;:72136798288,
+            &quot;avgObjSize&quot;:1024.00000113562,
+            &quot;storageSize&quot;:74154252592,
+            &quot;numExtents&quot;:65,
+            &quot;nindexes&quot;:4,
+            &quot;lastExtentSize&quot;:2146426864,
+            &quot;paddingFactor&quot;:1,
+            &quot;flags&quot;:1,
+            &quot;totalIndexSize&quot;:11394068224,
+            &quot;indexSizes&quot;:{
+                &quot;_id_&quot;:2969355200,
+                &quot;Number_1&quot;:2826453952,
+                &quot;Number1_1&quot;:2828403648,
+                &quot;Date_-1&quot;:2769855424
+            },
+            &quot;ok&quot;:1
+        },
+        &quot;shard0002&quot;:{
+            &quot;ns&quot;:&quot;testdb.test&quot;,
+            &quot;count&quot;:69845803,
+            &quot;size&quot;:71522102352,
+            &quot;avgObjSize&quot;:1024.00000114538,
+            &quot;storageSize&quot;:74154252592,
+            &quot;numExtents&quot;:65,
+            &quot;nindexes&quot;:4,
+            &quot;lastExtentSize&quot;:2146426864,
+            &quot;paddingFactor&quot;:1,
+            &quot;flags&quot;:1,
+            &quot;totalIndexSize&quot;:11300515584,
+            &quot;indexSizes&quot;:{
+                &quot;_id_&quot;:2930942912,
+                &quot;Number_1&quot;:2835243968,
+                &quot;Number1_1&quot;:2835907520,
+                &quot;Date_-1&quot;:2698421184
+            },
+            &quot;ok&quot;:1
+        }
+    },
+    &quot;ok&quot;:1
+}
+</code></pre><p>  虽然在最后由于时间的关系，没有测到10亿级别的数据量，但是通过这些数据已经可以证明Mongodb的性能是多么强劲了。另外一个原因是，在很多时候可能数据只达到千万我们就会对库进行拆分，不会让一个库的索引非常庞大。在测试的过程中还发现几个问题需要值得注意： 1） 在数据量很大的情况下，对服务进行重启，那么服务启动的初始化阶段，虽然可以接受数据的查询和修改，但是此时性能很差，因为mongodb会不断把数据从磁盘换入内存，此时的IO压力非常大。 2） 在数据量很大的情况下，如果服务没有正常关闭，那么Mongodb启动修复数据库的时间非常可观，在1.8中退出的-dur貌似可以解决这个问题，据官方说对读取没影响，写入速度会稍稍降低，有空我也会再进行下测试。 3） 在使用Sharding的时候，Mongodb时不时会对数据拆分搬迁，这个时候性能下降很厉害，虽然从测试图中看不出（因为我每一次测试都会测试比较多的迭代次数），但是我在实际观察中可以发现，在搬迁数据的时候每秒插入性能可能会低到几百条。其实我觉得能手动切分数据库就手动切分或者手动做历史库，不要依赖这种自动化的Sharding，因为一开始数据就放到正确的位置比分隔再搬迁效率不知道高多少。个人认为Mongodb单数据库存储不超过1亿的数据比较合适，再大还是手动分库吧。 4） 对于数据的插入，如果使用多线程并不会带来性能的提高，反而还会下降一点性能（并且可以在http接口上看到，有大量的线程处于等待）。 5） 在整个测试过程中，批量插入的时候遇到过几次连接被远程计算机关闭的错误，怀疑是有的时候Mongodb不稳定关闭了连接，或是官方的C#客户端有BUG，但是也仅仅是在数据量特别大的时候遇到几次。</p>
+<hr>
+<p>最新补充：在之后我又进行了几天测试，把测试数据量进一步加大到5亿，总磁盘占用超过500G，发现和2亿数据量相比，所有性能都差不多，只是测试6和测试7在超过2亿级别数据之后，每400万记录作为一个循环，上下波动30%的性能，非常有规律。 文章来源： <a href="http://www.taocms.org/435.html" target="_blank" rel="noopener">http://www.taocms.org/435.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/04/12/php-tips/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -1995,250 +2245,6 @@ sudo rm /usr/share/nginx/html/info.php
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/12/index.html">CentOS下pip和shadowsocks的安装使用</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-04-27 14:57:13" itemprop="dateCreated datePublished" datetime="2016-04-27T14:57:13+08:00">2016-04-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 16:59:08" itemprop="dateModified" datetime="2018-12-12T16:59:08+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>centos 我机器上装的时候，不能直接通过yum install pip, 而通过下面的， easy_install 安装成功了。</p>
-<blockquote>
-<p>可以通过使用 “sudo yum install epel-release” 来安装 python-pip</p>
-</blockquote>
-<p>另一点要注意的是，配置文件中的名称和值之间虽然是通过冒号分割的，但是还是要留出空格，否则会提示找不到服务器: <strong>“server”:”123.123.123.123” // 错误！</strong> <strong>“server” : “123.123.123.123” // 正确</strong> Pip是安装Python包的工具，提供了安装、列举已安装包、升级以及卸载包的功能。Pip 是对easy_install的取代，提供了和easy_install相同的查找包的功能，因此可以使用easy_install安装的包也同样可以使用pip进行安装。 目前有很多Python程序都是可以直接通过Pip来一键安装了，比如众所周知的Django、Markdown、Shadowsocks等。 简要介绍一下Pip的用法（以安装Shadowsocks举例）： 1、安装package</p>
-<pre><code>pip install shadowsocks
-</code></pre><p>  2、列出已安装的packages</p>
-<pre><code>pip freeze
-</code></pre><p>3、安装特定版本的package</p>
-<pre><code>pip install shadowsocks=1.3.3′
-pip install shadowsocks&gt;1.0,&lt;1.3.3′
-</code></pre><p>4、升级已安装的package到最新版本</p>
-<pre><code>pip install -U shadowsocks
-</code></pre><p>5、卸载已安装的package</p>
-<pre><code>pip uninstall shadowsocks
-</code></pre><p>6、查询已安装的package</p>
-<pre><code>pip search “shadowsocks”
-</code></pre><p>安装Pip之前必须要先安装setuptools，安装setuptools之前，必须要安装了Python，这之间的安装过程存在依赖关系，缺一不可。因此，整个过程还是比较麻烦的。 1、 检查Python版本</p>
-<pre><code>python –version
-</code></pre><p>CentOS 6.5默认安装的Python版本是2.6.6，返回值为：Python 2.6.6 2、 安装setuptools</p>
-<pre><code>yum install -y python-setuptools
-</code></pre><p>安装完毕后，easy_install命令就可以使用了。 3、 安装pip</p>
-<pre><code>easy_install pip
-</code></pre><p>通过easy_install安装pip是最为简单的方法。pip默认安装到/usr/bin目录下。 4、 安装shadowsocks</p>
-<pre><code>pip install shadowsocks
-</code></pre><p>截至目前，通过pip安装的shadowsocks版本为2.8.2 [2018-2-1] Shadowsocks的配置和使用 至于Shadowsocks可以拿来做什么，这里就毋须赘述了。直接开始吧。 1、 创建Shadowsocks的配置文件： CentOS下通过vim创建该配置，运行命令：</p>
-<pre><code>vi /etc/config.json
-</code></pre><p>内容如下：</p>
-<pre><code>{
-  &quot;server&quot;:&quot;my_server_ip&quot;,
-  &quot;server_port&quot;:8989,
-  &quot;local_port&quot;:1080,
-  &quot;password&quot;:&quot;teddysun.com&quot;,
-  &quot;timeout&quot;:600,
-  &quot;method&quot;:&quot;aes-256-cfb&quot;
-}
-</code></pre><p>  各字段的含义：</p>
-<pre><code>server  服务器 IP (IPv4/IPv6)，注意这也将是服务端监听的 IP 地址
-server_port  服务器端口
-local_port  本地端端口
-password  用来加密的密码
-timeout  超时时间（秒）
-method  加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”, “rc4″, 等等。默认是一种不安全的加密，推荐用 “aes-256-cfb”
-</code></pre><p>创建完毕后，赋予权限：</p>
-<pre><code>chmod 755 /etc/config.json
-</code></pre><p>2、 安装M2Crypto 默认加密方法 table 速度很快，但很不安全。推荐使用 “aes-256-cfb” 或者 “bf-cfb”。请不要使用 “rc4″，它不安全。如果选择 “table” 之外的加密，需要安装 M2Crypto。 先安装依赖包：</p>
-<pre><code>yum install -y openssl-devel gcc swig python-devel autoconf libtool
-</code></pre><p>安装setuptools：</p>
-<pre><code>wget --no-check-certificate https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
-python ez_setup.py install再通过pip安装M2Crypto：
-pip install M2Crypto
-</code></pre><p>  3、 安装 gevent 安装 gevent可以提高 Shadowsocks 的性能。CentOS下安装gevent依赖libevent和greenlet。 安装libevent：</p>
-<pre><code>yum install -y libevent
-</code></pre><p>安装greenlet：</p>
-<pre><code>pip install greenlet
-</code></pre><p>安装gevent：</p>
-<pre><code>pip install gevent
-</code></pre><p>4、 命令行参数（服务器端启动命令）</p>
-<pre><code>ssserver -c /etc/config.json
-</code></pre><p>如果想在后台一直运行Shadowsocks，启动命令如下：</p>
-<pre><code>nohup ssserver -c /etc/config.json &gt; /dev/null 2&gt;&amp;1 &amp;备注：关于nohup，是可以让程序在后台运行的命令，当执行以上命令后，屏幕输出进程的pid，同时提示：
-nohup: ignoring input and redirecting stderr to stdout
-</code></pre><p>此时，再次回车一下，回到shell输入命令窗口即可。 同时可以用命令行参数覆盖 config.json 里的设置：</p>
-<pre><code>sslocal -s 服务器地址 -p 服务器端口 -l 本地端端口 -k 密码 -m 加密方法
-ssserver -p 服务器端口 -k 密码 -m 加密方法
-</code></pre><p>备注：sslocal是客户端程序；ssserver是服务端程序。 5、 防火墙设置（如有） 编辑防火墙配置文件/etc/sysconfig/iptables，将服务器端口（server_port）放行。 新增一条防火墙规则：</p>
-<pre><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 8989 -j ACCEPT重启防火墙iptables：
-service iptables restart
-</code></pre><p>至此，服务器端的Shadowsocks安装和配置完毕。 6、客户端配置 Windows客户端有图形界面也有命令行，我们这里以配置图形化界面的shadowsocks-csharp为例说明。 下载客户端shadowsocks-csharp（最新版1.1.2）： <a href="https://shadowsocks-csharp.googlecode.com/files/shadowsocks-csharp-1.1.2.zip" target="_blank" rel="noopener">https://shadowsocks-csharp.googlecode.com/files/shadowsocks-csharp-1.1.2.zip</a> 解压至任意目录下，双击shadowsocks-csharp.exe运行程序，各参数选项填入： <img src="https://tech.msla.top/wp-content/uploads/2018/04/20140227040626597.png" alt="CentOS下pip和shadowsocks的安装使用"></p>
-<pre><code>Server IP:   服务器 IP (IPv4/IPv6)，填入在服务器端设置的IP地址（server）
-Server Port: 服务器端口，填入在服务器端设置的端口号（server_port）
-Password:    用来加密的密码，填入在服务器端设置的加密密码（password）
-Proxy Port:  本地端代理的端口，填入在服务器端设置的本地端端口（local_port）
-Encryptor:   加密方法，填入在服务器端设置的加密方法（method）
-</code></pre><p>备注：本地客户端填写的参数一定要与服务器端设置的一致才可以。 下面就可以利用浏览器插件无障碍浏览国外网站了。插件的设置过程这里略过。 AutoProxy（用于Firefox）、Proxy SwitchySharp（用于Chrome）</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2286,7 +2292,7 @@ Encryptor:   加密方法，填入在服务器端设置的加密方法（method�
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2758,7 +2764,11 @@ Encryptor:   加密方法，填入在服务器端设置的加密方法（method�
                     
                       
                     
-                    <span class="site-state-item-count">214</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">215</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>

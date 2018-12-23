@@ -353,6 +353,333 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/07/06/owncloud-e9-85-8d-e7-bd-ae-e5-b0-8f-e8-ae-b0/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/07/06/owncloud-e9-85-8d-e7-bd-ae-e5-b0-8f-e8-ae-b0/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/10/index.html">owncloud 配置小记</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-07-06 11:47:58" itemprop="dateCreated datePublished" datetime="2017-07-06T11:47:58+08:00">2017-07-06</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 17:21:19" itemprop="dateModified" datetime="2018-12-12T17:21:19+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>本文记录了自用 owncloud 的配置情况， 目前我用的是 10.0.2，界面比原来漂亮很多，用起来似乎也更舒服了 官方文档其实非常全，英文好的还是仔细读读原文吧， 这里是我个人的服务器配置： <strong>PHP 环境变量：</strong> 除了<a href="http://www.conf" target="_blank" rel="noopener">www.conf</a> 中的owner-user/owner-group、listen 之外，还要配置环境变量 我的： <code>vim /etc/php/7.0/fpm/pool.d/www.conf</code> 搜索 <code>HOSTNAME</code> 可以找到类似下面的段落：</p>
+<pre><code>;env[HOSTNAME] = $HOSTNAME
+;env[PATH] = /usr/local/bin:/usr/bin:/bin
+;env[TMP] = /tmp
+;env[TMPDIR] = /tmp
+;env[TEMP] = /tmp
+</code></pre><p>把前面的注释（;）去掉，然后 <code>systemctl restart php7.0-fpm.service</code> 重启 PHP-FPM <strong>nginx 的配置：</strong></p>
+<pre><code># /etc/nginx/nginx.conf 没改动任何配置项
+# vim /etc/nginx/site-enabled/default :
+upstream php-handler {
+    server unix:/run/php/php7.0-fpm.sock; # 本机 php-fpm handler 路径
+}
+# ==== SSL 证书的配置 ====
+# ......
+# ==== end SSL 证书的配置 end ====
+    # Add headers to serve security related headers
+    # Before enabling Strict-Transport-Security headers please read into this topic first.
+    #add_header Strict-Transport-Security &quot;max-age=15552000; includeSubDomains&quot;;
+    add_header X-Content-Type-Options nosniff;
+    add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
+    add_header X-XSS-Protection &quot;1; mode=block&quot;;
+    add_header X-Robots-Tag none;
+    add_header X-Download-Options noopen;
+    add_header X-Permitted-Cross-Domain-Policies none;
+
+    # Path to the root of your installation
+    root /var/www/html/owncloud/;
+
+    location = /robots.txt {
+        allow all;
+        log_not_found off;
+        access_log off;
+    }
+
+    # The following 2 rules are only needed for the user_webfinger app.
+    # Uncomment it if you&apos;re planning to use this app.
+    #rewrite ^/.well-known/host-meta /public.php?service=host-meta last;
+    #rewrite ^/.well-known/host-meta.json /public.php?service=host-meta-json last;
+
+    location = /.well-known/carddav {
+        return 301 $scheme://$host/remote.php/dav;
+    }
+    location = /.well-known/caldav {
+        return 301 $scheme://$host/remote.php/dav;
+    }
+
+    location ^~ /.well-known/acme-challenge { }
+
+    # set max upload size
+    client_max_body_size 512M;
+    fastcgi_buffers 64 4K;
+
+    # Disable gzip to avoid the removal of the ETag header
+    gzip off;
+ # Uncomment if your server is build with the ngx_pagespeed module
+    # This module is currently not supported.
+    #pagespeed off;
+
+    error_page 403 /core/templates/403.php;
+    error_page 404 /core/templates/404.php;
+
+    location / {
+        rewrite ^ /index.php$uri;
+    }
+
+    location ~ ^/(?:build|tests|config|lib|3rdparty|templates|data)/ {
+        return 404;
+    }
+    location ~ ^/(?:.|autotest|occ|issue|indie|db_|console) {
+        return 404;
+    }
+
+    location ~ ^/(?:index|remote|public|cron|core/ajax/update|status|ocs/v[12]|updater/.+|ocs-provider/.+|core/templates/40[34]).php(?:$|/) {
+        fastcgi_split_path_info ^(.+.php)(/.*)$;
+        include fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        fastcgi_param PATH_INFO $fastcgi_path_info;
+        # fastcgi_param HTTPS on;
+        fastcgi_param modHeadersAvailable true; #Avoid sending the security headers twice
+        fastcgi_param front_controller_active true;
+        fastcgi_pass php-handler;
+        fastcgi_intercept_errors on;
+        fastcgi_request_buffering off; #Available since NGINX 1.7.11
+    }
+
+    location ~ ^/(?:updater|ocs-provider)(?:$|/) {
+        try_files $uri $uri/ =404;
+        index index.php;
+    }
+# Adding the cache control header for js and css files
+    # Make sure it is BELOW the PHP block
+    location ~* .(?:css|js)$ {
+        try_files $uri /index.php$uri$is_args$args;
+        add_header Cache-Control &quot;max-age=15778463&quot;;
+        # Add headers to serve security related headers (It is intended to have those duplicated to the ones above)
+        # Before enabling Strict-Transport-Security headers please read into this topic first.
+        #add_header Strict-Transport-Security &quot;max-age=15552000; includeSubDomains&quot;;
+        add_header X-Content-Type-Options nosniff;
+        add_header X-Frame-Options &quot;SAMEORIGIN&quot;;
+        add_header X-XSS-Protection &quot;1; mode=block&quot;;
+        add_header X-Robots-Tag none;
+        add_header X-Download-Options noopen;
+        add_header X-Permitted-Cross-Domain-Policies none;
+        # Optional: Don&apos;t log access to assets
+        access_log off;
+    }
+
+    location ~* .(?:svg|gif|png|html|ttf|woff|ico|jpg|jpeg)$ {
+        try_files $uri /index.php$uri$is_args$args;
+        # Optional: Don&apos;t log access to other assets
+        access_log off;
+    }
+}
+</code></pre><p><strong>SSL 证书的配置块：</strong></p>
+<pre><code>server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    # Redirect all HTTP requests to HTTPS with a 301 Moved Permanently response.
+    return 301 https://$host$request_uri;
+}
+
+server {
+    listen 443 ssl http2;
+    listen [::]:443 ssl http2;
+
+    # certs sent to the client in SERVER HELLO are concatenated in ssl_certificate
+    ssl_certificate /path/to/signed_cert_plus_intermediates; # crt 文件的路径，该文件权限最好设置成 400
+    ssl_certificate_key /path/to/private_key; # key 文件的路径，该文件权限最好设置成 400
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:SSL:50m;
+    ssl_session_tickets off;
+
+    # Diffie-Hellman parameter for DHE ciphersuites, recommended 2048 bits
+    ssl_dhparam /path/to/dhparam.pem; # 没有，注释掉。。。
+
+    # intermediate configuration. tweak to your needs.
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_ciphers &apos;ECDHE-ECDSA-CHACHA20-POLY1305:ECDHE-RSA-CHACHA20-POLY1305:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-RSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES128-SHA:DHE-RSA-AES256-SHA256:DHE-RSA-AES256-SHA:ECDHE-ECDSA-DES-CBC3-SHA:ECDHE-RSA-DES-CBC3-SHA:EDH-RSA-DES-CBC3-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:DES-CBC3-SHA:!DSS&apos;;
+    ssl_prefer_server_ciphers on;
+
+    # HSTS (ngx_http_headers_module is required) (15768000 seconds = 6 months)
+    add_header Strict-Transport-Security max-age=15768000;
+
+    # OCSP Stapling ---
+    # fetch OCSP records from URL in ssl_certificate and cache them
+    ssl_stapling on;
+    ssl_stapling_verify on;
+
+    ## verify chain of trust of OCSP response using Root CA and Intermediate certs
+    ssl_trusted_certificate /path/to/root_CA_cert_plus_intermediates; # 没有，注释掉。。。
+
+    resolver ; # 这里写域名的dns地址，比如我这个域名的 dns31.hichina.com dns32.hichina.com
+
+    ....
+}
+</code></pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/07/04/php-e6-95-b0-e7-bb-84-e8-bd-ac-e6-8d-a2-e4-b8-bajavascript-e6-95-b0-e7-bb-84-e7-9a-84-e6-96-b9-e6-b3-95/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2154,325 +2481,6 @@ $KEY_INFO = array(
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/05/31/php-e5-a4-9a-e7-bb-b4-e6-95-b0-e7-bb-84-e6-8e-92-e5-ba-8f-e6-96-b9-e6-b3-95/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/05/31/php-e5-a4-9a-e7-bb-b4-e6-95-b0-e7-bb-84-e6-8e-92-e5-ba-8f-e6-96-b9-e6-b3-95/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/10/index.html">PHP 多维数组排序方法</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-05-31 15:59:42" itemprop="dateCreated datePublished" datetime="2017-05-31T15:59:42+08:00">2017-05-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:22:01" itemprop="dateModified" datetime="2018-12-12T17:22:01+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>接口需要，要对一些数组进行排序， 从数据库方面操作起来很麻烦， 只能放到程序里面去做， 发现默认的<strong>sort</strong>排序很奇怪，不知道为什么把一些以数字开头的key的item不放在第一位。。。 Google之，发现可以使用 <strong>usort()</strong> 这个方法： <a href="http://php.net/manual/zh/function.usort.php" target="_blank" rel="noopener">http://php.net/manual/zh/function.usort.php</a> 先来看原始数组是什么样子的：</p>
-<pre><code>Array
-(
-    [0] =&gt; Array
-        (
-            [brand_id] =&gt; -10
-            [brand_name] =&gt; 天猫 面膜
-            [status] =&gt; 3
-            [favourite] =&gt; 0
-        )
-
-    [1] =&gt; Array
-        (
-            [brand_id] =&gt; 20032
-            [brand_name] =&gt; A. by bom
-            [status] =&gt; 1
-            [favourite] =&gt; 1
-        )
-
-    [2] =&gt; Array
-        (
-            [brand_id] =&gt; 20063
-            [brand_name] =&gt; 妆色
-            [status] =&gt; 1
-            [favourite] =&gt; 1
-        )
-
-    [3] =&gt; Array
-        (
-            [brand_id] =&gt; 20161
-            [brand_name] =&gt; 安米娜
-            [status] =&gt; 1
-            [favourite] =&gt; 1
-        )
-
-    [4] =&gt; Array
-        (
-            [brand_id] =&gt; 20823
-            [brand_name] =&gt; 瑰柏翠
-            [status] =&gt; 1
-            [favourite] =&gt; 1
-        )
-
-    [5] =&gt; Array
-        (
-            [brand_id] =&gt; 21325
-            [brand_name] =&gt; 芙丽诗贝
-            [status] =&gt; 1
-            [favourite] =&gt; 1
-        )
-
-    [6] =&gt; Array
-        (
-            [brand_id] =&gt; 21443
-            [brand_name] =&gt; gram
-            [status] =&gt; 1
-            [favourite] =&gt; 1
-        )
-
-    [7] =&gt; Array
-        (
-            [brand_id] =&gt; 22115
-            [brand_name] =&gt; 蕾舒翠
-            [status] =&gt; 1
-            [favourite] =&gt; 1
-        )
-
-    [8] =&gt; Array
-        (
-            [brand_id] =&gt; 23356
-            [brand_name] =&gt; 台盐
-            [status] =&gt; 1
-            [favourite] =&gt; 1
-        )
-
-    [9] =&gt; Array
-        (
-            [brand_id] =&gt; 23029
-            [brand_name] =&gt; SASA
-            [status] =&gt; 0
-            [favourite] =&gt; 1
-        )
-
-    [10] =&gt; Array
-        (
-            [brand_id] =&gt; 23444
-            [brand_name] =&gt; 魔法森林
-            [status] =&gt; 0
-            [favourite] =&gt; 1
-        )
-
-    [11] =&gt; Array
-        (
-            [brand_id] =&gt; 25589
-            [brand_name] =&gt; 纯即
-            [status] =&gt; 0
-            [favourite] =&gt; 1
-        )
-
-    [12] =&gt; Array
-        (
-            [brand_id] =&gt; 24293
-            [brand_name] =&gt; 同仁堂
-            [status] =&gt; 0
-            [favourite] =&gt; 1
-        )
-
-    [13] =&gt; Array
-        (
-            [brand_id] =&gt; 20003
-            [brand_name] =&gt; 10度
-            [status] =&gt; 0
-            [favourite] =&gt; 0
-        )
-
-    [14] =&gt; Array
-        (
-            [brand_id] =&gt; 20014
-            [brand_name] =&gt; 3 CONCEPT EYES
-            [status] =&gt; 0
-            [favourite] =&gt; 0
-        )
-
-    [15] =&gt; Array
-        (
-            [brand_id] =&gt; 20033
-            [brand_name] =&gt; 珂泊亚
-            [status] =&gt; 0
-            [favourite] =&gt; 0
-        )
-)
-</code></pre><p>要求是，不要按照brand_id排，而是按照 brand_name，这个 brand_name 来头不小——不是一成不变的，而是会根据用户语言自行变化，比如英文环境下 A.H.C 这个品牌，到中文中会显示成 柯泊亚， 解决方法：</p>
-<pre><code>//声明
-    private function custom_sort($key){
-        return function ($a, $b) use ($key) {
-            return strnatcmp($a[$key], $b[$key]);
-        };
-    }
-
-/*
-....
-....
-....
-*/
-
-//调用
-usort($arr_brands,$this-&gt;custom_sort(&apos;brand_name&apos;));
-</code></pre><p>排序结果： <img src="https://tech.msla.top/wp-content/uploads/2018/04/592e77bee75a5.png" alt="20170531_001_0079.png" title="20170531_001_0079.png"></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2520,7 +2528,7 @@ usort($arr_brands,$this-&gt;custom_sort(&apos;brand_name&apos;));
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2992,7 +3000,11 @@ usort($arr_brands,$this-&gt;custom_sort(&apos;brand_name&apos;));
                     
                       
                     
-                    <span class="site-state-item-count">214</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">215</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>

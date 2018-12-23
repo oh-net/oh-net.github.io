@@ -353,6 +353,250 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/04/27/centos-e4-b8-8bpip-e5-92-8cshadowsocks-e7-9a-84-e5-ae-89-e8-a3-85-e4-bd-bf-e7-94-a8/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/13/index.html">CentOS下pip和shadowsocks的安装使用</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-04-27 14:57:13" itemprop="dateCreated datePublished" datetime="2016-04-27T14:57:13+08:00">2016-04-27</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 16:59:08" itemprop="dateModified" datetime="2018-12-12T16:59:08+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>centos 我机器上装的时候，不能直接通过yum install pip, 而通过下面的， easy_install 安装成功了。</p>
+<blockquote>
+<p>可以通过使用 “sudo yum install epel-release” 来安装 python-pip</p>
+</blockquote>
+<p>另一点要注意的是，配置文件中的名称和值之间虽然是通过冒号分割的，但是还是要留出空格，否则会提示找不到服务器: <strong>“server”:”123.123.123.123” // 错误！</strong> <strong>“server” : “123.123.123.123” // 正确</strong> Pip是安装Python包的工具，提供了安装、列举已安装包、升级以及卸载包的功能。Pip 是对easy_install的取代，提供了和easy_install相同的查找包的功能，因此可以使用easy_install安装的包也同样可以使用pip进行安装。 目前有很多Python程序都是可以直接通过Pip来一键安装了，比如众所周知的Django、Markdown、Shadowsocks等。 简要介绍一下Pip的用法（以安装Shadowsocks举例）： 1、安装package</p>
+<pre><code>pip install shadowsocks
+</code></pre><p>  2、列出已安装的packages</p>
+<pre><code>pip freeze
+</code></pre><p>3、安装特定版本的package</p>
+<pre><code>pip install shadowsocks=1.3.3′
+pip install shadowsocks&gt;1.0,&lt;1.3.3′
+</code></pre><p>4、升级已安装的package到最新版本</p>
+<pre><code>pip install -U shadowsocks
+</code></pre><p>5、卸载已安装的package</p>
+<pre><code>pip uninstall shadowsocks
+</code></pre><p>6、查询已安装的package</p>
+<pre><code>pip search “shadowsocks”
+</code></pre><p>安装Pip之前必须要先安装setuptools，安装setuptools之前，必须要安装了Python，这之间的安装过程存在依赖关系，缺一不可。因此，整个过程还是比较麻烦的。 1、 检查Python版本</p>
+<pre><code>python –version
+</code></pre><p>CentOS 6.5默认安装的Python版本是2.6.6，返回值为：Python 2.6.6 2、 安装setuptools</p>
+<pre><code>yum install -y python-setuptools
+</code></pre><p>安装完毕后，easy_install命令就可以使用了。 3、 安装pip</p>
+<pre><code>easy_install pip
+</code></pre><p>通过easy_install安装pip是最为简单的方法。pip默认安装到/usr/bin目录下。 4、 安装shadowsocks</p>
+<pre><code>pip install shadowsocks
+</code></pre><p>截至目前，通过pip安装的shadowsocks版本为2.8.2 [2018-2-1] Shadowsocks的配置和使用 至于Shadowsocks可以拿来做什么，这里就毋须赘述了。直接开始吧。 1、 创建Shadowsocks的配置文件： CentOS下通过vim创建该配置，运行命令：</p>
+<pre><code>vi /etc/config.json
+</code></pre><p>内容如下：</p>
+<pre><code>{
+  &quot;server&quot;:&quot;my_server_ip&quot;,
+  &quot;server_port&quot;:8989,
+  &quot;local_port&quot;:1080,
+  &quot;password&quot;:&quot;teddysun.com&quot;,
+  &quot;timeout&quot;:600,
+  &quot;method&quot;:&quot;aes-256-cfb&quot;
+}
+</code></pre><p>  各字段的含义：</p>
+<pre><code>server  服务器 IP (IPv4/IPv6)，注意这也将是服务端监听的 IP 地址
+server_port  服务器端口
+local_port  本地端端口
+password  用来加密的密码
+timeout  超时时间（秒）
+method  加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”, “rc4″, 等等。默认是一种不安全的加密，推荐用 “aes-256-cfb”
+</code></pre><p>创建完毕后，赋予权限：</p>
+<pre><code>chmod 755 /etc/config.json
+</code></pre><p>2、 安装M2Crypto 默认加密方法 table 速度很快，但很不安全。推荐使用 “aes-256-cfb” 或者 “bf-cfb”。请不要使用 “rc4″，它不安全。如果选择 “table” 之外的加密，需要安装 M2Crypto。 先安装依赖包：</p>
+<pre><code>yum install -y openssl-devel gcc swig python-devel autoconf libtool
+</code></pre><p>安装setuptools：</p>
+<pre><code>wget --no-check-certificate https://bitbucket.org/pypa/setuptools/raw/bootstrap/ez_setup.py
+python ez_setup.py install再通过pip安装M2Crypto：
+pip install M2Crypto
+</code></pre><p>  3、 安装 gevent 安装 gevent可以提高 Shadowsocks 的性能。CentOS下安装gevent依赖libevent和greenlet。 安装libevent：</p>
+<pre><code>yum install -y libevent
+</code></pre><p>安装greenlet：</p>
+<pre><code>pip install greenlet
+</code></pre><p>安装gevent：</p>
+<pre><code>pip install gevent
+</code></pre><p>4、 命令行参数（服务器端启动命令）</p>
+<pre><code>ssserver -c /etc/config.json
+</code></pre><p>如果想在后台一直运行Shadowsocks，启动命令如下：</p>
+<pre><code>nohup ssserver -c /etc/config.json &gt; /dev/null 2&gt;&amp;1 &amp;备注：关于nohup，是可以让程序在后台运行的命令，当执行以上命令后，屏幕输出进程的pid，同时提示：
+nohup: ignoring input and redirecting stderr to stdout
+</code></pre><p>此时，再次回车一下，回到shell输入命令窗口即可。 同时可以用命令行参数覆盖 config.json 里的设置：</p>
+<pre><code>sslocal -s 服务器地址 -p 服务器端口 -l 本地端端口 -k 密码 -m 加密方法
+ssserver -p 服务器端口 -k 密码 -m 加密方法
+</code></pre><p>备注：sslocal是客户端程序；ssserver是服务端程序。 5、 防火墙设置（如有） 编辑防火墙配置文件/etc/sysconfig/iptables，将服务器端口（server_port）放行。 新增一条防火墙规则：</p>
+<pre><code>-A INPUT -m state --state NEW -m tcp -p tcp --dport 8989 -j ACCEPT重启防火墙iptables：
+service iptables restart
+</code></pre><p>至此，服务器端的Shadowsocks安装和配置完毕。 6、客户端配置 Windows客户端有图形界面也有命令行，我们这里以配置图形化界面的shadowsocks-csharp为例说明。 下载客户端shadowsocks-csharp（最新版1.1.2）： <a href="https://shadowsocks-csharp.googlecode.com/files/shadowsocks-csharp-1.1.2.zip" target="_blank" rel="noopener">https://shadowsocks-csharp.googlecode.com/files/shadowsocks-csharp-1.1.2.zip</a> 解压至任意目录下，双击shadowsocks-csharp.exe运行程序，各参数选项填入： <img src="https://tech.msla.top/wp-content/uploads/2018/04/20140227040626597.png" alt="CentOS下pip和shadowsocks的安装使用"></p>
+<pre><code>Server IP:   服务器 IP (IPv4/IPv6)，填入在服务器端设置的IP地址（server）
+Server Port: 服务器端口，填入在服务器端设置的端口号（server_port）
+Password:    用来加密的密码，填入在服务器端设置的加密密码（password）
+Proxy Port:  本地端代理的端口，填入在服务器端设置的本地端端口（local_port）
+Encryptor:   加密方法，填入在服务器端设置的加密方法（method）
+</code></pre><p>备注：本地客户端填写的参数一定要与服务器端设置的一致才可以。 下面就可以利用浏览器插件无障碍浏览国外网站了。插件的设置过程这里略过。 AutoProxy（用于Firefox）、Proxy SwitchySharp（用于Chrome）</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2016/04/11/e4-bb-80-e4-b9-88-e6-97-b6-e5-80-99-e8-af-a5-e4-bd-bf-e7-94-a8-lvm-ef-bc-9f/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1977,180 +2221,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2016/03/03/msdn-e5-ae-98-e6-96-b9-e4-bb-a3-e7-a0-81-ef-bc-9a-e6-95-b0-e6-8d-ae-e8-bd-ac-e6-8d-a2-e6-97-b6-e9-9c-80-e8-a6-81-e6-8d-95-e8-8e-b7-e7-9a-84-e5-bc-82-e5-b8-b8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2016/03/03/msdn-e5-ae-98-e6-96-b9-e4-bb-a3-e7-a0-81-ef-bc-9a-e6-95-b0-e6-8d-ae-e8-bd-ac-e6-8d-a2-e6-97-b6-e9-9c-80-e8-a6-81-e6-8d-95-e8-8e-b7-e7-9a-84-e5-bc-82-e5-b8-b8/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/13/index.html">MSDN官方代码：数据转换时需要捕获的异常</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2016-03-03 16:48:40" itemprop="dateCreated datePublished" datetime="2016-03-03T16:48:40+08:00">2016-03-03</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:20:50" itemprop="dateModified" datetime="2018-12-12T17:20:50+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>记录下，经常做数据转换，但是捕获异常时有哪些可以做却被忽略了，查了下官方，摘录代码如下</p>
-<p>int newInteger = 0;<br>try {<br>    System.Console.WriteLine(“Enter an integer:”);<br>    newInteger = System.Convert.ToInt32(<br>                        System.Console.ReadLine());<br>}<br>catch (System.ArgumentNullException) {<br>    System.Console.WriteLine(“String is null.”);<br>}<br>catch (System.FormatException) {<br>    System.Console.WriteLine(“String does not consist of an “ +<br>                    “optional sign followed by a series of digits.”);<br>}<br>catch (System.OverflowException) {<br>    System.Console.WriteLine(<br>    “Overflow in string to int conversion.”);<br>}</p>
-<p>来源： <a href="https://msdn.microsoft.com/en-us/library/system.convert(v=vs.110).aspx" target="_blank" rel="noopener">https://msdn.microsoft.com/en-us/library/system.convert(v=vs.110).aspx</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2198,7 +2268,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2670,7 +2740,11 @@
                     
                       
                     
-                    <span class="site-state-item-count">214</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">215</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>

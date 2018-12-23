@@ -353,6 +353,179 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2015/05/28/c-e7-94-9f-e6-88-90-e5-a4-a7-e9-87-8f16-e4-bd-8d-e9-9a-8f-e6-9c-ba-e6-95-b0/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2015/05/28/c-e7-94-9f-e6-88-90-e5-a4-a7-e9-87-8f16-e4-bd-8d-e9-9a-8f-e6-9c-ba-e6-95-b0/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/17/index.html">C# 生成大量16位随机数</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-05-28 18:10:00" itemprop="dateCreated datePublished" datetime="2015-05-28T18:10:00+08:00">2015-05-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 16:58:49" itemprop="dateModified" datetime="2018-12-12T16:58:49+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>using System.Collections.Generic;<br>using System.Linq;<br>using System.Text;<br>using System.Security.Cryptography;<br>using System.IO;</p>
+<p>namespace InitRandom<br>{<br>    // 生成16位随机数字，写入D:AAAA16.txt中<br>    //<br>    // todo: 有万分之一左右的数据长度小于16位<br>    class Program<br>    {<br>        static void Main(string[] args)<br>        {<br>            string path = @”D:AAAA16.txt”;<br>            RandomNumberGenerator randgen = new RNGCryptoServiceProvider();<br>            byte[] data = new byte[8];<br>            using (StreamWriter sw = new StreamWriter(path, true)) {<br>                for (long i = 0; i &lt; 100000; i++) {<br>                    randgen.GetBytes(data);<br>                    string n = Math.Abs(BitConverter.ToInt64(data, 0)).ToString();<br>                    if (n.Length &gt;= 16) {<br>                        sw.Write(n.Substring(0,16) + “n”);<br>                    }<br>                }<br>            }<br>            Console.WriteLine(“Finished”);<br>            Console.ReadLine();<br>        }<br>    }<br>}</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2015/05/17/easyui-e5-88-86-e9-a1-b5/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2204,178 +2377,6 @@ fastcgi_index index.php;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2015/03/31/e4-bb-8a-e6-97-a5-e6-98-af-e6-95-b0-e6-8d-ae-e5-a4-87-e4-bb-bd-e6-97-a5/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2015/03/31/e4-bb-8a-e6-97-a5-e6-98-af-e6-95-b0-e6-8d-ae-e5-a4-87-e4-bb-bd-e6-97-a5/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/17/index.html">今日是数据备份日</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2015-03-31 11:10:02" itemprop="dateCreated datePublished" datetime="2015-03-31T11:10:02+08:00">2015-03-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:05:36" itemprop="dateModified" datetime="2018-12-12T17:05:36+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今日是数据备份日，别忘了在愚人节前备份数据 照片，视频，联系人 还有自己的代码，数据库，服务器快照，一切让你觉得重要的，都备份一下吧，手动备份，毕竟程序也有可能存在未知的问题。数据可贵！</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2423,7 +2424,7 @@ fastcgi_index index.php;
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2895,7 +2896,11 @@ fastcgi_index index.php;
                     
                       
                     
-                    <span class="site-state-item-count">214</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">215</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>

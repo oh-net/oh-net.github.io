@@ -353,6 +353,224 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Technician">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/4/index.html">CentOS 7.2下编译安装PHP 7</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-12-26 18:12:01" itemprop="dateCreated datePublished" datetime="2017-12-26T18:12:01+08:00">2017-12-26</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 16:59:08" itemprop="dateModified" datetime="2018-12-12T16:59:08+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>注意此配置针对开发环境，如果线上环境，那么phpdbg和dtrace这两个建议不要编译 编译安装参数</p>
+<pre><code># prefix 可根据实际情况自定义
+# with-fpm-systemd参数可以使PHP7支持centos7的systemd服务管理
+# 安装过程中可能有一些扩展需要额外库支持，如果configure运行报错，直接goolge 搜索，基本上yum install xxx-devel 就可
+
+./configure --prefix=/data/soft/php7
+ --enable-fpm
+ --with-fpm-user=php-fpm
+ --with-fpm-group=www
+ --with-fpm-systemd
+ --enable-phpdbg
+ --enable-dtrace
+ --enable-mysqlnd
+ --with-mysqli=mysqlnd
+ --with-pdo-mysql=mysqlnd
+ --enable-opcache
+ --enable-pcntl
+ --enable-mbstring
+ --enable-soap
+ --enable-zip
+ --enable-calendar
+ --enable-bcmath
+ --enable-ftp
+ --enable-intl
+ --enable-sockets
+ --with-openssl
+ --with-mhash
+ --with-zlib
+ --with-curl
+ --with-gettext
+ --with-gd
+ --enable-exif
+ --enable-gd-native-ttf
+ --enable-gd-jis-conv
+ --with-png-dir=/usr/lib
+ --with-jpeg-dir=/usr/lib
+ --with-freetype-dir=/usr/lib
+</code></pre><p>执行以上编译前配置，如果没有错误 运行命令</p>
+<pre><code>make &amp; make install
+</code></pre><p>编译完成，copy php-develpment.ini 文件到 PREFIX/lib/目录下</p>
+<hr>
+<p>一些特别需要注意安装的包</p>
+<pre><code>yum install systemd-devel
+yum isntall freetype-devel
+yum isntall libpng-devel
+yum install openjpeg-devel
+</code></pre><p>安装完，如果想要systemd控制启动 copy ./sapi/fpm/php-fpm.service 到 /usr/lib/systemd/system/下 systemctl enable php-fpm systemctl start php-fpm 即可 编译安装完，就是一些第三方扩展安装，能用pecl的尽量使用pecl，不能用的编译安装也简单，使用phize 这个即可，具体自己搜索网上文章 另外就是php.ini配置文件的修改和php-fpm.conf文件的修改，一些最基本的优化都可以在这两个文件里面实现，比如opcache的配置，php-fpm启动进程数量等，php-fpm配置文件在PREFIX/etc目录下 因为是开发环境，优化的就不写了，如果有需要，网上搜索，基本上优化的建议都很通用 文章来源： <a href="https://segmentfault.com/a/1190000005363212" target="_blank" rel="noopener">https://segmentfault.com/a/1190000005363212</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/12/22/e4-bd-bf-e7-94-a8snk-e5-af-86-e9-92-a5-e6-96-87-e4-bb-b6-e4-bf-9d-e6-8a-a4-e4-bd-a0-e7-9a-84dll-e5-92-8c-e4-bb-a3-e7-a0-81-e4-b8-8d-e8-a2-ab-e5-8f-8d-e7-bc-96-e8-af-91-e6-95-99-e7-a8-8b/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -2221,197 +2439,6 @@ up cp /etc/resolv.conf.school /etc/resolv.conf
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2017/10/28/ssundefined-symbol-evp-cipher-ctx-cleanup/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/10/28/ssundefined-symbol-evp-cipher-ctx-cleanup/" class="post-title-link" itemprop="https://hero.triple.net.cn/page/4/index.html">[shadowsocks error ] undefined symbol: EVP_CIPHER_CTX_cleanup</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-10-28 23:54:52" itemprop="dateCreated datePublished" datetime="2017-10-28T23:54:52+08:00">2017-10-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:27:29" itemprop="dateModified" datetime="2018-12-12T17:27:29+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/互联网/" itemprop="url" rel="index"><span itemprop="name">互联网</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Installed ss , when I try start with <code>sslocal -c ss.json</code>, its catch an error :</p>
-<blockquote>
-<p>undefined symbol: EVP_CIPHER_CTX_cleanup</p>
-</blockquote>
-<p>Using compalie to install ss, and, try using python-pip &amp; pip install shadowscks did not work,</p>
-<hr>
-<p>python version:</p>
-<blockquote>
-<p>Python, 2.7.13</p>
-</blockquote>
-<p>the answer from : <a href="http://www.cnblogs.com/lzhd24/p/6686803.html" target="_blank" rel="noopener">http://www.cnblogs.com/lzhd24/p/6686803.html</a></p>
-<pre><code>修改方法：
-
-    用vi打开文件：vi /usr/local/lib/python2.7/dist-packages/shadowsocks/crypto/openssl.py
-    跳转到52行（shadowsocks2.8.2版本，其他版本搜索一下cleanup）
-    进入编辑模式
-    将第52行libcrypto.EVP_CIPHER_CTX_cleanup.argtypes = (c_void_p,)
-    改为libcrypto.EVP_CIPHER_CTX_reset.argtypes = (c_void_p,)
-    再次搜索cleanup（全文件共2处，此处位于111行），将libcrypto.EVP_CIPHER_CTX_cleanup(self._ctx)
-    改为libcrypto.EVP_CIPHER_CTX_reset(self._ctx)
-    保存并退出
-    启动shadowsocks服务：service shadowsocks start 或 sslocal -c ss配置文件目录
-</code></pre>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2459,7 +2486,7 @@ up cp /etc/resolv.conf.school /etc/resolv.conf
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">175</span>
+                    <span class="site-state-item-count">176</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2931,7 +2958,11 @@ up cp /etc/resolv.conf.school /etc/resolv.conf
                     
                       
                     
-                    <span class="site-state-item-count">214</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">215</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
