@@ -110,7 +110,7 @@
 <meta name="keywords" content="easyui,jquery,datagrid,json">
 <meta property="og:type" content="article">
 <meta property="og:title" content="easyui 从后台取得数据并绑定到datagrid">
-<meta property="og:url" content="https://hero.triple.net.cn/2016/01/28/easyui-e4-bb-8e-e5-90-8e-e5-8f-b0-e5-8f-96-e5-be-97-e6-95-b0-e6-8d-ae-e5-b9-b6-e7-bb-91-e5-ae-9a-e5-88-b0datagrid/index.html">
+<meta property="og:url" content="https://www.cobsun.com/2016/01/28/easyui-e4-bb-8e-e5-90-8e-e5-8f-b0-e5-8f-96-e5-be-97-e6-95-b0-e6-8d-ae-e5-b9-b6-e7-bb-91-e5-ae-9a-e5-88-b0datagrid/index.html">
 <meta property="og:site_name" content="Technician">
 <meta property="og:description" content="项目需要，前台页面输入查询参数（比如邮箱地址）使用ajax发送到后台，然后数据库返回查询结果，并对其格式化，转成json格式，再绑定到前台页面的datagrid上。 期间遇到了几个问题，记录下（文章部分代码来自网络）。    1 ，SqlHelper 2，DataTable转换成JSON字符串 3，后台字符串绑定到datagrid  页面上DataGrid的属性、要显示的字段先设定好：">
 <meta property="og:locale" content="zh-CN">
@@ -124,7 +124,7 @@
 
 
 
-  <link rel="canonical" href="https://hero.triple.net.cn/2016/01/28/easyui-e4-bb-8e-e5-90-8e-e5-8f-b0-e5-8f-96-e5-be-97-e6-95-b0-e6-8d-ae-e5-b9-b6-e7-bb-91-e5-ae-9a-e5-88-b0datagrid/">
+  <link rel="canonical" href="https://www.cobsun.com/2016/01/28/easyui-e4-bb-8e-e5-90-8e-e5-8f-b0-e5-8f-96-e5-be-97-e6-95-b0-e6-8d-ae-e5-b9-b6-e7-bb-91-e5-ae-9a-e5-88-b0datagrid/">
 
 
 
@@ -356,7 +356,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://hero.triple.net.cn/2016/01/28/easyui-e4-bb-8e-e5-90-8e-e5-8f-b0-e5-8f-96-e5-be-97-e6-95-b0-e6-8d-ae-e5-b9-b6-e7-bb-91-e5-ae-9a-e5-88-b0datagrid/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2016/01/28/easyui-e4-bb-8e-e5-90-8e-e5-8f-b0-e5-8f-96-e5-be-97-e6-95-b0-e6-8d-ae-e5-b9-b6-e7-bb-91-e5-ae-9a-e5-88-b0datagrid/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1428,30 +1428,6 @@ public static void BatchUpdate(string connectionString, string sql, int batchSiz
     
        
     
-    
-      <div>
-        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
-  <div></div>
-  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
-    <span>打赏</span>
-  </button>
-  <div id="QR" style="display: none;">
-
-    
-
-    
-      <div id="alipay" style="display: inline-block">
-        <img id="alipay_qr" src="https://i.v2ex.co/v4dDksUbl.jpeg" alt="John Doe 支付宝">
-        <p>支付宝</p>
-      </div>
-    
-
-    
-
-  </div>
-</div>
-
-      </div>
     
 
     
