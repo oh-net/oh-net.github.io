@@ -108,13 +108,13 @@
 
   <meta name="description" content="$$ Welcome $$">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Technician">
+<meta property="og:title" content="Coppid">
 <meta property="og:url" content="https://www.cobsun.com/page/2/index.html">
-<meta property="og:site_name" content="Technician">
+<meta property="og:site_name" content="Coppid">
 <meta property="og:description" content="$$ Welcome $$">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Technician">
+<meta name="twitter:title" content="Coppid">
 <meta name="twitter:description" content="$$ Welcome $$">
 
 
@@ -132,7 +132,7 @@
   };
 </script>
 
-  <title>Technician</title>
+  <title>Coppid</title>
   
 
 
@@ -193,7 +193,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Technician</span>
+        <span class="site-title">Coppid</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -353,7 +353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/08/03/records-execution-time-of-php-script/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/15/use-reverse-SSH-to-access-intranet-hosts-from-the-external-network/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -362,7 +362,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -373,7 +373,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/08/03/records-execution-time-of-php-script/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">PHP 记录脚本或方法执行时间</a>
+                <a href="/2017/09/15/use-reverse-SSH-to-access-intranet-hosts-from-the-external-network/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">【转】利用反向ssh从外网访问内网主机</a>
               
             
           </h1>
@@ -398,7 +398,7 @@
                 
               
 
-              <time title="创建时间：2018-08-03 11:08:52" itemprop="dateCreated datePublished" datetime="2018-08-03T11:08:52+08:00">2018-08-03</time>
+              <time title="创建时间：2017-09-15 18:41:06" itemprop="dateCreated datePublished" datetime="2017-09-15T18:41:06+08:00">2017-09-15</time>
             
 
             
@@ -415,7 +415,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-21 14:24:10" itemprop="dateModified" datetime="2018-12-21T14:24:10+08:00">2018-12-21</time>
+                <time title="修改时间：2018-12-18 16:42:16" itemprop="dateModified" datetime="2018-12-18T16:42:16+08:00">2018-12-18</time>
               
             
           </span>
@@ -467,11 +467,200 @@
 
       
         
-          <p>我再也不想每次用 <em>PHP 记录脚步或方法执行时间</em> 时, 都要漫天搜索一遍, )即使搜索很容易 &amp; 代码也很简单 但这个不应该打扰我, 我要立即可用的 最好不要有警告, 不要让我再考虑如何转换成 “人话” !<br>代码来源: <strong>csdn:</strong> <a href="https://blog.csdn.net/zhu\_lizhen/article/details/76018386" target="_blank" rel="noopener">https://blog.csdn.net/zhu\_lizhen/article/details/76018386</a> </p>
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近遇到一个问题，就是过几天我需要离开学校，而且到时候仍然想登陆校园网里的一台服务器进行工作；<br>但是我又没有校园网网关的操作权限，不能做端口映射，也不能搞到校园网内部主机的外网 ip，而且学校自己提供的 vpn 又根本没法用。<br>研究了半天，总算找到了一个比较不错的利用<strong>反向ssh(reverse ssh tunnel)</strong>进行内网登陆的解决方案。</p>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><p>之所以很多转发的方法无法应用在这里，就是因为内网主机对外网其实是不可见的，也就是说外部主机不能用一般的方法访问到内部主机。<br>那么我们就想了，能不能用内网主机找外网主机，找到之后再把这条内网主机登陆外网的信道转换成外网主机登陆内网的信道呢？<br>辛运的是，这个方法的确是可行的，这也就是所谓反向 ssh 最通俗的理解，这就像寄信一样：虽然我不知道你的地址，但是你知道我的地址，那么你就先给我写封信，告诉我你的地址，然后我不就可以回信给你了么？</p>
+<h2 id="操作步骤"><a href="#操作步骤" class="headerlink" title="操作步骤"></a>操作步骤</h2><p>由于我们自己使用的电脑未必有外网 ip，因此我们需要一个有固定外网ip的服务器(随便搞个腾讯云阿里云的小机子就行)，然后用这台服务器与内网的机子进行通信，我们到时候要先登陆自己的服务器，然后再利用这个服务器去访问内网的主机。 </p>
+<p>1、准备好有固定 ip 的<strong>服务器 A</strong>，以及待访问的<strong>内网机器 B</strong>。<br>  两者都开着 <code>sshd</code> 服务，端口号默认都是 <code>22</code>。顺便做好 ssh 免密码登陆。<br>2、内网主机B主动连接服务器A，执行以下命令：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh -NfR 1111:localhost:22 username@servername -p 22</span><br></pre></td></tr></table></figure></div>
+<p>这条命令的意思是在后台执行(-f)，不实际连接而是做 <code>port forwarding(-N)</code>，做反向 <code>ssh(-R)</code> ，将远程服务器的 <code>1111</code> 端口映射成连接<strong>本机(B)</strong>与该服务器的反向 ssh 的端口。<br>附：这里有必要加强一下记忆，这个端口号一不小心就容易搞混。。man文档中的参数命令是这样的：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-R \[bind_address:\]port:host:hostport</span><br></pre></td></tr></table></figure></div>
+<p><code>bind_address</code> 以及其后面的 <code>port</code> 是指远程主机的 ip 以及端口，<code>host</code> 以及其后的 <code>hostport</code> 是指本机的 ip 和端口。<br>由于 ssh 命令本身需要远程主机的 ip(上上条命令中的 <code>servername</code>)，因此这个 <code>bind_address</code> 原则上是可以省略的。 </p>
+<p>执行完这条命令，我们可以在<strong>服务器A</strong>上看到他的 <code>1111</code> 端口已经开始监听：<br><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ ss -ant |grep 1111</span><br><span class="line"></span><br><span class="line">LISTEN 0 128 127.0.0.1:1111 *:*</span><br></pre></td></tr></table></figure></div></p>
+<p>3、在上面的操作中，这个 <code>1111</code> 端口就已经映射成了内网 <strong>主机 B</strong> 的 <code>22</code> 端口了，现在我们只要ssh到自己的这个端口就行了。</p>
+<p>在<strong>服务器A</strong>中执行：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ssh username@localhost -p1111</span><br></pre></td></tr></table></figure></div>
+<p>这样就成功的登陆了内网的主机了。</p>
+<h2 id="功能优化"><a href="#功能优化" class="headerlink" title="功能优化"></a>功能优化</h2><p>上面的做法其实有一个问题，就是反向ssh可能会不稳定，主机B对服务器A的端口映射可能会断掉，那么这时候就需要主机B重新链接，而显然远在外地的我无法登陆B。。。</p>
+<p>这其实有一个非常简单的解决方案，就是用 <code>autossh</code> 替代步骤2中的 <code>ssh</code>：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ autossh -M 2222 -NfR 1111:localhost:22 username@servername -p 22</span><br></pre></td></tr></table></figure></div>
+<p>后面的参数跟ssh都一样，只是多了一个 <code>-M</code> 参数，这个参数的意思就是用本机的 <code>2222</code> 端口来监听 <code>ssh</code>，每当他断了就重新把他连起来。。。不过man文档中也说了，这个端口又叫 <code>echo port</code>，他其实是有一对端口的形式出现，第二个端口就是这个端口号加一。<br>因此我们要保证这个端口号和这个端口号加一的端口号不被占用。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a href="http://www.cnblogs.com/eshizhan/archive/2012/07/16/2592902.html" target="_blank" rel="noopener">SSH反向连接及Autossh</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/15/Append-content-to-the-end-of-the-file/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coppid">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/09/15/Append-content-to-the-end-of-the-file/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">追加内容到文件末尾的几种常用方法</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-09-15 12:26:22" itemprop="dateCreated datePublished" datetime="2017-09-15T12:26:22+08:00">2017-09-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-21 14:25:47" itemprop="dateModified" datetime="2018-12-21T14:25:47+08:00">2018-12-21</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>使用 FileOutputStream 或者 FileWriter 时，将方法的第二个参数设置为 true 即可使用追加的方式写文件 下面是示例代码：</p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2018/08/03/records-execution-time-of-php-script/#more" rel="contents">
+              <a class="btn" href="/2017/09/15/Append-content-to-the-end-of-the-file/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -531,7 +720,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/07/25/config-wifi-on-raspberry-3b-plus/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/13/Ubuntu-系统下安装-Cisco-AnyConnect-VPN/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -540,7 +729,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -551,7 +740,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/07/25/config-wifi-on-raspberry-3b-plus/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">树莓派3b-plus无线wifi配置</a>
+                <a href="/2017/09/13/Ubuntu-系统下安装-Cisco-AnyConnect-VPN/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">Ubuntu 系统下安装 Cisco AnyConnect VPN</a>
               
             
           </h1>
@@ -576,7 +765,7 @@
                 
               
 
-              <time title="创建时间：2018-07-25 13:57:15" itemprop="dateCreated datePublished" datetime="2018-07-25T13:57:15+08:00">2018-07-25</time>
+              <time title="创建时间：2017-09-13 12:54:48" itemprop="dateCreated datePublished" datetime="2017-09-13T12:54:48+08:00">2017-09-13</time>
             
 
             
@@ -593,7 +782,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-18 12:53:14" itemprop="dateModified" datetime="2018-12-18T12:53:14+08:00">2018-12-18</time>
+                <time title="修改时间：2018-12-21 15:53:15" itemprop="dateModified" datetime="2018-12-21T15:53:15+08:00">2018-12-21</time>
               
             
           </span>
@@ -610,14 +799,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/互联网/" itemprop="url" rel="index"><span itemprop="name">互联网</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/互联网/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
 
                 
                 
@@ -653,12 +835,91 @@
       
         
           
-            <p>树莓派3b-plus 原生的wifi已经支持很好, 安装官方iso之后可以方便的使用 5G wifi 网络 一般使用</p>
-<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo raspi-config</span><br></pre></td></tr></table></figure></div>
-<p>并选择第二项, 配置 wifi, 输入 ssid 和 密码就好了 </p>
-<p>完整的 Wi-Fi 配置参考<a href="https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md" target="_blank" rel="noopener">官方文档</a></p>
-<p>下面是已经手动配置文件的截图(包含配置文件路径): </p>
-<p><img src="https://tech.msla.top/wp-content/uploads/raspberry-3b-plus-wifi-config-300x199.png" alt=""></p>
+            <p>打算在公司 IDC 机房部署一套VPN环境，经过考虑，最终决定采用 <code>Cisco</code> 下的开源技术 <code>AnyConnect</code></p>
+<h2 id="AnyConnect的优势："><a href="#AnyConnect的优势：" class="headerlink" title="AnyConnect的优势："></a>AnyConnect的优势：</h2><ol>
+<li>长连接，待机不会断开； </li>
+<li>速度快，稳定性好； </li>
+<li>安全性好，全程加密；<br>另外，支持freeradius认证功能； </li>
+<li>能够下发路由表给客户端，这个功能是最激动人心的。<br>因为如果长期连接，那么肯定是某些服务走 VPN，而国内的网站可以走自己的网络体验最好。 </li>
+<li>耗电量较低； </li>
+</ol>
+<p><code>AnyConnect</code> 是思科的安全远程接入解决方案，部署 Anyconnect 需要安装 <code>ocserv(OpenConnect server)</code>， 它是一个OpenConnect SSL协议服务端，0.3.0版后兼容使用AnyConnect SSL 协议的终端。<br>ocserv（OpenConnect Server）是由 GnuTLS 的作者 Nikos Mavrogiannopoulos 开发的一个能够兼容 Cisco Anyconnect 的开源服务端（ SSL VPN），支持*nix/BSD 平台，最早是作为 OpenConnect（Linux下的兼容Cisco ASA的开源客户端）对应的服务端，在后续版本（ 0.3.0 开始）中加入了对 Cisco Anyconnect 客户端的支持。<br>下面介绍在ubuntu系统下安装Anyconnect的操作记录： </p>
+<h2 id="安装过程如下（采用一键安装方式）"><a href="#安装过程如下（采用一键安装方式）" class="headerlink" title="安装过程如下（采用一键安装方式）"></a>安装过程如下（采用一键安装方式）</h2><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># apt-get update &amp;&amp; apt-get upgrade -y root@localhost:~# apt-get install wget root@localhost:~# wget http://git.io/p9r8 --no-check-certificate -O ocservauto.sh</span></span><br></pre></td></tr></table></figure></div>
+<p>//下载地址:<a href="https://pan.baidu.com/s/1i59e2hB%20" target="_blank" rel="noopener">https://pan.baidu.com/s/1i59e2hB</a> （提取密码:bp4w）</p>
+<p>如果以前使用了该脚本进行安装，只需要输入下面命令更新（只更新相关脚本，服务器不会更新）</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># wget http://git.io/ocservauto -O- --no-check-certificate|bash</span></span><br><span class="line"></span><br><span class="line">root@localhost:~<span class="comment"># bash ocservauto.sh</span></span><br></pre></td></tr></table></figure></div>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a26388ee6cd7543a441f03edfb0d1454.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8638813ae7cd533784f070c2113249fb.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6162e98f48bd305fd81fd7e78a46afc4.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/a90aa6f5b8ee0cbf40f3130baddae971.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/8c9c80914eeaa4033c9af81d03cd532f.png" alt=""> </p>
+<p>接着会进行一段时间的安装，如果顺利的话，出现下面信息则说明安装成功了！<br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/2e53c05420a89e2417b18ddc5749db32.png" alt=""> </p>
+<p>如果安装失败可以查阅安装日志文件ocinstall.log，日志文件在脚本所在文件夹下，可以使用下面命令逐步阅读一般情况下安装成功之后，服务器就在启动状态了。<br>我的部署机器由于是虚拟机(没有外网ip)，采用 <code>squid</code> 代理方式对外访问，导致脚本中定义的 <code>ftp</code> 方式对 <code>freeradius-client-1.1.7.tar.gz</code> 和 <code>ocserv-0.10.8.tar.xz</code> 安装包下载失败。</p>
+<p>解决办法：将上面这两个包单独下载下来，放在和ocservauto.sh脚本同一目录路径下，然后再重新执行脚本进行安装</p>
+<p>这里可以简单使用本地浏览器查看服务器信息，在本地浏览器输入 <em><code>https://IP 或域名:（英文冒号）端口</code></em> </p>
+<p>ocserv的默认安装目录是 <code>/etc/ocserv</code>，相关文件都在这个路径下，如配置文件 <code>ocserv.conf</code> 等</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~``<span class="comment"># cd /etc/ocserv/</span></span><br><span class="line">root@localhost:``/etc/ocserv``<span class="comment"># ls</span></span><br><span class="line">ca-cert.pem  </span><br><span class="line">config-per-group  </span><br><span class="line">dh.pem    </span><br><span class="line">ocserv.conf     </span><br><span class="line">ocserv-up.sh  </span><br><span class="line">server-cert.pem</span><br><span class="line">CAforOC      </span><br><span class="line">defaults          </span><br><span class="line">ocpasswd  </span><br><span class="line">ocserv-down.sh  </span><br><span class="line">profile.xml   </span><br><span class="line">server-key.pem</span><br></pre></td></tr></table></figure></div>
+<p>ocserv服务在安装后默认就启动了，安装中选择证书登陆方式，即https方式，所以tcp端口选择的是443</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># ps -ef|grep ocserv</span></span><br><span class="line">root       726     1  0 01:22 ?        00:00:00 ocserv-main</span><br><span class="line">root       728   726  0 01:22 ?        00:00:00 ocserv-secm</span><br><span class="line">root       865   849  0 01:26 pts/1    00:00:00 grep &lt;code--&lt;color=auto ocserv</span><br><span class="line">root@localhost:~<span class="comment"># lsof -i:443</span></span><br><span class="line">COMMAND   PID USER   FD   TYPE   DEVICE SIZE/OFF NODE NAME</span><br><span class="line">ocserv-ma 726 root    4u  IPv4 10406026      0t0  TCP *:https (LISTEN)</span><br><span class="line">ocserv-ma 726 root    5u  IPv6 10406027      0t0  TCP *:https (LISTEN)</span><br></pre></td></tr></table></figure></div>
+<h3 id="ocserv服务启动命令："><a href="#ocserv服务启动命令：" class="headerlink" title="ocserv服务启动命令："></a>ocserv服务启动命令：</h3><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/ocserv   </span><br><span class="line">start/stop/restart/status</span><br></pre></td></tr></table></figure></div>
+<h3 id="ocserv服务启动过程中若是出现下面两个小报错："><a href="#ocserv服务启动过程中若是出现下面两个小报错：" class="headerlink" title="ocserv服务启动过程中若是出现下面两个小报错：**"></a>ocserv服务启动过程中若是出现下面两个小报错：**</h3><ol>
+<li>/usr/sbin/ocserv: error while loading shared libraries: libtspi.so.1: cannot open shared object file:No such file or directory</li>
+</ol>
+<p>解决办法：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># apt-get install libtspi-dev</span></span><br></pre></td></tr></table></figure></div>
+<p>2）/usr/sbin/ocserv: error while loading shared libraries: libgnutls.so.28: cannot open shared objectfile: No such file or directory</p>
+<p>解决办法：</p>
+<p>安装 <code>libgnutls</code> 下载地址：<br><a href="https://pan.baidu.com/s/1skJxpI9" target="_blank" rel="noopener">https://pan.baidu.com/s/1skJxpI9</a>提取密码：ic3y</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># dpkg -i gnutls\_3.3.8-13\_amd64.deb</span></span><br><span class="line">root@localhost:~<span class="comment"># find / -name libgnutls.so.28/usr/lib64/libgnutls.so.28</span></span><br><span class="line">root@localhost:~<span class="comment"># ln -s /usr/lib64/libgnutls.so.28 /usr/lib/</span></span><br></pre></td></tr></table></figure></div>
+<p>可以在 <code>ocserv.conf</code> 文件里修改 <code>ocserv</code> 服务端口和域名等信息，修改后重启 <code>ocserv</code> 服务即可<br><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># /etc/init.d/ocserv restart</span></span><br><span class="line">[ ok ] Restarting ocserv (via systemctl): ocserv.service.</span><br></pre></td></tr></table></figure></div></p>
+<p><strong><em><code>Anyconnect</code></em></strong> 客户端工具下载地址：<a href="https://pan.baidu.com/s/1eSvDvEi" target="_blank" rel="noopener">https://pan.baidu.com/s/1eSvDvEi</a>提取密码：ckdi</p>
+<p>安装Anyconnect客户端工具，安装后，就可以使用上面安装ocserv过程中定义的信息连接了：<br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/0f32d9d55cfedeb73def0423c0900cd5.png" alt=""> </p>
+<p><strong>特别注意</strong>：<br>由于安装过程中选择的是自签证书，是不受信任的证书，所以客户端连接时需要关掉设置中的“阻止不信任的服务器”，即下面截图中的第四项 <code>Block connection to untrusted servers</code>不要勾选!不管采不采用证书验证，都不要勾选第四项！。<br>然后勾选第三项（第二项勾选与否都不要紧）<br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/3ce3726273262ff0c7a00b07cf509336.png" alt=""> </p>
+<p>点击“connect”，接着点击提示窗口中点击“Connect Anyway”，接着按照提示输入用户名和密码，正常连接就ok了。 </p>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/f06c61ba3551f4ed7ac504eda1e7ffab.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/829399aa040efd621f99e680802a34b5.png" alt=""> </p>
+<p>连接成功后，点击右下角的 <code>Anyconnect</code> 标志图，图上有一把钥匙的状态就说明已经连上了。 </p>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/6171c0def4996e64b205e9c41da1c2ac.png" alt=""> </p>
+<h3 id="1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）"><a href="#1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）" class="headerlink" title="1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）"></a>1）用户名和密码验证（客户端登陆时默认肯定会有的验证方式）</h3><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># cat /etc/ocserv/ocserv.conf</span></span><br><span class="line">........</span><br><span class="line">auth = plain[passwd=/etc/ocserv/ocpasswd]            //默认用户名和密码验证</span><br><span class="line"><span class="built_in">enable</span>-auth = certificate //用户名和密码验证同时，允许证书验证</span><br><span class="line">auth-timeout = 40</span><br></pre></td></tr></table></figure></div>
+<h4 id="创建用户名和密码命令（或重置用户密码）："><a href="#创建用户名和密码命令（或重置用户密码）：" class="headerlink" title="创建用户名和密码命令（或重置用户密码）："></a>创建用户名和密码命令（或重置用户密码）：</h4><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># ocpasswd -c /etc/ocserv/ocpasswd guohuihui</span></span><br><span class="line">Enter password:</span><br><span class="line">Re-enter password:</span><br><span class="line">root@localhost:~<span class="comment"># ocpasswd -c /etc/ocserv/ocpasswd liumengnan</span></span><br><span class="line">Enter password:</span><br><span class="line">Re-enter password:</span><br><span class="line">root@localhost:~<span class="comment"># cat /etc/ocserv/ocpasswd</span></span><br><span class="line">wangshibo:*:<span class="variable">$5</span>$.GQf1omiKmvGElhU<span class="variable">$q1yNyUxPRAHygEGaG98cwVGfYuJjSarsTkXROinhBX8</span></span><br><span class="line">guohuihui:*:<span class="variable">$5</span><span class="variable">$z</span>.H5ipnHSJCSigFU<span class="variable">$30mseKwk13ZG9MuD3QSeBtYmX6xLOcafVPpioXkulA2</span></span><br><span class="line">liumengnan:*:<span class="variable">$5</span><span class="variable">$mVSHMbBekX9vofxV</span><span class="variable">$n7bc8LkJB9kjXl6OADGWySfTqkIBeyIGJRvk5A</span>/ehHC</span><br></pre></td></tr></table></figure></div>
+<h3 id="证书验证除了用户名和密码验证之外，还可以进行证书验证。"><a href="#证书验证除了用户名和密码验证之外，还可以进行证书验证。" class="headerlink" title="证书验证除了用户名和密码验证之外，还可以进行证书验证。"></a>证书验证除了用户名和密码验证之外，还可以进行证书验证。</h3><p>用户在 <code>AnyConnect</code> 客户端第一次登陆时会提示加载证书。<br>首次登陆加载后，后面再登陆就不会提示加载证书了！<br>所有用户的 p12 证书文件可以在放置脚本的目录下找到，导入证书时需要输入证书创建时设定的密码。</p>
+<h4 id="新建用户证书命令："><a href="#新建用户证书命令：" class="headerlink" title="新建用户证书命令："></a>新建用户证书命令：</h4><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># bash ocservauto.sh gc</span></span><br></pre></td></tr></table></figure></div>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/e31e31ee178c20764f146089769d5266.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/ad390816c9873e0fe8fdcb5b22cf5ed8.png" alt=""><br>用户证书创建后会保存到和脚本同一路径下：<br><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># ls</span></span><br><span class="line">huanqiu.p12 ocinstall.log ocservauto.sh vars_ocservauto</span><br></pre></td></tr></table></figure></div></p>
+<h4 id="吊销客户证书命令"><a href="#吊销客户证书命令" class="headerlink" title="吊销客户证书命令"></a>吊销客户证书命令</h4><div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># bash ocservauto.sh rc</span></span><br></pre></td></tr></table></figure></div>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/7a5f957b028968e12c92dd3dd67d6289.png" alt=""><br><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/5f5821d5681456079d8c7c79c58e7323.png" alt=""> </p>
+<h3 id="脚本其他参数说明"><a href="#脚本其他参数说明" class="headerlink" title="脚本其他参数说明"></a>脚本其他参数说明</h3><ol start="0">
+<li>查看帮助</li>
+</ol>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># bash ocservauto.sh help</span></span><br></pre></td></tr></table></figure></div>
+<p><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/97d3b030c5ff75d0192c91df5f34c2fd.png" alt=""> </p>
+<ol>
+<li><p>平滑升级ocserv（升级后原来的用户数据都会保留）</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~# bash ocservauto.sh ug</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p>强制重装ocserv（注意这样会丢失之前的用户数据和配置）root@localhost:~# bash ocservauto.sh ri </p>
+</li>
+<li><p>同时开启证书登录和用户名密码登录（请务必首先选择任意一种登录方式来完成安装，接着再使用下面命令）</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># bash ocservauto.sh pc </span></span><br><span class="line">4. 关于相同客户端证书可以登录多个服务器的方案</span><br><span class="line"></span><br><span class="line">  假定有三台服务器ABC:</span><br><span class="line"></span><br><span class="line">  ```bash</span><br><span class="line">  <span class="comment"># bash ocservauto.sh rc</span></span><br></pre></td></tr></table></figure></div>
+<p>吊销所有想要吊销的证书。<br>由于不支持在线吊销证书列表，所以必须还要把A服务器上的<code>/etc/ocserv/crl</code>.pem文件同时复制到BC服务器相同位置，且修改ocserv的配置文件：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crl = /etc/ocserv/crl.pem</span><br></pre></td></tr></table></figure></div>
+</li>
+</ol>
+<h3 id="登陆方式"><a href="#登陆方式" class="headerlink" title="登陆方式"></a>登陆方式</h3><p>在上面一键安装过程中，选择了自签CA，安装后产生pem文件，如下：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="BASH"><figure class="iseeu highlight /bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">root@localhost:~<span class="comment"># cd /etc/ocserv/</span></span><br><span class="line">root@localhost:/etc/ocserv``<span class="comment"># ll *.pem</span></span><br><span class="line">-rw-r--r-- 1 root root 1793 Jan 16 23:34 ca-cert.pem</span><br><span class="line">-rw-r--r-- 1 root root 1003 Jan 17 02:46 crl.pem</span><br><span class="line">-rw-r--r-- 1 root root 2406 Jan 16 23:34 dh.pem</span><br><span class="line">-rw-r--r-- 1 root root 3322 Jan 16 23:34 server-cert.pem</span><br><span class="line">-rw-r--r-- 1 root root 1675 Jan 16 23:34 server-key.pem</span><br><span class="line">root@localhost:/etc/ocserv<span class="comment"># cat ocserv.conf |grep pem</span></span><br><span class="line">server-cert = /etc/ocserv/server-cert.pem</span><br><span class="line">server-key = /etc/ocserv/server-key.pem</span><br><span class="line">dh-params = /etc/ocserv/dh.pem</span><br><span class="line">ca-cert = /etc/ocserv/ca-cert.pem</span><br><span class="line">crl = /etc/ocserv/crl.pem</span><br><span class="line"><span class="comment"># http_anchors = FILE:/etc/ocserv-ca.pem</span></span><br></pre></td></tr></table></figure></div>
+<ol>
+<li>用户名密码登录<ol>
+<li>-自签CA（证书授权中心），取得ca-cert.pem（不需要保密，类比公钥）和ca-key.pem（需要保密，类比私钥）。</li>
+<li>-CA签发信任服务器证书，取得server-cert.pem（不需要保密，类比公钥）、server-key.pem（需要保密，类比私钥）。</li>
+<li>-该模式下，密码库是/etc/ocserv/ocpasswd文件。</li>
+<li>-如果想使用购买的服务器证书，请参考Nginx服务器证书配置，只需将对应的crt、key 文件重命名为server-cert.pem、server-key.pem，并覆盖到/etc/ocserv/文件夹下面。 </li>
+</ol>
+</li>
+<li>证书登录<ol>
+<li>-自签CA（证书授权中心），取得ca-cert.pem（不需要保密，类比公钥）和ca-key.pem（需要保密，类比私钥）。</li>
+<li>-CA签发信任服务器证书，取得server-cert.pem（不需要保密，类比公钥）、server-key.pem（需要保密，类比私钥）。</li>
+<li>-CA签发信任客户端证书，最终取得username.p12。</li>
+<li>-这里证书授权中心的ca-cert.pem既当作服务器证书的根证书，也当作客户端证书的验证证书。</li>
+<li>-由于CA证书当作验证证书，签发客户端证书就需要这个ca-key.pem，可以比同为密码库。</li>
+<li>-如果想使用购买的服务器证书，请参考Nginx服务器证书配置（<a href="http://www.cnblogs.com/kevingrace/p/5865501.html" target="_blank" rel="noopener">cnblogs.com</a>），只需将对应的 <code>crt</code>、<code>key</code> 文件重命名为 <code>server-cert.pem</code>、<code>server-key.pem</code>，并覆盖到 <code>/etc/ocserv/</code> 文件夹下面。</li>
+</ol>
+</li>
+<li>改善优化修改的参数都在 <code>/etc/ocserv/ocserv.conf</code> 文件中。<br>a. 对于某些移动宽带、长城带宽等，往往经过了很多重 <code>NAT</code>，容易出现连接成功但是无法打开网页情况，请改小 <code>dpd</code>、<code>mobile-dpd</code> 数值。<br>b. 如果 <code>vps</code> 对于本地延迟甚高，取消注释 <code>output-buffer</code> 项。</li>
+</ol>
 
           
         
@@ -715,7 +976,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/07/25/e5-b0-86-phpinfo-e7-9a-84-e4-bf-9d-e5-ad-98-e5-88-b0-e6-96-87-e4-bb-b6-e7-9a-84-e6-96-b9-e6-b3-95/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/09/13/e6-96-b0-e9-b2-9c-e5-87-ba-e7-82-89-e4-b8-80-e4-bb-bd-e5-ae-8c-e6-95-b4anyconnect-e6-95-99-e7-a8-8b-ef-bc-81/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -724,7 +985,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -735,7 +996,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/07/25/e5-b0-86-phpinfo-e7-9a-84-e4-bf-9d-e5-ad-98-e5-88-b0-e6-96-87-e4-bb-b6-e7-9a-84-e6-96-b9-e6-b3-95/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">将 phpinfo 的保存到文件的方法</a>
+                <a href="/2017/09/13/e6-96-b0-e9-b2-9c-e5-87-ba-e7-82-89-e4-b8-80-e4-bb-bd-e5-ae-8c-e6-95-b4anyconnect-e6-95-99-e7-a8-8b-ef-bc-81/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">新鲜出炉一份完整AnyConnect教程！</a>
               
             
           </h1>
@@ -760,7 +1021,7 @@
                 
               
 
-              <time title="创建时间：2018-07-25 11:05:38" itemprop="dateCreated datePublished" datetime="2018-07-25T11:05:38+08:00">2018-07-25</time>
+              <time title="创建时间：2017-09-13 12:53:07" itemprop="dateCreated datePublished" datetime="2017-09-13T12:53:07+08:00">2017-09-13</time>
             
 
             
@@ -777,7 +1038,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-12 17:08:58" itemprop="dateModified" datetime="2018-12-12T17:08:58+08:00">2018-12-12</time>
+                <time title="修改时间：2018-12-12 17:11:08" itemprop="dateModified" datetime="2018-12-12T17:11:08+08:00">2018-12-12</time>
               
             
           </span>
@@ -828,16 +1089,101 @@
       
         
           
-            <p>将 <code>phpinfo()</code> 的数据保存到文件的方法. 示例如下: 将本地 <code>phpinfo()</code> 打印的 server, env, model 等信息(去掉了贡献人, License 的信息)保存到当前目录, 文件以当前时间命名:</p>
-<pre><code>function PHPInfo2File($target_file){
-    ob_start();
-    phpinfo(61);
-    $info = ob_get_contents();
-    ob_end_clean();
-
-    file_put_contents(date(&apos;Y-m-d_His&apos;) . &apos;.txt&apos;, $info);
-}
-</code></pre><p>关于 <code>phpinfo()</code> 的参数可以参考: <a href="http://php.net/manual/zh/function.phpinfo.php" target="_blank" rel="noopener">http://php.net/manual/zh/function.phpinfo.php</a></p>
+            <p>一周年零一个月更新： 因为StartCom全家爆炸所以删除了相关的证书内容。 经过测试以后更改了Let’s Encrypt签发证书的内容。 新增了未打开IPv4转发（表现：可以连上服务器但是不能打开网页）的解决方法。 给你们找了一个你们喜欢的<a href="https://www.fanyueciyuan.info/fq/ocserv-debian.html" target="_blank" rel="noopener">一键脚本</a>。 GitHub有一个项目叫Streisand，要是搞不明白的可以尝试一下。自己没测试过。<strong>请注意如果**</strong>直接编译按照步骤走的话<strong>**这个程序似乎是会帮你开新服务器的，我建议参考<a href="https://github.com/jlund/streisand/blob/master/README.md#running-streisand-on-other-providers" target="_blank" rel="noopener">README.md#running-streisand-on-other-providers</a>来做。</strong> 说实话吧，其实我搞AnyConnect搞了好几天，一直碰到一个很鬼畜的Google不到的 getaddrinfo() failed: Name or service not known Cannot listen to specified ports 这个报错…吓得我iptables rule重写了好几遍w 后面再提啦。先走主线。</p>
+<h2 id="1-AnyConnect概述"><a href="#1-AnyConnect概述" class="headerlink" title="1. AnyConnect概述"></a>1. AnyConnect概述</h2><p>简而言之，AnyConnect是Cisco的新一代黑科技。鬼畜的协议可以让它在UDP/TCP之间切换，从而增强稳定性；（和其他VPN相比略微）复杂的部署让非企业用户使用AnyConnect的概率大大降低，基本上只剩下企业用户（这才是关键）。企业用户是什么，是GDP啊（笑）。 更何况今年某大新闻过后，坚挺许久的IPSec和他的小伙伴（PPTP和L2TP）一起见了马克思。 <a href="https://mark1998.com/wp-content/uploads/2015/10/wpid-img_0022-e1493655351209.png" target="_blank" rel="noopener"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/09/ace9377806d0c68ad327ff4c86f99fda.png" alt=""></a> 加上AnyConnect提供了独特的证书验证功能（这倒是次要的…反正自签名的证书都会报错根本防不了MITM），所以还是值得各位从各种IPSec啦PPTP啦L2TP啦跑过来的。</p>
+<h2 id="2-安装环境准备"><a href="#2-安装环境准备" class="headerlink" title="2.安装环境准备"></a>2.安装环境准备</h2><p>一贯的，我用的是Debian Jessie，KVM架构。OpenVZ的话…应该也是可以的吧。</p>
+<h3 id="2-1-安装依赖包"><a href="#2-1-安装依赖包" class="headerlink" title="2.1 安装依赖包"></a>2.1 安装依赖包</h3><p>AnyConnect要很多依赖包（喂别跑啊！还没到编译的部分呢）。这些东西可以在后面的README里面找到。Debian和Fedora有所不同，因为我用Debian，所以Fedora的各位就自己去readme里找咯…</p>
+<p>apt-get install libgnutls28-dev libwrap0-dev libpam0g-dev liblz4-dev libseccomp-dev libreadline-dev libnl-route-3-dev libkrb5-dev build-essential pkg-config gnutls-bin -y</p>
+<p>  development package理论上是用不着的。</p>
+<h3 id="2-2-编译ocserv"><a href="#2-2-编译ocserv" class="headerlink" title="2.2 编译ocserv"></a>2.2 编译ocserv</h3><p>ocserv就是我们需要的东西了。什么？OpenConnect和AnyConnect不一样？…别急啊。 但是由于官方没有最新版本的固定链接，所以我们得去他们的<a href="http://www.infradead.org/ocserv/download.html" target="_blank" rel="noopener">网站</a>自己扒…看不懂没关系，第一个链接就是了。下载命令格式是：</p>
+<p>curl -O 下载链接</p>
+<p>下载下来以后解压，进入文件夹：</p>
+<p>tar xvf ocserv*.tar.xz<br>./configure<br>make<br>make install</p>
+<h3 id="2-3-创建证书"><a href="#2-3-创建证书" class="headerlink" title="2.3 创建证书"></a>2.3 创建证书</h3><p>AnyConnect需要一个证书来建立安全连接。理论上倒是可以用Let’s Encrypt来给服务器签发证书，但是！LE并不支持针对IP地址签发。如果你在域名中填了IP地址的话就会出现以下错误：</p>
+<blockquote>
+<p>  Requested name <em>.</em>.<em>.</em> is an IP address. The Let’s Encrypt certificate authority will not issue certificates for a bare IP address. 请求的域名<em>.</em>.<em>.</em>是一个IP地址。Let’s Encrypt证书签发机构将不会对IP地址签发证书。  </p>
+</blockquote>
+<p>所以要是你不想买域名的话，还是乖乖用自签名证书吧。反正只要后面把自签名的证书从服务器上导入到本地也是一样的效果。</p>
+<h4 id="2-3-1-创建证书模板"><a href="#2-3-1-创建证书模板" class="headerlink" title="2.3.1 创建证书模板"></a>2.3.1 创建证书模板</h4><p>首先我们得新建一个文件夹，把东西到处乱丢可不是什么好习惯…</p>
+<p>mkdir cert<br>cd cert<br>touch ca.tmpl<br>nano ca.tmpl</p>
+<p>文本编辑器我用的是nano，各位要是不爽的话也可以用vi，这就不是重点了。总之复制上：</p>
+<p>cn = “随便填，你开心就好”<br>organization = “同开心就好”<br>serial = 1<br>expiration_days = 365<br>ca<br>signing_key<br>cert_signing_key<br>crl_signing_key</p>
+<p>保存退出。 生成密钥和证书。</p>
+<p>certtool –generate-privkey –outfile ca-key.pem<br>certtool –generate-self-signed –load-privkey ca-key.pem –template ca.tmpl –outfile ca-cert.pem</p>
+<p><strong>警告：任何东西都不能丢！任何东西都不能丢！任何东西都不能丢！</strong>重要的话说三遍</p>
+<h4 id="2-3-2-创建服务器证书"><a href="#2-3-2-创建服务器证书" class="headerlink" title="2.3.2 创建服务器证书"></a>2.3.2 创建服务器证书</h4><p>cn = “这里必须填域名或IP”<br>organization = “同开心就好”<br>expiration_days = 365<br>signing_key<br>encryption_key<br>tls_www_server</p>
+<p>保存。</p>
+<p>certtool –generate-privkey –outfile server-key.pem</p>
+<p>certtool –generate-certificate –load-privkey server-key.pem –load-ca-certificate ca-cert.pem –load-ca-privkey ca-key.pem –template server.tmpl –outfile server-cert.pem</p>
+<p>certtool –generate-certificate –load-privkey server-key.pem –load-ca-certificate ca-cert.pem –load-ca-privkey ca-key.pem –template server.tmpl –outfile server-cert.pem</p>
+<p>然后我们把证书放到一个你喜欢的文件夹，我们假设是/etc/ssl/selfsigned。<strong>存放路径可以自己改。</strong></p>
+<p>cp ca-cert.pem /etc/ssl/selfsigned/ca-cert.pem<br>cp server-cert.pem /etc/ssl/selfsigned/server-cert.pem<br>cp server-key.pem /etc/ssl/selfsigned/server-key.pem</p>
+<h3 id="3-配置ocserv"><a href="#3-配置ocserv" class="headerlink" title="3.配置ocserv"></a>3.配置ocserv</h3><p>我们<strong>在ocserv-x.x.x下操作</strong>。 把配置样本复制到/etc/ocserv中进行修改：</p>
+<p>mkdir ocserv<br>cp doc/sample.config /etc/ocserv/ocserv.conf<br>nano /etc/ocserv/ocserv.conf</p>
+<p>  然后添加一个用户名和密码：</p>
+<p>ocpasswd -c /etc/ocserv/ocpasswd 你喜欢的用户名</p>
+<p>接着会让你添加密码，输两遍（一遍用来验证）就行了 找到以下几行（友情提示：nano使用Ctrl+w可以进行搜索）并按照#后面的提示改动（如果你不知道怎么改就不要动了）</p>
+<p># 选择喜欢的登录方式，如果想使用证书登录的话应该把auth=”certificate”前的井号删掉并在下面这行的前面加上井号。第5点会提到<br>auth = “plain[/etc/ocserv/ocpasswd]“</p>
+<p># 允许同时连接的总客户端数量，比如下面的4就是最多只能4台设备同时使用<br>max-clients = 4</p>
+<p>#不同用户用同一个用户名可以同时登录，下面限制的是多少同名用户可以同时使用。改成0就是不作限制<br>max-same-clients = 2</p>
+<p># ocserv监听的IP地址，千万别动动了就爆炸</p>
+<p>#listen-host = [IP|HOSTNAME]</p>
+<p># 服务监听的TCP/UDP端口，如果没有搭网站的话就用TCP443/UDP80好了<br>tcp-port = 443<br>udp-port = 80</p>
+<p># 开启以后可以增强VPN性能<br>try-mtu-discovery = true</p>
+<p># 让服务器读取用户证书（后面会用到用户证书）<br>cert-user-oid = 2.5.4.3</p>
+<p># 服务器证书与密钥<br>server-cert = /etc/ssl/selfsigned/server-cert.pem<br>server-key = /etc/ssl/selfsigned/server-key.pem</p>
+<p># 服务器所使用的dns，我们使用Google提供的DNS<br>dns = 8.8.8.8<br>dns = 8.8.4.4</p>
+<p>#把route = *全注释掉就是了</p>
+<p>#route = 192.168.1.0/255.255.255.0</p>
+<p># 使ocserv兼容AnyConnect<br>cisco-client-compat = true</p>
+<p># 选择喜欢的登录方式，如果想使用证书登录的话应该把auth=”certificate”前的井号删掉并在下面这行的前面加上井号。第5点会提到<br>auth = “plain[/etc/ocserv/ocpasswd]“</p>
+<p># 允许同时连接的总客户端数量，比如下面的4就是最多只能4台设备同时使用<br>max-clients = 4</p>
+<p>#不同用户用同一个用户名可以同时登录，下面限制的是多少同名用户可以同时使用。改成0就是不作限制<br>max-same-clients = 2</p>
+<p># ocserv监听的IP地址，千万别动动了就爆炸</p>
+<p>#listen-host = [IP|HOSTNAME]</p>
+<p># 服务监听的TCP/UDP端口，如果没有搭网站的话就用TCP443/UDP80好了<br>tcp-port = 443<br>udp-port = 80</p>
+<p># 开启以后可以增强VPN性能<br>try-mtu-discovery = true</p>
+<p># 让服务器读取用户证书（后面会用到用户证书）<br>cert-user-oid = 2.5.4.3</p>
+<p># 服务器证书与密钥<br>server-cert = /etc/ssl/selfsigned/server-cert.pem<br>server-key = /etc/ssl/selfsigned/server-key.pem</p>
+<p># 服务器所使用的dns，我们使用Google提供的DNS<br>dns = 8.8.8.8<br>dns = 8.8.4.4</p>
+<p>#把route = *全注释掉就是了</p>
+<p>#route = 192.168.1.0/255.255.255.0</p>
+<p># 使ocserv兼容AnyConnect<br>cisco-client-compat = true</p>
+<p>Ctrl+x保存退出。 好了我们来聊聊开头提到的 getaddrinfo() failed。其实只要把listen-host那一行用#注释掉保存就可以了。然后ocserv就会自己进行扫描，多棒啊（</p>
+<h3 id="4-扫尾工作"><a href="#4-扫尾工作" class="headerlink" title="4.扫尾工作"></a><strong>4.扫尾工作</strong></h3><h4 id="4-1-防火墙设置"><a href="#4-1-防火墙设置" class="headerlink" title="4.1 防火墙设置"></a>4.1 防火墙设置</h4><p>有些骚年的端口可能被iptables挡住了，现在我们就在iptables上开个洞：</p>
+<p>iptables -A INPUT -p tcp -m state –state NEW –dport 443 -j ACCEPT<br>iptables -A INPUT -p udp -m state –state NEW –dport 80 -j ACCEPT</p>
+<p>  然后再开个NAT：</p>
+<p>iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</p>
+<p>顺便说一下有人问“能够正常连接但是上不了网”是什么情况，原因很可能是因为没有开启IPv4转发。IPv4转发的相关参数在/etc/sysctl.conf中，进入后找到net.ipv4.ip_forward=1并把前面的注释（“#”）删掉并保存（保存文件并且sysctl -p）即可。或者也可以使用echo来在文件尾添加上这一参数：</p>
+<p>echo “net.ipv4.ip_forward=1” &gt;&gt; /etc/sysctl.conf<br>sysctl -p</p>
+<p>  哦对了。看到analytics说有一个“anyconnet不能改端口”的搜索跳转，这里就补充一下：其实把tcp-port和udp-port改掉就好了…</p>
+<h4 id="4-2-测试"><a href="#4-2-测试" class="headerlink" title="4.2 测试"></a>4.2 测试</h4><p>洋洋洒洒写了这么多终于写到了测试，真是泪流满面…</p>
+<p>ocserv -f -d 1</p>
+<p>要是没有报错退出的话，那就可以用了。然而，只是可以用而已。</p>
+<h3 id="5-可选操作——添加守护进程（Debian）或使用证书认证"><a href="#5-可选操作——添加守护进程（Debian）或使用证书认证" class="headerlink" title="5.可选操作——添加守护进程（Debian）或使用证书认证"></a>5.可选操作——添加守护进程（Debian）或使用证书认证</h3><h4 id="5-1-添加守护进程"><a href="#5-1-添加守护进程" class="headerlink" title="5.1 添加守护进程"></a>5.1 添加守护进程</h4><p>添加守护进程这个是Debian多出来的一步。在CentOS下直接yum install ocserv然后就可以用service ocserv start或者service ocserv stop了。所以其实我新开了一台CentOS服务器，下面的内容是我从其他地方复制的</p>
+<p>cd /etc/init.d</p>
+<p>sudo ln -s /lib/init/upstart-job ocserv</p>
+<p>cd /etc/init</p>
+<p>sudo nano ocserv.conf</p>
+<p>  在新文件中加入以下几行：</p>
+<p>#!upstart<br>description “OpenConnect Server”</p>
+<p>start on runlevel [2345]<br>stop on runlevel [06]</p>
+<p>respawn<br>respawn limit 20 5</p>
+<p>script<br>exec start-stop-daemon –start –pidfile /var/run/ocserv.pid –exec /usr/local/sbin/ocserv – -f &gt;&gt; /dev/null 2&gt;&amp;1<br>end script</p>
+<p>  然后Debian党也可以使用service ocserv start/stop了。</p>
+<blockquote>
+<p>  补充：CentOS上systemctl start ocserv.service后可能会返回 Job for ocserv.service failed because the control process exited with error code. See “systemctl status ocserv.service” and “journalctl -xe” for details. 这时候敲systemctl status ocserv.service查看上一次的运行过程中发生了什么。一般来说这个日志中会显示配置错误(Syntax error，配置文件中的参数错误，一般会显示执行到第几行)或者是地址已经被使用[bind() failed: Address already in use]。对于第一种情况请检查相关配置文件，对于第二种情况可以lsof -i:ocserv使用的端口 查看端口调用情况。如果看到ocserv-ma则表示已经有一个ocserv服务在运行中，如果没有的话就需要调整到空端口或者手动杀掉占用此端口的进程然后重新启动ocserv。  </p>
+</blockquote>
+<h4 id="5-2-客户端使用证书登录"><a href="#5-2-客户端使用证书登录" class="headerlink" title="5.2 客户端使用证书登录"></a>5.2 客户端使用证书登录</h4><p>既然服务器需要提供证书来验证身份，那么客户端也可以提供身份证书进行登录。那么，我们开始咯我开始感到不耐烦了你们看出来了吗 现在证书推荐使用let’s encrypt生成，具体的方法各位可以参照<a href="https://touko.moe/blog/letsencrypt-ocserv-or-more" target="_blank" rel="noopener">这一篇文章</a>。<strong>用户使用自签名证书作为身份验证凭据的话会因为issuer unknown被拒绝（使用ocserv -f -d 1可以看到debug信息），所以自签名的用户证书是没有用的各位不要再折腾了。</strong> 首先<strong>我们要回到之前我们创建证书的地方</strong>（参见2.3.1），因为路径是阁下选的这里就给不出命令了明明就是偷懒</p>
+<p>touch user-cert.tmpl<br>nano user-cert.tmpl</p>
+<p>cn = “随便填”<br>unit = “也是随便填”<br>expiration_days = 365<br>signing_key<br>tls_www_client</p>
+<p>  生成密钥</p>
+<p>certtool –generate-privkey –outfile user-key.pem</p>
+<p>  生成证书</p>
+<p>certtool –generate-certificate –load-privkey user-key.pem –load-ca-certificate ca-cert.pem –load-ca-privkey ca-key.pem –template user-cert.tmpl –outfile user-cert.pem</p>
+<p>  这里多一步格式转换：</p>
+<p>certtool –to-p12 –load-privkey user-key.pem –pkcs-cipher 3des-pkcs12 –load-certificate user-cert.pem –outfile user.p12 –outder</p>
+<p>然后各位可以把证书弄到自己设备上。怎么弄呢？可以用SFTP/FTP（如：filezilla），也可以直接用Apache/Nginx，本来文章就够长了就不增加各位心理负担了（笑 最后回去编辑/etc/ocserv/ocserv.conf，把auth = “plain[/etc/ocserv/ocpasswd]”用 # 注释掉，把auth = “certificate” 的注释删除，注释掉 listen-clear-file = /var/run/ocserv-conn.socket，把ca-cert = 改成下面的 ca-cert = /etc/ssl/selfsigned/ca-cert.pem ，重启服务，大功告成！</p>
 
           
         
@@ -894,7 +1240,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/06/05/nat-setting-and-tips/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/26/e8-af-a6-e8-a7-a3https-e6-98-af-e5-a6-82-e4-bd-95-e7-a1-ae-e4-bf-9d-e5-ae-89-e5-85-a8-e7-9a-84-ef-bc-9f/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -903,7 +1249,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -914,7 +1260,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/06/05/nat-setting-and-tips/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">NAT类型科普及一些简单提升NAT类型的方法</a>
+                <a href="/2017/08/26/e8-af-a6-e8-a7-a3https-e6-98-af-e5-a6-82-e4-bd-95-e7-a1-ae-e4-bf-9d-e5-ae-89-e5-85-a8-e7-9a-84-ef-bc-9f/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">详解https是如何确保安全的？</a>
               
             
           </h1>
@@ -939,377 +1285,7 @@
                 
               
 
-              <time title="创建时间：2018-06-05 16:34:03" itemprop="dateCreated datePublished" datetime="2018-06-05T16:34:03+08:00">2018-06-05</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-17 16:09:52" itemprop="dateModified" datetime="2018-12-17T16:09:52+08:00">2018-12-17</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/互联网/" itemprop="url" rel="index"><span itemprop="name">互联网</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>首先可以在百度百科了解到什么是<strong><code>NAT</code></strong>，传送门→“<a href="http://baike.baidu.com/item/nat" target="_blank" rel="noopener"><strong>NAT科普</strong>”</a><br>然后呢，看了那么多我们大概就知道了一些关于NAT的基本知识， “<a href="http://baike.baidu.com/item/nat" target="_blank" rel="noopener">定义</a>”、 “<a href="http://baike.baidu.com/item/nat#1" target="_blank" rel="noopener">功能</a>”、 “<a href="http://baike.baidu.com/item/nat#2" target="_blank" rel="noopener">实现方式</a>”及 “<a href="http://baike.baidu.com/item/nat#7" target="_blank" rel="noopener">类型</a>”<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/06/05/nat-setting-and-tips/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/05/31/linux-e7-b3-bb-e7-bb-9f-e4-b8-ad-bz2-e4-b8-8e-gz-e6-96-87-e4-bb-b6-e7-9a-84-e5-8c-ba-e5-88-ab/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/05/31/linux-e7-b3-bb-e7-bb-9f-e4-b8-ad-bz2-e4-b8-8e-gz-e6-96-87-e4-bb-b6-e7-9a-84-e5-8c-ba-e5-88-ab/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">Linux系统中.bz2与.gz文件的区别</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-05-31 13:57:38" itemprop="dateCreated datePublished" datetime="2018-05-31T13:57:38+08:00">2018-05-31</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:20:50" itemprop="dateModified" datetime="2018-12-12T17:20:50+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>### 使用</p>
-<pre><code>#压缩
-tar -czf ***.tar.gz   # tar -czf /tmp/etc.tar.gz /etc  &lt;==打包后，以 gzip 压缩
-tar -cjf ***.tar.bz2 # tar -cjf /tmp/etc.tar.bz2 /etc  &lt;==打包后，以 bzip2 压缩
-#解压缩
-tar -xzf ***.tar.gz
-tar -xjf ***.tar.bz2
-</code></pre><p>### 区别 .bz2和.gz的区别在于，前者比后者压缩率更高，后者比前者花费更少的时间。也就是说同一个文件，压缩后，.bz2文件比.gz文件更小，但是.bz2文件的小是以花费更多的时间为代价的。 压缩实例：对一个599M的文件夹workspace进行压缩</p>
-<pre><code>-----------bz2文件----------------------
-time tar -jcvf j.tar.bz2 workspace/
-340M 56.8%
-real 13m20.975s
-user 11m13.872s
-sys 0m5.985s
-
------------gz文件----------------------
-time tar -zcvf z.tar.gz workspace/
-348M 58.1%
-real 2m10.305s
-user 0m54.228s
-sys 0m7.399s
----------------------------------
-</code></pre><p>总结：压缩后，.bz2文件只比.gz文件小了8M，但却花费了后者6倍多的时间。当然，压缩的比率，时间跟被压缩文件的格式，大小等因素有关。所以，本例不能说明使用gz比使用bz2更划算，但至少可以证明bz2比gz压缩率更高，gz比bz2花费更少的时间。 压缩率与文件类型方面的影响很大。某些文件 bz2压缩率还比不上gz，但某些文件bz2能压缩比gz多两倍！至于文件大小的问题，有一句经典的话：虽然磁盘越来越便宜，但是网络带宽并非那么廉价，因此更小的文件用于节省网络带宽常常是值得的。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/05/18/e8-99-9a-e6-8b-9f-e6-9c-ba-e5-ae-89-e8-a3-85-linux-e5-b9-b6-e4-bd-bf-e7-94-a8-e6-a1-8c-e9-9d-a2-e7-8e-af-e5-a2-83-e7-9a-84-e9-80-89-e6-8b-a9/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/05/18/e8-99-9a-e6-8b-9f-e6-9c-ba-e5-ae-89-e8-a3-85-linux-e5-b9-b6-e4-bd-bf-e7-94-a8-e6-a1-8c-e9-9d-a2-e7-8e-af-e5-a2-83-e7-9a-84-e9-80-89-e6-8b-a9/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">虚拟机安装 Linux 并使用桌面环境的选择</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-05-18 15:37:40" itemprop="dateCreated datePublished" datetime="2018-05-18T15:37:40+08:00">2018-05-18</time>
+              <time title="创建时间：2017-08-26 11:07:18" itemprop="dateCreated datePublished" datetime="2017-08-26T11:07:18+08:00">2017-08-26</time>
             
 
             
@@ -1377,7 +1353,112 @@ sys 0m7.399s
       
         
           
-            <p>VMware 12，HDD，i5 4790，12GB  内存 Debian太卡，用了lxde也一样，纯粹是为了其稳定性去的（据说可以用很多年）   Lubuntu 16.04.4 刚刚安装好重启都出错，先天不和，不过基于lxde的X界面，确实要比其他版本好太多，如果能忍受如此不稳定可以尝试。。。。。   好吧，换 CentOS（7, gnome classic），感觉还不错，卡顿比其他发行版感觉上好好<strong>一些</strong>，给了2G的<strong>显存</strong> 不足之处是各种软件不太熟悉，装个 ss 都没有，python 默认都是2.7.5的</p>
+            <h1 id="Https-介绍"><a href="#Https-介绍" class="headerlink" title="Https 介绍"></a>Https 介绍</h1><h2 id="什么是Https"><a href="#什么是Https" class="headerlink" title="什么是Https"></a>什么是Https</h2><p>HTTPS（全称：Hypertext Transfer Protocol over Secure Socket Layer），是以安全为目标的HTTP通道，简单讲是HTTP的安全版。即HTTP下加入SSL层，HTTPS的安全基础是SSL，因此加密的详细内容就需要SSL</p>
+<h2 id="Https的作用"><a href="#Https的作用" class="headerlink" title="Https的作用"></a>Https的作用</h2><ul>
+<li><strong>内容加密</strong> 建立一个信息安全通道，来保证数据传输的安全；</li>
+<li><strong>身份认证</strong> 确认网站的真实性</li>
+<li><strong>数据完整性</strong> 防止内容被第三方冒充或者篡改</li>
+</ul>
+<h2 id="Https的劣势"><a href="#Https的劣势" class="headerlink" title="Https的劣势"></a>Https的劣势</h2><ul>
+<li><p>对数据进行加解密决定了它比http慢</p>
+<blockquote>
+<p>需要进行非对称的加解密，且需要三次握手。首次连接比较慢点，当然现在也有很多的优化。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>出于安全考虑，浏览器不会在本地保存HTTPS缓存。实际上，只要在HTTP头中使用特定命令，HTTPS是可以缓存的。Firefox默认只在内存中缓存HTTPS。但是，只要头命令中有Cache-Control: Public，缓存就会被写到硬盘上。 IE只要http头允许就可以缓存https内容，缓存策略与是否使用HTTPS协议无关。</p>
+</blockquote>
+<h2 id="HTTPS和HTTP的区别"><a href="#HTTPS和HTTP的区别" class="headerlink" title="HTTPS和HTTP的区别"></a>HTTPS和HTTP的区别</h2><ul>
+<li>https协议需要到CA申请证书。</li>
+<li>http是超文本传输协议，信息是明文传输；https 则是具有安全性的ssl加密传输协议。</li>
+<li>http和https使用的是完全不同的连接方式，用的端口也不一样，前者是80，后者是443。</li>
+<li>http的连接很简单，是无状态的；HTTPS协议是由SSL+HTTP协议构建的可进行加密传输、身份认证的网络协议，比http协议安全。</li>
+</ul>
+<blockquote>
+<p>http默认使用80端口，https默认使用443端口</p>
+</blockquote>
+<p>下面就是https的整个架构，现在的https基本都使用TLS了，因为更加安全，所以下图中的SSL应该换为<strong>SSL/TLS</strong>。 <a href="http://www.wxtlife.com/img/https/https_01.png" target="_blank" rel="noopener"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/1508d053ea54e137b27735b382d9bfa7.png" alt=""></a> 下面就上图中的知识点进行一个大概的介绍。</p>
+<h1 id="加解密相关知识"><a href="#加解密相关知识" class="headerlink" title="加解密相关知识"></a>加解密相关知识</h1><h2 id="对称加密"><a href="#对称加密" class="headerlink" title="对称加密"></a>对称加密</h2><p>对称加密(也叫私钥加密)指加密和解密使用相同密钥的加密算法。有时又叫传统密码算法，就是加密密钥能够从解密密钥中推算出来，同时解密密钥也可以从加密密钥中推算出来。而在大多数的对称算法中，加密密钥和解密密钥是相同的，所以也称这种加密算法为秘密密钥算法或单密钥算法。常见的对称加密有：DES（Data Encryption Standard）、AES（Advanced Encryption Standard）、RC4、IDEA</p>
+<h2 id="非对称加密"><a href="#非对称加密" class="headerlink" title="非对称加密"></a>非对称加密</h2><p>与对称加密算法不同，非对称加密算法需要两个密钥：公开密钥（publickey）和私有密钥（privatekey）；并且加密密钥和解密密钥是成对出现的。非对称加密算法在加密和解密过程使用了不同的密钥，非对称加密也称为公钥加密，在密钥对中，其中一个密钥是对外公开的，所有人都可以获取到，称为公钥，其中一个密钥是不公开的称为私钥。</p>
+<blockquote>
+<p>非对称加密算法对加密内容的长度有限制，不能超过公钥长度。比如现在常用的公钥长度是 2048 位，意味着待加密内容不能超过 256 个字节。</p>
+</blockquote>
+<h2 id="摘要算法"><a href="#摘要算法" class="headerlink" title="摘要算法"></a>摘要算法</h2><p>数字摘要是采用单项Hash函数将需要加密的明文“摘要”成一串固定长度（128位）的密文，这一串密文又称为数字指纹，它有固定的长度，而且不同的明文摘要成密文，其结果总是不同的，而同样的明文其摘要必定一致。“数字摘要“是https能确保数据完整性和防篡改的根本原因。</p>
+<h2 id="数字签名"><a href="#数字签名" class="headerlink" title="数字签名"></a>数字签名</h2><p>数字签名技术就是对“非对称密钥加解密”和“数字摘要“两项技术的应用，它将摘要信息用发送者的私钥加密，与原文一起传送给接收者。接收者只有用发送者的公钥才能解密被加密的摘要信息，然后用HASH函数对收到的原文产生一个摘要信息，与解密的摘要信息对比。如果相同，则说明收到的信息是完整的，在传输过程中没有被修改，否则说明信息被修改过，因此数字签名能够验证信息的完整性。数字签名的过程如下：<code>明文 --&gt; hash运算 --&gt; 摘要 --&gt; 私钥加密 --&gt; 数字签名</code> 数字签名有两种功效：一、能确定消息确实是由发送方签名并发出来的，因为别人假冒不了发送方的签名。二、数字签名能确定消息的完整性。</p>
+<blockquote>
+<p><strong>注意：</strong> 数字签名只能验证数据的完整性，数据本身是否加密不属于数字签名的控制范围</p>
+</blockquote>
+<h2 id="数字证书"><a href="#数字证书" class="headerlink" title="数字证书"></a>数字证书</h2><h3 id="为什么要有数字证书？"><a href="#为什么要有数字证书？" class="headerlink" title="为什么要有数字证书？"></a>为什么要有数字证书？</h3><p>对于请求方来说，它怎么能确定它所得到的公钥一定是从目标主机那里发布的，而且没有被篡改过呢？亦或者请求的目标主机本本身就从事窃取用户信息的不正当行为呢？这时候，我们需要有一个权威的值得信赖的第三方机构(一般是由政府审核并授权的机构)来统一对外发放主机机构的公钥，只要请求方这种机构获取公钥，就避免了上述问题的发生。</p>
+<h3 id="数字证书的颁发过程"><a href="#数字证书的颁发过程" class="headerlink" title="数字证书的颁发过程"></a>数字证书的颁发过程</h3><p>用户首先产生自己的密钥对，并将公共密钥及部分个人身份信息传送给认证中心。认证中心在核实身份后，将执行一些必要的步骤，以确信请求确实由用户发送而来，然后，认证中心将发给用户一个数字证书，该证书内包含用户的个人信息和他的公钥信息，同时还附有认证中心的签名信息(根证书私钥签名)。用户就可以使用自己的数字证书进行相关的各种活动。数字证书由独立的证书发行机构发布，数字证书各不相同，每种证书可提供不同级别的可信度。</p>
+<h3 id="证书包含哪些内容"><a href="#证书包含哪些内容" class="headerlink" title="证书包含哪些内容"></a>证书包含哪些内容</h3><ul>
+<li>证书颁发机构的名称</li>
+<li>证书本身的数字签名</li>
+<li>证书持有者公钥</li>
+<li>证书签名用到的Hash算法</li>
+</ul>
+<h3 id="验证证书的有效性"><a href="#验证证书的有效性" class="headerlink" title="验证证书的有效性"></a>验证证书的有效性</h3><p><strong>浏览器默认都会内置CA根证书，其中根证书包含了CA的公钥</strong></p>
+<ol>
+<li>证书颁发的机构是伪造的：浏览器不认识，直接认为是危险证书</li>
+<li>证书颁发的机构是确实存在的，于是根据CA名，找到对应内置的CA根证书、CA的公钥。用CA的公钥，对伪造的证书的摘要进行解密，发现解不了，认为是危险证书。</li>
+<li>对于篡改的证书，使用CA的公钥对数字签名进行解密得到摘要A，然后再根据签名的Hash算法计算出证书的摘要B，对比A与B，若相等则正常，若不相等则是被篡改过的。</li>
+<li>证书可在其过期前被吊销，通常情况是该证书的私钥已经失密。较新的浏览器如Chrome、Firefox、Opera和Internet Explorer都实现了在线证书状态协议（OCSP）以排除这种情形：浏览器将网站提供的证书的序列号通过OCSP发送给证书颁发机构，后者会告诉浏览器证书是否还是有效的。</li>
+</ol>
+<blockquote>
+<p>1、2点是对伪造证书进行的，3是对于篡改后的证书验证，4是对于过期失效的验证。</p>
+</blockquote>
+<h1 id="SSL-与-TLS"><a href="#SSL-与-TLS" class="headerlink" title="SSL 与 TLS"></a>SSL 与 TLS</h1><h2 id="SSL-Secure-Socket-Layer，安全套接字层"><a href="#SSL-Secure-Socket-Layer，安全套接字层" class="headerlink" title="SSL (Secure Socket Layer，安全套接字层)"></a>SSL (Secure Socket Layer，安全套接字层)</h2><p>SSL为Netscape所研发，用以保障在Internet上数据传输之安全，利用数据加密(Encryption)技术，可确保数据在网络上之传输过程中不会被截取，当前为3.0版本。 SSL协议可分为两层： SSL记录协议（SSL Record Protocol）：它建立在可靠的传输协议（如TCP）之上，为高层协议提供数据封装、压缩、加密等基本功能的支持。 SSL握手协议（SSL Handshake Protocol）：它建立在SSL记录协议之上，用于在实际的数据传输开始前，通讯双方进行身份认证、协商加密算法、交换加密密钥等。</p>
+<h2 id="TLS-Transport-Layer-Security，传输层安全协议"><a href="#TLS-Transport-Layer-Security，传输层安全协议" class="headerlink" title="TLS (Transport Layer Security，传输层安全协议)"></a>TLS (Transport Layer Security，传输层安全协议)</h2><p>用于两个应用程序之间提供保密性和数据完整性。TLS 1.0是IETF（Internet Engineering Task Force，Internet工程任务组）制定的一种新的协议，它建立在SSL 3.0协议规范之上，是SSL 3.0的后续版本，可以理解为SSL 3.1，它是写入了 RFC 的。该协议由两层组成： TLS 记录协议（TLS Record）和 TLS 握手协议（TLS Handshake）。较低的层为 TLS 记录协议，位于某个可靠的传输协议（例如 TCP）上面。</p>
+<h2 id="SSL-TLS协议作用："><a href="#SSL-TLS协议作用：" class="headerlink" title="SSL/TLS协议作用："></a>SSL/TLS协议作用：</h2><ul>
+<li>认证用户和服务器，确保数据发送到正确的客户机和服务器；</li>
+<li>加密数据以防止数据中途被窃取；</li>
+<li>维护数据的完整性，确保数据在传输过程中不被改变。</li>
+</ul>
+<h2 id="TLS比SSL的优势"><a href="#TLS比SSL的优势" class="headerlink" title="TLS比SSL的优势"></a>TLS比SSL的优势</h2><ol>
+<li>对于消息认证使用密钥散列法：TLS 使用“消息认证代码的密钥散列法”（HMAC），当记录在开放的网络（如因特网）上传送时，该代码确保记录不会被变更。SSLv3.0还提供键控消息认证，但HMAC比SSLv3.0使用的（消息认证代码）MAC 功能更安全。</li>
+<li>增强的伪随机功能（PRF）：PRF生成密钥数据。在TLS中，HMAC定义PRF。PRF使用两种散列算法保证其安全性。如果任一算法暴露了，只要第二种算法未暴露，则数据仍然是安全的。</li>
+<li>改进的已完成消息验证：TLS和SSLv3.0都对两个端点提供已完成的消息，该消息认证交换的消息没有被变更。然而，TLS将此已完成消息基于PRF和HMAC值之上，这也比SSLv3.0更安全。</li>
+<li>一致证书处理：与SSLv3.0不同，TLS试图指定必须在TLS之间实现交换的证书类型。</li>
+<li>特定警报消息：TLS提供更多的特定和附加警报，以指示任一会话端点检测到的问题。TLS还对何时应该发送某些警报进行记录。</li>
+</ol>
+<h2 id="SSL、TLS的握手过程"><a href="#SSL、TLS的握手过程" class="headerlink" title="SSL、TLS的握手过程"></a>SSL、TLS的握手过程</h2><p>SSL与TLS握手整个过程如下图所示，下面会详细介绍每一步的具体内容： <a href="http://www.wxtlife.com/img/https/https_02.png" target="_blank" rel="noopener"><img src="https://w.msla.top/wordpress/wp-content/uploads/2017/08/15781e74c811bc0ad3e73c1dd10d1fe4.png" alt=""></a></p>
+<h3 id="客户端首次发出请求"><a href="#客户端首次发出请求" class="headerlink" title="客户端首次发出请求"></a>客户端首次发出请求</h3><p>由于客户端(如浏览器)对一些加解密算法的支持程度不一样，但是在TLS协议传输过程中必须使用同一套加解密算法才能保证数据能够正常的加解密。在TLS握手阶段，客户端首先要告知服务端，自己支持哪些加密算法，所以客户端需要将本地支持的加密套件(Cipher Suite)的列表传送给服务端。除此之外，客户端还要产生一个随机数，这个随机数一方面需要在客户端保存，另一方面需要传送给服务端，客户端的随机数需要跟服务端产生的随机数结合起来产生后面要讲到的 Master Secret 。 客户端需要提供如下信息：</p>
+<ul>
+<li>支持的协议版本，比如TLS 1.0版</li>
+<li>一个客户端生成的随机数，稍后用于生成”对话密钥”</li>
+<li>支持的加密方法，比如RSA公钥加密</li>
+<li>支持的压缩方法</li>
+</ul>
+<h3 id="服务端首次回应"><a href="#服务端首次回应" class="headerlink" title="服务端首次回应"></a>服务端首次回应</h3><p>服务端在接收到客户端的Client Hello之后，服务端需要确定加密协议的版本，以及加密的算法，然后也生成一个随机数，以及将自己的证书发送给客户端一并发送给客户端，这里的随机数是整个过程的第二个随机数。 服务端需要提供的信息：</p>
+<ul>
+<li>协议的版本</li>
+<li>加密的算法</li>
+<li>随机数</li>
+<li>服务器证书</li>
+</ul>
+<h3 id="客户端再次回应"><a href="#客户端再次回应" class="headerlink" title="客户端再次回应"></a>客户端再次回应</h3><p>客户端首先会对服务器下发的证书进行验证，验证通过之后，则会继续下面的操作，客户端再次产生一个随机数（第三个随机数），然后使用服务器证书中的公钥进行加密，以及放一个ChangeCipherSpec消息即编码改变的消息，还有整个前面所有消息的hash值，进行服务器验证，然后用新秘钥加密一段数据一并发送到服务器，确保正式通信前无误。客户端使用前面的两个随机数以及刚刚新生成的新随机数，使用与服务器确定的加密算法，生成一个Session Secret。</p>
+<blockquote>
+<p>ChangeCipherSpecChangeCipherSpec是一个独立的协议，体现在数据包中就是一个字节的数据，用于告知服务端，客户端已经切换到之前协商好的加密套件（Cipher Suite）的状态，准备使用之前协商好的加密套件加密数据并传输了。</p>
+</blockquote>
+<h3 id="服务器再次响应"><a href="#服务器再次响应" class="headerlink" title="服务器再次响应"></a>服务器再次响应</h3><p>服务端在接收到客户端传过来的第三个随机数的 加密数据之后，使用私钥对这段加密数据进行解密，并对数据进行验证，也会使用跟客户端同样的方式生成秘钥，一切准备好之后，也会给客户端发送一个 ChangeCipherSpec，告知客户端已经切换到协商过的加密套件状态，准备使用加密套件和 Session Secret加密数据了。之后，服务端也会使用 Session Secret 加密一段 Finish 消息发送给客户端，以验证之前通过握手建立起来的加解密通道是否成功。</p>
+<h3 id="后续客户端与服务器间通信"><a href="#后续客户端与服务器间通信" class="headerlink" title="后续客户端与服务器间通信"></a>后续客户端与服务器间通信</h3><p>确定秘钥之后，服务器与客户端之间就会通过商定的秘钥加密消息了，进行通讯了。整个握手过程也就基本完成了。</p>
+<blockquote>
+<p>值得特别提出的是：SSL协议在握手阶段使用的是非对称加密，在传输阶段使用的是对称加密，也就是说在SSL上传送的数据是使用对称密钥加密的！因为非对称加密的速度缓慢，耗费资源。其实当客户端和主机使用非对称加密方式建立连接后，客户端和主机已经决定好了在传输过程使用的对称加密算法和关键的对称加密密钥，由于这个过程本身是安全可靠的，也即对称加密密钥是不可能被窃取盗用的，因此，保证了在传输过程中对数据进行对称加密也是安全可靠的，因为除了客户端和主机之外，不可能有第三方窃取并解密出对称加密密钥！如果有人窃听通信，他可以知道双方选择的加密方法，以及三个随机数中的两个。整个通话的安全，只取决于第三个随机数（Premaster secret）能不能被破解。</p>
+</blockquote>
+<h3 id="其他补充"><a href="#其他补充" class="headerlink" title="其他补充"></a>其他补充</h3><p>对于非常重要的保密数据，服务端还需要对客户端进行验证，以保证数据传送给了安全的合法的客户端。服务端可以向客户端发出 Cerficate Request 消息，要求客户端发送证书对客户端的合法性进行验证。比如，金融机构往往只允许认证客户连入自己的网络，就会向正式客户提供USB密钥，里面就包含了一张客户端证书。 PreMaster secret前两个字节是TLS的版本号，这是一个比较重要的用来核对握手数据的版本号，因为在Client Hello阶段，客户端会发送一份加密套件列表和当前支持的SSL/TLS的版本号给服务端，而且是使用明文传送的，如果握手的数据包被破解之后，攻击者很有可能串改数据包，选择一个安全性较低的加密套件和版本给服务端，从而对数据进行破解。所以，服务端需要对密文中解密出来对的PreMaster版本号跟之前Client Hello阶段的版本号进行对比，如果版本号变低，则说明被串改，则立即停止发送任何消息。</p>
+<h2 id="session的恢复"><a href="#session的恢复" class="headerlink" title="session的恢复"></a>session的恢复</h2><p>有两种方法可以恢复原来的session：一种叫做session ID，另一种叫做session ticket。</p>
+<h3 id="session-ID"><a href="#session-ID" class="headerlink" title="session ID"></a>session ID</h3><p>session ID的思想很简单，就是每一次对话都有一个编号（session ID）。如果对话中断，下次重连的时候，只要客户端给出这个编号，且服务器有这个编号的记录，双方就可以重新使用已有的”对话密钥”，而不必重新生成一把。</p>
+<blockquote>
+<p>session ID是目前所有浏览器都支持的方法，但是它的缺点在于session ID往往只保留在一台服务器上。所以，如果客户端的请求发到另一台服务器，就无法恢复对话</p>
+</blockquote>
+<h3 id="session-ticket"><a href="#session-ticket" class="headerlink" title="session ticket"></a>session ticket</h3><p>客户端发送一个服务器在上一次对话中发送过来的session ticket。这个session ticket是加密的，只有服务器才能解密，其中包括本次对话的主要信息，比如对话密钥和加密方法。当服务器收到session ticket以后，解密后就不必重新生成对话密钥了。</p>
+<blockquote>
+<p>目前只有Firefox和Chrome浏览器支持。</p>
+</blockquote>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>https实际就是在TCP层与http层之间加入了SSL/TLS来为上层的安全保驾护航，主要用到对称加密、非对称加密、证书，等技术进行客户端与服务器的数据加密传输，最终达到保证整个通信的安全性。</p>
+<blockquote>
+<p><strong>参考文章</strong><a href="http://www.enkichen.com/2016/02/26/digital-certificate-based/" target="_blank" rel="noopener">数字证书的基础知识</a><a href="https://segmentfault.com/a/1190000004523659" target="_blank" rel="noopener">HTTPS科普扫盲帖</a><a href="http://blog.csdn.net/bluishglc/article/details/7585965" target="_blank" rel="noopener">和安全有关的那些事</a><a href="http://seanlook.com/2015/01/15/openssl-certificate-encryption/" target="_blank" rel="noopener">OpenSSL 与 SSL 数字证书概念贴</a><a href="http://seanlook.com/2015/01/18/openssl-self-sign-ca/" target="_blank" rel="noopener">基于OpenSSL自建CA和颁发SSL证书</a><a href="http://www.techug.com/https-ssl-tls" target="_blank" rel="noopener">聊聊HTTPS和SSL/TLS协议</a><a href="http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html" target="_blank" rel="noopener">SSL/TLS协议运行机制的概述</a><a href="http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html" target="_blank" rel="noopener">图解SSL/TLS协议</a><a href="http://blog.jobbole.com/86660/" target="_blank" rel="noopener">大型网站的 HTTPS 实践</a><a href="https://segmentfault.com/a/1190000002554673" target="_blank" rel="noopener">SSL/TLS原理详解</a><a href="https://segmentfault.com/a/1190000003801450" target="_blank" rel="noopener">扒一扒HTTPS网站的内幕</a><a href="https://segmentfault.com/a/1190000004467714" target="_blank" rel="noopener">白话解释 OSI模型，TLS/SSL 及 HTTPS</a><a href="http://codefine.co/1429.html" target="_blank" rel="noopener">OpenSSL HeartBleed漏洞原理漫画图解</a></p>
+</blockquote>
 
           
         
@@ -1434,7 +1515,7 @@ sys 0m7.399s
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/05/18/e9-98-bf-e9-87-8c-e4-ba-91-e4-b8-8d-e6-94-af-e6-8c-81-e4-bb-a3-e7-90-86-e3-80-82-e3-80-82-e3-80-82/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/26/e5-9c-a8opensuse-leap-e4-b8-8a-e9-83-a8-e7-bd-b2ocserv-ef-bc-88anyconnect-ef-bc-89-vpn-e4-bf-a1-e6-81-af-e7-bd-91/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1443,7 +1524,7 @@ sys 0m7.399s
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -1454,7 +1535,7 @@ sys 0m7.399s
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/05/18/e9-98-bf-e9-87-8c-e4-ba-91-e4-b8-8d-e6-94-af-e6-8c-81-e4-bb-a3-e7-90-86-e3-80-82-e3-80-82-e3-80-82/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">阿里云不支持代理。。。</a>
+                <a href="/2017/08/26/e5-9c-a8opensuse-leap-e4-b8-8a-e9-83-a8-e7-bd-b2ocserv-ef-bc-88anyconnect-ef-bc-89-vpn-e4-bf-a1-e6-81-af-e7-bd-91/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">在Opensuse Leap上部署Ocserv（Anyconnect） | VPN信息网</a>
               
             
           </h1>
@@ -1479,7 +1560,7 @@ sys 0m7.399s
                 
               
 
-              <time title="创建时间：2018-05-18 14:36:05" itemprop="dateCreated datePublished" datetime="2018-05-18T14:36:05+08:00">2018-05-18</time>
+              <time title="创建时间：2017-08-26 10:34:41" itemprop="dateCreated datePublished" datetime="2017-08-26T10:34:41+08:00">2017-08-26</time>
             
 
             
@@ -1496,177 +1577,7 @@ sys 0m7.399s
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-12 17:13:43" itemprop="dateModified" datetime="2018-12-12T17:13:43+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/互联网/" itemprop="url" rel="index"><span itemprop="name">互联网</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>昨天晚上想着经常用公共网络，不太安全，在ECS上建个代理吧， 折腾了很久，发现死活不行， 一开始尝试的是 openvpn ，配置好之后客户端连接提示 连接被重置。。我防火墙100%确定是关闭/放行了的 然后尝试下 ss ，简单的不能再简单的东西，也依然不行 至此基本确认，国内云想用代理基本不可能了。。。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/05/15/php-e6-9a-82-e5-81-9c-e5-a4-9a-e5-b0-91-e6-af-ab-e7-a7-92-e3-80-81-e5-be-ae-e7-a7-92-e5-90-8e-e6-89-a7-e8-a1-8c/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/05/15/php-e6-9a-82-e5-81-9c-e5-a4-9a-e5-b0-91-e6-af-ab-e7-a7-92-e3-80-81-e5-be-ae-e7-a7-92-e5-90-8e-e6-89-a7-e8-a1-8c/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">php 暂停多少毫秒、微秒 后执行</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-05-15 17:19:54" itemprop="dateCreated datePublished" datetime="2018-05-15T17:19:54+08:00">2018-05-15</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:22:01" itemprop="dateModified" datetime="2018-12-12T17:22:01+08:00">2018-12-12</time>
+                <time title="修改时间：2018-12-12 17:08:58" itemprop="dateModified" datetime="2018-12-12T17:08:58+08:00">2018-12-12</time>
               
             
           </span>
@@ -1717,7 +1628,249 @@ sys 0m7.399s
       
         
           
-            <p>在php中暂停代码执行一定时间，有两个函数可以实现，一个是sleep，另一个是usleep，它们参数都是一个整数值。 sleep是暂停多少秒，usleep是暂停多少<strong>微秒</strong>。 注意：usleep单位是微秒， 1秒 = 1000毫秒 ， 1毫秒 = 1000微秒， 即1微秒等于百万分之一秒。 如果程序中要使用要暂停多少毫秒，只能使用usleep，务必注意参数的单位， 假设暂停 50毫秒，<strong>应该使用usleep(50000)</strong>，而不是usleep(50)。</p>
+            <p>Opensuse的Wiki中介绍了Ocserv的搭建。 由于良久没有更新，文中的方法已经部分失效，因此在此对wiki中失效的方法作出修改。本文部署基于Leap 42.3，部分内容引用<a href="https://zh.opensuse.org/index.php?title=SDB:Setup_AnyConnect_VPN_with_ocserv&amp;variant=zh" target="_blank" rel="noopener">Opensuse的wiki</a>。</p>
+<h2 id="背景知识：什么是-Cisco-Anyconnect？什么是-ocserv？"><a href="#背景知识：什么是-Cisco-Anyconnect？什么是-ocserv？" class="headerlink" title="背景知识：什么是 Cisco Anyconnect？什么是 ocserv？"></a>背景知识：什么是 Cisco Anyconnect？什么是 ocserv？</h2><p>Cisco Anyconnect 是思科推出的一款企业级 VPN。其背后的开源技术是<a href="http://en.wikipedia.org/wiki/OpenConnect" target="_blank" rel="noopener">OpenConnect</a>。简单来说就是平时使用 UDP 的<a href="http://en.wikipedia.org/wiki/Datagram_Transport_Layer_Security" target="_blank" rel="noopener">DTLS</a>协议进行加密，掉线时自动使用 TCP 的 TLS 协议进行备份恢复，因此相对其它 VPN 比较稳定；而且广泛被大企业采用，不容易被误杀；而加之比较小众架设起来不太容易，也吸引不了很多的火力。</p>
+<h2 id="ocserv-的安装"><a href="#ocserv-的安装" class="headerlink" title="ocserv 的安装"></a>ocserv 的安装</h2><p>ocserv已经包括在了Opensue的官方源中，因此ocserv的安装十分简单，只需要一条命令</p>
+<pre><code>linux# zypper in ocserv
+</code></pre><h2 id="ocserv-的初始化配置"><a href="#ocserv-的初始化配置" class="headerlink" title="ocserv 的初始化配置"></a>ocserv 的初始化配置</h2><h3 id="修改-server-tmpl-模板"><a href="#修改-server-tmpl-模板" class="headerlink" title="修改 server.tmpl 模板"></a>修改 server.tmpl 模板</h3><p>将 ocserv 安装到您的服务器上后，您需要编辑 /etc/ocserv/certificates/server.tmpl，将其中的：</p>
+<pre><code>cn = &quot;Your hostname or IP&quot;
+</code></pre><p>改成你服务器的 IP 地址，可以使用：</p>
+<pre><code>linux# ifconfig -a
+</code></pre><p>查看您的ip地址</p>
+<h3 id="生成证书"><a href="#生成证书" class="headerlink" title="生成证书"></a>生成证书</h3><pre><code>linux# cd /etc/ocserv/certificates
+linux# certtool --generate-privkey --outfile ca-key.pem
+linux# certtool --generate-self-signed --load-privkey ca-key.pem --template ca.tmpl --outfile ca-cert.pem
+linux# certtool --generate-privkey --outfile server-key.pem
+linux# certtool --generate-certificate --load-privkey server-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template server.tmpl --outfile server-cert.pem
+</code></pre><p>参考：<a href="http://blog.tremily.us/posts/X.509_certificates/" target="_blank" rel="noopener">http://blog.tremily.us/posts/X.509_certificates/</a> 如果你有购买的SSL证书，只需要生成ca-key.pem即可，然后将你的证书和私钥放在/etc/ocserv/certificates下即可</p>
+<h3 id="生成密码文件"><a href="#生成密码文件" class="headerlink" title="生成密码文件"></a>生成密码文件</h3><pre><code>linux# ocpasswd -c /etc/ocserv/ocpasswd 您要使用的用户名
+</code></pre><p>“您要使用的用户名“是随意的，之后会提示您输入两次密码。</p>
+<h3 id="配置防火墙"><a href="#配置防火墙" class="headerlink" title="配置防火墙"></a>配置防火墙</h3><p>客户端连上Ocserv后使用的 IP 地址段 192.168.1.0/24 是可以在 /etc/ocserv/ocserv.conf 中配置的，这里用的是默认的。 同样，客户端连接Ocserv时使用的端口也是可以在 /etc/ocserv/ocserv.conf 中配置的，这里用的是tcp 999与udp 1999。 注意: 如果您没有特别设置过，新版 udev 确定的网口可能不是规整的 eth0，您需要 ifconfig -a 看后替换成你的。</p>
+<h4 id="使用SuSEfirewall2"><a href="#使用SuSEfirewall2" class="headerlink" title="使用SuSEfirewall2"></a>使用SuSEfirewall2</h4><p>修改/etc/sysconfig/SuSEfirewall2</p>
+<pre><code>FW_DEV_INT=&quot;vpns0&quot;
+FW_ROUTE=&quot;yes&quot;
+FW_MASQUERADE=&quot;yes&quot;
+FW_MASQ_NETS=&quot;192.168.1.0/24&quot;
+FW_SERVICES_EXT_TCP=&quot;80 999 8080&quot;
+FW_SERVICES_EXT_UDP=&quot;1999&quot;
+FW_FORWARD=&quot;192.168.1.0/24,0/0&quot;
+</code></pre><p>之后重新启动防火墙使之生效</p>
+<pre><code>linux# rcSuSEfirewall2 restart
+</code></pre><h4 id="使用iptables"><a href="#使用iptables" class="headerlink" title="使用iptables"></a>使用iptables</h4><p>如果你习惯使用iptales，你需要在先关闭SuSEfirewall2</p>
+<pre><code>linux# systemctl disable SuSEfirewall2
+linux# systemctl stop SuSEfirewall2
+</code></pre><p>设置iptables转发规则</p>
+<pre><code>linux# echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+linux# iptables -t nat -A POSTROUTING -s 192.168.1.0/24 -o eth0 -j MASQUERADE
+linux# iptables -A FORWARD -s 192.168.1.0/24 -j ACCEPT
+</code></pre><h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><pre><code>linux# ocserv -f -d 1
+</code></pre><p>运行不报错的话，可以用客户端连接来测试一下。</p>
+<h3 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h3><pre><code>linux# ocserv -f -c /etc/ocserv/ocserv.conf
+</code></pre><h2 id="客户端证书登录"><a href="#客户端证书登录" class="headerlink" title="客户端证书登录"></a>客户端证书登录</h2><p>也可以使用客户端证书而不是用户名密码来登录。</p>
+<pre><code>linux# certtool --generate-privkey --outfile user-key.pem
+linux# certtool --generate-certificate --load-privkey user-key.pem --load-ca-certificate ca-cert.pem --load-ca-privkey ca-key.pem --template user.tmpl --outfile user-cert.pem
+</code></pre><h3 id="生成-iOS-可用的-pk12-文件"><a href="#生成-iOS-可用的-pk12-文件" class="headerlink" title="生成 iOS 可用的 pk12 文件"></a>生成 <a href="https://vpnxxw.com/?tag=ios" target="_blank" rel="noopener">iOS</a> 可用的 pk12 文件</h3><pre><code>linux# openssl pkcs12 -export -inkey user-key.pem -in user-cert.pem -certfile ca-cert.pem -out user.p12
+</code></pre><p>会提示设置密码。之后可以把 user.p12 放在可以在线下载的地方，用你的 safari 去打开那个 URL 导入证书。</p>
+<h3 id="修改-ocserv-conf-配置"><a href="#修改-ocserv-conf-配置" class="headerlink" title="修改 ocserv.conf 配置"></a>修改 ocserv.conf 配置</h3><p>把 auth 由</p>
+<pre><code>#auth = &quot;certificate&quot;
+auth = &quot;plain[/etc/ocserv/ocpasswd]&quot;
+</code></pre><p>变成</p>
+<pre><code>auth = &quot;certificate&quot;
+#auth = &quot;plain[/etc/ocserv/ocpasswd]&quot;
+</code></pre><p>并注释掉不支持的选项：</p>
+<pre><code>listen-clear-file = /var/run/ocserv-conn.socket
+</code></pre><p>然后启用证书验证</p>
+<pre><code>ca-cert = /etc/ocserv/certificates/ca-cert.pem
+</code></pre><p>然后重新启动 ocserv.service</p>
+<pre><code>linux# systemctl restart ocserv
+</code></pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/16/874/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coppid">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/08/16/874/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">mysql默认时间日期</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-08-16 13:26:29" itemprop="dateCreated datePublished" datetime="2017-08-16T13:26:29+08:00">2017-08-16</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 16:57:54" itemprop="dateModified" datetime="2018-12-12T16:57:54+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>MySQL设置当前时间为默认值的问题我们经常会遇到，下面就为您介绍MySQL设置当前时间为默认值的实现全步骤，希望对您能有所启迪。</p>
+<ul>
+<li>数据库：test_db1</li>
+<li>创建表：test_ta1</li>
+<li><p>两个字段：</p>
+<ol>
+<li>id （自增 且为主键），</li>
+<li><p>createtime 创建日期（默认值为当前时间）</p>
+<p>– mysql默认时间日期<br>use test_db1;  </p>
+</li>
+</ol>
+<p>create table test_ta1(  </p>
+<p>id mediumint(8) unsigned not nulll auto_increment,  </p>
+<p>createtime timestamp not null default current_timestamp,  </p>
+<p>primary key (id)</p>
+</li>
+</ul>
 
           
         
@@ -1774,7 +1927,7 @@ sys 0m7.399s
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/05/15/getting-real-IP-and-the-example-code-of-forging-IP/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/06/e8-bd-ac-e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3-e5-8f-8c-e5-9b-a0-e5-ad-90-e8-ae-a4-e8-af-81/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1783,7 +1936,7 @@ sys 0m7.399s
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -1794,7 +1947,7 @@ sys 0m7.399s
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/05/15/getting-real-IP-and-the-example-code-of-forging-IP/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">获取真实IP的方法，以及伪造IP的例子代码</a>
+                <a href="/2017/08/06/e8-bd-ac-e6-b7-b1-e5-85-a5-e7-90-86-e8-a7-a3-e5-8f-8c-e5-9b-a0-e5-ad-90-e8-ae-a4-e8-af-81/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">[转]深入理解双因子认证</a>
               
             
           </h1>
@@ -1819,7 +1972,7 @@ sys 0m7.399s
                 
               
 
-              <time title="创建时间：2018-05-15 11:22:15" itemprop="dateCreated datePublished" datetime="2018-05-15T11:22:15+08:00">2018-05-15</time>
+              <time title="创建时间：2017-08-06 15:10:02" itemprop="dateCreated datePublished" datetime="2017-08-06T15:10:02+08:00">2017-08-06</time>
             
 
             
@@ -1836,7 +1989,7 @@ sys 0m7.399s
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-21 13:05:07" itemprop="dateModified" datetime="2018-12-21T13:05:07+08:00">2018-12-21</time>
+                <time title="修改时间：2018-12-12 17:13:19" itemprop="dateModified" datetime="2018-12-12T17:13:19+08:00">2018-12-12</time>
               
             
           </span>
@@ -1888,16 +2041,114 @@ sys 0m7.399s
 
       
         
-          <p>获取客户端ip其实不是个简单的活儿,因为存在Ip欺骗,和代理问题,所以获取客户端的IP的真实性会打折扣的,不能百分百准确.但是我们还是尽量找一个比较完善的获取客户端真正ip方法.使用php获取IP的方法能找到很多.</p>
-          <!--noindex-->
           
-            <div class="post-button text-center">
-              <a class="btn" href="/2018/05/15/getting-real-IP-and-the-example-code-of-forging-IP/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-         
-          <!--/noindex-->
+            <p>关于两步验证，写的非常好的一篇文章。 来源： [Debug Hacks](<a href="http://blog.gaoyuan.xyz/2017/01/05/2fa-a-programmers-perspective/" target="_blank" rel="noopener">http://blog.gaoyuan.xyz/2017/01/05/2fa-a-programmers-perspective/</a>)</p>
+<hr>
+<p>  去年年初，让ops在服务器上开启了基于google-authenticator的双因子认证。最近花了点时间进行深入了解，记录如下。</p>
+<h1 id="双因子认证的相关概念"><a href="#双因子认证的相关概念" class="headerlink" title="双因子认证的相关概念"></a>双因子认证的相关概念</h1><p>双因子认证（Two-factor authentication，也叫2FA），是一种通过组合两种不同的验证方式进行用户身份验证的机制。Google在2011年3月份，宣布在线上使用双因子认证，MSN和Yahoo紧随其后。 双因子认证，除了需要验证用户名密码外，还要结合另外一种实物设备，如Rsa令牌，或者手机。 如果我们把传统的用户名密码验证称为单因子认证（1FA），那么对比双因子认证（2FA），他们的区别如下：</p>
+<blockquote>
+<p>1FA – What you know (e.g. a password, a pin) 2FA – What you have (e.g. a phone, a hardware token) 3FA – What you are (e.g. your fingerprints, you retina)</p>
+</blockquote>
+<p>双因子认证的产品大致可以分成两类：</p>
+<ul>
+<li>可以产生token的硬件设备</li>
+<li>智能手机的app</li>
+</ul>
+<p>手机短信验证码，登录微信公众号时的扫码确认都可以称为双因子认证。 双因子认证，还会结合一个只有你有的硬件设备。只要这个专属的硬件设备不丢失（察觉这个设备丢失，比用户名密码泄露，会容易很多），就可以大大地提升账号的安全性。</p>
+<h1 id="双因子认证的实现"><a href="#双因子认证的实现" class="headerlink" title="双因子认证的实现"></a>双因子认证的实现</h1><p>[caption id=”” align=”alignleft” width=”1214”]<img src="https://tech.msla.top/wp-content/uploads/2018/04/flow.png" alt="Two-factor authentication flow" title="Two-factor authentication flow"> Two-factor authentication flow[/caption] 双因子认证的流程如下： 认证过程中涉及的token，一般会使用一次性密码(<a href="https://en.wikipedia.org/wiki/One-time_password" target="_blank" rel="noopener">One-time password</a>)，相关实现有：</p>
+<ul>
+<li>HOTP: 基于次数的一次性密码（<a href="https://tools.ietf.org/html/rfc4226" target="_blank" rel="noopener">HMAC-Based One-Time Password</a>）</li>
+<li>TOTP: 基于时间的一次性密码（<a href="https://tools.ietf.org/html/rfc6238" target="_blank" rel="noopener">Time-Based One-Time Password</a>）</li>
+</ul>
+<p><code>HOTP</code>和<code>TOTP</code>的实现都基于<a href="https://tools.ietf.org/html/rfc2104" target="_blank" rel="noopener">HMAC-SHA-1</a>算法。 <code>HOTP</code>的生成算法如下</p>
+<pre><code>HOTP(K,C) = Truncate(HMAC-SHA-1(K,C))
+</code></pre><p>其中：</p>
+<ul>
+<li><code>C</code>是一个8-byte的自增变量。对于客户端，每生成一次性密码，其值加1。对于服务端，每次成功认证客户端产生的一次性密码，其值加1。在<code>HOTP</code>生成（客户端）和验证（服务端）过程中，C的值必须同步。</li>
+<li><code>K</code>是客户端和服务端使用的共享密钥，每个客户端的<code>K</code>应该都是唯一的。</li>
+</ul>
+<p>生成步骤如下：</p>
+<pre><code>Step 1: 使用HMAC-SHA-1算法，利用C和K，生成一个长度为20-byte的40个十六进制字符，即：HS = HMAC-SHA-1(K,C)
+Step 2: 根据前面产品的字符串`HS`，生成一个长度为4-byte的8个十六进制字符，即：Sbits = DT(HS)，DT是根据HS，动态产生Sbits的方法，后面的示例中会提到
+Step 3: 根据前面的Sbits，计算一个HOTP的值，一般为6位数字。
+</code></pre><blockquote>
+<p>2 nibbles (2 hex characters) = 1-byte</p>
+</blockquote>
+<p><code>TOTP</code>可以当做是<code>HOTP</code>算法的一个变种，可以将<code>TOTP</code>的生成算法定义为：</p>
+<pre><code>TOTP = HOTP(K, T)
+</code></pre><p><code>K</code>同<code>HOTP</code>算法中<code>K</code>的定义，是客户端和服务端使用的共享密钥，<code>T</code>是一个整数，定义如下：</p>
+<pre><code>T = floor((Current Unix time - T0) / X)
+</code></pre><p>其中：</p>
+<ul>
+<li><code>T0</code>是起始的Unix Time，默认为0</li>
+<li><code>X</code>是<code>T</code>增长的步长，默认为30</li>
+</ul>
+<p>即<code>T</code>是以30为步长，当前的Unix Time距初始的Unix Time<code>T0</code>增长的数量。 如果<code>T0</code>=0，<code>X</code>=30，那么当此刻的Unix time是59时，<code>T</code>=1，当此刻的Unix time为60时，<code>T</code>=2。<code>TOTP</code>算法生成的一次性密码，就会每30s变更一次。</p>
+<h1 id="一次性密码的生成过程"><a href="#一次性密码的生成过程" class="headerlink" title="一次性密码的生成过程"></a>一次性密码的生成过程</h1><p>本文以HMAC-SHA-1算法生成的字符串<code>HS</code>的值是<code>0215a7d8c15b492e21116482b6d34fc4e1a9f6ba</code>为例，介绍一次性密码的生成过程。 如果使用<code>TOTP</code>算法进行双因子认证，要让用户在30s内输入40个十六进制的字符，这是一件很难想象的事情。所以我们需要想个办法，将<code>HS</code>转换地更加便于输入，而又不失安全性。这就是前面提到的DT（Dynamic Truncation）的处理过程。 为了更清晰地展示生成过程，用下图表示<code>HS</code>： <img src="https://tech.msla.top/wp-content/uploads/2018/04/hotp_step1.png" alt="" title="Two-factor authentication step1"> 前面的图中包含40个字符，每个字符都占4-bits（有16个可能的值0-15），被分成了20组单独的字符串。 我们先去找<code>HS</code>的低4位（最后一个字符），作为截取字符串的起始位置。在我们的例子里，最后一个字符是<code>a</code>： <img src="https://tech.msla.top/wp-content/uploads/2018/04/hotp_step2.png" alt="" title="Two-factor authentication step2"> 将十六进制的字符<code>a</code>转成十进制数是<code>10</code>。 我们将第1组字符串的偏移量用<code>0</code>表示，以此类推，如下： <img src="https://tech.msla.top/wp-content/uploads/2018/04/hotp_step3.png" alt="" title="Two-factor authentication step3"> 然后，从字符串<code>HS</code>的第<code>10</code>个偏移量开始，截取<code>4</code>组字符串（或者是接下来的31-bits）。</p>
+<blockquote>
+<p>这样截取的最大偏移量是15+4=19，刚好没有越界</p>
+</blockquote>
+<p>因此，我们通过DT（Dynamic Truncation）处理，将<code>HS</code>转换后得到的字符串是<code>6482b6d3</code>： <img src="https://tech.msla.top/wp-content/uploads/2018/04/hotp_step4.png" alt="" title="Two-factor authentication step4"> 将十六进制的<code>6482b6d3</code>转成十进制数是<code>1686288083</code>。 因为我们需要一个6位的数字，所以和<code>1000000</code>进行取模运算：</p>
+<pre><code>1686288083 modulo 1000000
+</code></pre><p>最后的结果是：</p>
+<pre><code>288083
+</code></pre><h1 id="使用google-authenticator，开启服务器双因子认证"><a href="#使用google-authenticator，开启服务器双因子认证" class="headerlink" title="使用google-authenticator，开启服务器双因子认证"></a>使用google-authenticator，开启服务器双因子认证</h1><p>首先，去你喜欢的android应用市场，或者apple的appStore去安装：“Google Authenticator（google身份验证器）”。 然后登录要开启双因子认证登录的服务器，进行下面的操作。 安装依赖</p>
+<pre><code>yum -y install gcc gcc-c++ make wget pam-devel
+</code></pre><p>安装Google Authenticator</p>
+<pre><code>wget http://google-authenticator.googlecode.com/files/libpam-google-authenticator-1.0-source.tar.bz2
+tar jxvf libpam-google-authenticator-1.0-source.tar.bz2
+cd libpam-google-authenticator-1.0
+make
+sudo make install
+</code></pre><p>配置SSH登录时调用google-authenticator模块 编辑文件<code>/etc/pam.d/sshd</code>，添加：</p>
+<pre><code>auth       required     pam_google_authenticator.so
+</code></pre><p>编辑文件<code>/etc/ssh/sshd_config</code>，在文件中查找<code>ChallengeResponseAuthentication</code>和<code>UsePAM</code>，修改为如下内容：</p>
+<pre><code>ChallengeResponseAuthentication yes
+UsePAM yes
+</code></pre><p>重启ssh</p>
+<pre><code>sudo service ssh restart
+</code></pre><p>下面是配置Google Authenticator的相关步骤。 如果要为用户<code>zhangsan</code>添加ssh登录时的双因子认证，执行如下命令：</p>
+<p>1<br>2</p>
+<pre><code>su - zhangsan
+google-authenticator
+</code></pre><p>会出现一串问题，让你选<code>y</code>或者<code>n</code>。</p>
+<pre><code>Do you want authentication tokens to be time-based (y/n) y
+https://www.google.com/chart?chs=200x200&amp;chld=M|0&amp;cht=qr&amp;chl=otpauth://totp/zhangsan@ali%3Fsecret%3DWKHM6UVJNTPYSPTQ
+Your new secret key is: WKHM6UVJNTPYSPTQ
+Your verification code is 434260
+Your emergency scratch codes are:
+30287010
+70585905
+68748337
+15176712
+38041521
+</code></pre><p>上面的这一步，会生成一个base32编码的共享密钥<code>WKHM6UVJNTPYSPTQ</code>，即前面的<code>K</code>，用于在客户端进行绑定（如果可以翻墙的话，实际上会看到一张二维码，使用Google Authenticator app扫码即可以完成绑定）。 共享密钥使用base32而非base64的原因如下：</p>
+<ul>
+<li>base32编码的字符串，包含了大写英文字母和数字2-7。不会因字体显示问题，把1，8，0和’I’,‘B’, ‘O’混淆，更利于输入。</li>
+<li>base32编码的字符串，出现在url中时，可以不用进行url编码处理（encode），便于直接使用生成二维码的web服务。</li>
+</ul>
+<p>同时，基于当前的Unix time，生成了一个动态验证码<code>434260</code>，可用于测试。并生成了5个应急备用验证码（上面的emergency scratch codes），可以在绑定设备丢失的情况下使用（每个应急码只能使用一次）。 剩下的问题，没有特殊癖好，可以都选<code>y</code>。</p>
+<pre><code>Do you want me to update your &quot;/home/zhangsan/.google_authenticator&quot; file (y/n) y
+
+Do you want to disallow multiple uses of the same authentication
+token? This restricts you to one login about every 30s, but it increases
+your chances to notice or even prevent man-in-the-middle attacks (y/n) y
+
+By default, tokens are good for 30 seconds and in order to compensate for
+possible time-skew between the client and the server, we allow an extra
+token before and after the current time. If you experience problems with poor
+time synchronization, you can increase the window from its default
+size of 1:30min to about 4min. Do you want to do so (y/n) y
+
+If the computer that you are logging into isn&apos;t hardened against brute-force
+login attempts, you can enable rate-limiting for the authentication module.
+By default, this limits attackers to no more than 3 login attempts every 30s.
+Do you want to enable rate-limiting (y/n) y
+</code></pre><p>之后，ssh登录服务器时，会看到类似这样的提示：</p>
+<pre><code>verification code:
+</code></pre><p>这时，打开手机上的google身份验证器App，输入对应的code，如下： <img src="https://tech.msla.top/wp-content/uploads/2018/04/google-authenticator.png" alt="" title="google 验证器 flow"> reference： [^1] <a href="https://pthree.org/2014/04/15/time-based-one-time-passwords-how-it-works/" target="_blank" rel="noopener">https://pthree.org/2014/04/15/time-based-one-time-passwords-how-it-works/</a> [^2] <a href="https://garbagecollected.org/2014/09/14/how-google-authenticator-works/" target="_blank" rel="noopener">https://garbagecollected.org/2014/09/14/how-google-authenticator-works/</a> [^3] <a href="https://www.blackmoreops.com/2014/06/26/securing-ssh-two-factor-authentication-using-google-authenticator/" target="_blank" rel="noopener">https://www.blackmoreops.com/2014/06/26/securing-ssh-two-factor-authentication-using-google-authenticator/</a></p>
+
+          
         
       
     </div>
@@ -1952,7 +2203,7 @@ sys 0m7.399s
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/04/28/php-e5-8f-91-e9-80-81get-e3-80-81post-e8-af-b7-e6-b1-82-e7-9a-846-e7-a7-8d-e6-96-b9-e6-b3-95-e7-ae-80-e6-98-8e-e6-80-bb-e7-bb-93/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/08/06/e5-be-b7-e5-85-b0-e4-bf-ae-e5-a5-b3-e7-ae-b4-e8-a8-80/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1961,7 +2212,7 @@ sys 0m7.399s
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -1972,7 +2223,7 @@ sys 0m7.399s
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/04/28/php-e5-8f-91-e9-80-81get-e3-80-81post-e8-af-b7-e6-b1-82-e7-9a-846-e7-a7-8d-e6-96-b9-e6-b3-95-e7-ae-80-e6-98-8e-e6-80-bb-e7-bb-93/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">php发送get、post请求的6种方法简明总结</a>
+                <a href="/2017/08/06/e5-be-b7-e5-85-b0-e4-bf-ae-e5-a5-b3-e7-ae-b4-e8-a8-80/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">德兰修女 箴言</a>
               
             
           </h1>
@@ -1997,7 +2248,7 @@ sys 0m7.399s
                 
               
 
-              <time title="创建时间：2018-04-28 16:16:50" itemprop="dateCreated datePublished" datetime="2018-04-28T16:16:50+08:00">2018-04-28</time>
+              <time title="创建时间：2017-08-06 13:49:19" itemprop="dateCreated datePublished" datetime="2017-08-06T13:49:19+08:00">2017-08-06</time>
             
 
             
@@ -2014,7 +2265,7 @@ sys 0m7.399s
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-12 17:22:01" itemprop="dateModified" datetime="2018-12-12T17:22:01+08:00">2018-12-12</time>
+                <time title="修改时间：2018-12-12 17:08:58" itemprop="dateModified" datetime="2018-12-12T17:08:58+08:00">2018-12-12</time>
               
             
           </span>
@@ -2039,6 +2290,8 @@ sys 0m7.399s
             </span>
           
 
+          
+            
           
 
           
@@ -2065,137 +2318,221 @@ sys 0m7.399s
       
         
           
-            <p><strong>方法1: 用file_get_contents 以get方式获取内容：</strong></p>
-<pre><code>&lt;?php
-$url=&apos;http://www.jb51.net/&apos;;
-$html = file_get_contents($url);
-echo $html;
-?&gt;
-</code></pre><p><strong>方法2: 用fopen打开url, 以get方式获取内容：</strong></p>
-<pre><code>&lt;?php
-$fp = fopen($url, ‘r&apos;);
-stream_get_meta_data($fp);
-while(!feof($fp)) {
-    $result .= fgets($fp, 1024);
-}
-echo “url body: $result”;
-fclose($fp);
-?&gt;
-</code></pre><p><strong>方法3：用file_get_contents函数,以post方式获取url</strong></p>
-<pre><code>&lt;?php
-$data = array (‘foo&apos; =&gt; ‘bar&apos;);
-$data = http_build_query($data);
+            <blockquote>
+<p>人们经常是不讲道理的、没有逻辑的和以自我为中心的 不管怎样，你要原谅他们 即使你是友善的，人们可能还是会说你自私和动机不良 不管怎样，你还是要友善 当你功成名就，你会有一些虚假的朋友 和一些真实的敌人 不管怎样，你还是要取得成功 即使你是诚实的和率直的，人们可能还是会欺骗你 不管怎样，你还是要诚实和率直 你多年来营造的东西 有人在一夜之间把它摧毁 不管怎样，你还是要去营造 如果你找到了平静和幸福，他们可能会嫉妒你 不管怎样，你还是要快乐 你今天做的善事，人们往往明天就会忘记 不管怎样，你还是要做善事 即使把你最好的东西给了这个世界 也许这些东西永远都不够 不管怎样，把你最好的东西给这个世界 你看，说到底，它是你和上帝之间的事 而决不是你和他人之间的事</p>
+</blockquote>
 
-$opts = array (
-        ‘http&apos; =&gt; array (
-            ‘method&apos; =&gt; ‘POST&apos;,
-            ‘header&apos;=&gt; “Content-type: application/x-www-form-urlencodedrn” .
-            “Content-Length: ” . strlen($data) . “rn”,
-            ‘content&apos; =&gt; $data
-            )
-        );
+          
+        
+      
+    </div>
 
-$context = stream_context_create($opts);
-$html = file_get_contents(‘http://localhost/e/admin/test.html&apos;, false, $context);
+    
 
-echo $html;
-?&gt;
-</code></pre><p><strong>方法4：用fsockopen函数打开url，以get方式获取完整的数据，包括header和body,fsockopen需要 PHP.ini 中 allow_url_fopen 选项开启</strong></p>
-<pre><code>&lt;?php
-function get_url ($url,$cookie=false)
-{
-    $url = parse_url($url);
-    $query = $url[path].”?”.$url[query];
-    echo “Query:”.$query;
-    $fp = fsockopen( $url[host], $url[port]?$url[port]:80 , $errno, $errstr, 30);
-    if (!$fp) {
-        return false;
-    } else {
-        $request = “GET $query HTTP/1.1rn”;
-        $request .= “Host: $url[host]rn”;
-        $request .= “Connection: Closern”;
-        if($cookie) $request.=”Cookie:  $cookien”;
-        $request.=”rn”;
-        fwrite($fp,$request);
-        while(!@feof($fp)) {
-            $result .= @fgets($fp, 1024);
-        }
-        fclose($fp);
-        return $result;
-    }
-}
-//获取url的html部分，去掉header
-function GetUrlHTML($url,$cookie=false)
-{
-    $rowdata = get_url($url,$cookie);
-    if($rowdata)
-    {
-        $body= stristr($rowdata,”rnrn”);
-        $body=substr($body,4,strlen($body));
-        return $body;
-    }
+    
+    
+    
 
-    return false;
-}
-?&gt;
-</code></pre><p><strong>方法5：用fsockopen函数打开url，以POST方式获取完整的数据，包括header和body</strong></p>
-<pre><code>&lt;?php
-function HTTP_Post($URL,$data,$cookie, $referrer=”&quot;)
-{
+    
 
-    // parsing the given URL
-    $URL_Info=parse_url($URL);
+    
+       
+    
+    
 
-    // Building referrer
-    if($referrer==”&quot;) // if not given use this script as referrer
-        $referrer=”111″;
+    
 
-    // making string from $data
-    foreach($data as $key=&gt;$value)
-        $values[]=”$key=”.urlencode($value);
-    $data_string=implode(“&amp;”,$values);
+    <footer class="post-footer">
+      
 
-    // Find out which port is needed – if not given use standard (=80)
-    if(!isset($URL_Info[&quot;port&quot;]))
-        $URL_Info[&quot;port&quot;]=80;
+      
 
-    // building POST-request:
-    $request.=”POST “.$URL_Info[&quot;path&quot;].” HTTP/1.1n”;
-    $request.=”Host: “.$URL_Info[&quot;host&quot;].”n”;
-    $request.=”Referer: $referern”;
-    $request.=”Content-type: application/x-www-form-urlencodedn”;
-    $request.=”Content-length: “.strlen($data_string).”n”;
-    $request.=”Connection: closen”;
+      
 
-    $request.=”Cookie:  $cookien”;
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
 
-    $request.=”n”;
-    $request.=$data_string.”n”;
 
-    $fp = fsockopen($URL_Info[&quot;host&quot;],$URL_Info[&quot;port&quot;]);
-    fputs($fp, $request);
-    while(!feof($fp)) {
-        $result .= fgets($fp, 1024);
-    }
-    fclose($fp);
+    
+      
 
-    return $result;
-}
+  
 
-?&gt;
-</code></pre><p><strong>方法6:使用curl库，使用curl库之前，可能需要查看一下php.ini是否已经打开了curl扩展</strong></p>
-<pre><code>&lt;?php
-$ch = curl_init();
-$timeout = 5;
-curl_setopt ($ch, CURLOPT_URL, ‘http://www.jb51.net/&apos;);
-curl_setopt ($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt ($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-$file_contents = curl_exec($ch);
-curl_close($ch);
+  
+  
+  
 
-echo $file_contents;
-?&gt;
-</code></pre><p>好了，关于 php 发送 get/post 请求的方法就介绍那么多。 文章来源： <a href="http://www.jb51.net/article/51974.htm" target="_blank" rel="noopener">http://www.jb51.net/article/51974.htm</a></p>
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/07/19/e4-bd-bf-e7-94-a8screen-e5-91-bd-e4-bb-a4-e9-95-bf-e6-9c-9f-e6-89-a7-e8-a1-8c-e8-bf-9c-e7-a8-8b-e5-91-bd-e4-bb-a4/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coppid">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2017/07/19/e4-bd-bf-e7-94-a8screen-e5-91-bd-e4-bb-a4-e9-95-bf-e6-9c-9f-e6-89-a7-e8-a1-8c-e8-bf-9c-e7-a8-8b-e5-91-bd-e4-bb-a4/" class="post-title-link" itemprop="https://www.cobsun.com/page/2/index.html">使用screen命令长期执行远程命令</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-07-19 15:41:25" itemprop="dateCreated datePublished" datetime="2017-07-19T15:41:25+08:00">2017-07-19</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 17:05:36" itemprop="dateModified" datetime="2018-12-12T17:05:36+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="使用-screen-命令长期执行远程命令"><a href="#使用-screen-命令长期执行远程命令" class="headerlink" title="使用 screen 命令长期执行远程命令"></a>使用 <code>screen</code> 命令长期执行远程命令</h2><p>经常需要登录到 linux 里执行一些长时间运行的命令， 后台执行的方法有很多，包括 <em><code>nhup</code></em> <em><code>&amp;</code></em> 等等 但是这些不支持全部的功能，比如我执行一个命令，需要在开始时接受用户输入，比如 密码、是否确认执行 这个时候比较适合用 <em><code>screen</code></em> 最常用的命令：</p>
+<h3 id="开启一个名为-task1-的-screen："><a href="#开启一个名为-task1-的-screen：" class="headerlink" title="开启一个名为 task1 的 screen："></a>开启一个名为 task1 的 <code>screen</code>：</h3><pre><code>screen -S task1
+</code></pre><p>这时可以看到终端闪了一下，然后屏幕变成干干净净的了，其实标题行还显示着 <code>screen 0 ××××</code> 等信息 即表示已经进入了screen的 Session 中了 然后就可以在这里执行任意的命令，和普通终端一模一样， 如果执行了一个需要很久才能结束的命令 ，又怕中途 SSH 断掉而中断命令， 可以在screen 窗口直接按键：</p>
+<pre><code>Ctrl+a   d
+</code></pre><h3 id="↑-让-screen-进入-Detached-模式"><a href="#↑-让-screen-进入-Detached-模式" class="headerlink" title="↑ 让 screen 进入 Detached 模式"></a>↑ 让 <code>screen</code> 进入 <em>Detached</em> 模式</h3><p>（将任务（Session）转移到后台）</p>
+<h3 id="当你需要再次进入screen"><a href="#当你需要再次进入screen" class="headerlink" title="当你需要再次进入screen"></a>当你需要再次进入screen</h3><p>以查看刚刚的命令执行的怎么样了， 可以先 list 一下：</p>
+<pre><code>screen -ls
+</code></pre><p>现在会显示出所有正在执行的命令，比如</p>
+<pre><code>[root@SJHL199-29 ~]# screen -ls
+There is a screen on:
+    32353.task1 (Detached)
+1 Socket in /var/run/screen/S-root.
+</code></pre><p>然后使用</p>
+<pre><code>screen -r 32353
+</code></pre><h3 id="↑进入刚才执行的命令-session中"><a href="#↑进入刚才执行的命令-session中" class="headerlink" title="↑进入刚才执行的命令/session中"></a>↑进入刚才执行的命令/session中</h3><p>使用 <code>Ctrl + d</code> 可以终止当前窗口</p>
+<hr>
+<p><strong>常用的 screen 命令</strong></p>
+<p>按键方式</p>
+<p>意义</p>
+<p>C-a ?</p>
+<p>显示所有键绑定信息</p>
+<p>C-a w</p>
+<p>显示所有窗口列表</p>
+<p>C-a C-a</p>
+<p>切换到之前显示的窗口</p>
+<p>C-a c</p>
+<p>创建一个新的运行shell的窗口并切换到该窗口</p>
+<p>C-a n</p>
+<p>切换到下一个窗口</p>
+<p>C-a p</p>
+<p>切换到前一个窗口(与C-a n相对)</p>
+<p>C-a 0..9</p>
+<p>切换到窗口0..9</p>
+<p>C-a a</p>
+<p>发送 C-a到当前窗口</p>
+<p>C-a d</p>
+<p><strong>暂时断开screen会话</strong></p>
+<p>C-a k</p>
+<p><strong>杀掉当前窗口</strong></p>
+<p>C-a [</p>
+<p>进入拷贝/回滚模式</p>
 
           
         
@@ -2241,7 +2578,7 @@ echo $file_contents;
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2284,7 +2621,7 @@ echo $file_contents;
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">176</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2313,9 +2650,7 @@ echo $file_contents;
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   
                 </div>
@@ -2548,219 +2883,7 @@ echo $file_contents;
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">215</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -2799,7 +2922,7 @@ echo $file_contents;
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

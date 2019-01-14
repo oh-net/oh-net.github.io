@@ -108,13 +108,13 @@
 
   <meta name="description" content="$$ Welcome $$">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Technician">
+<meta property="og:title" content="Coppid">
 <meta property="og:url" content="https://www.cobsun.com/page/4/index.html">
-<meta property="og:site_name" content="Technician">
+<meta property="og:site_name" content="Coppid">
 <meta property="og:description" content="$$ Welcome $$">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Technician">
+<meta name="twitter:title" content="Coppid">
 <meta name="twitter:description" content="$$ Welcome $$">
 
 
@@ -132,7 +132,7 @@
   };
 </script>
 
-  <title>Technician</title>
+  <title>Coppid</title>
   
 
 
@@ -193,7 +193,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Technician</span>
+        <span class="site-title">Coppid</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -353,7 +353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2015/08/06/c-e6-97-b6-e9-97-b4-e6-88-b3-e8-bd-ac-e6-8d-a2-e4-b8-ba-e6-99-ae-e9-80-9a-e6-97-b6-e9-97-b4/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -362,7 +362,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -373,7 +373,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/12/26/centos-7-2-e4-b8-8b-e7-bc-96-e8-af-91-e5-ae-89-e8-a3-85php-7/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">CentOS 7.2下编译安装PHP 7</a>
+                <a href="/2015/08/06/c-e6-97-b6-e9-97-b4-e6-88-b3-e8-bd-ac-e6-8d-a2-e4-b8-ba-e6-99-ae-e9-80-9a-e6-97-b6-e9-97-b4/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">C# 时间戳转换为普通时间</a>
               
             
           </h1>
@@ -398,7 +398,7 @@
                 
               
 
-              <time title="创建时间：2017-12-26 18:12:01" itemprop="dateCreated datePublished" datetime="2017-12-26T18:12:01+08:00">2017-12-26</time>
+              <time title="创建时间：2015-08-06 14:02:10" itemprop="dateCreated datePublished" datetime="2015-08-06T14:02:10+08:00">2015-08-06</time>
             
 
             
@@ -415,225 +415,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-12 16:59:08" itemprop="dateModified" datetime="2018-12-12T16:59:08+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>注意此配置针对开发环境，如果线上环境，那么phpdbg和dtrace这两个建议不要编译 编译安装参数</p>
-<pre><code># prefix 可根据实际情况自定义
-# with-fpm-systemd参数可以使PHP7支持centos7的systemd服务管理
-# 安装过程中可能有一些扩展需要额外库支持，如果configure运行报错，直接goolge 搜索，基本上yum install xxx-devel 就可
-
-./configure --prefix=/data/soft/php7
- --enable-fpm
- --with-fpm-user=php-fpm
- --with-fpm-group=www
- --with-fpm-systemd
- --enable-phpdbg
- --enable-dtrace
- --enable-mysqlnd
- --with-mysqli=mysqlnd
- --with-pdo-mysql=mysqlnd
- --enable-opcache
- --enable-pcntl
- --enable-mbstring
- --enable-soap
- --enable-zip
- --enable-calendar
- --enable-bcmath
- --enable-ftp
- --enable-intl
- --enable-sockets
- --with-openssl
- --with-mhash
- --with-zlib
- --with-curl
- --with-gettext
- --with-gd
- --enable-exif
- --enable-gd-native-ttf
- --enable-gd-jis-conv
- --with-png-dir=/usr/lib
- --with-jpeg-dir=/usr/lib
- --with-freetype-dir=/usr/lib
-</code></pre><p>执行以上编译前配置，如果没有错误 运行命令</p>
-<pre><code>make &amp; make install
-</code></pre><p>编译完成，copy php-develpment.ini 文件到 PREFIX/lib/目录下</p>
-<hr>
-<p>一些特别需要注意安装的包</p>
-<pre><code>yum install systemd-devel
-yum isntall freetype-devel
-yum isntall libpng-devel
-yum install openjpeg-devel
-</code></pre><p>安装完，如果想要systemd控制启动 copy ./sapi/fpm/php-fpm.service 到 /usr/lib/systemd/system/下 systemctl enable php-fpm systemctl start php-fpm 即可 编译安装完，就是一些第三方扩展安装，能用pecl的尽量使用pecl，不能用的编译安装也简单，使用phize 这个即可，具体自己搜索网上文章 另外就是php.ini配置文件的修改和php-fpm.conf文件的修改，一些最基本的优化都可以在这两个文件里面实现，比如opcache的配置，php-fpm启动进程数量等，php-fpm配置文件在PREFIX/etc目录下 因为是开发环境，优化的就不写了，如果有需要，网上搜索，基本上优化的建议都很通用 文章来源： <a href="https://segmentfault.com/a/1190000005363212" target="_blank" rel="noopener">https://segmentfault.com/a/1190000005363212</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/12/22/e4-bd-bf-e7-94-a8snk-e5-af-86-e9-92-a5-e6-96-87-e4-bb-b6-e4-bf-9d-e6-8a-a4-e4-bd-a0-e7-9a-84dll-e5-92-8c-e4-bb-a3-e7-a0-81-e4-b8-8d-e8-a2-ab-e5-8f-8d-e7-bc-96-e8-af-91-e6-95-99-e7-a8-8b/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/12/22/e4-bd-bf-e7-94-a8snk-e5-af-86-e9-92-a5-e6-96-87-e4-bb-b6-e4-bf-9d-e6-8a-a4-e4-bd-a0-e7-9a-84dll-e5-92-8c-e4-bb-a3-e7-a0-81-e4-b8-8d-e8-a2-ab-e5-8f-8d-e7-bc-96-e8-af-91-e6-95-99-e7-a8-8b/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">使用SNK密钥文件保护你的DLL和代码不被反编译教程</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-12-22 16:45:46" itemprop="dateCreated datePublished" datetime="2017-12-22T16:45:46+08:00">2017-12-22</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:05:36" itemprop="dateModified" datetime="2018-12-12T17:05:36+08:00">2018-12-12</time>
+                <time title="修改时间：2018-12-12 16:58:49" itemprop="dateModified" datetime="2018-12-12T16:58:49+08:00">2018-12-12</time>
               
             
           </span>
@@ -686,66 +468,23 @@ yum install openjpeg-devel
       
         
           
-            <p>大家做项目开发一般都是分层的，比如UI层，业务层，数据访问层。业务层引用数据访问层的DLL(比如dataAccess.dll)，并使用dataAccess.dll中的方法。当项目完成并给客户用了，可有些心里BT的客户这个时候也可以请个稍微懂NET的人来引用你的dataAccess.dll并调用其中的方法搞破坏。比如可以直接使用里面的ChangePwd(string UserName,string Pwd)方法把其他用户的密码改了，这个时候就你就……. 好了，该开始说怎么保护我们的代码了：</p>
-<h3 id="首先我们需要把我们的程序集做成强命名的程序集。"><a href="#首先我们需要把我们的程序集做成强命名的程序集。" class="headerlink" title="首先我们需要把我们的程序集做成强命名的程序集。"></a>首先我们需要把我们的程序集做成强命名的程序集。</h3><p>这里我们在.NET 命令提示中输入<code>sn -k c:test.snk</code> 创建一个新的随机密钥对并将其存储在 <code>c:test.snk</code> 中 然后新建立类库<code>ClassLibrary1</code>，里面只有个类文件<code>Class1.cs</code>，代码如下：</p>
-<pre><code>using System;
-namespace ClassLibrary1
+            <p><strong>时间戳转为C#格式时间</strong></p>
+<pre><code>// 时间戳转为C#格式时间
+private DateTime StampToDateTime(string timeStamp)
 {
-    public class Class1
-    {
-        public Class1()
-        {
-            //
-            // TODO: 在此处添加构造函数逻辑
-            //
-        }
-
-        public string Insert()
-        {
-            return &quot;ok&quot;;
-        }
-    }
+    DateTime dateTimeStart = TimeZone.CurrentTimeZone.ToLocalTime(new DateTime(1970, 1, 1));
+    long lTime = long.Parse(timeStamp + &quot;0000000&quot;);
+    TimeSpan toNow = new TimeSpan(lTime);
+    return dateTimeStart.Add(toNow);
 }
-</code></pre><p><strong>AssemblyInfo.cs代码：</strong></p>
-<pre><code>//............其他的就用默认
-
-[assembly: AssemblyKeyFile(&quot;c:test.snk&quot;)] // 连接上面用强命名工具SN.exe生成的文件.
-</code></pre><p>接着创建个WindowApplication来调用我们的ClassLibrary1，代码：</p>
-<pre><code>private void button1_Click(object sender, System.EventArgs e)
+</code></pre><p><strong>DateTime时间格式转换为Unix时间戳格式</strong></p>
+<pre><code>// DateTime时间格式转换为Unix时间戳格式
+private int DateTimeToStamp(System.DateTime time)
 {
-    MessageBox.Show(new ClassLibrary1.Class1().Insert());
+    System.DateTime startTime = TimeZone.CurrentTimeZone.ToLocalTime(new System.DateTime(1970, 1, 1));
+    return (int)(time - startTime).TotalSeconds;
 }
-</code></pre><p>不修改WindowApplication的AssemblyInfo.cs。 在这里就可以直接运行了，不过大家都看的出来，这样是能成功调用Class1中的方法的。 现在让我们来修改下<code>Class1.cs</code>，代码：</p>
-<pre><code>using System;
-using System.Security.Permissions;
-
-namespace ClassLibrary1
-{
-[StrongNameIdentityPermissionAttribute(SecurityAction.LinkDemand, PublicKey =
-&quot;00240000048000009400000006020000002400005253413100040000010001000551684edd1600&quot;+
-&quot;8ccbdd337b1cf1490490d97fe0048c5f3629cc4f5104578499eace9b2a94115022edd620def472&quot;+
-&quot;8b4f088291cfa77a40659afba611fdafbb7894b93a64049d439936bd0cd8dc0704625aeb735892&quot;+
-&quot;e9eb3f910a49a2925af10515d935654d7adac5567ff6d780d23d587de0ff4d271da7b30680fa88&quot;+
-&quot;a47a4ba4&quot;)]
-public class Class1
-{
-    public Class1()
-    {
-        //
-        // TODO: 在此处添加构造函数逻辑
-        //
-    }
-
-    public string Insert()
-    {
-        return &quot;ok&quot;;
-    }
-    }
-}
-</code></pre><p>然后再编译后运行windowapplication调用class1中的方法就会出错。 这里的<code>StrongNameIdentityPermissionAttribute</code>是NET提供的<code>CAS(Code Access Security)</code>中的1个类，具体可参考MSDN， <code>SecurityAction.LinkDemand</code> 是要求直接调用方已被授予了指定的权限，这里即windowapplication要授予了权限才行， 如果使用<code>SecurityAction.Demand</code>要求调用堆栈中的所有高级调用方都已被授予了当前权限对象所指定的权限。 他们的区别是： 如果windowapplication已授权访问，而还有个windowapplication2(未授权访问)通过调用windowapplication中的<code>button1_Click</code>方法来调用class1，这个时候如果使用<code>SecurityAction.LinkDemand</code>就能成功调用， 而使用<code>SecurityAction.Demand windowapplication2</code>就不能调用，windowapplication 在这2种情况下都能调用。 说到这里大家一定再问PublicKey＝后面一串那么长的字符串怎么来。PublicKey后面的字符串是你开始生成的<code>c:test.snk</code>文件中保存的公钥。那怎么才能看到这个公钥了，照样是用SN.EXE。 输入<code>sn -p c:test.snk c:publicKey.snk</code> (从 test.snk 中提取公钥并将其存储在 publicKey.snk 中) 再输入<code>sn -tp c:publicKey.snk</code> (显示公钥信息) 上面这个命令就能看到PublicKey后面的字符串了，还想什么啊，把那字符串copy下来啊。 最后大家一定在关心这个时候windowapplication 要怎么调用class1了，其实也简单，只要把<code>windowapplication</code> 的<code>AssemblyInfo.cs</code>修改为：</p>
-<pre><code>[assembly: AssemblyKeyFile(&quot;c:test.snk&quot;)]
-</code></pre><p>到这里就一切OK了，大家都看到最关键的就是test.snk文件了，所以一定要保护好你自己的test.snk文件。</p>
-
+</code></pre>
           
         
       
@@ -801,7 +540,7 @@ public class Class1
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/12/22/e7-9c-9f-e6-ad-a3-e4-bf-ae-e6-94-b9redmine-e9-99-84-e4-bb-b6-e4-b8-8a-e4-bc-a0-e8-b7-af-e5-be-84-e7-9a-84-e6-96-b9-e6-b3-95/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2015/08/04/ubuntu-e4-b8-8b-e6-80-8e-e4-b9-88-e4-bd-bf-e7-94-a8shadowsocks-ef-bc-9f/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -810,7 +549,7 @@ public class Class1
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -821,7 +560,7 @@ public class Class1
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2017/12/22/e7-9c-9f-e6-ad-a3-e4-bf-ae-e6-94-b9redmine-e9-99-84-e4-bb-b6-e4-b8-8a-e4-bc-a0-e8-b7-af-e5-be-84-e7-9a-84-e6-96-b9-e6-b3-95/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">真正修改Redmine附件上传路径的方法</a>
+                <a href="/2015/08/04/ubuntu-e4-b8-8b-e6-80-8e-e4-b9-88-e4-bd-bf-e7-94-a8shadowsocks-ef-bc-9f/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">ubuntu下怎么使用shadowsocks？</a>
               
             
           </h1>
@@ -846,7 +585,7 @@ public class Class1
                 
               
 
-              <time title="创建时间：2017-12-22 15:04:37" itemprop="dateCreated datePublished" datetime="2017-12-22T15:04:37+08:00">2017-12-22</time>
+              <time title="创建时间：2015-08-04 10:39:36" itemprop="dateCreated datePublished" datetime="2015-08-04T10:39:36+08:00">2015-08-04</time>
             
 
             
@@ -863,7 +602,238 @@ public class Class1
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-12 17:11:32" itemprop="dateModified" datetime="2018-12-12T17:11:32+08:00">2018-12-12</time>
+                <time title="修改时间：2018-12-12 17:24:02" itemprop="dateModified" datetime="2018-12-12T17:24:02+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="Ubuntu下怎么使用Shadowsocks？"><a href="#Ubuntu下怎么使用Shadowsocks？" class="headerlink" title="Ubuntu下怎么使用Shadowsocks？"></a><a href="#ubuntu下怎么使用shadowsocks？"></a>Ubuntu下怎么使用Shadowsocks？</h1><p><strong>用pip安装就很简单。</strong></p>
+<ol>
+<li><h3 id="安装ss"><a href="#安装ss" class="headerlink" title="安装ss"></a><a href="#安装ss"></a>安装ss</h3><pre><code>apt-get install python-pip &amp; pip install shadowsocks
+</code></pre></li>
+</ol>
+<ol start="2">
+<li><h3 id="启动-ss客户端"><a href="#启动-ss客户端" class="headerlink" title="启动 ss客户端"></a><a href="#启动-ss客户端"></a>启动 ss客户端</h3><ol>
+<li><p>启动方法a，直接在终端用命令：</p>
+<pre><code>sslocal -s 123.123.213.213 -p 6666 -b 127.0.0.1 -l 1080 -k 23333 -t 600 -m aes-256-cfb
+</code></pre></li>
+</ol>
+</li>
+</ol>
+<pre><code>2.  启动方法b，用配置文件启动  
+    配置文件存为ss.conf，格式：
+
+        {
+         &quot;server&quot; : &quot;123.123.213.213&quot;,
+         &quot;server_port&quot; : 6666,
+         &quot;local_port&quot; : 1080,
+         &quot;password&quot; : &quot;23333&quot;,
+         &quot;timeout&quot; : 600,
+         &quot;method&quot; : &quot;aes-256-cfb&quot;
+         }
+
+
+    启动时使用命令：
+
+        sslocal -c /filepath/to/ss.conf
+
+
+    完成。
+
+**PS：**
+
+&gt; a. 记得在Network设置代理: 设置Socks Host指向 ss客户端的本地IP和端口, 即`127.0.0.1 1080`;  
+&gt; b. 有同学反应还是不能科学上网。说明一下，SS不同于VPN，它是走socks5协议的，一般搭配浏览器食用，对于 **terminal的get,wget等走http是没有帮助的**。虽然有socks转http的方法，但这里就不折腾了。
+</code></pre><ol start="3">
+<li><h3 id="开机启动ss-可选"><a href="#开机启动ss-可选" class="headerlink" title=")开机启动ss(可选)"></a><a href="#开机启动ss(可选"></a>)开机启动ss(可选)</h3><p>在<code>/etc/rc.local</code>中添加启动命令。<br>例如:</p>
+<pre><code>sudo vi /etc/rc.local
+</code></pre></li>
+</ol>
+<pre><code>在exit 0前添加(这里假设你已经在第2步写好shell脚本，并命名为`ss_start.sh`)
+
+     sudo sh /path/to/sslocal/ss_start.sh
+
+
+如果路径和权限都没问题，在下次开机时就会启动ss了。
+
+查看ss是否已经开启，用下面这个:
+
+     ps -ef | grep sslocal
+
+
+输出两条进程信息就说明成功开启了(其中一条是上面这条命令的)。
+</code></pre>
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2015/05/14/vpn868-e9-94-99-e8-af-af/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coppid">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2015/05/14/vpn868-e9-94-99-e8-af-af/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">vpn868错误</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-05-14 09:57:38" itemprop="dateCreated datePublished" datetime="2015-05-14T09:57:38+08:00">2015-05-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 17:24:02" itemprop="dateModified" datetime="2018-12-12T17:24:02+08:00">2018-12-12</time>
               
             
           </span>
@@ -923,1481 +893,7 @@ public class Class1
       
         
           
-            <p>之前搭建了一个Redmine， 在一个云服务器上，装好了Redmine之后，想要更改文件的存储路径为另外的云硬盘（系统盘太不安全，容量也只有25G） 惊讶的发现，搜索 “redmine修改附件储存路径”时 网上的例子都是基于1.x.x 的做法，更甚的是，要修改源文件？？？ 甚至官方论坛<a href="https://www.redmine.org/boards/2/topics/140" target="_blank" rel="noopener">Custom folder for attachments. How?</a>都没有什么有效的回答（而且是10年前的答案。。也是修改 <code>xxx.rb</code>。。。你特么在逗我。。） 好吧，只有自己摸索了 下面是解决方案</p>
-<hr>
-<blockquote>
-<p>目标路径： <code>/data/redmine_attachments</code></p>
-</blockquote>
-<h3 id="创建目录-amp-设置权限"><a href="#创建目录-amp-设置权限" class="headerlink" title="创建目录&amp;设置权限"></a>创建目录&amp;设置权限</h3><pre><code>sudo mkdir -p /data/redmine_attachments
-sudo chown -R www-data /data/redmine_attachments
-sudo chmod -R 755 /data/redmine_attachments    # 这里一定要有执行权限，否则上传时（严格说，还没开始上传，而是点击按钮时）会提示“文件 是无效的”
-</code></pre><h3 id="设置上传路径-amp-顺便把邮件也修改了"><a href="#设置上传路径-amp-顺便把邮件也修改了" class="headerlink" title="设置上传路径 &amp; 顺便把邮件也修改了"></a>设置上传路径 &amp; 顺便把邮件也修改了</h3><pre><code>cd /usr/share/redmine/
-cp config/configuration.yml /etc/redmine/default/configuration.yml 
-</code></pre><p>这里的目标路径可能和你的不一样。快速找打的方法是打开你站点的<em>“管理”，“配置”，找到“邮件”这个选项</em>。 如果没配置的话，会提示错误，让你在<code>/etc/redmine/&lt;instance&gt;/configuration.yml</code> 中配置邮件选项，这个路径中的配置文件就是当前Redmine的正确配置文件 根据文档中的注释自己修改一下参数就可以了 最后，别忘记重启 apache</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/12/21/Vim-selected-remove-copy-in-quote/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/12/21/Vim-selected-remove-copy-in-quote/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">Vim快速选中、删除、复制引号或括号中的内容</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-12-21 11:33:15" itemprop="dateCreated datePublished" datetime="2017-12-21T11:33:15+08:00">2017-12-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 18:24:11" itemprop="dateModified" datetime="2018-12-12T18:24:11+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>最近刚刚发现了一些VIM中，快速对引号或括号等标点内的内容进行选中、删除、复制操作的超级技巧。 </p>
-<p>通过这些命令可以快速修改或删除匹配的 括号、引号等成对字符之间的内容，</p>
-<p><strong>极大</strong>的提高编辑效率。 以下命令可以对标点内的内容进行操作。</p>
-<pre><code>ci&apos;、ci&quot;、ci(、ci[、ci{、ci &lt;----- 分别更改这些配对标点符号中的文本内容
-di&apos;、di&quot;、di(或dib、di[、di{或diB、di &lt;----- 分别删除这些配对标点符号中的文本内容
-yi&apos;、yi&quot;、yi(、yi[、yi{、yi &lt;----- 分别复制这些配对标点符号中的文本内容
-vi&apos;、vi&quot;、vi(、vi[、vi{、vi &lt;----- 分别选中这些配对标点符号中的文本内容
-</code></pre><blockquote>
-<p>举个例子 1：</p>
-</blockquote>
-<p>原始数据（光标所在位置匹配的括号）： </p>
-<p><img src="https://tech.msla.top/wp-content/uploads/2018/04/sshot-9.png" alt="原始数据"> </p>
-<p>Normal 模式下 输入 <code>ci(</code>之后的结果： </p>
-<p><img src="http://happiz.qiniu.cdn.msla.top/sshot-10.png" alt="删除匹配括号之后的截图"></p>
-<blockquote>
-<p>举个例子 2：</p>
-</blockquote>
-<p>比如要操作的文本如下：</p>
-<pre><code>111&quot;222&quot;333
-</code></pre><p>将光标移到”222”的任何一个字符处输入命令 <code>di&quot;</code> ,<br>文本会变成： <code>111&quot;&quot;333</code> 若输入命令 <code>da&quot;</code> ,<br>文本会变成： <code>111333</code> 特别是对于用Vim编码的同学来说，真是非常强劲的技巧。 </p>
-<p>转至: <a href="http://www.linuxsong.org/2010/09/vim-quick-select-copy-delete/" target="_blank" rel="noopener">http://www.linuxsong.org/2010/09/vim-quick-select-copy-delete/</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/12/20/e6-9b-b4-e6-94-b9debian-e7-bb-88-e7-ab-af-e4-b8-ad-e7-9a-84-e5-91-bd-e4-bb-a4-e8-a1-8c-e9-a2-9c-e8-89-b2/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/12/20/e6-9b-b4-e6-94-b9debian-e7-bb-88-e7-ab-af-e4-b8-ad-e7-9a-84-e5-91-bd-e4-bb-a4-e8-a1-8c-e9-a2-9c-e8-89-b2/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">更改Debian终端中的命令行颜色</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-12-20 15:32:42" itemprop="dateCreated datePublished" datetime="2017-12-20T15:32:42+08:00">2017-12-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:11:08" itemprop="dateModified" datetime="2018-12-12T17:11:08+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>由于在终端下，命令提示符、输入及输出均为一种颜色，因此当输出内容比较多时，很容易花眼，不易区分，这里我把它更改成如BackTrack下的命令行颜色，即<code>username@hostname</code>为红色，后面的目录为蓝色。</p>
-<h3 id="更改普通用户的配置文件如下："><a href="#更改普通用户的配置文件如下：" class="headerlink" title="更改普通用户的配置文件如下："></a>更改普通用户的配置文件如下：</h3><pre><code>vi /home/xxx/.bashrc
-</code></pre><p>在打开的文件中添加下列語句：</p>
-<pre><code>PS1=&apos;${debian_chroot:+($debian_chroot)}[33[01;31m]u@h[33[00m]:[33[01;34m]w[33[00m]$ &apos;
-</code></pre><p>其中<code>01;31m</code>代表红色<code>username@hostname,01;34m</code>代表目录为蓝色。</p>
-<h3 id="root-用户，同样地，登陆root后，输入如下命令："><a href="#root-用户，同样地，登陆root后，输入如下命令：" class="headerlink" title="root 用户，同样地，登陆root后，输入如下命令："></a>root 用户，同样地，登陆root后，输入如下命令：</h3><pre><code>vi /root/.bashrc
-</code></pre><p>在打开的文件中添加上面的語句：</p>
-<pre><code>PS1=&apos;${debian_chroot:+($debian_chroot)}[33[01;31m]u@h[33[00m]:[33[01;34m]w[33[00m]$ &apos;
-</code></pre>
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/12/14/vim-global-command/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/12/14/vim-global-command/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">Vim Global Command用法（g命令）</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-12-14 14:02:56" itemprop="dateCreated datePublished" datetime="2017-12-14T14:02:56+08:00">2017-12-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 18:00:17" itemprop="dateModified" datetime="2018-12-12T18:00:17+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="Task"><a href="#Task" class="headerlink" title="Task"></a>Task</h3><blockquote>
-<p>删除一个文本文件中的所有带 ‘test’ 的行，以及这一行的前一行和后一行。 如何用Vim实现？</p>
-</blockquote>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><pre><code>:g/test/-,/test/+ d
-</code></pre><p>  上面的命令是如何工作的呢？这你就需要了解vim的global命令(g命令) <code>:g</code>就是global命令</p>
-<h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><pre><code>:[range]g/pattern/cmd
-:g/pattern1/, /pattern2/cmd
-</code></pre><p>第一种语法会在range的范围内搜索pattern, 如果符合要求就执行cmd. 第二种语法会在<code>/p1/</code>, <code>/p2/</code>之间执行cmd</p>
-<h3 id="例"><a href="#例" class="headerlink" title="例:"></a>例:</h3><pre><code>:g/test/d
-</code></pre><p>删除所有带test的行</p>
-<pre><code>:g!/test/d
-</code></pre><p>保留带test的行</p>
-<pre><code>:g/hello/, /world/d
-</code></pre><p>删除所有hello, world之间的行</p>
-<h3 id="提取宏定义"><a href="#提取宏定义" class="headerlink" title="提取宏定义"></a>提取宏定义</h3><p>有如下代码，现在要求提取出当TEST为Ture时，所定义的内容</p>
-<ol>
-<li>#ifdef TEST</li>
-<li>test1</li>
-<li>test2</li>
-<li>#else</li>
-<li>no test</li>
-<li>#endif</li>
-</ol>
-<p>可以这样写g命令</p>
-<pre><code>:g/#ifdef TEST/+1, /#else|#endif/-1 t $
-</code></pre><p><code>+1</code>代表取下一行，<code>-1</code>代表取上一行， <code>#else|#endif</code>表示满足<code>#else</code>或者<code>#endif</code>这两个条件都可以。 用以上的命令可以成功了取得<code>#ifdef TEST</code>所包含的内容 但如果我们想要取不满足<code>#ifdef TEST</code>的内容怎么办呢，这个问题要比上面的问题复杂。我们不能直接去搜索#else, 因为它之前有可能是其它的<code>#ifdef</code>, 而不是<code>#ifdef TEST</code>，其次，不是所有的<code>#ifdef TEST</code>都有<code>#else</code>定义。 所有我们要使用<code>try</code>和<code>endtry</code>命令</p>
-<pre><code>:try|g/#ifdef TEST//#else/+1, /#endif/-1 t $|endtry
-</code></pre><p>解释一下，先找 <code>#ifdef TEST</code>, 找到后再找 <code>#else</code>, 然后取下一行，再找到 <code>#endif</code> 取上一行。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/12/05/e8-bd-ac-e5-86-99-e4-bc-9a-mysql-e7-b4-a2-e5-bc-95/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/12/05/e8-bd-ac-e5-86-99-e4-bc-9a-mysql-e7-b4-a2-e5-bc-95/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">[转]写会 MySQL 索引</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-12-05 11:58:00" itemprop="dateCreated datePublished" datetime="2017-12-05T11:58:00+08:00">2017-12-05</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:13:19" itemprop="dateModified" datetime="2018-12-12T17:13:19+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <blockquote>
-<p>来源：andyqian my.oschina.net/u/1462914/blog/1563127</p>
-</blockquote>
-<h4 id="前言"><a href="#前言" class="headerlink" title="前言"></a><strong>前言</strong></h4><p>继上篇《<a href="http://mp.weixin.qq.com/s?__biz=MzA5ODM5MDU3MA==&amp;mid=2650863280&amp;idx=1&amp;sn=c549fffee672f8dbd186a42cfc2882b8&amp;chksm=8b6611f5bc1198e329475660587a57b8a3fd3ce719f13e904b7fa717122f13e337a3e23c0b5f&amp;scene=21#wechat_redirect" target="_blank" rel="noopener">读懂MySQL执行计划</a>》后，在文章末尾，我们谈到了索引的概念，那么，今天我们就一起来聊一聊MySQL索引。</p>
-<h4 id="什么是索引？"><a href="#什么是索引？" class="headerlink" title="什么是索引？"></a><strong>什么是索引？</strong></h4><p>百度百科是这样描述的：</p>
-<blockquote>
-<p>索引是为来加速对表中数据行中的检索而创建的一种分散的数据结果，时针对表而建立的，它是由数据页面以外的索引页面组成，每个索引页中的行都含有逻辑指针，以便加速检索物理数据</p>
-</blockquote>
-<p>其实，索引的概念大家都很清楚，也知道索引能够提升查询效率，但大部分童鞋在怎么建索引，建在哪些字段上有以下常见误解:</p>
-<ul>
-<li>新建表时不需要建索引，后续才添加索引</li>
-<li>where条件后的字段均建索引</li>
-<li>简单SQL不需要索引，联合查询才需要索引</li>
-<li>联合索引的顺序是where条件后字段的先后顺序</li>
-<li>对于区分度小的字段上也新建索引，如状态、性别等字段等。</li>
-</ul>
-<h4 id="索引区分度"><a href="#索引区分度" class="headerlink" title="索引区分度"></a><strong>索引区分度</strong></h4><p>在说上述问题之前，我们先来看看另一个概念，就是区分度。</p>
-<blockquote>
-<p>区分度: 指字段在数据库中的不重复比</p>
-</blockquote>
-<p>区分度在新建索引时有着非常重要的参考价值，在MySQL中，区分度的计算规则如下:</p>
-<blockquote>
-<p>字段去重后的总数与全表总记录数的商。</p>
-</blockquote>
-<p>例如:</p>
-<blockquote>
-<p>select count(distinct(name))/count(*) from t_base_user;</p>
-</blockquote>
-<p>结果如下:</p>
-<p>count(distinct(name))/count(*)</p>
-<p>1.0000</p>
-<p>其中区分度最大值为1.000，最小为0.0000，区分度的值越大，也就是数据不重复率越大，新建索引效果也越好，在主键以及唯一键上面的区分度是最高的，为1.0000，在状态、性别等字段上面的区分度值是最小的。 (这个就要看数据量了，如果只有几条数据，这时区分度还挺高的，如果数据量多，区分度基本为0.0000。也就是在这些字段上添加索引后，效果也不佳的原因。) 值得注意的是：如果表中没有任何记录时，计算区分度的结果是为空值，其他情况下，区分度值均分布在0.0000-1.0000之间。  </p>
-<h4 id="如何建索引"><a href="#如何建索引" class="headerlink" title="如何建索引"></a><strong>如何建索引</strong></h4><p><strong> (一)  : 区分度</strong> 个人强烈建议，建索引时，一定要先计算该字段的区分度，原因如下:</p>
-<ol>
-<li>单列索引 可以查看该字段的区分度，根据区分度的大小，也能大概知道在该字段上的新建索引是否有效，以及效果如何。区分度越大，索引效果越明显。</li>
-</ol>
-<p>2.多列索引(联合索引) 多列索引中其实还有一个字段的先后顺序问题，一般是将区分度较高的放在前面，这样联合索引才更有效，例如:</p>
-<blockquote>
-<p>select * from t_base_user where name=”” and status=1;</p>
-</blockquote>
-<p>像上述语句，如果建联合索引的话，就应该是:</p>
-<blockquote>
-<p>alter table t_base_user add index idx_name_status(name,status);</p>
-</blockquote>
-<p>而不是:</p>
-<blockquote>
-<p>alter table t_base_user add index idx_status_name(status,name)；</p>
-</blockquote>
-<p><strong>(二) 最左前缀匹配原则</strong> MySQL会一直向右匹配直到遇到范围查询(&gt;、&lt;、between、like)就停止匹配，比如</p>
-<blockquote>
-<p>select * from t_base_user where type=”10″ and created_at&lt;“2017-11-03” and status=1, (该语句仅作为演示)</p>
-</blockquote>
-<p>在上述语句中，status就不会走索引，因为遇到&lt;时，MySQL已经停止匹配，此时走的索引为：(type,created_at)，其先后顺序是可以调整的，而走不到status索引，此时需要修改语句为:</p>
-<blockquote>
-<p>select * from t_base_user where type=10 and status=1 and created_at&lt;“2017-11-03”</p>
-</blockquote>
-<p>即可走status索引。 <strong>(三) 函数运算</strong> 不要在索引列上，进行函数运算，否则索引会失效。因为b+树中存的都是数据表中的字段值，但进行检索时，需要把所有元素都应用函数才能比较，显然成本太大。 <strong>(四) 扩展优先</strong> 扩展优先，不要新建索引，尽量在已有索引中修改。如下:</p>
-<blockquote>
-<p>select * from t_base_user where name=”andyqian” and email=”andytohome”</p>
-</blockquote>
-<p>在表t_base_user表中已经存在idx_name索引，如果需要加入idx_name_email的索引，应该是修改idx_name索引，而不是新建一个索引。  </p>
-<h4 id="误解纠正"><a href="#误解纠正" class="headerlink" title="误解纠正"></a><strong>误解纠正</strong></h4><p>上面说了，如何新建索引，现在我们就可以来回答，在第一步中存在的误解了。 <strong>误解一：新建表时不需要建立索引，后续才加索引</strong> 答：一个好的数据表设计，在一开始就要考虑索引的创建，而不是等到后续出问题了，影响业务使用了，才新建索引来救场，而且后续创建索引的成本也相对高很多。(这就是给生产事故留下生根发芽的机会呀) <strong>误解二：where条件后的字段均建索引</strong> 答：这个误解比较常见，但where条件后的字段不需要全部建立索引，过多的索引，也会导致索引文件剧增，也还达不到期望中的效果。详细请参考上述新建索引的小节。 <strong>误解三：简单SQL不需要建立索引，联合查询采建立索引</strong> 答：这个误解就得好好说说了，现在互联网公司特别是B/S架构下，业务逻辑均剥离在代码逻辑层，到最后SQL层面，其实都是一些简单的SQL，只有些许连接查询，更多的还是单表操作，(C/S架构中有很多在SQL层面的写逻辑的)，你说这些语句简不简单。 <strong>误解四: 联合索引的顺序是where条件后字段的先后顺序</strong> 答：我们刚才说过，联合索引的顺序，是根据最左前缀原则，以及区分度来区分的，和where条件后字段的先后顺序无关。 <strong>误解五：对于区分度较小的字段新建索引</strong> 答：在区分度较小的字段上新建索引，基本无效，还会增加大量的索引文件，你说是不是得不偿失。  </p>
-<h4 id="索引重不重要？"><a href="#索引重不重要？" class="headerlink" title="索引重不重要？"></a><strong>索引重不重要？</strong></h4><p>上面介绍了MySQL索引的概念，新建索引时的一些技巧。这么理论的东西，对于平时没有使用或使用比较少的童鞋，此时对索引的重要性可能还没那么直观，那么，我就来说说我在索引上吃过的亏，踩过的坑！同时也是未建索引常见问题！ <strong>0. 导致慢查询</strong> 这个问题可是未建索引的常客哦，（这里也还有很多细节呢，如隐式类型转换等等） <strong>1. 导致服务超时</strong> 场景 : 在某次上线时，作为服务提供者，提供服务给业务方使用。一开始以为就提供一个简单的服务，也已经测试完成，心里还在窃喜，今天总算可以早早回家了！ 描述 : 实际一上线，在生产环境中导致业务方请求调用时，而且每次请求均超时，数据也已落地，此时只能review代码，最后发现生产中有个慢查询导致，活活的花费了10多秒，这个语句有多简单呢，你绝对想不到，就是一个简单的单表where查询。 你说这种原因导致服务不可用，你说冤不冤，气不气！（这也是我为什么说，一个好的数据表设计，从一开始就要考虑新建索引了）。 <strong>2. 数据库服务器CPU 100%</strong> 在查询频率比较高的SQL上，如果出现未建索引，导致慢查询的话，那可是会导致数据库服务器CPU 100%，影响可是整个系统哦。 <strong>小结</strong> 上面说了好几类，由于没建立索引而导致的问题，轻则导致慢查询，影响系统效率，重则，导致CPU 100%，影响整个系统的使用，看到这里，你说索引重不重要？  </p>
-<h4 id="最后"><a href="#最后" class="headerlink" title="最后"></a><strong>最后</strong></h4><p>上面简单说了，索引是什么、有什么用，以及建立索引时的一些技巧，还着重说了索引的重要性。那么索引这么重要，在平时编码时如何规避问题呢？以下是我个人的建议：</p>
-<ol>
-<li>在建表时就应该考虑添加索引，如外键字段等等。</li>
-<li>在写完SQL后，一定要查看执行计划。尽量避免全表扫描。</li>
-<li>如果是已有表中添加索引，一定要先计算该字段的区分度。</li>
-<li>联合索引，将区分度大放在前面。</li>
-<li>遵从MySQL左列前缀优先原则</li>
-</ol>
-<p>看完本文有收获？请转发分享给更多人 <strong>关注「数据库开发」，提升 DB 技能</strong> <img src="https://tech.msla.top/wp-content/uploads/2018/04/4ffce04d92a4d6cb21c1494cdfcd6dc1.jpg" alt=""></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/11/30/mysql-e8-87-aa-e5-ae-9a-e4-b9-89-e5-87-bd-e6-95-b0-e6-a0-b9-e6-8d-ae-e7-88-b6-e7-ba-a7-e5-88-86-e7-b1-bb-e6-9f-a5-e8-af-a2-e6-89-80-e6-9c-89-e5-ad-90-e7-ba-a7-e5-88-86-e7-b1-bb/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/11/30/mysql-e8-87-aa-e5-ae-9a-e4-b9-89-e5-87-bd-e6-95-b0-e6-a0-b9-e6-8d-ae-e7-88-b6-e7-ba-a7-e5-88-86-e7-b1-bb-e6-9f-a5-e8-af-a2-e6-89-80-e6-9c-89-e5-ad-90-e7-ba-a7-e5-88-86-e7-b1-bb/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">Mysql 自定义函数——根据父级分类查询所有子级分类</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-11-30 16:45:42" itemprop="dateCreated datePublished" datetime="2017-11-30T16:45:42+08:00">2017-11-30</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:20:50" itemprop="dateModified" datetime="2018-12-12T17:20:50+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Mysql 自定义函数——根据父级分类查询所有子级分类 mysql 有些地方不如Oracle那么强悍，但是业务应用范围却一点也不弱于后者， 这里涉及的是一个很常见的场景： 查询某个分类下面的所有子分类。 比如想知道某个组织架构下面的所有地区、部门、组、等分类，然后根据这些分类获取相应的人员</p>
-<pre><code>CREATE DEFINER=`test`@`172.16.%` FUNCTION `GET_CHLID`(deptID int) RETURNS varchar(4000) CHARSET gb2312
-    READS SQL DATA
-BEGIN
-DECLARE sTemp VARCHAR(4000);
-DECLARE sTempChd VARCHAR(4000);
-
-SET sTemp = &apos;$&apos;;
-SET sTempChd = cast(deptID  as char);
-
-WHILE sTempChd is not NULL DO
-SET sTemp = CONCAT(sTemp,&apos;,&apos;,sTempChd);
-SELECT 
-    GROUP_CONCAT(upm_dept_id)
-INTO sTempChd FROM
-    upm_dept
-WHERE
-    FIND_IN_SET(upm_from_dept_id, sTempChd) &gt; 0;
-END WHILE;
-return sTemp;
-RETURN 1;
-END
-</code></pre><h3 id="可能遇到的错误"><a href="#可能遇到的错误" class="headerlink" title="可能遇到的错误"></a>可能遇到的错误</h3><ul>
-<li>data too long for column ‘name’ at row 检查数据类型有没有错误，比如上文中的 deptID 如果定义函数的时候指定成 varchar 类型，会出错 字符编码问题，网上有很多案例，参考一下吧</li>
-<li><p>ERROR 1418 (HY000): This function has none of DETERMINISTIC 开启了bin-log, 我们就必须指定我们的函数是否是 <code>DETERMINISTIC | NO SQL | or READS SQL DATA</code> 那我们就指定这不就也能解决问题:</p>
-<p>create function rand_string(n INT)<br>returns varchar(255)<br>no sql  //《——-可以在这指定<br>begin<br>end $$</p>
-</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/11/01/e5-9c-a8debian-e4-b8-ad-e7-bd-91-e5-8d-a1-e7-9a-84-e8-ae-be-e7-bd-ae/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/11/01/e5-9c-a8debian-e4-b8-ad-e7-bd-91-e5-8d-a1-e7-9a-84-e8-ae-be-e7-bd-ae/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">在Debian中网卡的设置</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-11-01 10:24:23" itemprop="dateCreated datePublished" datetime="2017-11-01T10:24:23+08:00">2017-11-01</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:08:58" itemprop="dateModified" datetime="2018-12-12T17:08:58+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>在Debian中网卡的设置可以通过<code>/etc/network/interfaces</code>文件来进行，具体可分为三种不同的配置方式： DHCP自动获取、静态分配IP地址和PPPoE宽带拨号。 在进行配置之前，首先进入<code>/etc/network</code>目录中，用nano命令编辑interfaces文件： ** 网卡通过DHCP自动获取IP地址 **</p>
-<pre><code># This file describes the network interfaces available on your system
-# and how to activate them. For more information, see interfaces(5).
-
-#
-# The loopback network interface（配置环回口）
-
-# 开机自动激lo接口
-auto lo
-# 配置lo接口为环回口
-iface lo inet loopback
-
-#
-# The primary network interface （配置主网络接口）
-
-#开机自动激活eth0接口
-auto eth0
-#配置eth0接口为DHCP自动获取
-iface eth0 inet dhcp
-</code></pre><p>** 网卡静态分配IP地址 **</p>
-<pre><code># This file describes the network interfaces available on your system
-# and how to activate them. For more information, see interfaces(5).
-
-#
-# The loopback network interface（配置环回口）
-
-# 开机自动激lo接口
-auto lo
-# 配置lo接口为环回口
-iface lo inet loopback
-
-#
-# The primary network interface （配置主网络接口）
-
-#开机自动激活eth0接口
-auto eth0
-#配置eth0接口为静态设置IP地址
-iface eth0 inet static
-address 10.16.3.99
-netmask 255.255.255.0
-network 10.16.3.0
-broadcast 10.16.3.255
-gateway 10.16.3.1
-
-#单网卡配置多个ip，设置第二个ip地址
-
-auto eth0:1
-
-iface eth0:1 inet static
-address x.x.x.x
-netmask 255.255.255.0
-network 10.16.3.0
-broadcast 10.16.3.255
-gateway 10.16.3.1
-
-# dns-* options are implemented by the resolvconf package, if installed（DNS设置）
-dns-nameservers 61.153.177.196 61.153.177.197
-dns-search feelnet.org
-</code></pre><p>配置好后推出编辑<code>/etc/resolv.con</code>f，配置DNS，加入以下信息：</p>
-<pre><code>nameserver 219.146.0.130
-</code></pre><hr>
-<h3 id="基本文件格式"><a href="#基本文件格式" class="headerlink" title="基本文件格式"></a>基本文件格式</h3><p>Debian的网络配置文件在目录<code>/etc/network</code>中，其中的<code>interfaces</code>文件中保存了每一个网络设备在启动时的属性。下面是一个很简单的配置文件：</p>
-<h4 id="例子-1-简单的配置文件"><a href="#例子-1-简单的配置文件" class="headerlink" title="例子 1. 简单的配置文件"></a>例子 1. 简单的配置文件</h4><pre><code>auto lo eth0 ①
-iface lo inet loopback ②
-iface eth0 inet dhcp ③
-iface eth1 inet static ④
-address 10.1.133.165
-netmask 255.255.255.0
-gateway 10.1.133.1
-</code></pre><p>① 表示系统中的lo和eth0两个网络设备在系统启动网络时自动启动。 ② 表示网络设备lo使用TCP/IP网络并且是一个loopback设备，如果是IPV6网络则使用”inet6”，IPX网络使用”ipx”。 ③ 表示网络设备eth0使用TCP/IP网络，同时使用DHCP自动获取IP地址。 ④ 表示网络设备eth1使用TCP/IP网络，并且是占用固定的IP 10.1.33.165，子网掩码是255.255.255.0，网关是10.1.133.1。 上面的这种配置方式，可以使用于大多数的情况，但在一些特殊的情况下，就需要一些更为灵活的手段来配置网络。</p>
-<h4 id="通过PING配置网络"><a href="#通过PING配置网络" class="headerlink" title="通过PING配置网络"></a>通过PING配置网络</h4><p>Linux在处理PCMCIA卡的时候有比较好的方式，可以在PCMICA卡插入时通过一个配置脚本来确定网络地址。但是，笔记本上的网卡是笔记本自带的，并非PCMCIA卡，由于经常需要奔波于办公室、实验室和家之间，就经常需要修改网络地址。如果我去的每一个地方都安装了DHCP，那么我就可以把 eth0设定成为DHCP的方式，然而我的情况却是：在家可以使用DHCP，在办公室和实验室都要使用固定地址。 为了解决这个问题，我们可以使用一种mapping机制，这种方法的基本原理是通过运行一个程序来确定目前所处的环境，并为这个环境选择一套配置。我现在使用的就是通过ping一个网络的网关来确定当前网卡究竟连接在哪个网络上，然后再选择这个网络的配置。 首先，在<code>/usr/share/doc/ifupdown/examples</code>中有一个文件<code>ping-places.sh</code>，把它复制到<code>/etc/network</code>目录中，然后<code>chmod +x /etc/network/ping-places.sh</code>。下面就是编辑<code>/etc/network/interfaces</code>文件，下面是一个例子： 例子 2.</p>
-<pre><code>mapping eth0 ①
-script /etc/network/ping-places.sh
-map 192.168.0.107/24 192.168.0.1 home
-map 10.1.133.165/24 10.1.133.1 office
-map 10.1.0.107/24 10.1.0.1 lab
-iface home inet dhcp ②
-iface office inet static ③
-address 10.1.133.165
-netmask 255.255.255.0
-gateway 10.1.133.1
-up cp /etc/resolv.conf.school /etc/resolv.conf ④
-iface lab inet static
-address 10.1.0.107
-netmask 255.255.255.0
-gateway 10.1.0.1
-up cp /etc/resolv.conf.school /etc/resolv.conf
-</code></pre><p>① 表示对于网络设备调用脚本/etc/network/ping-places.sh，如果能够用地址192.168.0.107/24 ping通地址192.168.0.1，则将eth0映射为设备home，即启动home的配置。后面的office和lab与其类似。 ② 表示虚拟设备home使用DHCP分配的地址。 ③ 表示虚拟设备office使用固定地址。 ④ 表示在启动这个网络设备后还要执行cp命令，从而指定一个域名解析方法。除了up以外，还有pre-up、down和post-down可以用来指定在启动或停止网络设备前后执行的命令。 在<code>/usr/share/doc/ifupdown/examples</code>中有一些配置网络的例子和需要的脚本。</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/10/30/emeditor-17-2-3-e5-ae-98-e6-96-b9-e6-ad-a3-e5-bc-8f-e7-89-88-e6-9c-ac-e5-8f-8a-e6-bf-80-e6-b4-bb-e5-af-86-e9-92-a5/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2017/10/30/emeditor-17-2-3-e5-ae-98-e6-96-b9-e6-ad-a3-e5-bc-8f-e7-89-88-e6-9c-ac-e5-8f-8a-e6-bf-80-e6-b4-bb-e5-af-86-e9-92-a5/" class="post-title-link" itemprop="https://www.cobsun.com/page/4/index.html">EmEditor 17.2.3 官方正式版本及激活密钥</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2017-10-30 09:33:25" itemprop="dateCreated datePublished" datetime="2017-10-30T09:33:25+08:00">2017-10-30</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:19:14" itemprop="dateModified" datetime="2018-12-12T17:19:14+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="EmEditor-17-2-3-官方正式版本及激活密钥"><a href="#EmEditor-17-2-3-官方正式版本及激活密钥" class="headerlink" title="EmEditor 17.2.3 官方正式版本及激活密钥"></a>EmEditor 17.2.3 官方正式版本及激活密钥</h3><h4 id="终身授权在线激活密钥"><a href="#终身授权在线激活密钥" class="headerlink" title="终身授权在线激活密钥"></a>终身授权在线激活密钥</h4><blockquote>
-<p>DMAZM-WHY52-AX222-ZQJXN-79JXH</p>
-</blockquote>
-<p><strong>EmEditor v17.2.3 / v14.8.1 官方正式版 安装版 + 绿色版 + 破解补丁</strong></p>
-<blockquote>
-<p><a href="https://pan.baidu.com/s/1hsQU5VI" target="_blank" rel="noopener">https://pan.baidu.com/s/1hsQU5VI</a> &gt; 注：14.8.1 版本支持WinXP，14.9.0 版本之后支持Windows7或更高版。</p>
-</blockquote>
-<h4 id="EmEditor-17-2-3-x86-x64-官方下载地址"><a href="#EmEditor-17-2-3-x86-x64-官方下载地址" class="headerlink" title="EmEditor 17.2.3 (x86/x64) 官方下载地址"></a>EmEditor 17.2.3 (x86/x64) 官方下载地址</h4><p><strong>安装版： </strong></p>
-<blockquote>
-<p><a href="http://files.emeditor.com/emed32\_17.2.3.exe" target="_blank" rel="noopener">http://files.emeditor.com/emed32\_17.2.3.exe</a> <a href="http://files.emeditor.com/emed64\_17.2.3.exe" target="_blank" rel="noopener">http://files.emeditor.com/emed64\_17.2.3.exe</a></p>
-</blockquote>
-<p><strong>绿色版： </strong></p>
-<blockquote>
-<p><a href="http://files.emeditor.com/emed32\_17.2.3\_portable.zip" target="_blank" rel="noopener">http://files.emeditor.com/emed32\_17.2.3\_portable.zip</a> <a href="http://files.emeditor.com/emed64\_17.2.3\_portable.zip" target="_blank" rel="noopener">http://files.emeditor.com/emed64\_17.2.3\_portable.zip</a></p>
-</blockquote>
-<hr>
-<h4 id="EmEditor-v14-8-1-x86-x64-for-WinXP-官方下载地址"><a href="#EmEditor-v14-8-1-x86-x64-for-WinXP-官方下载地址" class="headerlink" title="EmEditor v14.8.1 (x86/x64) for WinXP 官方下载地址"></a>EmEditor v14.8.1 (x86/x64) for WinXP 官方下载地址</h4><p><strong>安装版： </strong></p>
-<blockquote>
-<p><a href="http://files.emeditor.com/emed32\_14.8.1.exe" target="_blank" rel="noopener">http://files.emeditor.com/emed32\_14.8.1.exe</a> <a href="http://files.emeditor.com/emed64\_14.8.1.exe" target="_blank" rel="noopener">http://files.emeditor.com/emed64\_14.8.1.exe</a></p>
-</blockquote>
-<p><strong>绿色版： </strong></p>
-<blockquote>
-<p><a href="http://files.emeditor.com/emed32\_14.8.1\_portable.zip" target="_blank" rel="noopener">http://files.emeditor.com/emed32\_14.8.1\_portable.zip</a> <a href="http://files.emeditor.com/emed64\_14.8.1\_portable.zip" target="_blank" rel="noopener">http://files.emeditor.com/emed64\_14.8.1\_portable.zip</a></p>
-</blockquote>
-<h4 id="EmEditor-破解为专业版授权通用补丁-by-addhaloka"><a href="#EmEditor-破解为专业版授权通用补丁-by-addhaloka" class="headerlink" title="EmEditor 破解为专业版授权通用补丁 by addhaloka **"></a>EmEditor 破解为专业版授权通用补丁 by addhaloka **</h4><blockquote>
-<p><a href="https://pan.lanzou.com/b105840" target="_blank" rel="noopener">https://pan.lanzou.com/b105840</a> <a href="https://zdfans.ctfile.com/dir/16343-24913607-9a4e61" target="_blank" rel="noopener">https://zdfans.ctfile.com/dir/16343-24913607-9a4e61</a></p>
-</blockquote>
-<p>本文来源：<a href="http://www.safecn.net/13796.html" target="_blank" rel="noopener">http://www.safecn.net/13796.html</a></p>
+            <p><strong>vpn868错误解决方法：</strong> 一句话：DNS导致的，不要使用自动获取的，可以用8.8.8.8,8.8.4.4等 <img src="https://tech.msla.top/wp-content/uploads/2018/04/sina_vpn1.png" alt="" title="vpn868错误设置"> <img src="https://tech.msla.top/wp-content/uploads/2018/04/sina_vpn2.png" alt="" title="vpn868错误解决方法"> vpn868错误：未进行远程连接，因为远程访问服务器的名称问题没有解决。</p>
 
           
         
@@ -2443,7 +939,7 @@ up cp /etc/resolv.conf.school /etc/resolv.conf
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
   </nav>
 
 
@@ -2486,7 +982,7 @@ up cp /etc/resolv.conf.school /etc/resolv.conf
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">176</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2515,9 +1011,7 @@ up cp /etc/resolv.conf.school /etc/resolv.conf
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   
                 </div>
@@ -2750,219 +1244,7 @@ up cp /etc/resolv.conf.school /etc/resolv.conf
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">215</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -3001,7 +1283,7 @@ up cp /etc/resolv.conf.school /etc/resolv.conf
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

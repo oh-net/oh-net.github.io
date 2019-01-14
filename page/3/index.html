@@ -108,13 +108,13 @@
 
   <meta name="description" content="$$ Welcome $$">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Technician">
+<meta property="og:title" content="Coppid">
 <meta property="og:url" content="https://www.cobsun.com/page/3/index.html">
-<meta property="og:site_name" content="Technician">
+<meta property="og:site_name" content="Coppid">
 <meta property="og:description" content="$$ Welcome $$">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Technician">
+<meta name="twitter:title" content="Coppid">
 <meta name="twitter:description" content="$$ Welcome $$">
 
 
@@ -132,7 +132,7 @@
   };
 </script>
 
-  <title>Technician</title>
+  <title>Coppid</title>
   
 
 
@@ -193,7 +193,7 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Technician</span>
+        <span class="site-title">Coppid</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -353,7 +353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/04/20/owncloud-e5-a4-87-e4-bb-bd/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/07/10/resolve-chrome-not-appear-in-menus-under-lxde/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -362,7 +362,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -373,7 +373,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/04/20/owncloud-e5-a4-87-e4-bb-bd/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">ownCloud 备份</a>
+                <a href="/2017/07/10/resolve-chrome-not-appear-in-menus-under-lxde/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">解决lxde桌面环境下Google-Chrome不在菜单中显示的问题</a>
               
             
           </h1>
@@ -398,7 +398,7 @@
                 
               
 
-              <time title="创建时间：2018-04-20 09:46:07" itemprop="dateCreated datePublished" datetime="2018-04-20T09:46:07+08:00">2018-04-20</time>
+              <time title="创建时间：2017-07-10 15:09:18" itemprop="dateCreated datePublished" datetime="2017-07-10T15:09:18+08:00">2017-07-10</time>
             
 
             
@@ -415,7 +415,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-12 17:21:19" itemprop="dateModified" datetime="2018-12-12T17:21:19+08:00">2018-12-12</time>
+                <time title="修改时间：2018-12-18 16:28:52" itemprop="dateModified" datetime="2018-12-18T16:28:52+08:00">2018-12-18</time>
               
             
           </span>
@@ -440,6 +440,8 @@
             </span>
           
 
+          
+            
           
 
           
@@ -466,41 +468,12 @@
       
         
           
-            <p>以下文档来自官方，经Google翻译后： 备份ownCloud服务器时，需要复制以下四项内容：</p>
-<ol>
-<li>你的 <code>config/</code> 目录。</li>
-<li>你的 <code>data/</code> 目录。</li>
-<li>您的 ownCloud 数据库。</li>
-<li>您的自定义主题文件，如果有的话。（参见<a href="https://doc.owncloud.org/server/latest/developer_manual/core/theming.html" target="_blank" rel="noopener">Theming ownCloud</a>）</li>
-</ol>
-<p>当您从我们的安装您ownCloud服务器<a href="https://download.owncloud.org/download/repositories/stable/owncloud/" target="_blank" rel="noopener">开放编译服务</a>包（或发行包，我们不建议）<strong>不要备份ownCloud服务器上的文件</strong>，这是在你的其他文件 <code>owncloud/</code> 目录，例如 <code>ore/</code> ， <code>3rdparty/</code> ， <code>apps/</code> ， <code>lib/</code> ，和所有其余的ownCloud文件。如果您从备份中还原这些文件，它们可能与当前的软件包版本不同步，并且会导致代码完整性检查失败。这也可能导致其他错误，如白页。 当你从源代码tarball中安装ownCloud时，这不会是一个问题，除了ownCloud数据库之外，你可以安全地备份整个ownCloud安装。数据库不能被复制，但您必须使用数据库工具来进行正确的数据库转储。 要从备份恢复ownCloud安装，请参阅<a href="https://doc.owncloud.org/server/10.0/admin_manual/maintenance/restore.html" target="_blank" rel="noopener"><em>恢复ownCloud</em></a>。</p>
-<h2 id="备份配置-和数据-目录"><a href="#备份配置-和数据-目录" class="headerlink" title="备份配置/和数据/目录"></a>备份配置/和数据/目录</h2><p>只需将您的复制<code>config/</code>和<code>data/</code>文件夹到您 ownCloud 环境以外的地方。这个例子<code>rsync</code>用来将两个目录复制到<code>/oc-backupdir</code>：</p>
-<pre><code>rsync -Aax config data /oc-backupdir/
-</code></pre><p>有很多方法可以备份普通文件，你可以使用任何你习惯的方法。  </p>
-<h2 id="备份数据库"><a href="#备份数据库" class="headerlink" title="备份数据库"></a>备份数据库</h2><p>您不能只复制数据库，但必须使用数据库工具来进行正确的数据库转储。</p>
-<h3 id="MySQL的-MariaDB的"><a href="#MySQL的-MariaDB的" class="headerlink" title="MySQL的/ MariaDB的"></a>MySQL的/ MariaDB的</h3><p>推荐的数据库引擎是MySQL或MariaDB，这是推荐的MySQL替代品。备份MySQL / MariaDB：</p>
-<pre><code>mysqldump --single-transaction -h [server] -u [username] -p [password] [db_name] &gt; owncloud-dbbackup_`date +&quot;%Y%m%d&quot;`.bak
-</code></pre><p>示例：</p>
-<pre><code>mysqldump --single-transaction -h localhost -u username -p password owncloud &gt; owncloud-dbbackup_`date +&quot;%Y%m%d&quot;`.bak
-</code></pre><h3 id="SQLite的"><a href="#SQLite的" class="headerlink" title="SQLite的"></a>SQLite的</h3><pre><code>sqlite3 data / owncloud.db .dump&gt; owncloud-dbbackup_`date +“％Y％m％d”`.bak
-</code></pre><h3 id="PostgreSQL的"><a href="#PostgreSQL的" class="headerlink" title="PostgreSQL的"></a>PostgreSQL的</h3><pre><code>PGPASSWORD=&quot;password&quot; pg_dump [db_name] -h [server] -U [username] -f owncloud-dbbackup_`date +&quot;%Y%m%d&quot;`.bak
-</code></pre><h2 id="启用加密时从备份中还原文件"><a href="#启用加密时从备份中还原文件" class="headerlink" title="启用加密时从备份中还原文件"></a>启用加密时从备份中还原文件</h2><p>如果您需要从备份中恢复文件，这些文件是在启用加密时进行备份的，那么请执行以下操作。</p>
-<blockquote>
-<p>从ownCloud起，至少v8.2.7版本才有效。此外，这还<strong>没有官方支持</strong>。ownCloud官方支持恢复完整备份或者不恢复 —— 不恢复其个别部分。</p>
-</blockquote>
-<ol>
-<li>从备份还原文件。</li>
-<li>从备份还原文件的加密密钥。</li>
-<li>运行 <code>occ files:scan</code>; 这使扫描器找到它。请注意，在数据库中，它将（1）将“大小”设置为加密大小，这是错误的（并且更大），以及（2）“加密”标志将被设置为0。<code>occ files:scan</code></li>
-<li>将DB中的“encrypted”标志更新为 1 下的 所有  _文件_<code>files/path</code>，但<strong>不包括</strong>目录。将该标志设置为1将告诉加密应用程序文件已加密并需要处理。</li>
-<li><blockquote>
-<p>无需为“files_versions”或“files_trashbin”中的文件更新加密标志，因为 <code>OCC files:scan</code> 不会扫描或找到这些文件。</p>
-</blockquote>
-</li>
-<li><p>以用户身份下载文件一次; 该文件的大小将自动更正。</p>
-</li>
-</ol>
-<p>这个过程可能不适用于所有环境。如果它不适合你，你可能需要运行一个OCC命令来进行扫描。但是，这将需要用户的密码或恢复密钥。</p>
+            <p>用的是 Debian8.x LXDE 环境， 装好了Google Chrome，重启。<br>然后发现菜单中并没有出现熟悉的 <code>Chrome 应用</code>，并且在 <code>网络/互联网</code> 选项中也没有 Google 的身影 </p>
+<p>解决办法： 先看看当前登录用户的目录下有没有chrome的menu文件， </p>
+<p>比如，我下面的截图显示的 是 mslagee 这个用户的目录中存在的 chrome 的配置<br><img src="https://tech.msla.top/wp-content/uploads/2018/04/5963266dc828f.png" alt="$USERHOME/.config/menu/ 下面的配置文件" title="$USERHOME/.config/menu/ 下面的配置文件"> </p>
+<p><strong> 然后将 <code>user-chrome-apps.menu</code> 配置文件拷贝至 <code>/etc/xdg/menus</code> 目录 </strong> </p>
+<p>系统菜单立刻就能看到 Chrome 的身影了</p>
+<p><img src="https://tech.msla.top/wp-content/uploads/2018/04/596327ac488f3.png" alt="$USERHOME/.config/menu/ 下面的文件拷贝至 /etc/xdg/menus" title="$USERHOME/.config/menu/ 下面的文件拷贝至 /etc/xdg/menus"></p>
 
           
         
@@ -557,7 +530,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/04/19/debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2017/07/04/745/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -566,7 +539,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -577,7 +550,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/04/19/debian-e4-b8-8b-e4-bd-bf-e7-94-a8-iptables-e9-98-b2-e7-81-ab-e5-a2-99/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">Debian下使用iptables防火墙</a>
+                <a href="/2017/07/04/745/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">在 Debian 下安装 WordPress</a>
               
             
           </h1>
@@ -602,7 +575,7 @@
                 
               
 
-              <time title="创建时间：2018-04-19 18:18:28" itemprop="dateCreated datePublished" datetime="2018-04-19T18:18:28+08:00">2018-04-19</time>
+              <time title="创建时间：2017-07-04 14:44:42" itemprop="dateCreated datePublished" datetime="2017-07-04T14:44:42+08:00">2017-07-04</time>
             
 
             
@@ -619,234 +592,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-12 16:59:32" itemprop="dateModified" datetime="2018-12-12T16:59:32+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Iptables 是建立在 netfilter 架构基础上的一个包过滤管理工具，最主要的作用是用来做防火墙或透明代理。Iptables 从 ipchains 发展而来，它的功能更为强大。Iptables 提供以下三种功能：包过滤、NAT（网络地址转换）和通用的 pre-route packet mangling。 在之前的文章中我对Iptables 进行了概念和原理上的介绍：Iptables介绍及命令，但是在实际应用中，很多实用的命令会反复用到，所以在这里对这些命令进行一下总结，方便大家查看。</p>
-<h2 id="安装iptables防火墙"><a href="#安装iptables防火墙" class="headerlink" title="安装iptables防火墙"></a>安装iptables防火墙</h2><p>如果没有安装iptables需要先安装，CentOS执行：</p>
-<pre><code>yum install iptables
-</code></pre><p>Debian/Ubuntu执行：</p>
-<pre><code>apt-get install iptables
-</code></pre><p>PS：一般默认的VPS Linux发行版都会带有iptables。 iptables规则的查看与删除</p>
-<h2 id="查看iptables规则"><a href="#查看iptables规则" class="headerlink" title="查看iptables规则"></a>查看iptables规则</h2><p>命令后面的line-number为显示行号（将规则一则一则输出，并显示行号），可选，方便后文的删除指令。</p>
-<pre><code>iptables -L -n --line-numbers
-</code></pre><h2 id="清除已有iptables规则"><a href="#清除已有iptables规则" class="headerlink" title="清除已有iptables规则"></a>清除已有iptables规则</h2><pre><code>iptables -F
-iptables -X
-iptables -Z
-</code></pre><h3 id="删除某iptables规则"><a href="#删除某iptables规则" class="headerlink" title="删除某iptables规则"></a>删除某iptables规则</h3><p>例如，删除第12行的规则，行号可由之前的命令查看</p>
-<pre><code>iptables -D INPUT 12
-</code></pre><h2 id="常用的iptables规则"><a href="#常用的iptables规则" class="headerlink" title="常用的iptables规则"></a>常用的iptables规则</h2><h3 id="开放指定的端口"><a href="#开放指定的端口" class="headerlink" title="开放指定的端口"></a>开放指定的端口</h3><pre><code>#允许本机访问
-iptables -A INPUT -s 127.0.0.1 -d 127.0.0.1 -j ACCEPT
-# 允许已建立的或相关连的通行
-iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
-#允许所有本机向外的访问
-iptables -A OUTPUT -j ACCEPT
-# 允许访问22端口
-iptables -A INPUT -p tcp --dport 22 -j ACCEPT
-#允许访问80端口
-iptables -A INPUT -p tcp --dport 80 -j ACCEPT
-#允许FTP服务的21和20端口
-iptables -A INPUT -p tcp --dport 21 -j ACCEPT
-iptables -A INPUT -p tcp --dport 20 -j ACCEPT
-#如果有其他端口的话，规则也类似，稍微修改上述语句就行
-#禁止其他未允许的规则访问
-iptables -A INPUT -j REJECT
-iptables -A FORWARD -j REJECT
-</code></pre><h3 id="屏蔽IP"><a href="#屏蔽IP" class="headerlink" title="屏蔽IP"></a>屏蔽IP</h3><p>有些IP如果你不想被VPS访问的到（原因很多，例如搜索引擎蜘蛛，DOS攻击者之类），可以用iptables屏蔽这些IP的访问：</p>
-<pre><code>#如果只是想屏蔽IP的话“3、开放指定的端口”可以直接跳过。
-#屏蔽单个IP的命令是
-iptables -I INPUT -s 123.45.6.7 -j DROP
-#封整个段即从123.0.0.1到123.255.255.254的命令
-iptables -I INPUT -s 123.0.0.0/8 -j DROP
-#封IP段即从123.45.0.1到123.45.255.254的命令
-iptables -I INPUT -s 124.45.0.0/16 -j DROP
-#封IP段即从123.45.6.1到123.45.6.254的命令是
-iptables -I INPUT -s 123.45.6.0/24 -j DROP
-</code></pre><h2 id="保存iptables规则"><a href="#保存iptables规则" class="headerlink" title="保存iptables规则"></a>保存iptables规则</h2><p><strong>CentOS上可以执行：</strong></p>
-<pre><code>service iptables save
-</code></pre><p>一般在安装iptables完成后，开机启动会自动设置成功，但在个别CentOS系统上，貌似还有些问题，可以使用如下命令手动设置:</p>
-<pre><code>chkconfig --level 345 iptables on
-</code></pre><p>另外更需要注意的是Debian/Ubuntu上iptables是不会保存规则的。 需要按如下步骤进行，让网卡关闭是保存iptables规则，启动时加载iptables规则： 创建/etc/network/if-post-down.d/iptables 文件，添加如下内容：</p>
-<pre><code>#!/bin/bash
-iptables-save &gt; /etc/iptables.rules
-</code></pre><p>添加执行权限。</p>
-<pre><code>chmod +x /etc/network/if-post-down.d/iptables
-</code></pre><p>创建/etc/network/if-pre-up.d/iptables 文件，添加如下内容：</p>
-<pre><code>#!/bin/bash
-iptables-restore &lt; /etc/iptables.rules
-</code></pre><p>添加执行权限</p>
-<pre><code>chmod +x /etc/network/if-pre-up.d/iptables
-</code></pre><hr>
-<p>本文出自 TENNFY博客，转载时请注明出处及相应链接。 本文永久链接: <a href="https://www.tennfy.com/2552.html" target="_blank" rel="noopener">https://www.tennfy.com/2552.html</a></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/03/28/linux-e4-b8-8b-e5-ae-89-e8-a3-85eclipse/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/03/28/linux-e4-b8-8b-e5-ae-89-e8-a3-85eclipse/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">Linux下安装Eclipse</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-03-28 18:46:23" itemprop="dateCreated datePublished" datetime="2018-03-28T18:46:23+08:00">2018-03-28</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:20:50" itemprop="dateModified" datetime="2018-12-12T17:20:50+08:00">2018-12-12</time>
+                <time title="修改时间：2018-12-12 16:57:54" itemprop="dateModified" datetime="2018-12-12T16:57:54+08:00">2018-12-12</time>
               
             
           </span>
@@ -899,35 +645,111 @@ iptables-restore &lt; /etc/iptables.rules
       
         
           
-            <h2 id="Java环境"><a href="#Java环境" class="headerlink" title="Java环境"></a>Java环境</h2><p>若要在Linux下面安装Oracle 的Java， 参见本博另一篇文章：<a href="https://tech.msla.top/?p=762" target="_blank" rel="noopener">Linux 下面配置 Oracle JDK</a></p>
-<h2 id="下载："><a href="#下载：" class="headerlink" title="下载："></a>下载：</h2><p>官方地址： <a href="https://www.eclipse.org/downloads/eclipse-packages/?osType=linux&amp;release=undefined" target="_blank" rel="noopener">https://www.eclipse.org/downloads/eclipse-packages/?osType=linux&amp;release=undefined</a> 国内维护： happiz.msla.qiniu.cdn.msla.top/eclipse-java-oxygen-3-linux-gtk-x86_64.tar.gz</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p># 以下操作均已root账户执行，或者具有sudo权限的用户按需要在命令前面加 sudo</p>
-<pre><code># 将文件复制到安装路径下/usr/local/，并解压，最后执行：
-cp eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz /usr/local/
-# 解压
-tar -zxvf eclipse-java-luna-SR2-linux-gtk-x86_64.tar.gz
-cd eclipse
-# 命令行中启动Eclipse
-./eclipse
-</code></pre><h2 id="制作快捷方式"><a href="#制作快捷方式" class="headerlink" title="制作快捷方式"></a>制作快捷方式</h2><p># 以下操作均以root账户执行，或者具有sudo权限的用户按需要在命令前面加 sudo</p>
-<pre><code>vi Eclipse.desktop
-# 在文件中输入下面的内容
-[Desktop Entry]
-Name=Eclipse
-Exec=/usr/local/eclipse/eclipse -desktop
-Icon=/usr/local/eclipse/plugins/org.eclipse.platform_xxxx.xxx.xxx/eclipse64.png
-Type=Application
-Comment=Run eclipse
-Path=
-Terminal=false
-StartupNotify=false
+            <h2 id="Basic-Installation-guide-for-Wheezy"><a href="#Basic-Installation-guide-for-Wheezy" class="headerlink" title="Basic Installation guide for Wheezy"></a>Basic Installation guide for Wheezy</h2><p># apt-get install wordpress curl apache2 mysql-server</p>
+<p>Set the mysql admin root user password when prompted</p>
+<h3 id="Create-a-site"><a href="#Create-a-site" class="headerlink" title="Create a site"></a>Create a site</h3><p># nano /etc/apache2/sites-available/wp.conf</p>
+<p>Add this content:</p>
+<pre><code> Alias /wp/wp-content /var/lib/wordpress/wp-content
+Alias /wp /usr/share/wordpress
+&lt;Directory /usr/share/wordpress&gt;
+    Options FollowSymLinks
+    AllowOverride Limit Options FileInfo
+    DirectoryIndex index.php
+    Order allow,deny
+     Allow from all
+&lt;/Directory&gt;
+&lt;Directory /var/lib/wordpress/wp-content&gt;
+    Options FollowSymLinks
+    Order allow,deny
+    Allow from all
+&lt;/Directory&gt;
+</code></pre><p>For Apache 2.4 (Jessie) you’ll need a slightly different site configuration:</p>
+<p># nano /etc/apache2/sites-available/wp.conf</p>
+<p>add this content:</p>
+<pre><code>Alias /wp/wp-content /var/lib/wordpress/wp-content
+Alias /wp /usr/share/wordpress
+&lt;Directory /usr/share/wordpress&gt;
+    Options FollowSymLinks
+    AllowOverride Limit Options FileInfo
+    DirectoryIndex index.php
+    Require all granted
+&lt;/Directory&gt;
+&lt;Directory /var/lib/wordpress/wp-content&gt;
+    Options FollowSymLinks
+    Require all granted
+&lt;/Directory&gt;
+</code></pre><h3 id="Enable-the-site"><a href="#Enable-the-site" class="headerlink" title="Enable the site"></a>Enable the site</h3><p># a2ensite wp</p>
+<p>Restart the webserver  </p>
+<p># service apache2 reload</p>
+<p>Create /etc/wordpress/config-$DM.php. $DM is the domain name e.g. if the fully qualified domain name is <a href="http://www.debianwordpress.dev" target="_blank" rel="noopener">www.debianwordpress.dev</a>, create one of the following files:</p>
+<ul>
+<li>/etc/wordpress/config-<a href="http://www.debianwordpress.dev.php" target="_blank" rel="noopener">www.debianwordpress.dev.php</a> (this is the default, use it if you are unsure)</li>
+<li>/etc/wordpress/config-debianwordpress.dev.php (this is used for multisite with subdomains)</li>
+<li>/etc/wordpress/config-default.php (this is used as a fallback if no other file matches your domain name)</li>
+</ul>
+<p>WordPress searches in the above order and uses the first configuration file it can find. The domain name is taken from the HTTP-Request of your browser. That way you may be able to define different configuration files for different domains you are hosting.</p>
+<p># nano /etc/wordpress/config-<a href="http://www.debianwordpress.dev.php" target="_blank" rel="noopener">www.debianwordpress.dev.php</a></p>
+<p>Add this content:-</p>
+<p> &lt;?php<br> define(‘DB_NAME’, ‘wordpress’);<br> define(‘DB_USER’, ‘wordpress’);<br> define(‘DB_PASSWORD’, ‘password’);<br> define(‘DB_HOST’, ‘localhost’);<br> define(‘WP_CONTENT_DIR’, ‘/var/lib/wordpress/wp-content’);<br> ?&gt;</p>
+<p><img src="https://wiki.debian.org/htdocs/debwiki/img/attention.png" alt="&lt;!&gt;" title="&lt;!&gt;"> replace password with a suitably secure password Create a file to hold the database creation instructions</p>
+<p># nano ~/wp.sql</p>
+<p>Add this content:-</p>
+<p>CREATE DATABASE wordpress;<br>GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,ALTER<br>ON wordpress.*<br>TO wordpress@localhost<br>IDENTIFIED BY ‘password’;<br>FLUSH PRIVILEGES;</p>
+<p><img src="https://wiki.debian.org/htdocs/debwiki/img/attention.png" alt="&lt;!&gt;" title="&lt;!&gt;"> replace password with your “suitably secure password” Create the database:-</p>
+<p># cat ~/wp.sql | mysql –defaults-extra-file=/etc/mysql/debian.cnf</p>
+<p>Navigate to the wordpress directory in browser e.g.:- <a href="http://debianwordpress.dev/wp" target="_blank" rel="noopener">http://debianwordpress.dev/wp</a> which redirects to <a href="http://debianwordpress.dev/wp/wp-admin/install.php" target="_blank" rel="noopener">http://debianwordpress.dev/wp/wp-admin/install.php</a> where you’ll see the “classic” wordpress 5 minute install page (actually a 5 second install thanks to the Debian packaging) <img src="https://wiki.debian.org/htdocs/debwiki/img/attention.png" alt="&lt;!&gt;" title="&lt;!&gt;"> replace debianwordpress.dev with your domain name (or localhost if running on the same box as your browser). At time of writing this provides WordPress v3.6.1. WordPress v3.7.1 is available in Testing and Unstable. I haven’t tested it but it should install fine on Wheezy.</p>
+<h2 id="Upgrading-the-installed-WordPress-version"><a href="#Upgrading-the-installed-WordPress-version" class="headerlink" title="Upgrading the installed WordPress version"></a>Upgrading the installed WordPress version</h2><p>For keep your WordPress up to date and receive security fixes use Debian package manager:</p>
+<p># apt-get update &amp;&amp; apt-get upgrade</p>
+<p>If you would like to use a more recent version of WordPress, consider using Backports or Debian testing.</p>
+<h2 id="An-alternate-installation-method"><a href="#An-alternate-installation-method" class="headerlink" title="An alternate installation method"></a>An alternate installation method</h2><p>I believe this method conforms more with how the maintainer recommends it should be done. Various sources are drawn upon using this method, and it is also affected by a few bugs as at this writing. It is basically centric around a “kind of” multisite install, but I recommend this method even for a single blog, otherwise when you decide down the track to have more than one and share the packages’ codebase, you’ll have a fair bit of work on your hands. The key useful script here is /usr/share/doc/wordpress/examples/setup-mysql. This gem does a few things:</p>
+<ul>
+<li>Creates a WordPress config file under /etc/wordpress</li>
+<li>Creates the WordPress database and user</li>
+<li>Sets up a wp-content structure under /srv/www/wp-content/DOMAIN (this is key for a non-WordPress multisite install, which is covered more below)</li>
+</ul>
+<h3 id="Install-required-packages"><a href="#Install-required-packages" class="headerlink" title="Install required packages"></a>Install required packages</h3><p># apt-get install wordpress apache2 mysql-server</p>
+<h3 id="Run-the-helper-script"><a href="#Run-the-helper-script" class="headerlink" title="Run the helper script"></a>Run the helper script</h3><p>Now run /usr/share/doc/wordpress/examples/setup-mysql, passing an argument of your site name; eg. myblog.com. You will most probably need other arguments too – just try an initial -h to get help. At this point, as per above, you should have a database created for you, and the /etc/wordpress/config-myblog.com.php config file. Peruse that and sanity check it.</p>
+<h3 id="Create-the-Apache-site"><a href="#Create-the-Apache-site" class="headerlink" title="Create the Apache site"></a>Create the Apache site</h3><p>Quoting /usr/share/doc/wordpress/examples/apache.conf: There are several ways to setup Wordpress &amp; Apache in Debian. However the maintainer’s recommended way with the helper script setup-mysql uses:</p>
+<p>## Virtual host VirtualDocumentRoot</p>
+<pre><code>NameVirtualHost *:80
 
-# 复制到桌面中
-mv Eclipse.desktop /home/user123/Desktop/
-</code></pre><h2 id="后续"><a href="#后续" class="headerlink" title="后续"></a>后续</h2><p>有可能会提示“Eclipse 没有标记为可信任” 的问题，右键查看时，已设定为可执行。 解决方法： 使用root帐号将这个文件所有者设置为执行的用户：</p>
-<pre><code>su
-chown user123:user123 Eclipse.desktop
-</code></pre>
+&lt;VirtualHost *:80&gt;
+UseCanonicalName Off
+VirtualDocumentRoot /usr/share/wordpress
+Options All
+
+# wp-content in /srv/www/wp-content/$0
+RewriteEngine On
+RewriteRule ^/wp-content/(.*)$ /srv/www/wp-content/%{HTTP_HOST}/$1
+&lt;/VirtualHost&gt;
+</code></pre><p>For this configuration to work you’ll also need to have mod_rewrite and mod_vhost_alias loaded and working in Apache. To enable these modules run</p>
+<p># a2enmod rewrite &amp;&amp; a2enmod vhost_alias &amp;&amp; service apache2 restart</p>
+<p>Place this config into something like /etc/apache2/sites-available/myblog.com and modify according to your needs (IP-based virtual host, name-based, logging, etc.) If you’re using any Wordpress functionality that requires URL rewriting (such as permalinks), then you will also need something like this in your Apache config:</p>
+<pre><code>RewriteRule ^index.php$ - \[L\]
+RewriteCond /usr/share/wordpress%{REQUEST_URI} !-f
+RewriteCond /usr/share/wordpress%{REQUEST_URI} !-d
+RewriteRule . /usr/share/wordpress/index.php \[L\]
+# Also needed if using PHP-FPM / Fast-CGI
+RewriteCond %{REQUEST_URI} !^/php5-fcgi/*
+</code></pre><p>The above rewrite conditions rely on Apache finding the required files in /usr/share/wordpress for non-permalinks (such as wp-admin). This may require the following line to ensure it finds the index file when requesting /wp-admin/</p>
+<pre><code>DirectoryIndex index.php
+</code></pre><h3 id="Final-reading-before-actual-configuration"><a href="#Final-reading-before-actual-configuration" class="headerlink" title="Final reading before actual configuration"></a>Final reading before actual configuration</h3><p>Now would be a great time to read /usr/share/doc/wordpress/README.Debian if you haven’t already. All the rest of the pieces should fall into place once you do. Amongst other things, it explains the great way that the Debian WordPress package utilises the WordPress wp-config.php framework, and more importantly, how to handle the infamous “themes” and “plugins” directories in a WordPress install. The key point is that by symlinking under /var/lib/wordpress, users better abide by the <a href="https://wiki.debian.org/FilesystemHierarchyStandard" target="_blank" rel="noopener">FilesystemHierarchyStandard</a>, and can use the in-app upgrade mechanisms of WordPress to upgrade plugins and themes, without clobbering the package, and risking server security. It also discusses the two choices regarding multisite installs, of which this here describes the non-WordPress version.</p>
+<h3 id="Enable-the-Apache-site"><a href="#Enable-the-Apache-site" class="headerlink" title="Enable the Apache site"></a>Enable the Apache site</h3><p>Now we enable the Apache site config made earlier using a2ensite, which basically just creates a symlink in /etc/apache2/sites-enabled from sites-available, then reload Apache:</p>
+<p># a2ensite myblog.com<br># service apache2 reload</p>
+<h3 id="Configure-WordPress"><a href="#Configure-WordPress" class="headerlink" title="Configure WordPress"></a>Configure WordPress</h3><p>Now, browse to your new domain, and follow the normal WP configuration process, and you should be done.</p>
+<h3 id="Issues"><a href="#Issues" class="headerlink" title="Issues"></a>Issues</h3><p>Sadly at this point, there are some issues with symlinking, and messing around generally with WP_CONTENT_DIR. The main bug is being tracked at <a href="http://core.trac.wordpress.org/ticket/16953" target="_blank" rel="noopener">http://core.trac.wordpress.org/ticket/16953</a>. At this point, basically a fair few things break, especially if plugin or theme authors don’t do things right when determining correct filesystem and URI paths to use. There seems no easy fix right now, other than not using symlinks or non-standard (but configurable!) paths.</p>
+<h2 id="See-also"><a href="#See-also" class="headerlink" title="See also"></a>See also</h2><ul>
+<li>Sample configurations can be found in /usr/share/doc/wordpress/examples/</li>
+<li>Debian specific instructions are /usr/share/doc/wordpress/README.Debian</li>
+<li><a href="https://wiki.debian.org/LaMp" target="_blank" rel="noopener">LAMP</a></li>
+</ul>
+<h2 id="External-links"><a href="#External-links" class="headerlink" title="External links"></a>External links</h2><ul>
+<li><a href="http://wordpress.org/" target="_blank" rel="noopener">Home Page</a></li>
+<li><a href="http://codex.wordpress.org/" target="_blank" rel="noopener">WordPress Online Documentation</a></li>
+<li><a href="http://codex.wordpress.org/Updating_WordPress#Manual_Update" target="_blank" rel="noopener">WordPress Manual Update Guide</a></li>
+</ul>
+<p>WordPress (<a href="https://wiki.debian.org/WordPress?action=info" target="_blank" rel="noopener">最后修改时间 2017-06-10 18:26:06</a>)</p>
+
           
         
       
@@ -983,7 +805,7 @@ chown user123:user123 Eclipse.desktop
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/02/28/important-math-in-program/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2016/04/11/e4-bb-80-e4-b9-88-e6-97-b6-e5-80-99-e8-af-a5-e4-bd-bf-e7-94-a8-lvm-ef-bc-9f/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -992,7 +814,7 @@ chown user123:user123 Eclipse.desktop
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -1003,7 +825,7 @@ chown user123:user123 Eclipse.desktop
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/02/28/important-math-in-program/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">作为程序员的你，何时意识到数学的重要性?</a>
+                <a href="/2016/04/11/e4-bb-80-e4-b9-88-e6-97-b6-e5-80-99-e8-af-a5-e4-bd-bf-e7-94-a8-lvm-ef-bc-9f/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">什么时候该使用 LVM？</a>
               
             
           </h1>
@@ -1028,7 +850,7 @@ chown user123:user123 Eclipse.desktop
                 
               
 
-              <time title="创建时间：2018-02-28 18:46:02" itemprop="dateCreated datePublished" datetime="2018-02-28T18:46:02+08:00">2018-02-28</time>
+              <time title="创建时间：2016-04-11 09:15:22" itemprop="dateCreated datePublished" datetime="2016-04-11T09:15:22+08:00">2016-04-11</time>
             
 
             
@@ -1045,7 +867,7 @@ chown user123:user123 Eclipse.desktop
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-18 12:25:14" itemprop="dateModified" datetime="2018-12-18T12:25:14+08:00">2018-12-18</time>
+                <time title="修改时间：2018-12-12 17:05:36" itemprop="dateModified" datetime="2018-12-12T17:05:36+08:00">2018-12-12</time>
               
             
           </span>
@@ -1066,6 +888,13 @@ chown user123:user123 Eclipse.desktop
 
                 
                 
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
               
             </span>
           
@@ -1098,19 +927,26 @@ chown user123:user123 Eclipse.desktop
       
         
           
-            <p>我印象很深的一个例子，是当年学WordPress的时候，接触到一个函数 <a href="core.trac.wordpress.org/browser/tags/4.8/src/wp-includes/pluggable.php#L1846">wp_nonce_tick</a> 有时候HTTP请求需要在特定周期过后失效，也就是时间敏感的请求签名，这是后台自我保护的一种机制。 </p>
-<blockquote>
-<p>怎么样让一个请求在一定时间后过期呢？</p>
-</blockquote>
-<p>按照web后台程序员习惯的方法，是在数据库或者session里存一个值，相应请求到达后端的时候就去检查这个值是否还匹配。</p>
-<p>但是只是存放一个值并不能关联到时间，所有就要设计相应的机制去 <code>poll/update</code> 这个值。如果这样搞，开销会很大</p>
-<p>Nonce的基本原理就是一个算式：</p>
-<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">    ceil(time() / ( life / 2 ))</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">你有兴趣可以打开浏览器控制台用Javascript来试试，比如一分钟内有效期的Nonce</span><br></pre></td></tr></table></figure></div>
-<pre><code>Math.ceil(Math.ceil(new Date().getTime() / 1000) / (60 / 2))
-</code></pre><p><code>`</code> </p>
-<p>用这个值来给请求签名，服务器端只需要计算一个同周期的Nonce，看看两者是否相等就可以判断请求是否仍然有效。 </p>
-<p>不用存什么中间值，不用poll，只是简单的数学规律，谈不上多高深，但你知道了这个工具以后，会觉得太强大r、太美、数学家真牛逼</p>
-<p>加密学上有很多让不懂数学的人，懂了以后觉得毛骨悚然的例子，你可以买本书来看看，我数学差，就不混充很懂了。</p>
+            <p>Linux 2.4 之后就开始在内核上支持 LVM 分区管理模式了，具体介绍网上一搜一大堆，找了下适用情况： <strong>使用 LVM 的优势：</strong></p>
+<ul>
+<li>文件系统可以跨多个磁盘，因此大小不会受物理磁盘的限制。</li>
+<li>可以在系统运行状态下动态地扩展文件系统大小。</li>
+<li>可以增加新磁盘到 LVM 的存储池中。</li>
+<li>可以以镜像的方式冗余重要数据到多个物理磁盘上。</li>
+<li>可以很方便地导出整个卷组，并导入到另外一台机器上。</li>
+</ul>
+<p><strong>使用 LVM 的限制：</strong></p>
+<ul>
+<li>在从卷组中移除一个磁盘时必须使用 reducevg，否则会出问题。</li>
+<li>当卷组中的一个磁盘损坏时，整个卷组都会受影响。</li>
+<li>不能减小文件系统大小（受文件系统类型限制）。</li>
+<li>因为加入了额外的操作，存储性能会受影响（使用 Stripe 的情况另当别论）。</li>
+</ul>
+<p>使用 LVM 将获得更好的可扩展性和可操作性，但却损失了可靠性和存储性能，总的说来就是在这两者间选择。 <strong>使用要点</strong></p>
+<ul>
+<li>按需分配文件系统大小，不要一次性分配太大的空间给文件系统，剩余的空间可以放在存储池中，在需要时再扩充到文件系统中。</li>
+<li>把不同的数据放在不同的卷组中，这样在做系统升级或数据迁移操作时会比较方便。</li>
+</ul>
 
           
         
@@ -1167,7 +1003,7 @@ chown user123:user123 Eclipse.desktop
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/02/14/e5-90-8c-e6-97-b6-e4-bd-bf-e7-94-a8-e6-9c-89-e7-ba-bf-e7-bd-91-e4-b8-8a-e5-86-85-e7-bd-91-e3-80-81-e6-97-a0-e7-ba-bf-e7-bd-91-e4-b8-8a-e5-a4-96-e7-bd-91/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2016/03/19/e9-87-8d-e8-a3-85win7-e5-90-8e-ef-bc-8c-e4-bf-ae-e5-a4-8dubuntu-e5-bc-95-e5-af-bc-e6-96-b9-e6-b3-95/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1176,7 +1012,7 @@ chown user123:user123 Eclipse.desktop
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -1187,7 +1023,7 @@ chown user123:user123 Eclipse.desktop
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/02/14/e5-90-8c-e6-97-b6-e4-bd-bf-e7-94-a8-e6-9c-89-e7-ba-bf-e7-bd-91-e4-b8-8a-e5-86-85-e7-bd-91-e3-80-81-e6-97-a0-e7-ba-bf-e7-bd-91-e4-b8-8a-e5-a4-96-e7-bd-91/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">同时使用有线网上内网、无线网上外网</a>
+                <a href="/2016/03/19/e9-87-8d-e8-a3-85win7-e5-90-8e-ef-bc-8c-e4-bf-ae-e5-a4-8dubuntu-e5-bc-95-e5-af-bc-e6-96-b9-e6-b3-95/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">重装win7后，修复ubuntu引导方法</a>
               
             
           </h1>
@@ -1212,355 +1048,7 @@ chown user123:user123 Eclipse.desktop
                 
               
 
-              <time title="创建时间：2018-02-14 11:37:01" itemprop="dateCreated datePublished" datetime="2018-02-14T11:37:01+08:00">2018-02-14</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:08:58" itemprop="dateModified" datetime="2018-12-12T17:08:58+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/互联网/" itemprop="url" rel="index"><span itemprop="name">互联网</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h3 id="方法一、"><a href="#方法一、" class="headerlink" title="方法一、"></a>方法一、</h3><p>利用有线访问局域网数据库等，用无线网络访问外网，这里提供一种方法可以实现，可编写bat文件，并在cmd中执行：</p>
-<pre><code>route delete 0.0.0.0
-
-route add 0.0.0.0 mask 0.0.0.0 172.20.1.254
-
-route add 172.20.36.0 mask 255.255.255.0 172.20.36.254
-</code></pre><p>解释一下： 其中<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><figcaption><span>针对上述情况，实际应用中，遇到windows 7与windows xp两者不一样，windows 7中，除了上述命令外，在TCP/IP配置中，无线外网设置为自动获取，内网配置为内网IP，子网掩码，网关。 widows xp中，除了上述命令外，在TCP/IP配置中，无线设置为手动输入IP，子网掩码，且网关留空，不填，内网配置为内网IP，子网掩码，网关。  </span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 方法二、</span><br><span class="line"></span><br><span class="line">  例1 我的笔记本用无线 网卡联互联网，同时局域网使用的是有线 连接（网段 132.147.X.X，不提供接入Internet服务），同时提供无线 网络连接供客户使用（网段192.168.1.X，可连接互联网）。 如果同时连接有线 网卡和 无线 网卡，因为有线 网卡的优先级较高，故仅有线 局域网能正常工作，无线 网卡可连接但却无法传送数据。要改变这种情况，需要对笔记本本地路由设置做出修改：访问132.147.X.X的请求均有有线 网卡处理，访问其它网络的则由无线 网卡处理。 具体设置步骤如下： 1. 设置无线 网卡为默认路由网关：无线 网络连接属性—Internet协议（TCP/IP）-属性-高级，手动输入无线 路由网关，我这里的是132.147.X.X，跃点数为“1”， 是最高优先级。到了这一步，如果有线 连接，无线 连接同时存在的话，所有的数据都是经由无线 网卡处理的。 2. 设置排除信息，把132.147.X.X路段的网址连接请求交由优先网卡处理：在命令行输入以下命令</span><br><span class="line"></span><br><span class="line">    route -p add 132.147.0.0 mask 255.255.0.0 132.147.160.1</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">其中132.147.0.0是本地局域网网段，132.147.160.1是本机所处子网段的默认网关，需要根据具体情况填写。经过以上设置，在访问本地网段的时候均由有线 网卡处理，访问互联网的时候可交由无线 网卡处理，就不会产生冲突了。</span><br><span class="line"></span><br><span class="line">**注意****: ****这里的****172.16.x.x ****和****192.168.1.X ****和你的局域网环境有关**,可以命令行下ipconfig /all 查看</span><br><span class="line"></span><br><span class="line">例2</span><br><span class="line"></span><br><span class="line">### 局域网有线连接（网段172.16.X.X，不提供接入internet服务），WIFI连接（网段192.168.1.X，可连接互联网)。</span><br><span class="line"></span><br><span class="line">如 果同时连接有线网卡和无线网卡，因为有线网卡的优先级较高，故仅有线局域网能正常工作，无线网卡可连接但却无法传送数据。要改变这种情况，需要对笔记本本 地路由设置做出修改：访问172.16.X.X的请求均有有线网卡处理，访问其它网络的则由无线网卡处理。设置步骤如下： 1》 设置无线网卡为默认路由网关：无线网络连接属性—Internet协议(TCP/IP)-属性-高级，手动输入无线路由网关，我这里的是 192.168.1.1，跃点数为“1”，是最高优先级。到了这一步，如果有线连接，无线连接同时存在的话，所有的数据都是经由无线网卡处理的。 2》设置排除信息，把172.16.X.X路段的网址连接请求交由优先网卡处理：在命令行输入以下命令</span><br><span class="line"></span><br><span class="line">    route -p add 172.16.0.0 mask 255.255.0.0 172.16.6.1</span><br><span class="line">    </span><br><span class="line"></span><br><span class="line">其中172.16.0.0是本地局域网网段，172.16.6.1是本机所处子网段的默认网关，需要根据具体情况填写。 经过以上设置，在访问本地网段的时候均由有线网卡处理，访问互联网的时候可交由无线网卡处理，就不会产生冲突了。</span><br><span class="line"></span><br><span class="line">### 其它信息(来自网络)</span><br><span class="line"></span><br><span class="line">不少公司的网管试图解决双网卡问题，下面我就给大家详细的讲解一下双网卡同时使用的方法，这样即可保障内网的安全，又能解决电脑访问外网的问题，一举两得。希望大家喜欢。</span><br><span class="line"></span><br><span class="line">首先你的机器需要有两块网卡，分别接到两台交换机上,</span><br><span class="line"></span><br><span class="line">internet地址：192.168.1.8，子网掩码：255.255.255.0，网关：192.168.1.1</span><br><span class="line"></span><br><span class="line">内部网地址：172.23.1.8，子网掩码：255.255.255.0，网关：172.23.1.1</span><br><span class="line"></span><br><span class="line">如果按正常的设置方法设置每块网卡的ip地址和网关，再cmd下使用route print查看时会看到</span><br><span class="line"></span><br><span class="line">Network Destination Netmask Gateway Interface Metric</span><br><span class="line"></span><br><span class="line">0.0.0.0 0.0.0.0 192.168.1.1 192.168.1.8</span><br><span class="line"></span><br><span class="line">0.0.0.0 0.0.0.0 172.23.1.1 172.23.1.8</span><br><span class="line"></span><br><span class="line">即指向0.0.0.0的有两个网关，这样就会出现路由冲突，两个网络都不能访问。</span><br><span class="line"></span><br><span class="line">如何实现同时访问两个网络？那要用到route命令</span><br><span class="line"></span><br><span class="line">第一步：route delete 0.0.0.0     &quot;删除所有0.0.0.0的路由&quot;</span><br><span class="line"></span><br><span class="line">第二步：route add 0.0.0.0 mask 0.0.0.0 192.168.1.1     &quot;添加0.0.0.0网络路由&quot;这个是主要的,意思就是你可以上外网.</span><br><span class="line"></span><br><span class="line">第三步：route add 172.23.0.0 mask 255.0.0.0 172.23.1.1    &quot;添加172.23.0.0网络路由&quot;，注意mask为255.0.0.0   ，而不是255.255.255.0 ，这样内部的多网段才可用。</span><br><span class="line"></span><br><span class="line">这时就可以同时访问两个网络了，但碰到一个问题，使用上述命令添加的路由在系统重新启动后会自动丢失，怎样保存现有的路由表呢？</span><br><span class="line"></span><br><span class="line">route add -p 添加静态路由，即重启后，路由不会丢失。注意使用前要在tcp/ip设置里去掉接在企业内部网的网卡的网关</span><br><span class="line"></span><br><span class="line">------------------------------------------------------------------------------------------------</span><br><span class="line"></span><br><span class="line">一些单位将内网和外网分开了。痛苦啊，偶单位就是如此。boss当然是基于安全性考虑了，可是没有笔记本的怎么办？又要办公，有得上网。没办法，发扬DIY精神偷偷装一块网卡，让聊天与工作同在。让你的主机内外兼顾。这是我在网上找到的，谢谢作者了。方法如下： 1.设置其中接internet的网卡的网关为10.0.0.1，启用后就是默认网关 --注：这是对应外网的网卡，按照你们单位外网的ip分配情况，在TCP/IP属性中配置好 ip、掩码、DNS</span><br><span class="line"></span><br><span class="line">2.将连接单位内部网的网卡IP配好后，设网关设置为空（即不设网关），启用后，此时内网无法通过网关路由</span><br><span class="line"></span><br><span class="line">3.进入CMD，运行：route -p add 192.0.0.0 mask 255.0.0.0 192.168.0.1 metric 1</span><br><span class="line"></span><br><span class="line">--注：意思是将192*的IP包的路由网关设为192.168.0.1 ，-P 参数代表永久写入路由表，建议先不加此参数，实践通过后在写上去</span><br><span class="line"></span><br><span class="line">4. OK！同时启用两个网卡，两个网关可以同时起作用了，两个子网也可以同时访问了，关机重启后也不用重设！</span><br><span class="line"></span><br><span class="line">``</span><br></pre></td></tr></table></figure></div></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/02/06/php-e6-a1-86-e6-9e-b6-e4-b9-8b-e4-ba-89/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/02/06/php-e6-a1-86-e6-9e-b6-e4-b9-8b-e4-ba-89/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">PHP 框架之争</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-02-06 10:53:07" itemprop="dateCreated datePublished" datetime="2018-02-06T10:53:07+08:00">2018-02-06</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:22:01" itemprop="dateModified" datetime="2018-12-12T17:22:01+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>原文来自V站，帖子在这里： <a href="https://www.v2ex.com/t/428592" target="_blank" rel="noopener">https://www.v2ex.com/t/428592</a> 有很多人做了我们没时间&amp;没能力做到的事情，减少了自己亲历亲为的代价，先表示感谢， 我把个人认为有用的copy下来： Yii2，Yaf，CI。大型用 Yii2，中小型 CI，要效率，Yaf。 天天说 Laravel 很重很重，但你有没有用过 Laravel 的精简版 Lumen ？ 以速度著称的 Lumen 都不知道要甩其他框架几条街，用做 API 和前后端分离的最佳框架之一。 当哪天你不想用 Lumen，还可以无痛升级到 Laravel —— Yii 增删查改不够方便（相比别的）； Laravel 乱七八糟的东西太多，增加不必要的折腾。谁简单实用就用谁吧，安全问题框架解决不了。 —— Laravel 在我看来有几点无法接受 1. 都说 Laravel 模仿 Rails,但是 Rails 的哲学里”约定优于配置”却没抄过来,起码路由没有. 没有自动路由,每加一个 action 就要去配置文件里写一次,简直恶心死了. 最恶心的是你接手别人项目时候,路由还有几种风格的,分析时在 html 或者 js 里找到个接口,接着想找 php 的具体实现,必须先去看路由的配置文件 2. 全局函数以及 Facade 众多语言 /框架都是先引入,再使用,到 Laravel 这里就不是了 从文档上下文来看,并没有显式引入某个函数 /类,为什么从天而降给了个函数 /类给我用,你到底还偷偷引入了多少东西? 3.文档 文档太简陋了,一堆细节没说,具体实现太绕,经常要看源码 4.view 层 PHP 本身就是个强大的模板语言,非要再往上加个模板引擎,这就算了 不能忍的是 view 文件的路径分隔居然是用”.”而不是”/“ 当出现了像 view(‘activities.index’)这样的代码,我要去找具体的 view 文件时,就要手工把”.”转换成”/“,然后在编辑器 /IDE 里跳过去 如果是 view(‘activities/index’)的话,我只需要复制 activities/index 出来,然后使用编辑器 /IDE 的任意文件跳转功能,瞬间就转过去了 如果你非要说装个插件就能解决的话,当我没说过这一条 5.性能 大部分 Laravel 的性能优化文章都是千篇一律,无非就是升 php7,开 opcache,关闭 debug,开路由 /配置缓存,生成 composer 安装的所有依赖的 class map 废话,这些基础谁不会 在没做上述优化之前,我压测 hello world 的结果,qps 只有 5~7 在做完上述这些之后,qps 到了 13~15,哇,性能是原来的 2 倍,开心吗 这个 qps,我按住 F5 都能把网站给刷爆 同样的环境下,也做了上述的优化后,CodeIgniter,Yii,ThinkPHP 这几个框架的 qps 都在 200~400 之间 别说加了 db 操作之后大家都差不多,不少页面能命中缓存的情况下,io 的耗时比 Laravel 的耗时都要低 6.其他 Laravel 自带的队列 去年帮别人改代码时碰到的,消息是经过 PHP 的序列化放进队列的,可改造性差 队列为空就退出进程,官方还教你用 supervisor 去守护,喵喵喵? 神经病一样的存在 Laravel 的诞生并没有解决太多的痛点,或者说他解决的问题在我这里根本就不痛,还带我来了更多的坑,换我在 PHP 框架上选型我也选 Yii Yii 文档丰富,细节到位,安全指南也够用,没那么多花哨的概念,代码规范又符合直觉,层次清晰,性能虽然没有常驻内存的框架好,但也够用,只需要专心处理业务就是 而且 PHP 不适合玩常驻内存,毕竟没有多少对 GC 的讨论,官方也没有什么指南给你去调优,因为本身设计就是请求完就销毁的 玩异步的话,除了 Swoole 框架有异步文件 IO 函数,其它框架都没有,除非自己用多线程模拟,否则一处阻塞处处阻塞,可选型方案太少,还不如换语言 —— 9 年前搞过 yii 还把 zend 项目无痛转成了 yii 现在它自带后台了吗 像 laravel voyager 现在鄙人再也不关注性能 只在乎开发速度 和现场的东西 —— yii2-starter-kit 自带后台, rest-api， 通一遍之后，开发很快 —— 我现在比较关注设计理念，工作用 CakePHP,自己写东西用 Symfony ；看过 laravel 与 yii，只能说 laravel 的优雅我没有 get 到 —— 我觉得框架选择，主要还是熟悉度，一个非常熟悉踩过很多坑的框架，和一个熟悉但是没怎么用过的框架，谁都知道选哪个吧，前者可以是 Yii 可以是 Laravel，取决于选择框架的人 —— CodeIgniter 刚工作时深度使用,当时那家公司用 2 台服务器撑起了千万级 PV 的业务 ThinkJS 作为个人 Node 项目的 api 接口 Web 框架看多了,会发现它们基本都是大同小异,无论是流程上还是功能上,到后面无非就是找一些符合自己理念 /哲学 /信仰的工具而已 还是多研究些架构更实在 —— Yii 相对于 Laraval，类似自助餐与方便面的关系，从健康（相对于方便面）、分量、口味、厌倦周期等角度来说，推荐 Yii，从就餐时间角度来说，推荐 Laraval ——</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/01/23/e9-80-9a-e8-bf-87sql-e7-b4-af-e5-8a-a0-e6-95-b0-e6-8d-ae/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/01/23/e9-80-9a-e8-bf-87sql-e7-b4-af-e5-8a-a0-e6-95-b0-e6-8d-ae/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">通过SQL累加数据</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2018-01-23 13:09:04" itemprop="dateCreated datePublished" datetime="2018-01-23T13:09:04+08:00">2018-01-23</time>
+              <time title="创建时间：2016-03-19 17:33:44" itemprop="dateCreated datePublished" datetime="2016-03-19T17:33:44+08:00">2016-03-19</time>
             
 
             
@@ -1594,7 +1082,14 @@ route add 172.20.36.0 mask 255.255.255.0 172.20.36.254
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
 
                 
                 
@@ -1630,125 +1125,798 @@ route add 172.20.36.0 mask 255.255.255.0 172.20.36.254
       
         
           
-            <h3 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h3><p>通过SQL累加数据。已知有列A（id），B（coin），C（direction）， 规则： 1. 当 c = 1 时，查询的结果， 新列D == B（coin），否则 新列E == B（coin） 2. 然后再根据C（direction）的值，使用相同的规则(#1)，累加B（coin），生成新列F 先看表结构：</p>
-<pre><code>CREATE TABLE `test1` (
-  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `coin` int(11) NOT NULL,
-  `direction` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-);
--- 测试数据
-INSERT INTO `test1` VALUES (&apos;1&apos;, &apos;1&apos;, &apos;1&apos;);
-INSERT INTO `test1` VALUES (&apos;2&apos;, &apos;22&apos;, &apos;0&apos;);
-INSERT INTO `test1` VALUES (&apos;3&apos;, &apos;33&apos;, &apos;1&apos;);
-INSERT INTO `test1` VALUES (&apos;4&apos;, &apos;4&apos;, &apos;0&apos;);
-INSERT INTO `test1` VALUES (&apos;5&apos;, &apos;4&apos;, &apos;1&apos;);
-INSERT INTO `test1` VALUES (&apos;6&apos;, &apos;99&apos;, &apos;0&apos;);
-INSERT INTO `test1` VALUES (&apos;7&apos;, &apos;7&apos;, &apos;0&apos;);
-INSERT INTO `test1` VALUES (&apos;8&apos;, &apos;8&apos;, &apos;0&apos;);
-INSERT INTO `test1` VALUES (&apos;9&apos;, &apos;23&apos;, &apos;1&apos;);
-INSERT INTO `test1` VALUES (&apos;10&apos;, &apos;543&apos;, &apos;0&apos;);
-</code></pre><p>--- 要实现的效果： : <img src="https://tech.msla.top/wp-content/uploads/2018/04/sql_result.png" alt="通过SQL累加要实现的效果"> 也就是说：</p>
+            <p><strong>电脑本来是win7+ubuntu12.04双系统，后来格式化c盘重装了win7，没了ubuntu的引导，网上试了一些方法，成功恢复了引导。下面是方法：</strong> 用u盘做成ubuntu启动盘，或者用刻好的光盘也行，从u盘启动，选择试用ubuntu，不要安装。进入系统后，打开终端： sudo -i   //取得root权限 fdisk -l    //查看分区信息，找出你的linux的分区，比如我的是sda9 mount /dev/sda9 /mnt //挂载你的boot分区 grub-install –root-directory=/mnt /dev/sda //修复grub 输入完之后如果出现no error report，就已经成功了。 然后重启电脑，就可以看到熟悉的grub启动列表了。 不过还没完，现在只是能进去ubuntu，win7进不去了，然后还要进入ubuntu，打开终端输入： sudo update-grub //更新grub 这样才能启动win7.</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2016/01/11/e6-80-81-e7-b1-bb-e5-9e-8b-e7-9a-84-e5-b1-9e-e6-80-a7-e8-b5-8b-e5-80-bc/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coppid">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/01/11/e6-80-81-e7-b1-bb-e5-9e-8b-e7-9a-84-e5-b1-9e-e6-80-a7-e8-b5-8b-e5-80-bc/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">态类型的属性赋值</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-01-11 15:08:12" itemprop="dateCreated datePublished" datetime="2016-01-11T15:08:12+08:00">2016-01-11</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 17:11:08" itemprop="dateModified" datetime="2018-12-12T17:11:08+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>可以向动态类型的属性赋值，属性名都是动态生成的，所以在输入时是没有智能提示的，因为是运行时才解析，所以，赋值和取值时的属性名字一定要一致，不然就取不到值了。 举个例子：</p>
+<p>dynamic dd = new ExpandoObject();<br>// 赋值<br>dd.Name = “小王”;<br>dd.Age = 35;</p>
+<p>// 取值<br>Console.WriteLine($”此人名叫 {dd.Name} ，年龄 {dd.Age}。”);</p>
+<p>ExpandoObject是专为动态行为而设计的类型，因为此时要向动态类型的实例的属性赋值，因此属于复合类型，在用dynamic关键字声明变量后，就必须用一个类来实例化，ExpandoObject类就是这个用途。 然后，赋了Name和Age属性的值，属性名字可以随便写，因为是动态的，编译时不会检查；然后在读取属性的值时，属性名一定要和刚才赋值时的名字一致，不然你是取不到值的。 所以得到结果如下： 此人名叫 小王 ，年龄 35。 实际上，ExpandoObject类显式实现了 IDictionary&lt;string,object&gt; 接口，所以，我们可以知道，其实它里面就是用一个字典来存储动态赋值的数值的，键的类型为字符串，表示属性名；值的类型为object，表示任何类型。 不信？咱们把它里面的字典数据输出来：  </p>
+<p>IDictionary dic = (IDictionary)dd;<br>foreach (var pv in dic)<br>{<br>    Console.WriteLine($”Key = {pv.Key} , Value = {pv.Value}”);<br>}</p>
+<p>然后得到结果如下： Key = Name , Value = 小王 Key = Age , Value = 35   所为为什么不管你如何动态设置属性，它都可以进行解析，就是这个原因，里面用一个字典来负责存取数据。     From   <a href="http://www.cnblogs.com/tcjiaan/p/5110658.html" target="_blank" rel="noopener">http://www.cnblogs.com/tcjiaan/p/5110658.html</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2016/01/01/using-socket-proxy-in-linux/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coppid">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/01/01/using-socket-proxy-in-linux/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">Linux命令行下使用socks代理</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-01-01 17:18:51" itemprop="dateCreated datePublished" datetime="2016-01-01T17:18:51+08:00">2016-01-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-18 12:16:57" itemprop="dateModified" datetime="2018-12-18T12:16:57+08:00">2018-12-18</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/操作系统/" itemprop="url" rel="index"><span itemprop="name">操作系统</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Linux CL下要用socks代理，可以使用 <code>tsocks</code> 这个软件。<a href="http://tsocks.sourceforge.net/" target="_blank" rel="noopener">官网在这里</a> 不过已经很有一段时间没有更新了。</p>
+<p>一般发行版的软件源里面相信都有，直接安装即可。 </p>
+<p>安装完成后，编辑 <code>/etc/tsocks.conf</code> 文件，注意修改下面4行： </p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">local = 192.168.1.0/255.255.255.0 //本地不使用代理 </span><br><span class="line">server = 192.168.1.1 //代理ip </span><br><span class="line">server_port = 1080 //端口 </span><br><span class="line">server_type = 5 //socks 4 or 5</span><br></pre></td></tr></table></figure></div>
+<p>保存之后，用 <code>tsocks</code> 打头，如： <code>tsocks apt-get update</code></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2016/01/01/e4-bd-bf-e7-94-a8-e5-9b-bd-e5-86-85-e9-95-9c-e5-83-8f-e4-b8-bacomposer-e5-8a-a0-e9-80-9f-ef-bc-88-e6-84-9f-e8-b0-a2-e4-bd-9c-e8-80-85-ef-bc-81-ef-bc-89/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coppid">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2016/01/01/e4-bd-bf-e7-94-a8-e5-9b-bd-e5-86-85-e9-95-9c-e5-83-8f-e4-b8-bacomposer-e5-8a-a0-e9-80-9f-ef-bc-88-e6-84-9f-e8-b0-a2-e4-bd-9c-e8-80-85-ef-bc-81-ef-bc-89/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">使用国内镜像为composer加速（感谢作者！）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-01-01 17:03:09" itemprop="dateCreated datePublished" datetime="2016-01-01T17:03:09+08:00">2016-01-01</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 17:05:36" itemprop="dateModified" datetime="2018-12-12T17:05:36+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>来源： <a href="http://pkg.phpcomposer.com/" target="_blank" rel="noopener">http://pkg.phpcomposer.com/</a></p>
+<h1 id="Packagist-Composer-中国全量镜像"><a href="#Packagist-Composer-中国全量镜像" class="headerlink" title="Packagist / Composer 中国全量镜像"></a>Packagist / Composer 中国全量镜像</h1><h2 id="用法："><a href="#用法：" class="headerlink" title="用法："></a>用法：</h2><p>有两种方式启用本镜像服务：</p>
 <ol>
-<li>D=增加=B</li>
-<li>E=减少=B</li>
-<li>F=余额累加数</li>
+<li>将配置信息添加到 Composer 的配置文件 <code>config.json</code> 中（系统全局配置）。见<a href="http://pkg.phpcomposer.com/#tip1" target="_blank" rel="noopener">“例1 （推荐方式）”</a></li>
+<li>将配置信息添加到单个项目的 <code>composer.json</code> 文件中（单个项目配置）。见<a href="http://pkg.phpcomposer.com/#tip2" target="_blank" rel="noopener">“例2”</a></li>
 </ol>
-<p>----</p>
-<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><pre><code>SET @csum := 0;
-SELECT
-    a.id,
-    a.coin,
-    a.direction AS &apos;B(direction)&apos;,
-    (
-        CASE a.direction
-        WHEN 1 THEN
-            a.coin
-        ELSE
-            &apos; &apos;
-        END
-    ) AS D,
-    (
-        CASE a.direction
-        WHEN 0 THEN
-            a.coin
-        ELSE
-            &apos; &apos;
-        END
-    ) AS &apos;E&apos;,
-    (
-        @csum := @csum + (
-            a.coin * (
-                CASE a.direction
-                WHEN 1 THEN
-                    1
-                ELSE
-                    - 1
-                END
-            )
-        )
-    ) AS &apos;F&apos;
-FROM
-    test1 a
-GROUP BY
-    a.id,
-    a.coin,
-    a.direction,
-    D,
-    E
-</code></pre><h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><pre><code>SELECT
-    a.id,
-    a.coin,
-    a.direction AS &apos;B(direction)&apos;,
-    (
-        CASE a.direction
-        WHEN 1 THEN
-            a.coin
-        ELSE
-            &apos; &apos;
-        END
-    ) AS D,
-    (
-        CASE a.direction
-        WHEN 0 THEN
-            a.coin
-        ELSE
-            &apos; &apos;
-        END
-    ) AS &apos;E&apos;,
-    (
-        ifnull(
-            (
-                SELECT
-                    SUM(b.coin)
-                FROM
-                    test1 b
-                WHERE
-                    b.id &lt;= a.id
-                AND b.direction = 1
-            ),
-            0
-        ) - ifnull(
-            (
-                SELECT
-                    SUM(b.coin)
-                FROM
-                    test1 b
-                WHERE
-                    b.id &lt;= a.id
-                AND b.direction = 0
-            ),
-            0
-        )
-    ) axxx
-FROM
-    test1 a
-GROUP BY
-    a.id,
-    a.coin,
-    a.direction,
-    D,
-    E
+<hr>
+<h3 id="例1：修改-composer-的全局配置文件（推荐方式）"><a href="#例1：修改-composer-的全局配置文件（推荐方式）" class="headerlink" title="例1：修改 composer 的全局配置文件（推荐方式）"></a>例1：修改 composer 的全局配置文件（推荐方式）</h3><p>打开命令行窗口（windows用户）或控制台（Linux、Mac 用户）并执行如下命令：</p>
+<pre><code>composer config -g repositories.packagist composer http://packagist.phpcomposer.com 
+</code></pre><h3 id="例2：以-laravel-项目的-composer-json-配置文件为例，添加本镜像服务配置信息后如下所示（注意最后几行）："><a href="#例2：以-laravel-项目的-composer-json-配置文件为例，添加本镜像服务配置信息后如下所示（注意最后几行）：" class="headerlink" title="例2：以 laravel 项目的 composer.json 配置文件为例，添加本镜像服务配置信息后如下所示（注意最后几行）："></a>例2：以 laravel 项目的 <code>composer.json</code> 配置文件为例，添加本镜像服务配置信息后如下所示（注意最后几行）：</h3><pre><code>{ &quot;name&quot;: &quot;laravel/laravel&quot;, &quot;description&quot;: &quot;The Laravel Framework.&quot;, &quot;keywords&quot;: [&quot;framework&quot;, &quot;laravel&quot;], &quot;license&quot;: &quot;MIT&quot;, &quot;type&quot;: &quot;project&quot;, &quot;require&quot;: { &quot;php&quot;: &quot;&gt;=5.5.9&quot;, &quot;laravel/framework&quot;: &quot;5.1.*&quot; }, &quot;require-dev&quot;: { &quot;fzaninotto/faker&quot;: &quot;~1.4&quot;, &quot;mockery/mockery&quot;: &quot;0.9.*&quot;, &quot;phpunit/phpunit&quot;: &quot;~4.0&quot;, &quot;phpspec/phpspec&quot;: &quot;~2.1&quot; }, &quot;autoload&quot;: { &quot;classmap&quot;: [ &quot;database&quot; ], &quot;psr-4&quot;: { &quot;App&quot;: &quot;app/&quot; } }, &quot;autoload-dev&quot;: { &quot;classmap&quot;: [ &quot;tests/TestCase.php&quot; ] }, &quot;scripts&quot;: { &quot;post-install-cmd&quot;: [ &quot;php artisan clear-compiled&quot;, &quot;php artisan optimize&quot; ], &quot;pre-update-cmd&quot;: [ &quot;php artisan clear-compiled&quot; ], &quot;post-update-cmd&quot;: [ &quot;php artisan optimize&quot; ], &quot;post-root-package-install&quot;: [ &quot;php -r &quot;copy(&apos;.env.example&apos;, &apos;.env&apos;);&quot;&quot; ], &quot;post-create-project-cmd&quot;: [ &quot;php artisan key:generate&quot; ] }, &quot;config&quot;: { &quot;preferred-install&quot;: &quot;dist&quot; }, &quot;repositories&quot;: [ {&quot;type&quot;: &quot;composer&quot;, &quot;url&quot;: &quot;http://packagist.phpcomposer.com&quot;}, {&quot;packagist&quot;: false} ] } 
+</code></pre><blockquote>
+<p>注意：为了避免安装包的时候都要执行两次查询，切记要添加禁用 packagist 的设置，如下：</p>
+</blockquote>
+<pre><code>{ &quot;repositories&quot;: [ {&quot;type&quot;: &quot;composer&quot;, &quot;url&quot;: &quot;http://packagist.phpcomposer.com&quot;}, {&quot;packagist&quot;: false} ] } 
+</code></pre><hr>
+<h2 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h2><blockquote>
+<p>使用本镜像服务就意味着下载的所有的安装包元数据都将来自本镜像服务，而不再向 packagist.org 发起请求。这将加速 Composer 的安装过程，并且更加可靠、快速。（由于众所周知的原因，国外的网站连接速度太慢，并且随时可能被墙） 一般情况下，安装包的数据（zip 文件等）一般是从 GitHub 或其他第三方服务器上下载的，使用本镜像服务后，我们会缓存所有安装包到国内的机房，这样就不必再去向国外的网站发起请求，因此，即使 packagist.org、github.com 或其他第三方服务发生故障（主要是连接速度太慢和被墙），你仍然可以下载、更新安装包。</p>
+</blockquote>
+<hr>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+       
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2015/12/04/c-e5-8a-a8-e6-80-81post-e6-95-b0-e6-8d-ae-ef-bc-8c-e4-bb-a5-e6-8b-9b-e5-95-86-e9-93-b6-e8-a1-8c-e4-b8-ba-e4-be-8b-ef-bc-88-e9-83-a8-e5-88-86-e4-bb-a3-e7-a0-81-ef-bc-8c-ef-bc-89/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="$$ Welcome $$">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Coppid">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2015/12/04/c-e5-8a-a8-e6-80-81post-e6-95-b0-e6-8d-ae-ef-bc-8c-e4-bb-a5-e6-8b-9b-e5-95-86-e9-93-b6-e8-a1-8c-e4-b8-ba-e4-be-8b-ef-bc-88-e9-83-a8-e5-88-86-e4-bb-a3-e7-a0-81-ef-bc-8c-ef-bc-89/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">C#动态post 数据，以招商银行为例（部分代码，）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2015-12-04 16:59:53" itemprop="dateCreated datePublished" datetime="2015-12-04T16:59:53+08:00">2015-12-04</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-12-12 16:58:49" itemprop="dateModified" datetime="2018-12-12T16:58:49+08:00">2018-12-12</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <pre><code>genMc.bKey = &quot;AaBbCc1234567890&quot;;
+genMc.bDate = DateTime.Now.ToString(&quot;yyyyMMdd&quot;);
+genMc.bBranchID = &quot;0571&quot;;
+genMc.bCono = &quot;000056&quot;;
+genMc.bBillno = &quot;TEST&quot; + DateTime.Now.ToString(&quot;yyyyMMddHHmmss&quot;);
+genMc.bAmount = &quot;1.23&quot;;
+genMc.bMerchantPara = &quot;Hello CMBChina&quot;;
+genMc.bMerchantUrl = &quot;http://www.abc.com/resp.php&quot;;
+genMc.bPayer = &quot;Buyer1&quot;;
+genMc.bPayee = &quot;Employeer&quot;;
+genMc.bIP = &quot;123.123.123.123&quot;;
+genMc.bGoodType = &quot;54011600&quot;;
+genMc.bReserved = &quot;&quot;;
+
+string mcode = this.CreateMerchantCode(genMc);
+this.txtMerchantCode.Text = mcode;
+}
+
+protected void btnSubmitPayment_Click(object sender, EventArgs e)
+{
+
+// 拼接交易数据
+//StringBuilder _postData = new StringBuilder();
+//_postData.Append(&quot;&amp;BranchID=&quot; + this.genMc.bBranchID);
+//_postData.Append(&quot;&amp;Cono=&quot; + this.genMc.bCono);
+//_postData.Append(&quot;&amp;BillNo=&quot; + this.genMc.bBillno);
+//_postData.Append(&quot;&amp;Amount=&quot; + this.genMc.bAmount);
+//_postData.Append(&quot;&amp;Date=&quot; + this.genMc.bDate);
+genMc.bKey = &quot;AaBbCc1234567890&quot;;
+genMc.bDate = DateTime.Now.ToString(&quot;yyyyMMdd&quot;);
+genMc.bBranchID = &quot;0571&quot;;
+genMc.bCono = &quot;000056&quot;;
+genMc.bBillno = DateTime.Now.ToString(&quot;yyMMddHHmm&quot;);
+genMc.bAmount = &quot;1.23&quot;;
+genMc.bMerchantPara = &quot;Hello CMBChina&quot;;
+genMc.bMerchantUrl = &quot;http://www.abc.com/resp.php&quot;;
+genMc.bPayer = &quot;Buyer1&quot;;
+genMc.bPayee = &quot;Employeer&quot;;
+genMc.bIP = &quot;123.123.123.123&quot;;
+genMc.bGoodType = &quot;54011600&quot;;
+genMc.bReserved = &quot;&quot;;
+
+string _url = &quot;https://netpay.cmbchina.com/netpayment/basehttp.dll?prepayc&quot;;
+
+SortedDictionaryparam = new SortedDictionary();
+
+param.Add(&quot;BranchID&quot;, this.genMc.bBranchID);
+param.Add(&quot;Cono&quot;, this.genMc.bCono);
+param.Add(&quot;BillNo&quot;, this.genMc.bBillno);
+param.Add(&quot;Amount&quot;, this.genMc.bAmount);
+param.Add(&quot;Date&quot;, this.genMc.bDate);
+
+//Set a name for the form
+string formID = &quot;PostForm&quot;;
+//Build the form using the specified data to be posted.
+StringBuilder strForm = new StringBuilder();
+strForm.Append(&quot;
+
+&lt;form id=&quot;&quot;&quot;&quot; name=&quot;&quot;&quot;&quot;&gt;&lt;/form&gt;formID + &quot;&quot; action=&quot;&quot; + _url +
+&quot;&quot; method=&quot;POST&quot;&gt;&quot;);
+
+foreach (var item in param)
+{
+strForm.Append(&quot;&lt;input type=&quot;&quot;hidden&quot;&quot; name=&quot;&quot;&quot;&quot; /&gt; &quot;&quot; value=&quot;&quot; + item.Value + &quot;&quot;&gt;&quot;);
+}
+
+strForm.Append(&quot;
+
+&quot;);
+//Build the JavaScript which will do the Posting operation.
+StringBuilder strScript = new StringBuilder();
+strScript.Append(&quot;&lt;script type=&quot;text/javascript&quot; language=&quot;javascript&quot;&gt;// &lt;![CDATA[
+&quot;);             strScript.Append(&quot;var v&quot; + formID + &quot; = document.&quot; +                              formID + &quot;;&quot;);             strScript.Append(&quot;v&quot; + formID + &quot;.submit();&quot;);             strScript.Append(&quot;
+// ]]&gt;&lt;/script&gt;&quot;);
+//Return the form and the script concatenated.
+//(The order is important, Form then JavaScript)
+Response.Write(strForm.ToString() + strScript.ToString());
 </code></pre>
           
         
@@ -1805,7 +1973,7 @@ GROUP BY
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/01/16/e5-85-ab-e5-b9-b4phper-e7-9a-84-e9-ab-98-e7-ba-a7-e5-b7-a5-e7-a8-8b-e5-b8-88-e9-9d-a2-e8-af-95-e4-b9-8b-e8-b7-af/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2015/10/22/e5-a4-8d-e5-88-b6listview-e5-88-97-e8-a1-a8-e9-87-8c-e5-86-85-e5-ae-b9/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1814,7 +1982,7 @@ GROUP BY
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -1825,7 +1993,7 @@ GROUP BY
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/01/16/e5-85-ab-e5-b9-b4phper-e7-9a-84-e9-ab-98-e7-ba-a7-e5-b7-a5-e7-a8-8b-e5-b8-88-e9-9d-a2-e8-af-95-e4-b9-8b-e8-b7-af/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">八年phper的高级工程师面试之路</a>
+                <a href="/2015/10/22/e5-a4-8d-e5-88-b6listview-e5-88-97-e8-a1-a8-e9-87-8c-e5-86-85-e5-ae-b9/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">复制listview列表里内容</a>
               
             
           </h1>
@@ -1850,7 +2018,7 @@ GROUP BY
                 
               
 
-              <time title="创建时间：2018-01-16 12:14:16" itemprop="dateCreated datePublished" datetime="2018-01-16T12:14:16+08:00">2018-01-16</time>
+              <time title="创建时间：2015-10-22 13:48:35" itemprop="dateCreated datePublished" datetime="2015-10-22T13:48:35+08:00">2015-10-22</time>
             
 
             
@@ -1920,8 +2088,20 @@ GROUP BY
       
         
           
-            <h1 id="八年phper的高级工程师面试之路"><a href="#八年phper的高级工程师面试之路" class="headerlink" title="八年phper的高级工程师面试之路"></a>八年phper的高级工程师面试之路</h1><p>这是一篇反面教材，希望也能引起部分程序员的警惕。 最近半个月时间，经过几次面试，差不多已经对自己有了定位————距离腾讯T3岗位还是有一点距离。 因为在一家小公司呆的习惯了（6年），公司没有人在技术层面超过我，作为技术核心，感觉自己很牛，活在一个小圈子里面，几乎不会主动去了解新技术，甚至对php以及js本身都不能算精通。 所以变故出现的时候，我才发现自己的技术脱节有多厉害，虽然之前的面试并没有做专门的准备，但是与6年前找工作的情形相比，差距非常的大。 下面是我整理的一部分遇到的面试题，我尽量用我所知道的知识来进行陈述，肯定会有很多误解以及遗漏，希望大家能够指正。 公司1： <strong>1、mysql_real_escape_string mysql_escape_string有什么本质的区别，有什么用处，为什么被弃用？</strong> 答：mysql_real_escape_string需要预先连接数据库，并可在第二个参数传入数据库连接（不填则使用上一个连接） 两者都是对数据库插入数据进行转义，但是mysql_real_escape_string转义时，会考虑数据库连接的字符集。 它们的用处都是用来能让数据正常插入到数据库中，并防止sql注入，但是并不能做到100%防止sql注入。 再问：为什么不能100%防止？ 答；因为客户端编码以及服务器端编码不同，可能产生注入问题，但是其实这种场景不多见。 继续答：被弃用的原因是官方不再建议使用mysql_xx的数据库操作方式，建议使用pdo和mysqli，因为不管从性能跟安全来看，mysqli都比mysql要好。 衍生出来的问题是mysqli的连接复用（持久化）问题，这一块我并没有答好。 <strong>2、什么是内存泄漏，js内存泄漏是怎么产生的？</strong> 答：内存泄漏是因为一块被分配内存既不能被使用，也不能被回收，直到浏览器进程结束。 产生泄漏的原因是闭包维持函数内局部变量，不能被释放，尤其是使用闭包并存在外部引用还setInterval的时候危害很大。 备注：我觉得这块回答并不好，因为肯定不是闭包的原因。 我查了一下资料，从比较浅的方位来再回答一下这个问题： 产生泄漏的原因有好几种： (1) 页面元素被删除，但是绑定在该元素上的事件未被删除； (2) 闭包维持函数内局部变量（外部不可控），使其得不到释放； (3) 意外的全局变量； (4) 引用被删除，但是引用内的引用，还存在内存中。 从上述原因上看，内存泄漏产生的根本原因是引用无法正确回收，值类型并不能引发内存泄漏。 对于每个引用，都有自己的引用计数，当引用计数归零或被标记清除时，js垃圾回收器会认为该引用可以回收了。 <strong>3、什么是闭包，跟原型链、作用域链有什么关联</strong> 答：闭包是指存在于一个作用域链分支的函数域内的函数，该函数可以向上逐级访问作用域链上的变量，直到找到为止。当闭包存在外部引用时，js会维持闭包自身以及所在函数作用域链的内存状态。 备注：这个是我自己瞎说的。 继续答：跟原型链没有什么关联，函数的原型（prototype）主要用于实现继承，原型链可用于追溯继承关系，与作用域链类似，都是向上逐级访问属性，直到被找到，原型链的顶层是null，可以理解为所有的object都继承至null，所以null的类型是object。 继续答：作用域链可以看作是一个树形结构，由根节点window向下扩散，下层节点可以访问上层节点，但是上层节点无法访问下层节点，产生闭包的函数作用域属于节点中的一个，向下扩散后闭包函数产生叶子节点，叶子节点之间可以互相访问，当访问的变量在叶子节点中无法找到时，向上层节点查找，直到被找到为止，这个概念有点类似原型链上的属性查找。 <strong>4、一台电脑配置无限好，可以同时打开多少个网页</strong> 答：65535-1000 = 64535（端口数） // 1024 <strong>5、ip地址能被伪造吗？</strong> 答：http头部可以被篡改，但是只能修改X_FORWARDED_FOR，真实ip地址（REMOTE_ADDR）很难修改（除非是路由器去修改），因为真实ip是底层会话ip地址，而且因为TCP 3次握手的存在，连接无法建立，伪造的意义不大，至于UDP的话，一般是内网才使用UDP通信。 <strong>6、有100万个奖品，每个人可以中奖3次，先到先得，怎么控制并发，不能发超，并保证完全的先到先得模式</strong> 答：百万奖品在打乱后预先insert到数据库，所有中奖操作，均只能update，不能insert。进来抽奖的用户使用memcahe原子加锁，实现抽奖次数自增，当抽奖次数到达3时，返回不中奖。 再问：预先插入需要很多资源，如果奖品数量上了1亿怎么办？ 答：使用redis队列存储请求，跑守护进程异步发奖，产生的问题是用户无法实时看到中奖情况。 再问：这样肯定不行。 再答：使用全局内存加锁确保抽奖过程是单进程在跑，但是会面临大并发阻塞问题。 再问：内存比较宝贵，在不用内存加锁的情况下怎么办，并且如果碰到1亿奖池的情况，预先插入数据库肯定不好，怎么办？ 答：设置奖品概率，分三张表，都使用innodb引擎，一张存中奖记录（预先插入一行），一张存奖品发放概况，一张存用户抽奖情况（uin唯一索引），大并发情况下，利用mysql的排他锁进行并发控制。流程如下： begin 查询用户抽奖次数，加排他锁 对用户抽奖次数的更新/插入 锁行查询发放情况 获得抽奖结果（某些奖品发完之后，动态变更概率） 更新发放表 插入中奖记录 commit 再问：遇到脏读怎么办？ 答：这方面不是很了解 再问：innodb的master线程在什么情况下fork其他子线程？ 答：不知道 <strong>7、数据链路层的数据是怎么校验的，有哪些校验方式？</strong> 答：crc32，别的校验可能是取模校验奇偶数吧。 备注：答个crc校验就行了。 <strong>8、b+树的查询时间复杂度是多少，哈希表是多少，为什么数据库索引用b+树存储，而不是哈希表，数据库索引存储还有其他数据结构吗？</strong> 答：O(log(n))，O(1) 因为哈希表是散列的，在遇到`key`&gt;’12’这种查找条件时，不起作用，并且空间复杂度较高。 备注：b+数根据层数决定时间复杂度，数据量多的情况下一般4-5层，然后用二分法查找页中的数据，时间复杂度远小于log(n)。 <strong>9、apache是怎么跟php通讯的，sapi是什么</strong> 答：使用sapi通讯，sapi是php封装的对外数据传递接口，通常有cgi/fastcgi/cli/apache2handler四种运行模式。 <strong>10、php的垃圾回收机制？</strong> 答：垃圾回收是指当php运行状态结束时，比如遇到了exit/die/致命错误/脚本运行结束时，php需要回收运行过程中创建的变量、资源的内存。 ZEND引擎维护了一个栈zval，每个创建的变量和资源都会压入这个栈中，每个压入的数组结构都类似：[refcount =&gt; int, is_ref =&gt; 0|1, value =&gt; union, type =&gt; string]，变量被unset时，ref_count如果变成0，则被回收。 当遇到变量循环引用自身时，使用同步回收算法回收。 备注：PHP7已经重写了zal的结构体。 <strong>11、jquery的sizzle引擎工作原理</strong> 答：除了直到是DOM元素查找引擎之外，一无所知。 <strong>12、seajs的工作原理，如何解决重复加载库的问题，如何进行资源的同步加载</strong> 答：建立映射关系并缓存起来；资源并不能真正同步加载，只是返回一个回调。 <strong>13、memcache跟redis的区别</strong> 答：可存储数据结构不同；redis支持持久化存储。 <strong>14、md5逆向原理</strong> 答：先用字典查找，再尝试暴力破解。 再问：没有更好的方法了吗？ 答：没有了。 备注：嗯，事实上也确实没有特别好的办法，只能使用TB级的海量特征库用数据库存起来，然再分片查找。 <strong>15、父类方法是protected，子类重构为private，会发生什么？</strong> 答：会发生fatal错误，因为继承的方法或属性只能维持或放大权限，不能缩小，比如protected重载为public是可行的。 <strong>16、一个网页从输入地址回车，到完整展示网页内容这段时间里，做了哪些工作，越详细越好。</strong> 答： 0、浏览器本地缓存匹配； 1、本地hosts映射对比; 2、本地dns缓存解析； 3、远程dns解析获得服务器ip地址； 4、浏览器发送tcp连接请求包(syn)； 5、请求包经过传输层、网络层、数据链路层封装通过网卡到达路由器； 6、路由器转发数据包到所属运营商服务器； 7、运营商服务器通过寻址最短路径通过中继节点到达指定ip地址； 8、服务器端可能存在反向代理或者负载均衡，都是直接转发请求至上游服务器，当然也可以制定安全防御规则直接丢弃请求包； 9、上游服务器收到连接请求，在自身可用的情况下，返回(syn+ack)； 10、浏览器校验ack，再次发送(syn+ack)； 11、服务器校验ack切换连接状态至established，然后根据请求传输数据包； 12、当transform-encoding为chunked时，浏览器开始渲染页面； 13、四次挥手，连接关闭； 14、渲染数据完成。 备注：还有很多东西不懂，一些东西完全是自己瞎蒙的，因为时间原因，以后有时间详细画一下。 <strong>17、keep-alive的概念</strong> 答：长连接机制，表示keep-alive-timeout时间内，如果连接没有closed，再次传输数据不再需要三次握手了。 备注：这里也有很多疑问，需要好好捋一捋。 <strong>18、linux文件压缩操作命令，shell脚本等</strong> 备注：因为平时开发都是在windows环境，对linux了解不足，这一块几乎是0分。 公司2： 这个是被鄙视最惨的一家了，首先会有笔试，相对来说并不复杂，但是有些坑，很多已经忘记了。 印象深刻的是我说自己熟悉常用设计模式，然后让我画UML类图，我就懵逼了，所以在写简历的时候，最好是写自己非常熟悉的，如果只是一知半解，并没有必要放到简历中。 公司3： 这里仅列举几个问到的问题： 1、设计一个中继服务器，转发客户A-&gt;客户B的请求； 2、myisam跟innodb有什么区别； 3、php进程死锁产生的原因是什么？怎么自动排查与自动恢复？ 4、有class A { public function b($a, $b, $c){//ssss}}; 怎么使用[‘b’ =&gt; 2, ‘a’ =&gt; 1, ‘c’ =&gt; 3]，对进行A::b进行调用，并顺利赋值？ 5、php5.2-&gt;php7.1的各版本演进历史，新增特性等？ 6、画一个tcp三次握手图 目前还在找工作中，在我看来8年的程序员怎么也不应该是这样子的，温水煮青蛙的教训非常惨痛，好在现在认识到问题还不晚，等到了35岁这个年纪，可能就真的晚了。 <a href="https://www.zhihu.com/topic/19552910" target="_blank" rel="noopener">PHP</a> 高级php架构师   觉得他们的面试题出的未必是好 题主已说面岗是架构师 虽然我不是架构师 但是我接触到的架构师应该具备的能力模型我觉得有几点比较重要 技术选型（知识面要广，不仅要考虑到公司的团队效率还要考虑到所选技术遇到问题解决所需的时间成本）、技术难点攻克（算法和并发模型或者存储方案的搭配），学习能力（不论年龄 这是必须 因为技术本是日新月异），管理能力（这个包括但不限于 人员管理、定期的技术沉淀、项目控制等），业务分析到技术实现的能力（其实架构师很大一部分壁垒是对业务理解非常深刻 一些具体实现未必要事必躬亲 因为本来你的时间成本就是应该发挥其最大价值 就是带领并指导团队快速开发产品的），解决问题的能力（bug出现时你一定要出现在一线指导或者亲自快速解决）其他的想到的再说吧 补充一些：鉴于技术人员的天生不服的性格 所以一般架构师技术不过硬是服不了人的 所以像一些底层的东西还是需要深入了解的 网络 协议 存储db 设计模式 算法 数据结构 未必细节要全部记住 但是要做到已知所以然 知其然只需要稍看文档即可 最后回归下腾讯的面试题吧 他们的考察点太单一了 毕竟是一个已然涉及管理岗的职位 但是题目还是较多在技术的细节点上 像是一个普通程序员岗的面试题 当然有一些可能是在其他几面中高管会面谈测探 我没面过腾讯所以有下错误定论的可能 只是希望给所有技术人员一点职业发展中应该平衡一下自己的重点 这样才不至于被淘汰</p>
-
+            <p> `//用ctrl + C 复制listview列表里内容</p>
+<pre><code>private void listView1_KeyDown(object sender, KeyEventArgs e)
+{
+    if (e.Control &amp;&amp; e.KeyCode == Keys.C)
+    {
+        if (listView1.SelectedItems.Count &gt; 0)
+        {
+            //将复制的内容放入剪切板中
+            if (listView1.SelectedItems[0].Text != &quot;&quot;)
+                Clipboard.SetDataObject(listView1.SelectedItems[0].Text);
+        }
+    }
+}`
+</code></pre>
           
         
       
@@ -1977,7 +2157,7 @@ GROUP BY
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/01/12/something-about-get-browsers-info/">
+    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2015/09/25/e6-80-8e-e6-a0-b7-e7-94-a8js-e5-87-86-e7-a1-ae-e7-9a-84-e5-88-a4-e6-96-ad-e6-b5-8f-e8-a7-88-e5-99-a8-e5-88-b7-e6-96-b0-e4-ba-8b-e4-bb-b6/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="John Doe">
@@ -1986,7 +2166,7 @@ GROUP BY
     </span>
 
     <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
+      <meta itemprop="name" content="Coppid">
     </span>
 
     
@@ -1997,7 +2177,7 @@ GROUP BY
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2018/01/12/something-about-get-browsers-info/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">关于获取浏览器语言的一些调查</a>
+                <a href="/2015/09/25/e6-80-8e-e6-a0-b7-e7-94-a8js-e5-87-86-e7-a1-ae-e7-9a-84-e5-88-a4-e6-96-ad-e6-b5-8f-e8-a7-88-e5-99-a8-e5-88-b7-e6-96-b0-e4-ba-8b-e4-bb-b6/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">怎样用JS准确的判断浏览器刷新事件</a>
               
             
           </h1>
@@ -2022,7 +2202,7 @@ GROUP BY
                 
               
 
-              <time title="创建时间：2018-01-12 17:13:03" itemprop="dateCreated datePublished" datetime="2018-01-12T17:13:03+08:00">2018-01-12</time>
+              <time title="创建时间：2015-09-25 12:31:05" itemprop="dateCreated datePublished" datetime="2015-09-25T12:31:05+08:00">2015-09-25</time>
             
 
             
@@ -2039,7 +2219,7 @@ GROUP BY
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-12-18 12:34:13" itemprop="dateModified" datetime="2018-12-18T12:34:13+08:00">2018-12-18</time>
+                <time title="修改时间：2018-12-12 17:11:08" itemprop="dateModified" datetime="2018-12-12T17:11:08+08:00">2018-12-12</time>
               
             
           </span>
@@ -2060,240 +2240,10 @@ GROUP BY
 
                 
                 
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>今天有一个需求过来:</p>
-<blockquote>
-<p>要根据用户使用的语言自动将官网切换成对应的语种. 呶,就那么 _简单_ 的需求 </p>
-</blockquote>
-<p>实际上实现起来也不是特别复杂,切换方法都有,网站原来已经做了本地化处理,不过是需要客户手动选择 </p>
-<p>然后, 很快写了一段JS, 通过js获取浏览器语言, 然后再做匹配. 代码很简单:</p>
-<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="PLAIN"><figure class="iseeu highlight /plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">    &lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">      $(document).ready(function () &#123;</span><br><span class="line">    	var currLang = $.cookie(&apos;lang&apos;);</span><br><span class="line">    	// 如果本地已经保存过语言设定，使用本地的；否则，从浏览器重新获取语言</span><br><span class="line">    	if (typeof (currLang) == &apos;undefined&apos; || currLang == &apos;&apos;) &#123;</span><br><span class="line">    		currLang = window.navigator.language;</span><br><span class="line">    		if (!currLang) &#123;</span><br><span class="line">    			currLang = window.navigator.browserLanguage;</span><br><span class="line">    		&#125;</span><br><span class="line">    		if (currLang != &apos;zh-CN&apos; &amp;&amp; currLang != &apos;en-US&apos;) &#123;</span><br><span class="line">    			// 既不是中文，也不是英文，则使用英文作为默认显示语言</span><br><span class="line">    			currLang = &apos;en-US&apos;;</span><br><span class="line">    		&#125;</span><br><span class="line">    		changeLang(currLang);</span><br><span class="line">    	&#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &lt;/script&gt;</span><br><span class="line">```    </span><br><span class="line"></span><br><span class="line">丢到测试环境, Firefox,Chrome 跑一通，正常！ </span><br><span class="line">然而在IE 下，就不行了，，，， 我操作系统是中文的，IE 默认语言也是中文，</span><br><span class="line">在 `常规`-`外观`-`语言` 里面看到有设置的地方，改为英语，无效;</span><br><span class="line">删除中文，只留英语，还是无效;</span><br><span class="line">然后，把网上流传的三种获取语言的方式都在IE里面试一遍：</span><br><span class="line"></span><br><span class="line">```    </span><br><span class="line">    alert(window.navigator.userLanguage);</span><br><span class="line">    alert(window.navigator.systemLanguage);</span><br><span class="line">    alert(window.navigator.language);</span><br><span class="line">``` </span><br><span class="line"></span><br><span class="line">IE 显示的都是 `zh-CN` ! </span><br><span class="line"></span><br><span class="line">不服，把 `navigator` 的所有属性都打印了一遍（需要的拿走）：</span><br></pre></td></tr></table></figure></div>
-<pre><code>//属性  
-document.write( window.navigator.appCodeName + &quot; ------ //返回与浏览器相关的内部代码名  都为Mozilla   
-&quot;);
-document.write(navigator.appName + &quot; ------ //返回浏览器正式名称  均为Netscape   
-&quot;);
-document.write(navigator.appVersion + &quot; ------ //返回浏览器版本号   
-&quot;);
-document.write(navigator.cookieEnabled + &quot; ------ //返回浏览器是否启用cookie，true和false   
-&quot;);
-document.write(navigator.geolocation + &quot; ------ //返回地理定位信息(h5)   
-&quot;);
-document.write(navigator.javaEnabled() + &quot; ------ //检测当前浏览器是否支持 Java，从而知道浏览器是否能显示 Java 小程序(IE,chrome返回true，firefox返回false)   
-&quot;);
-document.write(navigator.language + &quot; ------ //返回浏览器的首选语言   
-&quot;);
-document.write( navigator.mimeTypes + &quot; ------ //返回浏览器支持的Mime类型   
-&quot;);
-document.write( navigator.msManipulationViewsEnabled + &quot; ------ //仅支持IE，true   
-&quot;);
-document.write(navigator.msMaxTouchPoints + &quot; ------ //字面意思是最大的触摸点，IE为0，其他不支持   
-&quot;);
-document.write(navigator.msPointerEnabled + &quot; ------ //IE为true，其他不支持   
-&quot;);
-document.write(navigator.onLine + &quot; ------ //是否连接互联网，均返回true(未断网)   
-&quot;);
-document.write(navigator.platform + &quot; ------ //所在平台，返回win32   
-&quot;);
-document.write(navigator.plugins + &quot; ------ //返回浏览器插件集合   
-&quot;);
-document.write(navigator.preference + &quot; ------ //允许一个已标识的脚本获取并设置特定的 Navigator 参数   
-&quot;);
-document.write( navigator.product + &quot; ------ //浏览器产品名，返回gecko   
-&quot;);
-document.write(navigator.systemLanguage + &quot; ------ //获取系统语言，IE支持，返回zh-cn   
-&quot;);
-document.write(navigator.userAgent + &quot; ------ //判断浏览器类型   
-&quot;);
-document.write(navigator.userLanguage + &quot; ------ //返回操作系统的自然语言设置,IE支持，返回zh-cn   
-&quot;);
-//方法  
-document.write(navigator.msLaunchUri + &quot; ------ //回调函数，未研究   
-&quot;);
-document.write(navigator.taintEnabled + &quot; ------ //回调函数   
-&quot;);
-document.write(navigator.hasOwnProperty + &quot; ------ //意思是是否支持属性，用法如下   
-&quot;);
-document.write(document.hasOwnProperty(&quot;ontouchstart&quot;) + &quot; ------ //电脑返回false，手机为true   
-&quot;);
-console.log(navigator);
-</code></pre><p><code>`</code> </p>
-<p>显示结果：<br><img src="https://tech.msla.top/wp-content/uploads/2018/04/navigator_on_IE11.png" alt="IE 的 navigator属性和方法"> </p>
-<p>一个`en-US`的影子也没</p>
-<p>继续找方法， </p>
-<p>在 Mozilla 官方文档上看到<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Navigator" target="_blank" rel="noopener">关于 Navigator 的定义</a><br>貌似有一个 <code>navigator.languages</code> 的属性（<code>language</code> 后面有个 <em><code>s</code></em>），拿到IE下面打印一下： </p>
-<p>`undefined` 。。。 </p>
-<p>这就悲剧了，意思是，和操作系统语言有关，IE 留的这个功能没啥用处。。。<br>网上看来有像我一样不死心的人，跑到 <a href="https://answers.microsoft.com/zh-hans/ie/forum/ie10-windows_7/js%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96ie%E6%B5%8F/25abb93e-c084-49f8-aa2a-6fd904f9eb19" target="_blank" rel="noopener">Microsoft 官方论坛</a> 还有这里： <a href="https://social.msdn.microsoft.com/Forums/ie/en-US/a5190b18-a49b-49b2-ac7a-2af433c0319a/detect-ie-language-preference" target="_blank" rel="noopener">https://social.msdn.microsoft.com/Forums/ie/en-US/a5190b18-a49b-49b2-ac7a-2af433c0319a/detect-ie-language-preference</a><br>结果就是，，，， 他们自己也不知道。。。 </p>
-<p>然后再去找，偶然发现 <code>ip.chinaz.com</code> 页面显示的语言居然是我浏览器设定的。。 神奇！！<br>仔细一看，原来诀窍在这里，看图：<br><img src="https://tech.msla.top/wp-content/uploads/2018/04/network_on_request_chinaz.png" alt="通过Header获取语言信息"> </p>
-<p>chianz 没用直接通过js获取语言（估计他们也研究过这个问题），而是在点击“展开更多”那个按钮时发送一个GET请求，然后获取当次请求中的Header中的属性（`Accept-Language`）</p>
-<p>果然很专业！<br>剩下的问题，就简单了，依葫芦画瓢呗～～</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-       
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://www.cobsun.com/2018/01/09/php-e7-9a-84aes-e5-af-b9-e7-a7-b0-e5-8a-a0-e5-af-86-e5-b0-8f-e8-ae-a1/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="$$ Welcome $$">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Technician">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/01/09/php-e7-9a-84aes-e5-af-b9-e7-a7-b0-e5-8a-a0-e5-af-86-e5-b0-8f-e8-ae-a1/" class="post-title-link" itemprop="https://www.cobsun.com/page/3/index.html">PHP的AES 对称加密小计</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
+                  ，
                 
               
-
-              <time title="创建时间：2018-01-09 17:03:34" itemprop="dateCreated datePublished" datetime="2018-01-09T17:03:34+08:00">2018-01-09</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2018-12-12 17:22:01" itemprop="dateModified" datetime="2018-12-12T17:22:01+08:00">2018-12-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/大前端！/技术分类/" itemprop="url" rel="index"><span itemprop="name">技术分类</span></a></span>
 
                 
                 
@@ -2329,37 +2279,18 @@ console.log(navigator);
       
         
           
-            <p>对称加密在很多地方有独特的应用需要， 并且经实测，加密解密效率也不错， 我服务器上 双核2G，PHP7.0 使用 openssl_encrypt 模块加密并解密 三万六千个字符，耗时大约 0.5 <strong>毫</strong>秒（ 0.00048s），速度非常快 对于个人加密数据来说已经足够了 有些小问题需要记一下： 1. openssl_encrypt 模块必须要有非NULL的初始化向量（IV） 2. 加密和解密是没有雪崩效应的，特别是解密，在密文后面追加字符，并不会显著影响前面的密文的解密，只是后面追加的字符无法解密而已，前面的照常显示 3. 老版本PHP使用的的 Mcrypt 模块密钥长度是16位（可能是部分加密方法，未完全测试），openssl 没有此限制 通用加密/解密使用方法：  </p>
-<pre><code>/**
- * [AesSecurity aes加密，支持PHP7.1]
- */
-class AesSecurity
-{
- /**
-  * [encrypt aes加密]
-  * @param [type]     $input [要加密的数据]
-  * @param [type]     $key [加密key]
-  * @return [type]       [加密后的数据]
-  */
- public static function encrypt($input, $key)
- {
-  $data = openssl_encrypt($input, &apos;AES-128-ECB&apos;, $key, OPENSSL_RAW_DATA);
-  $data = base64_encode($data);
-  return $data;
- }
- /**
-  * [decrypt aes解密]
-  * @param [type]     $sStr [要解密的数据]
-  * @param [type]     $sKey [加密key]
-  * @return [type]       [解密后的数据]
-  */
- public static function decrypt($sStr, $sKey)
- {
-  $decrypted = openssl_decrypt(base64_decode($sStr), &apos;AES-128-ECB&apos;, $sKey, OPENSSL_RAW_DATA);
-  return $decrypted;
- }
+            <pre><code>window.onbeforeunload = function() {
+    var n = window.event.screenX - window.screenLeft;
+    var b = n &gt; document.documentElement.scrollWidth-20;
+    if(b &amp;&amp; window.event.clientY &lt; 0 || window.event.altKey){
+        alert(&quot;这是一个关闭操作而非刷新&quot;);
+        window.event.returnValue = &quot;&quot;; //此处放你想要操作的代码
+    }else{
+        alert(&quot;这是一个刷新操作而非关闭&quot;);
+    }
 }
-</code></pre>
+</code></pre><p>来源: <a href="http://segmentfault.com/q/1010000000204152" target="_blank" rel="noopener">http://segmentfault.com/q/1010000000204152</a></p>
+
           
         
       
@@ -2404,7 +2335,7 @@ class AesSecurity
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -2447,7 +2378,7 @@ class AesSecurity
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">176</span>
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2476,9 +2407,7 @@ class AesSecurity
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">分类</span>
                   
                 </div>
@@ -2711,219 +2640,7 @@ class AesSecurity
                     
                       
                     
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                      
-                    
-                    <span class="site-state-item-count">215</span>
+                    <span class="site-state-item-count">58</span>
                     <span class="site-state-item-name">标签</span>
                   
                 </div>
@@ -2962,7 +2679,7 @@ class AesSecurity
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
